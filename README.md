@@ -12,6 +12,7 @@ and they are located in the package herachy "GST_Low_Level".
 
 
 ##Architectural considerations.
+
 The herachy "GST_Low_Level" is intended for internal use only and shall never be imported by clients the clients shall use
 packages in the herachy "GStreamer" which shall proper Ada-glib objects.
 
