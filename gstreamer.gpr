@@ -1,0 +1,29 @@
+with "gtkada";
+
+library project Gstreamer is
+
+   for Languages use ("Ada", "Makefile", "Python", "sed");
+   for Library_Name use "a-gstreamer";
+   for Library_Dir use "lib";
+   for Source_Dirs use (".", "sed", "src/**", "bin");
+   for Object_Dir use ".obj";
+
+   package Compiler is
+      for Driver ("sed") use "";
+      for Driver ("makefile") use "";
+      for Driver ("python") use "";
+      for Default_Switches ("ada") use ("-O2", "-gnatwa");
+   end Compiler;
+
+   package Linker is
+      for Linker_Options use ("");
+   end Linker;
+
+   package Naming is
+      for Body_Suffix ("sed") use ".sed";
+      for Body_Suffix ("python") use ".py";
+      for Body_Suffix ("makefile") use ".mk";
+      for Implementation_Exceptions ("makefile") use ("Makefile");
+   end Naming;
+
+end Gstreamer;
