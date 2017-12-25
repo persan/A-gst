@@ -1,2 +1,2 @@
-package gstreamer is
-end Gstreamer;
+package GStreamer is
+end GStreamer;
