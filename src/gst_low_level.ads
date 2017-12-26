@@ -47,7 +47,6 @@ package GST_Low_Level is
    end  Glib_2_0_Glib_Glist_H;
 
    package Glib_2_0_Gobject_Gobject_H is
-      type GObject is new Interfaces.C.Extensions.Void;
       type GObjectClass is new Interfaces.C.Extensions.Void;
 
    end  Glib_2_0_Gobject_Gobject_H;

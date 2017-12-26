@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 
 import re
-import glob
+from glob import glob
+
 
 def fixFile(path):
     print path
@@ -14,15 +15,17 @@ def fixFile(path):
             types.append(matches.group(1))
     for i in range(0, len(buffer)):
         for t in types:
-            buffer[i] = buffer[i].replace("type u_%s;" % t,
-                                          "type %s;" % t)\
-                                 .replace("type u_%s " % t,
-                                          "type %s " % t)\
-                                 .replace("pragma Convention (C_Pass_By_Copy, u_%s);" % t,
-                                          "pragma Convention (C_Pass_By_Copy, %s);" % t)\
-                                 .replace("subtype %s is u_%s;" % (t, t),
-                                          "--subtype %s is u_%s;" % (t, t))
+            buffer[i] = buffer[i]\
+                .replace("type u_%s;" % t,
+                         "type %s;" % t)\
+                .replace("type u_%s " % t,
+                         "type %s " % t)\
+                .replace("pragma Convention (C_Pass_By_Copy, u_%s);" % t,
+                         "pragma Convention (C_Pass_By_Copy, %s);" % t)\
+                .replace("subtype %s is u_%s;" % (t, t),
+                         "--subtype %s is u_%s;" % (t, t))
     with open(path, "w") as outf:
         outf.write("\n".join(buffer))
-for i in glob.glob("src/gen/*.ads"):
+
+for i in glob("src/gen/*.ads"):
     fixFile(i)

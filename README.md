@@ -13,5 +13,5 @@ and they are located in the package herachy "GST_Low_Level".
 
 ## Architectural considerations.
 The package herachy "GST_Low_Level" is intended for internal use only and shall never be referenced direct by clients. Clients shall use
-packages in the herachy "GStreamer" which shall contain proper Ada-glib objects with naming and structure in acordance with GTKAda.
+packages in the herachy "GStreamer" which shall contain proper Ada-glib objects with naming and structure in acordance with thw schema used in GTKAda.
 
