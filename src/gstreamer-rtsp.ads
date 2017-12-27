@@ -1,4 +1,5 @@
 with interfaces.C;
+with Glib;
 package GStreamer.Rtsp is
    type GstRTSPResult is new interfaces.C.Int;
    OK          : constant GstRTSPResult := 0;
@@ -394,5 +395,10 @@ package GStreamer.Rtsp is
 
    function Find_Method (Method : String) return GstRTSPMethod;
 
-   function Header_Allow_Multiple (Field : GstRTSPHeaderField) return Boolean;
+   function Header_Allow_Multiple (Field : GstRTSPHeaderField) return GLIB.Gboolean;
+   Rtsp_Error : exception;
+private
+   procedure RetCode_2_Exception (Code : GstRTSPResult);
+   pragma Linker_Options ("-lgstrtsp-0.10");
+
 end GStreamer.Rtsp;

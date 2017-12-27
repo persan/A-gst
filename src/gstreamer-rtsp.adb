@@ -1,17 +1,32 @@
 pragma Ada_2012;
 with GStreamer.GST_Low_Level.Gstreamer_0_10_Gst_Rtsp_Gstrtspdefs_H;
-with GLIB;
+with Ada.Unchecked_Conversion;
+with Interfaces.C.Strings;
+with System;
 package body GStreamer.Rtsp is
    use Interfaces.C;
-   use GStreamer.GST_Low_Level.gstreamer_0_10_gst_rtsp_gstrtspdefs_h;
+   use GStreamer.GST_Low_Level.Gstreamer_0_10_Gst_Rtsp_Gstrtspdefs_H;
+   type GcharPtr is access all Glib.Gchar with Storage_Size => 0;
+
+   function Convert is new Ada.Unchecked_Conversion (Source => GcharPtr , Target => Interfaces.C.Strings.Chars_Ptr);
+   function To_Ada ( C : access constant Glib.Gchar) return String is
+
+   begin
+      return (if C /= null
+              then
+                 Interfaces.C.Strings.Value (Convert (C.all'Unrestricted_Access))
+              else
+                 "");
+   end;
+
    ---------------
    -- Strresult --
    ---------------
 
    function Strresult (Result : GstRTSPResult) return String is
-     r : access constant Glib.Gchar  := Gst_Rtsp_Strresult (Int(Result));
+      R : constant access constant Glib.Gchar  := Gst_Rtsp_Strresult (Int (Result));
    begin
-      return ""; -- To_Ada ();
+      return To_Ada (R);
    end Strresult;
 
    --------------------
@@ -19,10 +34,10 @@ package body GStreamer.Rtsp is
    --------------------
 
    function Method_As_Text (Method : GstRTSPMethod) return String is
+      R : constant access constant Glib.Gchar  := Gst_Rtsp_Method_As_Text (Unsigned (Method));
    begin
-      --  Generated stub: replace with real body!
-      pragma Compile_Time_Warning (Standard.True, "Method_As_Text unimplemented");
-      return raise Program_Error with "Unimplemented function Method_As_Text";
+
+      return To_Ada (R);
    end Method_As_Text;
 
    ---------------------
@@ -30,10 +45,9 @@ package body GStreamer.Rtsp is
    ---------------------
 
    function Version_As_Text (Version : GstRTSPVersion) return String is
+      R : constant access constant Glib.Gchar  := Gst_Rtsp_Version_As_Text (Unsigned (Version));
    begin
-      --  Generated stub: replace with real body!
-      pragma Compile_Time_Warning (Standard.True, "Version_As_Text unimplemented");
-      return raise Program_Error with "Unimplemented function Version_As_Text";
+      return To_Ada (R);
    end Version_As_Text;
 
    --------------------
@@ -41,10 +55,10 @@ package body GStreamer.Rtsp is
    --------------------
 
    function Header_As_Text (Field : GstRTSPHeaderField) return String is
+      function To_GstRTSPHeaderField is new Ada.Unchecked_Conversion (GstRTSPHeaderField, GStreamer.GST_Low_Level.Gstreamer_0_10_Gst_Rtsp_Gstrtspdefs_H.GstRTSPHeaderField);
+      R : constant access constant Glib.Gchar  := Gst_Rtsp_Header_As_Text (To_GstRTSPHeaderField (Field));
    begin
-      --  Generated stub: replace with real body!
-      pragma Compile_Time_Warning (Standard.True, "Header_As_Text unimplemented");
-      return raise Program_Error with "Unimplemented function Header_As_Text";
+      return To_Ada (R);
    end Header_As_Text;
 
    --------------------
@@ -52,10 +66,9 @@ package body GStreamer.Rtsp is
    --------------------
 
    function Status_As_Text (Code : GstRTSPStatusCode) return String is
+      R : constant access constant Glib.Gchar  := Gst_Rtsp_Status_As_Text (Unsigned (Code));
    begin
-      --  Generated stub: replace with real body!
-      pragma Compile_Time_Warning (Standard.True, "Status_As_Text unimplemented");
-      return raise Program_Error with "Unimplemented function Status_As_Text";
+      return To_Ada (R);
    end Status_As_Text;
 
    ---------------------
@@ -63,21 +76,23 @@ package body GStreamer.Rtsp is
    ---------------------
 
    function Options_As_Text (Options : GstRTSPMethod) return String is
+      R : constant access constant Glib.Gchar  := Gst_Rtsp_Options_As_Text (Unsigned (Options));
    begin
-      --  Generated stub: replace with real body!
-      pragma Compile_Time_Warning (Standard.True, "Options_As_Text unimplemented");
-      return raise Program_Error with "Unimplemented function Options_As_Text";
+      return To_Ada (R);
    end Options_As_Text;
 
    -----------------------
    -- Find_Header_Field --
    -----------------------
-
+   function To_Gcharptr is new Ada.Unchecked_Conversion (Source => System.Address,
+                                                         Target => GcharPtr);
    function Find_Header_Field (Header : String) return GstRTSPHeaderField is
+      L_Header : constant String := Header & ASCII.NUL;
+      function Convert     is new Ada.Unchecked_Conversion
+        (Source => GST_Low_Level.Gstreamer_0_10_Gst_Rtsp_Gstrtspdefs_H.GstRTSPHeaderField,
+         Target => GstRTSPHeaderField);
    begin
-      --  Generated stub: replace with real body!
-      pragma Compile_Time_Warning (Standard.True, "Find_Header_Field unimplemented");
-      return raise Program_Error with "Unimplemented function Find_Header_Field";
+      return Convert (Gst_Rtsp_Find_Header_Field (To_Gcharptr (L_Header'Address)));
    end Find_Header_Field;
 
    -----------------
@@ -85,10 +100,9 @@ package body GStreamer.Rtsp is
    -----------------
 
    function Find_Method (Method : String) return GstRTSPMethod is
+      L_Method : constant String := Method & ASCII.NUL;
    begin
-      --  Generated stub: replace with real body!
-      pragma Compile_Time_Warning (Standard.True, "Find_Method unimplemented");
-      return raise Program_Error with "Unimplemented function Find_Method";
+      return GstRTSPMethod (Gst_Rtsp_Find_Method (To_Gcharptr (L_Method'Address)));
    end Find_Method;
 
    ---------------------------
@@ -97,12 +111,18 @@ package body GStreamer.Rtsp is
 
    function Header_Allow_Multiple
      (Field : GstRTSPHeaderField)
-      return Boolean
+      return GLIB.gboolean
    is
    begin
-      --  Generated stub: replace with real body!
-      pragma Compile_Time_Warning (Standard.True, "Header_Allow_Multiple unimplemented");
-      return raise Program_Error with "Unimplemented function Header_Allow_Multiple";
+      return gst_rtsp_header_allow_multiple(GST_Low_Level.Gstreamer_0_10_Gst_Rtsp_Gstrtspdefs_H.GstRTSPHeaderField'Val(GstRTSPHeaderField'Pos(Field)));
    end Header_Allow_Multiple;
+
+
+   procedure RetCode_2_Exception (Code : GstRTSPResult) is
+   begin
+      if Code /= OK then
+         raise Rtsp_Error with Strresult (Code);
+      end if;
+   end RetCode_2_Exception;
 
 end GStreamer.Rtsp;

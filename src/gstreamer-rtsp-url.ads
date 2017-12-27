@@ -3,7 +3,7 @@ with Glib;
 with System;
 with Ada.Finalization;
 with GNAT.Sockets;
-package GStreamer.Rtsp.Gstrtspurl is
+package GStreamer.Rtsp.url is
 
    DEFAULT_PORT : constant := 554;
 
@@ -26,4 +26,4 @@ private
       Data : aliased GStreamer.GST_Low_Level.Gstreamer_0_10_Gst_Rtsp_Gstrtspurl_H.GstRTSPUrl;
    end record;
 
-end GStreamer.Rtsp.Gstrtspurl;
+end GStreamer.Rtsp.url;
