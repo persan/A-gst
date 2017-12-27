@@ -1,3 +1,4 @@
+with "aunit";
 with "../gstreamer.gpr";
 project Gstreamer.Tests is
 

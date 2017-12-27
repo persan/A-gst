@@ -23,7 +23,7 @@ package GStreamer.Rtsp.Gstrtspurl is
 
 private
    type GstRTSPUrl is new Ada.Finalization.Controlled with record
-      Self : aliased GStreamer.GST_Low_Level.Gstreamer_0_10_Gst_Rtsp_Gstrtspurl_H.GstRTSPUrl;
+      Data : aliased GStreamer.GST_Low_Level.Gstreamer_0_10_Gst_Rtsp_Gstrtspurl_H.GstRTSPUrl;
    end record;
 
 end GStreamer.Rtsp.Gstrtspurl;

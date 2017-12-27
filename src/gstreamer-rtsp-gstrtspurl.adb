@@ -1,15 +1,17 @@
 pragma Ada_2012;
 pragma Warnings (Off);
+with GStreamer.GST_Low_Level.Gstreamer_0_10_Gst_Rtsp_Gstrtspdefs_H;
+with GStreamer.RetCode_2_Exception;
 package body GStreamer.Rtsp.Gstrtspurl is
-
+   use GStreamer.GST_Low_Level.Gstreamer_0_10_Gst_Rtsp_Gstrtspurl_H;
+   use GStreamer.GST_Low_Level.gstreamer_0_10_gst_rtsp_gstrtspdefs_h;
+   use GLIB;
    --------------
    -- Get_Type --
    --------------
    function Get_Type return GLIB.GType is
    begin
-      --  Generated stub: replace with real body!
-      pragma Compile_Time_Warning (Standard.True, "Get_Type unimplemented");
-      return raise Program_Error with "Unimplemented function Get_Type";
+      return gst_rtsp_url_get_type;
    end Get_Type;
 
    -----------
@@ -17,10 +19,13 @@ package body GStreamer.Rtsp.Gstrtspurl is
    -----------
 
    function Parse (Urlstr : String) return GstRTSPUrl is
+      L_Urlstr : constant String := Urlstr & ASCII.NUL;
+      RetCode  : GstRTSPResult;
    begin
-      --  Generated stub: replace with real body!
-      pragma Compile_Time_Warning (Standard.True, "Parse unimplemented");
-      return raise Program_Error with "Unimplemented function Parse";
+      return Ret : GstRTSPUrl do
+         RetCode := Gst_Rtsp_Url_Parse (Gchar (L_Urlstr (L_Urlstr'First))'Unrestricted_Access, Ret.Data'Address);
+         RetCode_2_Exception (RetCode);
+      end return;
    end Parse;
 
    ---------------------
