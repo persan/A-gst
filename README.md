@@ -3,7 +3,7 @@ Ada binding to the GStreamer library.
 
 ## Current state of the library.
 The library consits at the moment only of compilable Ada-spec:s generated from the all th gstreamer header-files
-and they are located in the package herachy "GST_Low_Level".
+and they are located in the private package herachy "GStreamer.GST_Low_Level".
 
 
 ## Remaning work to be done is to:
@@ -12,6 +12,7 @@ and they are located in the package herachy "GST_Low_Level".
 
 
 ## Architectural considerations.
-The package herachy "GST_Low_Level" is intended for internal use only and shall never be referenced direct by clients. Clients shall use
-packages in the herachy "GStreamer" which shall contain proper Ada-glib objects with naming and structure in acordance with thw schema used in GTKAda.
+The package herachy "GStreamer.GST_Low_Level" is intended for internal use only and threfore private. 
+The other packagdes in GStreamer which contains proper Ada-glib objects shall folow naming and structure in 
+acordance with the schema used in GTKAda.
 
