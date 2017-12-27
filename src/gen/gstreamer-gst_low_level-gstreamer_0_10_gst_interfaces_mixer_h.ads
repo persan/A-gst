@@ -47,7 +47,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_interfaces_mixer_h is
   -- * License along with this library; if not, write to the
   -- * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
   -- * Boston, MA 02111-1307, USA.
-  --  
+  --
 
    --  skipped empty struct u_GstMixer
 
@@ -64,9 +64,9 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_interfaces_mixer_h is
   -- * @GST_MIXER_SOFTWARE: mixing is implemented via software processing.
   -- *
   -- * Mixer classification.
-  --  
+  --
 
-   type GstMixerType is 
+   type GstMixerType is
      (GST_MIXER_HARDWARE,
       GST_MIXER_SOFTWARE);
    pragma Convention (C, GstMixerType);  -- gst/interfaces/mixer.h:61
@@ -88,9 +88,9 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_interfaces_mixer_h is
   -- * An enumeration for the type of a GstMixer message received on the bus
   -- *
   -- * Since: 0.10.14
-  --  
+  --
 
-   type GstMixerMessageType is 
+   type GstMixerMessageType is
      (GST_MIXER_MESSAGE_INVALID,
       GST_MIXER_MESSAGE_MUTE_TOGGLED,
       GST_MIXER_MESSAGE_RECORD_TOGGLED,
@@ -103,6 +103,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_interfaces_mixer_h is
   --*
   -- * GstMixerFlags:
   -- * @GST_MIXER_FLAG_NONE: No flags
+
   -- * @GST_MIXER_FLAG_AUTO_NOTIFICATIONS: The mixer implementation automatically
   -- *    sends notification messages.
   -- * @GST_MIXER_FLAG_HAS_WHITELIST: The mixer implementation flags tracks that
@@ -116,7 +117,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_interfaces_mixer_h is
   -- * implementation.
   -- *
   -- * Since: 0.10.14
-  --  
+  --
 
    subtype GstMixerFlags is unsigned;
    GST_MIXER_FLAG_NONE : constant GstMixerFlags := 0;
@@ -128,40 +129,40 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_interfaces_mixer_h is
       klass : aliased GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GTypeInterface;  -- gst/interfaces/mixer.h:118
       mixer_type : aliased GstMixerType;  -- gst/interfaces/mixer.h:120
       list_tracks : access function  (arg1 : System.Address) return access constant GStreamer.GST_Low_Level.glib_2_0_glib_glist_h.GList;  -- gst/interfaces/mixer.h:123
-      set_volume : access procedure 
+      set_volume : access procedure
            (arg1 : System.Address;
             arg2 : access GStreamer.GST_Low_Level.gstreamer_0_10_gst_interfaces_mixertrack_h.GstMixerTrack;
             arg3 : access GLIB.gint);  -- gst/interfaces/mixer.h:127
-      get_volume : access procedure 
+      get_volume : access procedure
            (arg1 : System.Address;
             arg2 : access GStreamer.GST_Low_Level.gstreamer_0_10_gst_interfaces_mixertrack_h.GstMixerTrack;
             arg3 : access GLIB.gint);  -- gst/interfaces/mixer.h:130
-      set_mute : access procedure 
+      set_mute : access procedure
            (arg1 : System.Address;
             arg2 : access GStreamer.GST_Low_Level.gstreamer_0_10_gst_interfaces_mixertrack_h.GstMixerTrack;
             arg3 : GLIB.gboolean);  -- gst/interfaces/mixer.h:134
-      set_record : access procedure 
+      set_record : access procedure
            (arg1 : System.Address;
             arg2 : access GStreamer.GST_Low_Level.gstreamer_0_10_gst_interfaces_mixertrack_h.GstMixerTrack;
             arg3 : GLIB.gboolean);  -- gst/interfaces/mixer.h:137
-      mute_toggled : access procedure 
+      mute_toggled : access procedure
            (arg1 : System.Address;
             arg2 : access GStreamer.GST_Low_Level.gstreamer_0_10_gst_interfaces_mixertrack_h.GstMixerTrack;
             arg3 : GLIB.gboolean);  -- gst/interfaces/mixer.h:142
-      record_toggled : access procedure 
+      record_toggled : access procedure
            (arg1 : System.Address;
             arg2 : access GStreamer.GST_Low_Level.gstreamer_0_10_gst_interfaces_mixertrack_h.GstMixerTrack;
             arg3 : GLIB.gboolean);  -- gst/interfaces/mixer.h:145
-      volume_changed : access procedure 
+      volume_changed : access procedure
            (arg1 : System.Address;
             arg2 : access GStreamer.GST_Low_Level.gstreamer_0_10_gst_interfaces_mixertrack_h.GstMixerTrack;
             arg3 : access GLIB.gint);  -- gst/interfaces/mixer.h:148
-      set_option : access procedure 
+      set_option : access procedure
            (arg1 : System.Address;
             arg2 : access GStreamer.GST_Low_Level.gstreamer_0_10_gst_interfaces_mixeroptions_h.GstMixerOptions;
             arg3 : access GLIB.gchar);  -- gst/interfaces/mixer.h:155
       get_option : access function  (arg1 : System.Address; arg2 : access GStreamer.GST_Low_Level.gstreamer_0_10_gst_interfaces_mixeroptions_h.GstMixerOptions) return access GLIB.gchar;  -- gst/interfaces/mixer.h:157
-      option_changed : access procedure 
+      option_changed : access procedure
            (arg1 : System.Address;
             arg2 : access GStreamer.GST_Low_Level.gstreamer_0_10_gst_interfaces_mixeroptions_h.GstMixerOptions;
             arg3 : access GLIB.gchar);  -- gst/interfaces/mixer.h:162
@@ -170,13 +171,13 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_interfaces_mixer_h is
    end record;
    pragma Convention (C_Pass_By_Copy, GstMixerClass);  -- gst/interfaces/mixer.h:117
 
-  -- virtual functions  
-  -- signals (deprecated)  
-  --< private > 
+  -- virtual functions
+  -- signals (deprecated)
+  --< private >
    function gst_mixer_get_type return GLIB.GType;  -- gst/interfaces/mixer.h:173
    pragma Import (C, gst_mixer_get_type, "gst_mixer_get_type");
 
-  -- virtual class function wrappers  
+  -- virtual class function wrappers
    function gst_mixer_list_tracks (mixer : System.Address) return access constant GStreamer.GST_Low_Level.glib_2_0_glib_glist_h.GList;  -- gst/interfaces/mixer.h:176
    pragma Import (C, gst_mixer_list_tracks, "gst_mixer_list_tracks");
 
@@ -213,7 +214,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_interfaces_mixer_h is
    function gst_mixer_get_option (mixer : System.Address; opts : access GStreamer.GST_Low_Level.gstreamer_0_10_gst_interfaces_mixeroptions_h.GstMixerOptions) return access GLIB.gchar;  -- gst/interfaces/mixer.h:192
    pragma Import (C, gst_mixer_get_option, "gst_mixer_get_option");
 
-  -- trigger bus messages  
+  -- trigger bus messages
    procedure gst_mixer_mute_toggled
      (mixer : System.Address;
       track : access GStreamer.GST_Low_Level.gstreamer_0_10_gst_interfaces_mixertrack_h.GstMixerTrack;
@@ -250,7 +251,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_interfaces_mixer_h is
    function gst_mixer_get_mixer_flags (mixer : System.Address) return GstMixerFlags;  -- gst/interfaces/mixer.h:216
    pragma Import (C, gst_mixer_get_mixer_flags, "gst_mixer_get_mixer_flags");
 
-  -- Functions for recognising and parsing GstMixerMessages on the bus  
+  -- Functions for recognising and parsing GstMixerMessages on the bus
    function gst_mixer_message_get_type (message : access GStreamer.GST_Low_Level.gstreamer_0_10_gst_gstmessage_h.GstMessage) return GstMixerMessageType;  -- gst/interfaces/mixer.h:219
    pragma Import (C, gst_mixer_message_get_type, "gst_mixer_message_get_type");
 

@@ -35,12 +35,12 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_codecparsers_gstvc1parser_h i
   -- * License along with this library; if not, write to the
   -- * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
   -- * Boston, MA 02111-1307, USA.
-  --  
+  --
 
   --*
   -- * @GST_VC1_BFRACTION_BASIS: The @bfraction variable should be divided
   -- * by this constant to have the actual value.
-  --  
+  --
 
    subtype GstVC1StartCode is unsigned;
    GST_VC1_END_OF_SEQ : constant GstVC1StartCode := 10;
@@ -55,14 +55,14 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_codecparsers_gstvc1parser_h i
    GST_VC1_ENTRY_POINT_USER : constant GstVC1StartCode := 30;
    GST_VC1_SEQUENCE_USER : constant GstVC1StartCode := 31;  -- gst/codecparsers/gstvc1parser.h:57
 
-   type GstVC1Profile is 
+   type GstVC1Profile is
      (GST_VC1_PROFILE_SIMPLE,
       GST_VC1_PROFILE_MAIN,
       GST_VC1_PROFILE_RESERVED,
       GST_VC1_PROFILE_ADVANCED);
    pragma Convention (C, GstVC1Profile);  -- gst/codecparsers/gstvc1parser.h:64
 
-   type GstVC1ParserResult is 
+   type GstVC1ParserResult is
      (GST_VC1_PARSER_OK,
       GST_VC1_PARSER_BROKEN_DATA,
       GST_VC1_PARSER_NO_BDU,
@@ -70,7 +70,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_codecparsers_gstvc1parser_h i
       GST_VC1_PARSER_ERROR);
    pragma Convention (C, GstVC1ParserResult);  -- gst/codecparsers/gstvc1parser.h:72
 
-   type GstVC1PictureType is 
+   type GstVC1PictureType is
      (GST_VC1_PICTURE_TYPE_P,
       GST_VC1_PICTURE_TYPE_B,
       GST_VC1_PICTURE_TYPE_I,
@@ -78,16 +78,16 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_codecparsers_gstvc1parser_h i
       GST_VC1_PICTURE_TYPE_SKIPPED);
    pragma Convention (C, GstVC1PictureType);  -- gst/codecparsers/gstvc1parser.h:81
 
-  -- Simple/Main profile low level  
-  -- Simple/Main profile medium level  
-  -- Main profile high level  
-  -- Advanced profile level 0  
-  -- Advanced profile level 1  
-  -- Advanced profile level 2  
-  -- Advanced profile level 3  
-  -- Advanced profile level 4  
-  -- 5 to 7 reserved  
-  -- Unknown profile  
+  -- Simple/Main profile low level
+  -- Simple/Main profile medium level
+  -- Main profile high level
+  -- Advanced profile level 0
+  -- Advanced profile level 1
+  -- Advanced profile level 2
+  -- Advanced profile level 3
+  -- Advanced profile level 4
+  -- 5 to 7 reserved
+  -- Unknown profile
    subtype GstVC1Level is unsigned;
    GST_VC1_LEVEL_LOW : constant GstVC1Level := 0;
    GST_VC1_LEVEL_MEDIUM : constant GstVC1Level := 1;
@@ -99,21 +99,21 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_codecparsers_gstvc1parser_h i
    GST_VC1_LEVEL_L4 : constant GstVC1Level := 4;
    GST_VC1_LEVEL_UNKNOWN : constant GstVC1Level := 255;  -- gst/codecparsers/gstvc1parser.h:97
 
-   type GstVC1QuantizerSpec is 
+   type GstVC1QuantizerSpec is
      (GST_VC1_QUANTIZER_IMPLICITLY,
       GST_VC1_QUANTIZER_EXPLICITLY,
       GST_VC1_QUANTIZER_NON_UNIFORM,
       GST_VC1_QUANTIZER_UNIFORM);
    pragma Convention (C, GstVC1QuantizerSpec);  -- gst/codecparsers/gstvc1parser.h:105
 
-   type GstVC1DQProfile is 
+   type GstVC1DQProfile is
      (GST_VC1_DQPROFILE_FOUR_EDGES,
       GST_VC1_DQPROFILE_DOUBLE_EDGES,
       GST_VC1_DQPROFILE_SINGLE_EDGE,
       GST_VC1_DQPROFILE_ALL_MBS);
    pragma Convention (C, GstVC1DQProfile);  -- gst/codecparsers/gstvc1parser.h:112
 
-   type GstVC1Condover is 
+   type GstVC1Condover is
      (GST_VC1_CONDOVER_NONE,
       GST_VC1_CONDOVER_ALL,
       GST_VC1_CONDOVER_SELECT);
@@ -122,9 +122,9 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_codecparsers_gstvc1parser_h i
   --*
   -- * GstVC1MvMode:
   -- *
-  --  
+  --
 
-   type GstVC1MvMode is 
+   type GstVC1MvMode is
      (GST_VC1_MVMODE_1MV_HPEL_BILINEAR,
       GST_VC1_MVMODE_1MV,
       GST_VC1_MVMODE_1MV_HPEL,
@@ -164,21 +164,11 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_codecparsers_gstvc1parser_h i
    type GstVC1SeqStructC;
    --subtype GstVC1SeqStructC is u_GstVC1SeqStructC;  -- gst/codecparsers/gstvc1parser.h:149
 
-  -- Pictures Structures  
+  -- Pictures Structures
    type GstVC1FrameLayer;
    --subtype GstVC1FrameLayer is u_GstVC1FrameLayer;  -- gst/codecparsers/gstvc1parser.h:152
 
    type GstVC1FrameHdr;
-   type anon_432 (discr : unsigned := 0) is record
-      case discr is
-         when 0 =>
-            simple : aliased GstVC1PicSimpleMain;  -- gst/codecparsers/gstvc1parser.h:542
-         when others =>
-            advanced : aliased GstVC1PicAdvanced;  -- gst/codecparsers/gstvc1parser.h:543
-      end case;
-   end record;
-   pragma Convention (C_Pass_By_Copy, anon_432);
-   pragma Unchecked_Union (anon_432);--subtype GstVC1FrameHdr is u_GstVC1FrameHdr;  -- gst/codecparsers/gstvc1parser.h:153
 
    type GstVC1PicAdvanced;
    --subtype GstVC1PicAdvanced is u_GstVC1PicAdvanced;  -- gst/codecparsers/gstvc1parser.h:154
@@ -212,7 +202,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_codecparsers_gstvc1parser_h i
   -- * GstVC1EntryPointHdr:
   -- *
   -- * Structure for entrypoint header, this will be used only in advanced profiles
-  --  
+  --
 
    type GstVC1EntryPointHdr is record
       broken_link : aliased GLIB.guint8;  -- gst/codecparsers/gstvc1parser.h:180
@@ -242,7 +232,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_codecparsers_gstvc1parser_h i
   -- * GstVC1AdvancedSeqHdr:
   -- *
   -- * Structure for the advanced profile sequence headers specific parameters.
-  --  
+  --
 
    type GstVC1AdvancedSeqHdr is record
       level : aliased GstVC1Level;  -- gst/codecparsers/gstvc1parser.h:210
@@ -285,10 +275,10 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_codecparsers_gstvc1parser_h i
    end record;
    pragma Convention (C_Pass_By_Copy, GstVC1AdvancedSeqHdr);  -- gst/codecparsers/gstvc1parser.h:208
 
-  -- computed  
-  -- Around in fps, 0 if unknown 
-  -- Around in kpbs, 0 if unknown 
-  -- The last parsed entry point  
+  -- computed
+  -- Around in fps, 0 if unknown
+  -- Around in kpbs, 0 if unknown
+  -- The last parsed entry point
    type GstVC1SeqStructA is record
       vert_size : aliased GLIB.guint32;  -- gst/codecparsers/gstvc1parser.h:257
       horiz_size : aliased GLIB.guint32;  -- gst/codecparsers/gstvc1parser.h:258
@@ -304,7 +294,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_codecparsers_gstvc1parser_h i
    end record;
    pragma Convention (C_Pass_By_Copy, GstVC1SeqStructB);  -- gst/codecparsers/gstvc1parser.h:261
 
-  -- In simple and main profiles only  
+  -- In simple and main profiles only
    type GstVC1SeqStructC is record
       profile : aliased GstVC1Profile;  -- gst/codecparsers/gstvc1parser.h:275
       frmrtq_postproc : aliased GLIB.guint8;  -- gst/codecparsers/gstvc1parser.h:278
@@ -331,15 +321,15 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_codecparsers_gstvc1parser_h i
    end record;
    pragma Convention (C_Pass_By_Copy, GstVC1SeqStructC);  -- gst/codecparsers/gstvc1parser.h:273
 
-  -- Only in simple and main profiles  
-  -- Computed  
-  -- Around in fps, 0 if unknown 
-  -- Around in kpbs, 0 if unknown 
-  -- This should be filled by user if previously known  
-  -- This should be filled by user if previously known  
-  -- Wmvp specific  
-  -- Specify if the stream is wmp or not  
-  -- In the wmvp case, the framerate is not computed but in the bistream  
+  -- Only in simple and main profiles
+  -- Computed
+  -- Around in fps, 0 if unknown
+  -- Around in kpbs, 0 if unknown
+  -- This should be filled by user if previously known
+  -- This should be filled by user if previously known
+  -- Wmvp specific
+  -- Specify if the stream is wmp or not
+  -- In the wmvp case, the framerate is not computed but in the bistream
    type GstVC1SeqLayer is record
       numframes : aliased GLIB.guint32;  -- gst/codecparsers/gstvc1parser.h:311
       struct_a : aliased GstVC1SeqStructA;  -- gst/codecparsers/gstvc1parser.h:313
@@ -352,7 +342,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_codecparsers_gstvc1parser_h i
   -- * GstVC1SeqHdr:
   -- *
   -- * Structure for sequence headers in any profile.
-  --  
+  --
 
    type GstVC1SeqHdr is record
       profile : aliased GstVC1Profile;  -- gst/codecparsers/gstvc1parser.h:325
@@ -364,12 +354,12 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_codecparsers_gstvc1parser_h i
    end record;
    pragma Convention (C_Pass_By_Copy, GstVC1SeqHdr);  -- gst/codecparsers/gstvc1parser.h:323
 
-  --  calculated  
+  --  calculated
   --*
   -- * GstVC1PicSimpleMain:
   -- * @bfaction: Should be divided by #GST_VC1_BFRACTION_BASIS
   -- * to get the real value.
-  --  
+  --
 
    type GstVC1PicSimpleMain is record
       frmcnt : aliased GLIB.guint8;  -- gst/codecparsers/gstvc1parser.h:345
@@ -393,23 +383,23 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_codecparsers_gstvc1parser_h i
    end record;
    pragma Convention (C_Pass_By_Copy, GstVC1PicSimpleMain);  -- gst/codecparsers/gstvc1parser.h:343
 
-  -- I and P pic simple and main profiles only  
-  -- I and BI pic simple and main profiles only  
-  -- B and P pic simple and main profiles only  
-  -- P pic simple and main profiles only  
+  -- I and P pic simple and main profiles only
+  -- I and BI pic simple and main profiles only
+  -- B and P pic simple and main profiles only
+  -- P pic simple and main profiles only
   -- B and BI picture only
   --   * Should be divided by #GST_VC1_BFRACTION_BASIS
-  --   * to get the real value.  
+  --   * to get the real value.
 
   -- Biplane value, those fields only mention the fact
-  --   * that the bitplane is in raw mode or not  
+  --   * that the bitplane is in raw mode or not
 
-  -- B pic main profile only  
+  -- B pic main profile only
   --*
   -- * GstVC1PicAdvanced:
   -- * @bfaction: Should be divided by #GST_VC1_BFRACTION_BASIS
   -- * to get the real value.
-  --  
+  --
 
    type GstVC1PicAdvanced is record
       fcm : aliased GstVC1FrameCodingMode;  -- gst/codecparsers/gstvc1parser.h:388
@@ -463,24 +453,24 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_codecparsers_gstvc1parser_h i
    end record;
    pragma Convention (C_Pass_By_Copy, GstVC1PicAdvanced);  -- gst/codecparsers/gstvc1parser.h:386
 
-  --  B and P picture specific  
+  --  B and P picture specific
   -- B and BI picture only
   --   * Should be divided by #GST_VC1_BFRACTION_BASIS
-  --   * to get the real value.  
+  --   * to get the real value.
 
-  -- ppic  
-  -- bipic  
+  -- ppic
+  -- bipic
   -- Biplane value, those fields only mention the fact
-  --   * that the bitplane is in raw mode or not  
+  --   * that the bitplane is in raw mode or not
 
-  -- B pic interlace field only  
-  -- For interlaced pictures only  
-  -- P and B pictures  
-  -- If 4mvswitch in ppic  
-  --  P picture  
-  -- For interlaced fields only  
-  -- Raw value  
-  -- P pic  
+  -- B pic interlace field only
+  -- For interlaced pictures only
+  -- P and B pictures
+  -- If 4mvswitch in ppic
+  --  P picture
+  -- For interlaced fields only
+  -- Raw value
+  -- P pic
    type GstVC1BitPlanes is record
       acpred : access GLIB.guint8;  -- gst/codecparsers/gstvc1parser.h:465
       fieldtx : access GLIB.guint8;  -- gst/codecparsers/gstvc1parser.h:466
@@ -493,7 +483,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_codecparsers_gstvc1parser_h i
    end record;
    pragma Convention (C_Pass_By_Copy, GstVC1BitPlanes);  -- gst/codecparsers/gstvc1parser.h:463
 
-  -- Size of the arrays  
+  -- Size of the arrays
    type GstVC1VopDquant is record
       pqdiff : aliased GLIB.guint8;  -- gst/codecparsers/gstvc1parser.h:478
       abspq : aliased GLIB.guint8;  -- gst/codecparsers/gstvc1parser.h:479
@@ -506,15 +496,15 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_codecparsers_gstvc1parser_h i
    end record;
    pragma Convention (C_Pass_By_Copy, GstVC1VopDquant);  -- gst/codecparsers/gstvc1parser.h:476
 
-  -- Computed  
-  --  if dqant != 2 
+  -- Computed
+  --  if dqant != 2
   -- if dqprofile == GST_VC1_DQPROFILE_SINGLE_EDGE
-  --   * or GST_VC1_DQPROFILE_DOUBLE_EDGE: 
+  --   * or GST_VC1_DQPROFILE_DOUBLE_EDGE:
 
   -- if dqprofile == GST_VC1_DQPROFILE_SINGLE_EDGE
-  --   * or GST_VC1_DQPROFILE_DOUBLE_EDGE: 
+  --   * or GST_VC1_DQPROFILE_DOUBLE_EDGE:
 
-  -- if dqprofile == GST_VC1_DQPROFILE_ALL_MBS  
+  -- if dqprofile == GST_VC1_DQPROFILE_ALL_MBS
    type GstVC1FrameLayer is record
       key : aliased GLIB.guint8;  -- gst/codecparsers/gstvc1parser.h:503
       framesize : aliased GLIB.guint32;  -- gst/codecparsers/gstvc1parser.h:504
@@ -524,16 +514,27 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_codecparsers_gstvc1parser_h i
    end record;
    pragma Convention (C_Pass_By_Copy, GstVC1FrameLayer);  -- gst/codecparsers/gstvc1parser.h:501
 
-  -- calculated  
+   type anon_432 (discr : unsigned := 0) is record
+      case discr is
+         when 0 =>
+            simple : aliased GstVC1PicSimpleMain;  -- gst/codecparsers/gstvc1parser.h:542
+         when others =>
+            advanced : aliased GstVC1PicAdvanced;  -- gst/codecparsers/gstvc1parser.h:543
+      end case;
+   end record;
+   pragma Convention (C_Pass_By_Copy, anon_432);
+   pragma Unchecked_Union (anon_432);--subtype GstVC1FrameHdr is u_GstVC1FrameHdr;  -- gst/codecparsers/gstvc1parser.h:153
+
+  -- calculated
   --*
   -- * GstVC1FrameHdr:
   -- *
   -- * Structure that represent picture in any profile or mode.
   -- * You should look at @ptype and @profile to know what is currently
   -- * in use.
-  --  
+  --
 
-  -- common fields  
+  -- common fields
    type GstVC1FrameHdr is record
       ptype : aliased GstVC1PictureType;  -- gst/codecparsers/gstvc1parser.h:523
       interpfrm : aliased GLIB.guint8;  -- gst/codecparsers/gstvc1parser.h:524
@@ -551,15 +552,15 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_codecparsers_gstvc1parser_h i
    end record;
    pragma Convention (C_Pass_By_Copy, GstVC1FrameHdr);  -- gst/codecparsers/gstvc1parser.h:520
 
-  -- Computed  
-  -- Convenience fields  
-  --  If dquant  
-  -- Size of the picture layer in bits  
+  -- Computed
+  -- Convenience fields
+  --  If dquant
+  -- Size of the picture layer in bits
   --*
   -- * GstVC1BDU:
   -- *
   -- * Structure that represents a Bitstream Data Unit.
-  --  
+  --
 
    type GstVC1BDU is record
       c_type : aliased GstVC1StartCode;  -- gst/codecparsers/gstvc1parser.h:557

@@ -68,13 +68,33 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_gstindex_h is
   -- * License along with this library; if not, write to the
   -- * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
   -- * Boston, MA 02111-1307, USA.
-  --  
+  --
+  --*
+  -- * GstAssocFlags:
+  -- * @GST_ASSOCIATION_FLAG_NONE: no extra flags
+  -- * @GST_ASSOCIATION_FLAG_KEY_UNIT: the entry marks a key unit, a key unit is one
+  -- *  that marks a place where one can randomly seek to.
+  -- * @GST_ASSOCIATION_FLAG_DELTA_UNIT: the entry marks a delta unit, a delta unit
+  -- *  is one that marks a place where one can relatively seek to.
+  -- * @GST_ASSOCIATION_FLAG_LAST: extra user defined flags should start here.
+  -- *
+  -- * Flags for an association entry.
+  --
+
+  -- new flags should start here
+   subtype GstAssocFlags is unsigned;
+   GST_ASSOCIATION_FLAG_NONE : constant GstAssocFlags := 0;
+   GST_ASSOCIATION_FLAG_KEY_UNIT : constant GstAssocFlags := 1;
+   GST_ASSOCIATION_FLAG_DELTA_UNIT : constant GstAssocFlags := 2;
+   GST_ASSOCIATION_FLAG_LAST : constant GstAssocFlags := 256;  -- gst/gstindex.h:157
+
 
    type GstIndexEntry;
    type anon_221;
    type anon_222 is record
       description : access GLIB.gchar;  -- gst/gstindex.h:202
    end record;
+
    pragma Convention (C_Pass_By_Copy, anon_222);
    type anon_223 is record
       nassocs : aliased GLIB.gint;  -- gst/gstindex.h:205
@@ -126,9 +146,9 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_gstindex_h is
   -- * @GST_INDEX_FUZZY: accuracy is fuzzy
   -- *
   -- * The certainty of a group in the index.
-  --  
+  --
 
-   type GstIndexCertainty is 
+   type GstIndexCertainty is
      (GST_INDEX_UNKNOWN,
       GST_INDEX_CERTAIN,
       GST_INDEX_FUZZY);
@@ -142,9 +162,9 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_gstindex_h is
   -- * @GST_INDEX_ENTRY_FORMAT: A format definition
   -- *
   -- * The different types of entries in the index.
-  --  
+  --
 
-   type GstIndexEntryType is 
+   type GstIndexEntryType is
      (GST_INDEX_ENTRY_ID,
       GST_INDEX_ENTRY_ASSOCIATION,
       GST_INDEX_ENTRY_OBJECT,
@@ -158,9 +178,9 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_gstindex_h is
   -- * @GST_INDEX_LOOKUP_AFTER: The exact entry or the one after it
   -- *
   -- * Specify the method to find an index entry in the index.
-  --  
+  --
 
-   type GstIndexLookupMethod is 
+   type GstIndexLookupMethod is
      (GST_INDEX_LOOKUP_EXACT,
       GST_INDEX_LOOKUP_BEFORE,
       GST_INDEX_LOOKUP_AFTER);
@@ -171,14 +191,14 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_gstindex_h is
   -- * @entry: The entry to query
   -- *
   -- * Get the number of associations in the entry.
-  --  
+  --
 
   --*
   -- * GST_INDEX_ASSOC_FLAGS:
   -- * @entry: The entry to query
   -- *
   -- *  Get the flags for this entry.
-  --  
+  --
 
   --*
   -- * GST_INDEX_ASSOC_FORMAT:
@@ -186,7 +206,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_gstindex_h is
   -- * @i: The format index
   -- *
   -- * Get the i-th format of the entry.
-  --  
+  --
 
   --*
   -- * GST_INDEX_ASSOC_VALUE:
@@ -194,7 +214,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_gstindex_h is
   -- * @i: The value index
   -- *
   -- * Get the i-th value of the entry.
-  --  
+  --
 
    type GstIndexAssociation;
    --subtype GstIndexAssociation is u_GstIndexAssociation;  -- gst/gstindex.h:125
@@ -205,7 +225,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_gstindex_h is
   -- * @value: the value of the association
   -- *
   -- * An association in an entry.
-  --  
+  --
 
    type GstIndexAssociation is record
       format : aliased GStreamer.GST_Low_Level.gstreamer_0_10_gst_gstformat_h.GstFormat;  -- gst/gstindex.h:135
@@ -213,59 +233,41 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_gstindex_h is
    end record;
    pragma Convention (C_Pass_By_Copy, GstIndexAssociation);  -- gst/gstindex.h:134
 
-  --*
-  -- * GstAssocFlags:
-  -- * @GST_ASSOCIATION_FLAG_NONE: no extra flags
-  -- * @GST_ASSOCIATION_FLAG_KEY_UNIT: the entry marks a key unit, a key unit is one
-  -- *  that marks a place where one can randomly seek to.
-  -- * @GST_ASSOCIATION_FLAG_DELTA_UNIT: the entry marks a delta unit, a delta unit
-  -- *  is one that marks a place where one can relatively seek to.
-  -- * @GST_ASSOCIATION_FLAG_LAST: extra user defined flags should start here.
-  -- *
-  -- * Flags for an association entry.
-  --  
-
-  -- new flags should start here  
-   subtype GstAssocFlags is unsigned;
-   GST_ASSOCIATION_FLAG_NONE : constant GstAssocFlags := 0;
-   GST_ASSOCIATION_FLAG_KEY_UNIT : constant GstAssocFlags := 1;
-   GST_ASSOCIATION_FLAG_DELTA_UNIT : constant GstAssocFlags := 2;
-   GST_ASSOCIATION_FLAG_LAST : constant GstAssocFlags := 256;  -- gst/gstindex.h:157
 
   --*
   -- * GST_INDEX_FORMAT_FORMAT:
   -- * @entry: The entry to query
   -- *
   -- * Get the format of the format entry
-  --  
+  --
 
   --*
   -- * GST_INDEX_FORMAT_KEY:
   -- * @entry: The entry to query
   -- *
   -- * Get the key of the format entry
-  --  
+  --
 
   --*
   -- * GST_INDEX_ID_INVALID:
   -- *
   -- * Constant for an invalid index id
-  --  
+  --
 
   --*
   -- * GST_INDEX_ID_DESCRIPTION:
   -- * @entry: The entry to query
   -- *
   -- * Get the description of the id entry
-  --  
+  --
 
   --*
   -- * GstIndexEntry:
   -- *
   -- * The basic element of an index.
-  --  
+  --
 
-  --< private > 
+  --< private >
    type GstIndexEntry is record
       c_type : aliased GstIndexEntryType;  -- gst/gstindex.h:197
       id : aliased GLIB.gint;  -- gst/gstindex.h:198
@@ -277,10 +279,10 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_gstindex_h is
   -- * GstIndexGroup:
   -- *
   -- * A group of related entries in an index.
-  --  
+  --
 
-  --< private > 
-  -- unique ID of group in index  
+  --< private >
+  -- unique ID of group in index
    type GstIndexGroup is record
       groupnum : aliased GLIB.gint;  -- gst/gstindex.h:231
       entries : access GStreamer.GST_Low_Level.glib_2_0_glib_glist_h.GList;  -- gst/gstindex.h:234
@@ -289,9 +291,9 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_gstindex_h is
    end record;
    pragma Convention (C_Pass_By_Copy, GstIndexGroup);  -- gst/gstindex.h:228
 
-  -- list of entries  
-  -- the certainty level of the group  
-  -- peer group that contains more certain entries  
+  -- list of entries
+  -- the certainty level of the group
+  -- peer group that contains more certain entries
   --*
   -- * GstIndexFilter:
   -- * @index: The index being queried
@@ -303,9 +305,9 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_gstindex_h is
   -- * Returns: This function should return %TRUE if the entry is to be added
   -- * to the index, %FALSE otherwise.
   -- *
-  --  
+  --
 
-   type GstIndexFilter is access function 
+   type GstIndexFilter is access function
         (arg1 : access GstIndex;
          arg2 : access GstIndexEntry;
          arg3 : System.Address) return GLIB.gboolean;
@@ -318,9 +320,9 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_gstindex_h is
   -- * @GST_INDEX_RESOLVER_PATH: Resolve on the path in graph
   -- *
   -- * The method used to resolve index writers
-  --  
+  --
 
-   type GstIndexResolverMethod is 
+   type GstIndexResolverMethod is
      (GST_INDEX_RESOLVER_CUSTOM,
       GST_INDEX_RESOLVER_GTYPE,
       GST_INDEX_RESOLVER_PATH);
@@ -336,9 +338,9 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_gstindex_h is
   -- * Function to resolve ids to writer descriptions.
   -- *
   -- * Returns: %TRUE if an id could be assigned to the writer.
-  --  
+  --
 
-   type GstIndexResolver is access function 
+   type GstIndexResolver is access function
         (arg1 : access GstIndex;
          arg2 : access GStreamer.GST_Low_Level.gstreamer_0_10_gst_gstobject_h.GstObject;
          arg3 : System.Address;
@@ -352,7 +354,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_gstindex_h is
   -- * @GST_INDEX_FLAG_LAST: First flag that can be used by subclasses
   -- *
   -- * Flags for this index
-  --  
+  --
 
    subtype GstIndexFlags is unsigned;
    GST_INDEX_WRITABLE : constant GstIndexFlags := 16;
@@ -364,20 +366,20 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_gstindex_h is
   -- * @obj: The index to check
   -- *
   -- * Check if the index can be read from
-  --  
+  --
 
   --*
   -- * GST_INDEX_IS_WRITABLE:
   -- * @obj: The index to check
   -- *
   -- * Check if the index can be written to
-  --  
+  --
 
   --*
   -- * GstIndex:
-  -- * 
+  -- *
   -- * Opaque #GstIndex structure.
-  --  
+  --
 
    type GstIndex is record
       object : aliased GStreamer.GST_Low_Level.gstreamer_0_10_gst_gstobject_h.GstObject;  -- gst/gstindex.h:325
@@ -397,18 +399,18 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_gstindex_h is
    end record;
    pragma Convention (C_Pass_By_Copy, GstIndex);  -- gst/gstindex.h:324
 
-  --< private > 
-  -- ABI added since 0.10.18  
-  --< private > 
+  --< private >
+  -- ABI added since 0.10.18
+  --< private >
    type GstIndexClass is record
       parent_class : aliased GStreamer.GST_Low_Level.gstreamer_0_10_gst_gstobject_h.GstObjectClass;  -- gst/gstindex.h:351
-      get_writer_id : access function 
+      get_writer_id : access function
            (arg1 : access GstIndex;
             arg2 : access GLIB.gint;
             arg3 : access GLIB.gchar) return GLIB.gboolean;  -- gst/gstindex.h:354
       commit : access procedure  (arg1 : access GstIndex; arg2 : GLIB.gint);  -- gst/gstindex.h:356
       add_entry : access procedure  (arg1 : access GstIndex; arg2 : access GstIndexEntry);  -- gst/gstindex.h:359
-      get_assoc_entry : access function 
+      get_assoc_entry : access function
            (arg1 : access GstIndex;
             arg2 : GLIB.gint;
             arg3 : GstIndexLookupMethod;
@@ -422,10 +424,10 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_gstindex_h is
    end record;
    pragma Convention (C_Pass_By_Copy, GstIndexClass);  -- gst/gstindex.h:350
 
-  --< protected > 
-  -- abstract methods  
-  -- signals  
-  --< private > 
+  --< protected >
+  -- abstract methods
+  -- signals
+  --< private >
    function gst_index_get_type return GLIB.GType;  -- gst/gstindex.h:373
    pragma Import (C, gst_index_get_type, "gst_index_get_type");
 
@@ -539,7 +541,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_gstindex_h is
       user_data : System.Address) return access GstIndexEntry;  -- gst/gstindex.h:411
    pragma Import (C, gst_index_get_assoc_entry_full, "gst_index_get_assoc_entry_full");
 
-  -- working with index entries  
+  -- working with index entries
    function gst_index_entry_get_type return GLIB.GType;  -- gst/gstindex.h:418
    pragma Import (C, gst_index_entry_get_type, "gst_index_entry_get_type");
 
