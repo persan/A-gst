@@ -15,10 +15,6 @@ library project Gstreamer is
       for Default_Switches ("ada") use ("-O2", "-gnatwa");
    end Compiler;
 
-   package Linker is
-      for Linker_Options use ("");
-   end Linker;
-
    package Naming is
       for Body_Suffix ("sed") use ".sed";
       for Body_Suffix ("python") use ".py";

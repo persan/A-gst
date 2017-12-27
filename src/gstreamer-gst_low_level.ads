@@ -49,7 +49,6 @@ private package GStreamer.GST_Low_Level is
 
    package Glib_2_0_Gobject_Gobject_H is
       type GObjectClass is new Interfaces.C.Extensions.Void;
-
    end  Glib_2_0_Gobject_Gobject_H;
 
    package Glib_2_0_Gobject_Gparam_H is
@@ -101,14 +100,17 @@ private package GStreamer.GST_Low_Level is
 
 
    package Glib_2_0_Glib_Gslist_H is
-      type GPollFD is new System.Address;
       type GSList is new System.Address;
    end Glib_2_0_Glib_Gslist_H;
 
 
    package glib_2_0_glib_gpoll_h is
-      type GPollFD is new System.Address;
-   end glib_2_0_glib_gpoll_h;
+      type GPollFD is record
+         Fd : aliased GLIB.Gint;  -- /usr/include/glib-2.0/glib/gpoll.h:98
+         Events : aliased GLIB.Gushort;  -- /usr/include/glib-2.0/glib/gpoll.h:100
+         Revents : aliased GLIB.Gushort;  -- /usr/include/glib-2.0/glib/gpoll.h:101
+      end record;
+   end Glib_2_0_Glib_Gpoll_H;
 
    package glib_2_0_gobject_gvaluearray_h is
       type GValueArray is new System.Address;
@@ -119,17 +121,17 @@ private package GStreamer.GST_Low_Level is
    end Glib_2_0_Glib_Gstring_H;
 
    package Sys_Types_H is
-      type Off_T is new Interfaces.C.Extensions.Void;
+      type Off_T is new Long;
    end  Sys_Types_H;
 
    package Bits_Types_Time_T_H is
-      type Time_T is new Interfaces.C.Extensions.Void;
+      type Time_T is new Long;
    end  Bits_Types_Time_T_H;
 
    package Libxml2_Libxml_Tree_H is
-      type XmlNodePtr is new Interfaces.C.Extensions.Void;
-      type xmlNsPtr is new Interfaces.C.Extensions.Void;
-      type xmlDocPtr is new Interfaces.C.Extensions.Void;
+      type XmlNodePtr is new Interfaces.C.Extensions.void_ptr;
+      type xmlNsPtr is new Interfaces.C.Extensions.void_ptr;
+      type xmlDocPtr is new Interfaces.C.Extensions.void_ptr;
    end  Libxml2_Libxml_Tree_H;
 
    package time_h is
