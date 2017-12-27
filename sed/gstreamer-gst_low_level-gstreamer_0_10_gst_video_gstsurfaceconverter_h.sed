@@ -1,0 +1,1 @@
+s!subtype GstSurfaceBuffer is GStreamer.GST_Low_Level.gstreamer_0_10_gst_video_gstsurfacebuffer_h.u_GstSurfaceBuffer;!type GstSurfaceBuffer is new GStreamer.GST_Low_Level.gstreamer_0_10_gst_video_gstsurfacebuffer_h.GstSurfaceBuffer;!

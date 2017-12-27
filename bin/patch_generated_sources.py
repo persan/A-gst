@@ -8,7 +8,7 @@ subprocess.call(["sed", "-f", "sed/all.sed", "-i"] + glob("src/gen/*.ads"))
 
 
 # Process per file patching
-for i in glob.glob("sed/*.sed"):
+for i in glob("sed/*.sed"):
 
     tgt = join("src", "gen", splitext(basename(i))[0] + ".ads")
     if exists(tgt):

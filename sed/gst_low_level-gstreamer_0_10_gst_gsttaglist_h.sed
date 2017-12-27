@@ -1,1 +1,0 @@
-s!subtype GstTagList is GST_Low_Level.gstreamer_0_10_gst_gststructure_h.u_GstStructure!type GstTagList is new GST_Low_Level.gstreamer_0_10_gst_gststructure_h.u_GstStructure!
