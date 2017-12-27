@@ -21,11 +21,10 @@ package body GStreamer.rtsp.connection is
 
    function create_from_fd
      (fd : GLIB.gint;
-      ip : access GLIB.gchar;
+      ip : String;
       port : GLIB.guint16;
-      initial_buffer : access GLIB.gchar;
-      conn : GstRTSPConnection)
-      return GstRTSPResult
+      initial_buffer : access GLIB.gchar)
+      return GstRTSPConnection
    is
    begin
       --  Generated stub: replace with real body!
@@ -37,209 +36,192 @@ package body GStreamer.rtsp.connection is
    -- Do_accept --
    ---------------
 
-   function Do_accept
-     (sock : GLIB.gint;
-      conn : GstRTSPConnection)
-      return GstRTSPResult
-   is
+   procedure Do_accept (sock : GLIB.gint; conn : GstRTSPConnection) is
    begin
       --  Generated stub: replace with real body!
       pragma Compile_Time_Warning (Standard.True, "Do_accept unimplemented");
-      return raise Program_Error with "Unimplemented function Do_accept";
+      raise Program_Error with "Unimplemented procedure Do_accept";
    end Do_accept;
 
    -------------
    -- connect --
    -------------
 
-   function connect
+   procedure connect
      (conn : GstRTSPConnection;
       timeout : access GLIB.GTime_Val)
-      return GstRTSPResult
    is
    begin
       --  Generated stub: replace with real body!
       pragma Compile_Time_Warning (Standard.True, "connect unimplemented");
-      return raise Program_Error with "Unimplemented function connect";
+      raise Program_Error with "Unimplemented procedure connect";
    end connect;
 
    -----------
    -- close --
    -----------
 
-   function close (conn : GstRTSPConnection) return GstRTSPResult is
+   procedure close (conn : GstRTSPConnection) is
    begin
       --  Generated stub: replace with real body!
       pragma Compile_Time_Warning (Standard.True, "close unimplemented");
-      return raise Program_Error with "Unimplemented function close";
+      raise Program_Error with "Unimplemented procedure close";
    end close;
 
    ----------
    -- free --
    ----------
 
-   function free (conn : GstRTSPConnection) return GstRTSPResult is
+   procedure free (conn : GstRTSPConnection) is
    begin
       --  Generated stub: replace with real body!
       pragma Compile_Time_Warning (Standard.True, "free unimplemented");
-      return raise Program_Error with "Unimplemented function free";
+      raise Program_Error with "Unimplemented procedure free";
    end free;
 
    ----------
    -- read --
    ----------
 
-   function read
+   procedure read
      (conn : GstRTSPConnection;
       data : access GLIB.guint8;
       size : GLIB.guint;
       timeout : access GLIB.GTime_Val)
-      return GstRTSPResult
    is
    begin
       --  Generated stub: replace with real body!
       pragma Compile_Time_Warning (Standard.True, "read unimplemented");
-      return raise Program_Error with "Unimplemented function read";
+      raise Program_Error with "Unimplemented procedure read";
    end read;
 
    -----------
    -- write --
    -----------
 
-   function write
+   procedure write
      (conn : GstRTSPConnection;
       data : access GLIB.guint8;
       size : GLIB.guint;
       timeout : access GLIB.GTime_Val)
-      return GstRTSPResult
    is
    begin
       --  Generated stub: replace with real body!
       pragma Compile_Time_Warning (Standard.True, "write unimplemented");
-      return raise Program_Error with "Unimplemented function write";
+      raise Program_Error with "Unimplemented procedure write";
    end write;
 
    ----------
    -- send --
    ----------
 
-   function send
+   procedure send
      (conn : GstRTSPConnection;
       message : access GStreamer.Rtsp.message.GstRTSPMessage;
       timeout : access GLIB.GTime_Val)
-      return GstRTSPResult
    is
    begin
       --  Generated stub: replace with real body!
       pragma Compile_Time_Warning (Standard.True, "send unimplemented");
-      return raise Program_Error with "Unimplemented function send";
+      raise Program_Error with "Unimplemented procedure send";
    end send;
 
    -------------
    -- receive --
    -------------
 
-   function receive
+   procedure receive
      (conn : GstRTSPConnection;
       message : access GStreamer.Rtsp.message.GstRTSPMessage;
       timeout : access GLIB.GTime_Val)
-      return GstRTSPResult
    is
    begin
       --  Generated stub: replace with real body!
       pragma Compile_Time_Warning (Standard.True, "receive unimplemented");
-      return raise Program_Error with "Unimplemented function receive";
+      raise Program_Error with "Unimplemented procedure receive";
    end receive;
 
    ----------
    -- poll --
    ----------
 
-   function poll
+   procedure poll
      (conn : GstRTSPConnection;
       events : GstRTSPEvent;
       revents : access GstRTSPEvent;
       timeout : access GLIB.GTime_Val)
-      return GstRTSPResult
    is
    begin
       --  Generated stub: replace with real body!
       pragma Compile_Time_Warning (Standard.True, "poll unimplemented");
-      return raise Program_Error with "Unimplemented function poll";
+      raise Program_Error with "Unimplemented procedure poll";
    end poll;
 
    ------------------
    -- next_timeout --
    ------------------
 
-   function next_timeout
+   procedure next_timeout
      (conn : GstRTSPConnection;
       timeout : access GLIB.GTime_Val)
-      return GstRTSPResult
    is
    begin
       --  Generated stub: replace with real body!
       pragma Compile_Time_Warning (Standard.True, "next_timeout unimplemented");
-      return raise Program_Error with "Unimplemented function next_timeout";
+      raise Program_Error with "Unimplemented procedure next_timeout";
    end next_timeout;
 
    -------------------
    -- reset_timeout --
    -------------------
 
-   function reset_timeout (conn : GstRTSPConnection) return GstRTSPResult is
+   procedure reset_timeout (conn : GstRTSPConnection) is
    begin
       --  Generated stub: replace with real body!
       pragma Compile_Time_Warning (Standard.True, "reset_timeout unimplemented");
-      return raise Program_Error with "Unimplemented function reset_timeout";
+      raise Program_Error with "Unimplemented procedure reset_timeout";
    end reset_timeout;
 
    -----------
    -- flush --
    -----------
 
-   function flush
-     (conn : GstRTSPConnection;
-      flush : GLIB.gboolean)
-      return GstRTSPResult
-   is
+   procedure flush (conn : GstRTSPConnection; flush : GLIB.gboolean) is
    begin
       --  Generated stub: replace with real body!
       pragma Compile_Time_Warning (Standard.True, "flush unimplemented");
-      return raise Program_Error with "Unimplemented function flush";
+      raise Program_Error with "Unimplemented procedure flush";
    end flush;
 
    ---------------
    -- set_proxy --
    ---------------
 
-   function set_proxy
+   procedure set_proxy
      (conn : GstRTSPConnection;
-      host : access GLIB.gchar;
+      host : String;
       port : GLIB.guint)
-      return GstRTSPResult
    is
    begin
       --  Generated stub: replace with real body!
       pragma Compile_Time_Warning (Standard.True, "set_proxy unimplemented");
-      return raise Program_Error with "Unimplemented function set_proxy";
+      raise Program_Error with "Unimplemented procedure set_proxy";
    end set_proxy;
 
    --------------
    -- set_auth --
    --------------
 
-   function set_auth
+   procedure set_auth
      (conn : GstRTSPConnection;
       method : GstRTSPAuthMethod;
-      user : access GLIB.gchar;
-      pass : access GLIB.gchar)
-      return GstRTSPResult
+      user : String;
+      pass : String)
    is
    begin
       --  Generated stub: replace with real body!
       pragma Compile_Time_Warning (Standard.True, "set_auth unimplemented");
-      return raise Program_Error with "Unimplemented function set_auth";
+      raise Program_Error with "Unimplemented procedure set_auth";
    end set_auth;
 
    --------------------
@@ -248,8 +230,8 @@ package body GStreamer.rtsp.connection is
 
    procedure set_auth_param
      (conn : GstRTSPConnection;
-      param : access GLIB.gchar;
-      value : access GLIB.gchar)
+      param : String;
+      value : String)
    is
    begin
       --  Generated stub: replace with real body!
@@ -272,15 +254,14 @@ package body GStreamer.rtsp.connection is
    -- set_qos_dscp --
    ------------------
 
-   function set_qos_dscp
+   procedure set_qos_dscp
      (conn : GstRTSPConnection;
       qos_dscp : GLIB.guint)
-      return GstRTSPResult
    is
    begin
       --  Generated stub: replace with real body!
       pragma Compile_Time_Warning (Standard.True, "set_qos_dscp unimplemented");
-      return raise Program_Error with "Unimplemented function set_qos_dscp";
+      raise Program_Error with "Unimplemented procedure set_qos_dscp";
    end set_qos_dscp;
 
    -------------
@@ -301,7 +282,7 @@ package body GStreamer.rtsp.connection is
    -- get_ip --
    ------------
 
-   function get_ip (conn : GstRTSPConnection) return access GLIB.gchar is
+   function get_ip (conn : GstRTSPConnection) return String is
    begin
       --  Generated stub: replace with real body!
       pragma Compile_Time_Warning (Standard.True, "get_ip unimplemented");
@@ -312,7 +293,7 @@ package body GStreamer.rtsp.connection is
    -- set_ip --
    ------------
 
-   procedure set_ip (conn : GstRTSPConnection; ip : access GLIB.gchar) is
+   procedure set_ip (conn : GstRTSPConnection; ip : String) is
    begin
       --  Generated stub: replace with real body!
       pragma Compile_Time_Warning (Standard.True, "set_ip unimplemented");
@@ -384,10 +365,7 @@ package body GStreamer.rtsp.connection is
    -- get_tunnelid --
    ------------------
 
-   function get_tunnelid
-     (conn : GstRTSPConnection)
-      return access GLIB.gchar
-   is
+   function get_tunnelid (conn : GstRTSPConnection) return String is
    begin
       --  Generated stub: replace with real body!
       pragma Compile_Time_Warning (Standard.True, "get_tunnelid unimplemented");
@@ -398,15 +376,14 @@ package body GStreamer.rtsp.connection is
    -- do_tunnel --
    ---------------
 
-   function do_tunnel
+   procedure do_tunnel
      (conn : GstRTSPConnection;
       conn2 : GstRTSPConnection)
-      return GstRTSPResult
    is
    begin
       --  Generated stub: replace with real body!
       pragma Compile_Time_Warning (Standard.True, "do_tunnel unimplemented");
-      return raise Program_Error with "Unimplemented function do_tunnel";
+      raise Program_Error with "Unimplemented procedure do_tunnel";
    end do_tunnel;
 
 end GStreamer.rtsp.connection;

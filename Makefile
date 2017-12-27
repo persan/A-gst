@@ -6,11 +6,12 @@ all:
 compile:
 
 clean:
-
+	git clean -xdf
 install:
 
 test:
 
+tag:
 
 #-------------------------------------------------------------------------------
 # Only used to generate the initial lowlevel bindings.

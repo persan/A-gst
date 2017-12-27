@@ -1,108 +1,122 @@
 pragma Ada_2012;
-package body GStreamer.rtsp.transport is
--- Just a dummy body
+package body GStreamer.Rtsp.Transport is
+
    --------------
-   -- get_type --
+   -- Get_Type --
    --------------
 
-   function get_type return GLIB.GType is
+   function Get_Type return GLIB.GType is
    begin
       --  Generated stub: replace with real body!
-      pragma Compile_Time_Warning (Standard.True, "get_type unimplemented");
-      return raise Program_Error with "Unimplemented function get_type";
-   end get_type;
-
-   -------------
-   -- gst_new --
-   -------------
-
-   function gst_new (transport : System.Address) return GstRTSPResult is
-   begin
-      --  Generated stub: replace with real body!
-      pragma Compile_Time_Warning (Standard.True, "gst_new unimplemented");
-      return raise Program_Error with "Unimplemented function gst_new";
-   end gst_new;
-
-   ----------
-   -- init --
-   ----------
-
-   function init (transport : access GstRTSPTransport) return GstRTSPResult is
-   begin
-      --  Generated stub: replace with real body!
-      pragma Compile_Time_Warning (Standard.True, "init unimplemented");
-      return raise Program_Error with "Unimplemented function init";
-   end init;
+      pragma Compile_Time_Warning (Standard.True, "Get_Type unimplemented");
+      return raise Program_Error with "Unimplemented function Get_Type";
+   end Get_Type;
 
    -----------
-   -- parse --
+   -- Parse --
    -----------
 
-   function parse
-     (str : access GLIB.gchar;
-      transport : access GstRTSPTransport)
-      return GstRTSPResult
+   procedure Parse
+     (Str       : String;
+      Transport : out GstRTSPTransport_Record)
    is
    begin
       --  Generated stub: replace with real body!
-      pragma Compile_Time_Warning (Standard.True, "parse unimplemented");
-      return raise Program_Error with "Unimplemented function parse";
-   end parse;
+      pragma Compile_Time_Warning (Standard.True, "Parse unimplemented");
+      raise Program_Error with "Unimplemented procedure Parse";
+   end Parse;
 
    -------------
-   -- as_text --
+   -- As_Text --
    -------------
 
-   function as_text
-     (transport : access GstRTSPTransport)
-      return access GLIB.gchar
-   is
+   function As_Text (Transport : GstRTSPTransport) return String is
    begin
       --  Generated stub: replace with real body!
-      pragma Compile_Time_Warning (Standard.True, "as_text unimplemented");
-      return raise Program_Error with "Unimplemented function as_text";
-   end as_text;
+      pragma Compile_Time_Warning (Standard.True, "As_Text unimplemented");
+      return raise Program_Error with "Unimplemented function As_Text";
+   end As_Text;
 
    --------------
-   -- get_mime --
+   -- Get_Mime --
    --------------
 
-   function get_mime
-     (trans : GstRTSPTransMode;
-      mime : System.Address)
+   function Get_Mime (Trans : GstRTSPTransMode) return String is
+   begin
+      --  Generated stub: replace with real body!
+      pragma Compile_Time_Warning (Standard.True, "Get_Mime unimplemented");
+      return raise Program_Error with "Unimplemented function Get_Mime";
+   end Get_Mime;
+
+   -----------------
+   -- Get_Manager --
+   -----------------
+
+   function Get_Manager
+     (Trans   : GstRTSPTransMode;
+      Manager : System.Address;
+      Option  : GLIB.Guint)
       return GstRTSPResult
    is
    begin
       --  Generated stub: replace with real body!
-      pragma Compile_Time_Warning (Standard.True, "get_mime unimplemented");
-      return raise Program_Error with "Unimplemented function get_mime";
-   end get_mime;
-
-   -----------------
-   -- get_manager --
-   -----------------
-
-   function get_manager
-     (trans : GstRTSPTransMode;
-      manager : System.Address;
-      option : GLIB.guint)
-      return GstRTSPResult
-   is
-   begin
-      --  Generated stub: replace with real body!
-      pragma Compile_Time_Warning (Standard.True, "get_manager unimplemented");
-      return raise Program_Error with "Unimplemented function get_manager";
-   end get_manager;
+      pragma Compile_Time_Warning (Standard.True, "Get_Manager unimplemented");
+      return raise Program_Error with "Unimplemented function Get_Manager";
+   end Get_Manager;
 
    ----------
-   -- free --
+   -- Free --
    ----------
 
-   function free (transport : access GstRTSPTransport) return GstRTSPResult is
+   function Free (Transport : access GstRTSPTransport) return GstRTSPResult is
    begin
       --  Generated stub: replace with real body!
-      pragma Compile_Time_Warning (Standard.True, "free unimplemented");
-      return raise Program_Error with "Unimplemented function free";
-   end free;
+      pragma Compile_Time_Warning (Standard.True, "Free unimplemented");
+      return raise Program_Error with "Unimplemented function Free";
+   end Free;
 
-end GStreamer.rtsp.transport;
+   -------------
+   -- Gst_New --
+   -------------
+
+   function Gst_New (Transport : System.Address) return GstRTSPResult is
+   begin
+      --  Generated stub: replace with real body!
+      pragma Compile_Time_Warning (Standard.True, "Gst_New unimplemented");
+      return raise Program_Error with "Unimplemented function Gst_New";
+   end Gst_New;
+
+   ----------
+   -- Init --
+   ----------
+
+   function Init (Transport : access GstRTSPTransport) return GstRTSPResult is
+   begin
+      --  Generated stub: replace with real body!
+      pragma Compile_Time_Warning (Standard.True, "Init unimplemented");
+      return raise Program_Error with "Unimplemented function Init";
+   end Init;
+
+   ----------------
+   -- Initialize --
+   ----------------
+
+   procedure Initialize (Object : in out GstRTSPTransport_Record) is
+   begin
+      --  Generated stub: replace with real body!
+      pragma Compile_Time_Warning (Standard.True, "Initialize unimplemented");
+      raise Program_Error with "Unimplemented procedure Initialize";
+   end Initialize;
+
+   --------------
+   -- Finalize --
+   --------------
+
+   procedure Finalize (Object : in out GstRTSPTransport_Record) is
+   begin
+      --  Generated stub: replace with real body!
+      pragma Compile_Time_Warning (Standard.True, "Finalize unimplemented");
+      raise Program_Error with "Unimplemented procedure Finalize";
+   end Finalize;
+
+end GStreamer.Rtsp.Transport;

@@ -39,114 +39,117 @@ package GStreamer.rtsp.message is
   --
 
 
-   type GstRTSPMessage(<>) is tagged private;
+   type GstRTSPMessage_Record (<>) is tagged private;
+   type GstRTSPMessage is access all GstRTSPMessage_Record'Class;
 
    --< private >
   -- memory management
-   function gst_new (msg : System.Address) return GstRTSPResult;  -- gst/rtsp/gstrtspmessage.h:110   pragma Import (C, gst_new, "new");
-
-   function init (msg : access GstRTSPMessage) return GstRTSPResult;  -- gst/rtsp/gstrtspmessage.h:111
-
-   function unset (msg : access GstRTSPMessage) return GstRTSPResult;  -- gst/rtsp/gstrtspmessage.h:112
-
-   function free (msg : access GstRTSPMessage) return GstRTSPResult;  -- gst/rtsp/gstrtspmessage.h:113
 
 
-
-   function Get_Type (Msg : access GstRTSPMessage) return GstRTSPMsgType;  -- gst/rtsp/gstrtspmessage.h:115
+   function Get_Type (Msg : access GstRTSPMessage_Record) return GstRTSPMsgType;  -- gst/rtsp/gstrtspmessage.h:115
 
   -- request
-   function new_request
+   procedure  new_request
      (msg : System.Address;
       method : GstRTSPMethod;
-      uri : access GLIB.gchar) return GstRTSPResult;  -- gst/rtsp/gstrtspmessage.h:118
+      uri : access GLIB.gchar);  -- gst/rtsp/gstrtspmessage.h:118
 
-   function init_request
+   procedure  init_request
      (msg : access GstRTSPMessage;
       method : GstRTSPMethod;
-      uri : access GLIB.gchar) return GstRTSPResult;  -- gst/rtsp/gstrtspmessage.h:121
+      uri : access GLIB.gchar);  -- gst/rtsp/gstrtspmessage.h:121
 
-   function parse_request
+   procedure  parse_request
      (msg : access GstRTSPMessage;
       method : access GstRTSPMethod;
       uri : System.Address;
-      version : access GstRTSPVersion) return GstRTSPResult;  -- gst/rtsp/gstrtspmessage.h:124
+      version : access GstRTSPVersion);  -- gst/rtsp/gstrtspmessage.h:124
 
   -- response
-   function new_response
+   procedure  new_response
      (msg : System.Address;
       code : GstRTSPStatusCode;
       reason : access GLIB.gchar;
-      request : access constant GstRTSPMessage) return GstRTSPResult;  -- gst/rtsp/gstrtspmessage.h:130
+      request : access constant GstRTSPMessage);  -- gst/rtsp/gstrtspmessage.h:130
 
-   function init_response
-     (msg : access GstRTSPMessage;
+   procedure  init_response
+     (msg : access GstRTSPMessage_Record;
       code : GstRTSPStatusCode;
       reason : access GLIB.gchar;
-      request : access constant GstRTSPMessage) return GstRTSPResult;  -- gst/rtsp/gstrtspmessage.h:134
+      request : access constant GstRTSPMessage);  -- gst/rtsp/gstrtspmessage.h:134
 
-   function parse_response
-     (msg : access GstRTSPMessage;
+   procedure  parse_response
+     (msg : access GstRTSPMessage_Record;
       code : access GstRTSPStatusCode;
       reason : System.Address;
-      version : access GstRTSPVersion) return GstRTSPResult;  -- gst/rtsp/gstrtspmessage.h:138
+      version : access GstRTSPVersion);  -- gst/rtsp/gstrtspmessage.h:138
 
   -- data
-   function new_data (msg : System.Address; channel : GLIB.guint8) return GstRTSPResult;  -- gst/rtsp/gstrtspmessage.h:144
+   procedure  new_data (msg : System.Address; channel : GLIB.guint8);  -- gst/rtsp/gstrtspmessage.h:144
 
-   function init_data (msg : access GstRTSPMessage; channel : GLIB.guint8) return GstRTSPResult;  -- gst/rtsp/gstrtspmessage.h:146
+   procedure  init_data (msg : access GstRTSPMessage_Record; channel : GLIB.guint8);  -- gst/rtsp/gstrtspmessage.h:146
 
-   function parse_data (msg : access GstRTSPMessage; channel : access GLIB.guint8) return GstRTSPResult;  -- gst/rtsp/gstrtspmessage.h:148
+   procedure  parse_data (msg : access GstRTSPMessage_Record; channel : access GLIB.guint8);  -- gst/rtsp/gstrtspmessage.h:148
 
   -- headers
-   function add_header
-     (msg : access GstRTSPMessage;
+   procedure  add_header
+     (msg : access GstRTSPMessage_Record;
       field : GstRTSPHeaderField;
-      value : access GLIB.gchar) return GstRTSPResult;  -- gst/rtsp/gstrtspmessage.h:152
+      value : access GLIB.gchar);  -- gst/rtsp/gstrtspmessage.h:152
 
-   function take_header
-     (msg : access GstRTSPMessage;
+   procedure  take_header
+     (msg : access GstRTSPMessage_Record;
       field : GstRTSPHeaderField;
-      value : access GLIB.gchar) return GstRTSPResult;  -- gst/rtsp/gstrtspmessage.h:155
+      value : access GLIB.gchar);  -- gst/rtsp/gstrtspmessage.h:155
 
-   function remove_header
-     (msg : access GstRTSPMessage;
+   procedure  remove_header
+     (msg : access GstRTSPMessage_Record;
       field : GstRTSPHeaderField;
-      indx : GLIB.gint) return GstRTSPResult;  -- gst/rtsp/gstrtspmessage.h:158
+      indx : GLIB.gint);  -- gst/rtsp/gstrtspmessage.h:158
 
-   function get_header
-     (msg : access constant GstRTSPMessage;
+   procedure  get_header
+     (msg : access constant GstRTSPMessage_Record;
       field : GstRTSPHeaderField;
       value : System.Address;
-      indx : GLIB.gint) return GstRTSPResult;  -- gst/rtsp/gstrtspmessage.h:161
+      indx : GLIB.gint);  -- gst/rtsp/gstrtspmessage.h:161
 
-   function append_headers (msg : access constant GstRTSPMessage; str : access Glib.String.GString) return GstRTSPResult;  -- gst/rtsp/gstrtspmessage.h:165
+   procedure  append_headers (msg : access constant GstRTSPMessage; str : access Glib.String.GString);  -- gst/rtsp/gstrtspmessage.h:165
 
   -- handling the body
-   function set_body
-     (msg : access GstRTSPMessage;
+   procedure  set_body
+     (msg : access GstRTSPMessage_Record;
       data : access GLIB.guint8;
-      size : GLIB.guint) return GstRTSPResult;  -- gst/rtsp/gstrtspmessage.h:169
+      size : GLIB.guint);  -- gst/rtsp/gstrtspmessage.h:169
 
-   function take_body
-     (msg : access GstRTSPMessage;
+   procedure  take_body
+     (msg : access GstRTSPMessage_Record;
       data : access GLIB.guint8;
-      size : GLIB.guint) return GstRTSPResult;  -- gst/rtsp/gstrtspmessage.h:172
+      size : GLIB.guint);  -- gst/rtsp/gstrtspmessage.h:172
 
-   function get_body
-     (msg : access constant GstRTSPMessage;
+   procedure  get_body
+     (msg : access constant GstRTSPMessage_Record;
       data : System.Address;
-      size : access GLIB.guint) return GstRTSPResult;  -- gst/rtsp/gstrtspmessage.h:175
+      size : access GLIB.guint);  -- gst/rtsp/gstrtspmessage.h:175
 
-   function steal_body
-     (msg : access GstRTSPMessage;
+   procedure  steal_body
+     (msg : access GstRTSPMessage_Record;
       data : System.Address;
-      size : access GLIB.guint) return GstRTSPResult;  -- gst/rtsp/gstrtspmessage.h:178
+      size : access GLIB.guint);  -- gst/rtsp/gstrtspmessage.h:178
 
   -- debug
-   function dump (msg : access GstRTSPMessage) return GstRTSPResult;  -- gst/rtsp/gstrtspmessage.h:183
+   procedure  dump (msg : access GstRTSPMessage_Record);  -- gst/rtsp/gstrtspmessage.h:183
 private
-   type GstRTSPMessage is new Ada.Finalization.Controlled with record
+   type GstRTSPMessage_Record is new Ada.Finalization.Controlled with record
       Data : access  GStreamer.GST_Low_Level.Gstreamer_0_10_Gst_Rtsp_Gstrtspmessage_H.GstRTSPMessage;
    end record;
+
+   procedure  gst_new (msg : in out GstRTSPMessage);  -- gst/rtsp/gstrtspmessage.h:110   pragma Import (C, gst_new, "new");
+
+   procedure  init (msg : access GstRTSPMessage_Record);  -- gst/rtsp/gstrtspmessage.h:111
+
+   procedure  unset (msg : access GstRTSPMessage_Record);  -- gst/rtsp/gstrtspmessage.h:112
+
+   procedure  free (msg : access GstRTSPMessage_Record);  -- gst/rtsp/gstrtspmessage.h:113
+
+
 end GStreamer.rtsp.message;

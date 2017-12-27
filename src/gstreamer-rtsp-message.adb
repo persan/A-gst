@@ -1,55 +1,14 @@
 pragma Ada_2012;
 package body GStreamer.rtsp.message is
 
-   -------------
-   -- gst_new --
-   -------------
-
-   function gst_new (msg : System.Address) return GstRTSPResult is
-   begin
-      --  Generated stub: replace with real body!
-      pragma Compile_Time_Warning (Standard.True, "gst_new unimplemented");
-      return raise Program_Error with "Unimplemented function gst_new";
-   end gst_new;
-
-   ----------
-   -- init --
-   ----------
-
-   function init (msg : access GstRTSPMessage) return GstRTSPResult is
-   begin
-      --  Generated stub: replace with real body!
-      pragma Compile_Time_Warning (Standard.True, "init unimplemented");
-      return raise Program_Error with "Unimplemented function init";
-   end init;
-
-   -----------
-   -- unset --
-   -----------
-
-   function unset (msg : access GstRTSPMessage) return GstRTSPResult is
-   begin
-      --  Generated stub: replace with real body!
-      pragma Compile_Time_Warning (Standard.True, "unset unimplemented");
-      return raise Program_Error with "Unimplemented function unset";
-   end unset;
-
-   ----------
-   -- free --
-   ----------
-
-   function free (msg : access GstRTSPMessage) return GstRTSPResult is
-   begin
-      --  Generated stub: replace with real body!
-      pragma Compile_Time_Warning (Standard.True, "free unimplemented");
-      return raise Program_Error with "Unimplemented function free";
-   end free;
-
    --------------
    -- Get_Type --
    --------------
 
-   function Get_Type (Msg : access GstRTSPMessage) return GstRTSPMsgType is
+   function Get_Type
+     (Msg : access GstRTSPMessage_Record)
+      return GstRTSPMsgType
+   is
    begin
       --  Generated stub: replace with real body!
       pragma Compile_Time_Warning (Standard.True, "Get_Type unimplemented");
@@ -60,300 +19,323 @@ package body GStreamer.rtsp.message is
    -- new_request --
    -----------------
 
-   function new_request
+   procedure new_request
      (msg : System.Address;
       method : GstRTSPMethod;
       uri : access GLIB.gchar)
-      return GstRTSPResult
    is
    begin
       --  Generated stub: replace with real body!
       pragma Compile_Time_Warning (Standard.True, "new_request unimplemented");
-      return raise Program_Error with "Unimplemented function new_request";
+      raise Program_Error with "Unimplemented procedure new_request";
    end new_request;
 
    ------------------
    -- init_request --
    ------------------
 
-   function init_request
+   procedure init_request
      (msg : access GstRTSPMessage;
       method : GstRTSPMethod;
       uri : access GLIB.gchar)
-      return GstRTSPResult
    is
    begin
       --  Generated stub: replace with real body!
       pragma Compile_Time_Warning (Standard.True, "init_request unimplemented");
-      return raise Program_Error with "Unimplemented function init_request";
+      raise Program_Error with "Unimplemented procedure init_request";
    end init_request;
 
    -------------------
    -- parse_request --
    -------------------
 
-   function parse_request
+   procedure parse_request
      (msg : access GstRTSPMessage;
       method : access GstRTSPMethod;
       uri : System.Address;
       version : access GstRTSPVersion)
-      return GstRTSPResult
    is
    begin
       --  Generated stub: replace with real body!
       pragma Compile_Time_Warning (Standard.True, "parse_request unimplemented");
-      return raise Program_Error with "Unimplemented function parse_request";
+      raise Program_Error with "Unimplemented procedure parse_request";
    end parse_request;
 
    ------------------
    -- new_response --
    ------------------
 
-   function new_response
+   procedure new_response
      (msg : System.Address;
       code : GstRTSPStatusCode;
       reason : access GLIB.gchar;
       request : access constant GstRTSPMessage)
-      return GstRTSPResult
    is
    begin
       --  Generated stub: replace with real body!
       pragma Compile_Time_Warning (Standard.True, "new_response unimplemented");
-      return raise Program_Error with "Unimplemented function new_response";
+      raise Program_Error with "Unimplemented procedure new_response";
    end new_response;
 
    -------------------
    -- init_response --
    -------------------
 
-   function init_response
-     (msg : access GstRTSPMessage;
+   procedure init_response
+     (msg : access GstRTSPMessage_Record;
       code : GstRTSPStatusCode;
       reason : access GLIB.gchar;
       request : access constant GstRTSPMessage)
-      return GstRTSPResult
    is
    begin
       --  Generated stub: replace with real body!
       pragma Compile_Time_Warning (Standard.True, "init_response unimplemented");
-      return raise Program_Error with "Unimplemented function init_response";
+      raise Program_Error with "Unimplemented procedure init_response";
    end init_response;
 
    --------------------
    -- parse_response --
    --------------------
 
-   function parse_response
-     (msg : access GstRTSPMessage;
+   procedure parse_response
+     (msg : access GstRTSPMessage_Record;
       code : access GstRTSPStatusCode;
       reason : System.Address;
       version : access GstRTSPVersion)
-      return GstRTSPResult
    is
    begin
       --  Generated stub: replace with real body!
       pragma Compile_Time_Warning (Standard.True, "parse_response unimplemented");
-      return raise Program_Error with "Unimplemented function parse_response";
+      raise Program_Error with "Unimplemented procedure parse_response";
    end parse_response;
 
    --------------
    -- new_data --
    --------------
 
-   function new_data
-     (msg : System.Address;
-      channel : GLIB.guint8)
-      return GstRTSPResult
-   is
+   procedure new_data (msg : System.Address; channel : GLIB.guint8) is
    begin
       --  Generated stub: replace with real body!
       pragma Compile_Time_Warning (Standard.True, "new_data unimplemented");
-      return raise Program_Error with "Unimplemented function new_data";
+      raise Program_Error with "Unimplemented procedure new_data";
    end new_data;
 
    ---------------
    -- init_data --
    ---------------
 
-   function init_data
-     (msg : access GstRTSPMessage;
+   procedure init_data
+     (msg : access GstRTSPMessage_Record;
       channel : GLIB.guint8)
-      return GstRTSPResult
    is
    begin
       --  Generated stub: replace with real body!
       pragma Compile_Time_Warning (Standard.True, "init_data unimplemented");
-      return raise Program_Error with "Unimplemented function init_data";
+      raise Program_Error with "Unimplemented procedure init_data";
    end init_data;
 
    ----------------
    -- parse_data --
    ----------------
 
-   function parse_data
-     (msg : access GstRTSPMessage;
+   procedure parse_data
+     (msg : access GstRTSPMessage_Record;
       channel : access GLIB.guint8)
-      return GstRTSPResult
    is
    begin
       --  Generated stub: replace with real body!
       pragma Compile_Time_Warning (Standard.True, "parse_data unimplemented");
-      return raise Program_Error with "Unimplemented function parse_data";
+      raise Program_Error with "Unimplemented procedure parse_data";
    end parse_data;
 
    ----------------
    -- add_header --
    ----------------
 
-   function add_header
-     (msg : access GstRTSPMessage;
+   procedure add_header
+     (msg : access GstRTSPMessage_Record;
       field : GstRTSPHeaderField;
       value : access GLIB.gchar)
-      return GstRTSPResult
    is
    begin
       --  Generated stub: replace with real body!
       pragma Compile_Time_Warning (Standard.True, "add_header unimplemented");
-      return raise Program_Error with "Unimplemented function add_header";
+      raise Program_Error with "Unimplemented procedure add_header";
    end add_header;
 
    -----------------
    -- take_header --
    -----------------
 
-   function take_header
-     (msg : access GstRTSPMessage;
+   procedure take_header
+     (msg : access GstRTSPMessage_Record;
       field : GstRTSPHeaderField;
       value : access GLIB.gchar)
-      return GstRTSPResult
    is
    begin
       --  Generated stub: replace with real body!
       pragma Compile_Time_Warning (Standard.True, "take_header unimplemented");
-      return raise Program_Error with "Unimplemented function take_header";
+      raise Program_Error with "Unimplemented procedure take_header";
    end take_header;
 
    -------------------
    -- remove_header --
    -------------------
 
-   function remove_header
-     (msg : access GstRTSPMessage;
+   procedure remove_header
+     (msg : access GstRTSPMessage_Record;
       field : GstRTSPHeaderField;
       indx : GLIB.gint)
-      return GstRTSPResult
    is
    begin
       --  Generated stub: replace with real body!
       pragma Compile_Time_Warning (Standard.True, "remove_header unimplemented");
-      return raise Program_Error with "Unimplemented function remove_header";
+      raise Program_Error with "Unimplemented procedure remove_header";
    end remove_header;
 
    ----------------
    -- get_header --
    ----------------
 
-   function get_header
-     (msg : access constant GstRTSPMessage;
+   procedure get_header
+     (msg : access constant GstRTSPMessage_Record;
       field : GstRTSPHeaderField;
       value : System.Address;
       indx : GLIB.gint)
-      return GstRTSPResult
    is
    begin
       --  Generated stub: replace with real body!
       pragma Compile_Time_Warning (Standard.True, "get_header unimplemented");
-      return raise Program_Error with "Unimplemented function get_header";
+      raise Program_Error with "Unimplemented procedure get_header";
    end get_header;
 
    --------------------
    -- append_headers --
    --------------------
 
-   function append_headers
+   procedure append_headers
      (msg : access constant GstRTSPMessage;
       str : access Glib.String.GString)
-      return GstRTSPResult
    is
    begin
       --  Generated stub: replace with real body!
       pragma Compile_Time_Warning (Standard.True, "append_headers unimplemented");
-      return raise Program_Error with "Unimplemented function append_headers";
+      raise Program_Error with "Unimplemented procedure append_headers";
    end append_headers;
 
    --------------
    -- set_body --
    --------------
 
-   function set_body
-     (msg : access GstRTSPMessage;
+   procedure set_body
+     (msg : access GstRTSPMessage_Record;
       data : access GLIB.guint8;
       size : GLIB.guint)
-      return GstRTSPResult
    is
    begin
       --  Generated stub: replace with real body!
       pragma Compile_Time_Warning (Standard.True, "set_body unimplemented");
-      return raise Program_Error with "Unimplemented function set_body";
+      raise Program_Error with "Unimplemented procedure set_body";
    end set_body;
 
    ---------------
    -- take_body --
    ---------------
 
-   function take_body
-     (msg : access GstRTSPMessage;
+   procedure take_body
+     (msg : access GstRTSPMessage_Record;
       data : access GLIB.guint8;
       size : GLIB.guint)
-      return GstRTSPResult
    is
    begin
       --  Generated stub: replace with real body!
       pragma Compile_Time_Warning (Standard.True, "take_body unimplemented");
-      return raise Program_Error with "Unimplemented function take_body";
+      raise Program_Error with "Unimplemented procedure take_body";
    end take_body;
 
    --------------
    -- get_body --
    --------------
 
-   function get_body
-     (msg : access constant GstRTSPMessage;
+   procedure get_body
+     (msg : access constant GstRTSPMessage_Record;
       data : System.Address;
       size : access GLIB.guint)
-      return GstRTSPResult
    is
    begin
       --  Generated stub: replace with real body!
       pragma Compile_Time_Warning (Standard.True, "get_body unimplemented");
-      return raise Program_Error with "Unimplemented function get_body";
+      raise Program_Error with "Unimplemented procedure get_body";
    end get_body;
 
    ----------------
    -- steal_body --
    ----------------
 
-   function steal_body
-     (msg : access GstRTSPMessage;
+   procedure steal_body
+     (msg : access GstRTSPMessage_Record;
       data : System.Address;
       size : access GLIB.guint)
-      return GstRTSPResult
    is
    begin
       --  Generated stub: replace with real body!
       pragma Compile_Time_Warning (Standard.True, "steal_body unimplemented");
-      return raise Program_Error with "Unimplemented function steal_body";
+      raise Program_Error with "Unimplemented procedure steal_body";
    end steal_body;
 
    ----------
    -- dump --
    ----------
 
-   function dump (msg : access GstRTSPMessage) return GstRTSPResult is
+   procedure dump (msg : access GstRTSPMessage_Record) is
    begin
       --  Generated stub: replace with real body!
       pragma Compile_Time_Warning (Standard.True, "dump unimplemented");
-      return raise Program_Error with "Unimplemented function dump";
+      raise Program_Error with "Unimplemented procedure dump";
    end dump;
+
+   -------------
+   -- gst_new --
+   -------------
+
+   procedure gst_new (msg : in out GstRTSPMessage) is
+   begin
+      --  Generated stub: replace with real body!
+      pragma Compile_Time_Warning (Standard.True, "gst_new unimplemented");
+      raise Program_Error with "Unimplemented procedure gst_new";
+   end gst_new;
+
+   ----------
+   -- init --
+   ----------
+
+   procedure init (msg : access GstRTSPMessage_Record) is
+   begin
+      --  Generated stub: replace with real body!
+      pragma Compile_Time_Warning (Standard.True, "init unimplemented");
+      raise Program_Error with "Unimplemented procedure init";
+   end init;
+
+   -----------
+   -- unset --
+   -----------
+
+   procedure unset (msg : access GstRTSPMessage_Record) is
+   begin
+      --  Generated stub: replace with real body!
+      pragma Compile_Time_Warning (Standard.True, "unset unimplemented");
+      raise Program_Error with "Unimplemented procedure unset";
+   end unset;
+
+   ----------
+   -- free --
+   ----------
+
+   procedure free (msg : access GstRTSPMessage_Record) is
+   begin
+      --  Generated stub: replace with real body!
+      pragma Compile_Time_Warning (Standard.True, "free unimplemented");
+      raise Program_Error with "Unimplemented procedure free";
+   end free;
 
 end GStreamer.rtsp.message;

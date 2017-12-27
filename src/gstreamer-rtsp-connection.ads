@@ -6,7 +6,6 @@ with Ada.Finalization;
 with System;
 package GStreamer.rtsp.connection is
 
-  --*
   type GstRTSPConnection(<>) is tagged private;
 
 
@@ -15,107 +14,106 @@ package GStreamer.rtsp.connection is
 
    function create_from_fd
      (fd : GLIB.gint;
-      ip : access GLIB.gchar;
+      ip : String;
       port : GLIB.guint16;
-      initial_buffer : access GLIB.gchar;
-      conn : GstRTSPConnection) return GstRTSPResult;
+      initial_buffer : access GLIB.gchar) return GstRTSPConnection ;
 
 
-   function Do_accept (sock : GLIB.gint; conn : GstRTSPConnection) return GstRTSPResult;
+   procedure  Do_accept (sock : GLIB.gint; conn : GstRTSPConnection) ;
 
 
-   function connect (conn : GstRTSPConnection; timeout : access GLIB.GTime_Val) return GstRTSPResult;
+   procedure  connect (conn : GstRTSPConnection; timeout : access GLIB.GTime_Val) ;
 
 
-   function close (conn : GstRTSPConnection) return GstRTSPResult;
+   procedure  close (conn : GstRTSPConnection) ;
 
 
-   function free (conn : GstRTSPConnection) return GstRTSPResult;
+   procedure  free (conn : GstRTSPConnection) ;
 
 
   -- sending/receiving raw bytes
-   function read
+   procedure  read
      (conn : GstRTSPConnection;
       data : access GLIB.guint8;
       size : GLIB.guint;
-      timeout : access GLIB.GTime_Val) return GstRTSPResult;
+      timeout : access GLIB.GTime_Val) ;
 
 
-   function write
+   procedure  write
      (conn : GstRTSPConnection;
       data : access GLIB.guint8;
       size : GLIB.guint;
-      timeout : access GLIB.GTime_Val) return GstRTSPResult;
+      timeout : access GLIB.GTime_Val) ;
 
 
   -- sending/receiving messages
-   function send
+   procedure  send
      (conn : GstRTSPConnection;
       message : access GStreamer.Rtsp.message.GstRTSPMessage;
-      timeout : access GLIB.GTime_Val) return GstRTSPResult;
+      timeout : access GLIB.GTime_Val) ;
 
 
-   function receive
+   procedure  receive
      (conn : GstRTSPConnection;
       message : access GStreamer.Rtsp.message.GstRTSPMessage;
-      timeout : access GLIB.GTime_Val) return GstRTSPResult;
+      timeout : access GLIB.GTime_Val) ;
 
 
   -- status management
-   function poll
+   procedure  poll
      (conn : GstRTSPConnection;
       events : GstRTSPEvent;
       revents : access GstRTSPEvent;
-      timeout : access GLIB.GTime_Val) return GstRTSPResult;
+      timeout : access GLIB.GTime_Val) ;
 
 
   -- reset the timeout
-   function next_timeout (conn : GstRTSPConnection; timeout : access GLIB.GTime_Val) return GstRTSPResult;
+   procedure  next_timeout (conn : GstRTSPConnection; timeout : access GLIB.GTime_Val) ;
 
 
-   function reset_timeout (conn : GstRTSPConnection) return GstRTSPResult;
+   procedure  reset_timeout (conn : GstRTSPConnection) ;
 
 
   -- flushing state
-   function flush (conn : GstRTSPConnection; flush : GLIB.gboolean) return GstRTSPResult;
+   procedure  flush (conn : GstRTSPConnection; flush : GLIB.gboolean) ;
 
 
   -- HTTP proxy support
-   function set_proxy
+   procedure  set_proxy
      (conn : GstRTSPConnection;
-      host : access GLIB.gchar;
-      port : GLIB.guint) return GstRTSPResult;
+      host : String;
+      port : GLIB.guint) ;
 
 
   -- configure authentication data
-   function set_auth
+   procedure  set_auth
      (conn : GstRTSPConnection;
       method : GstRTSPAuthMethod;
-      user : access GLIB.gchar;
-      pass : access GLIB.gchar) return GstRTSPResult;
+      user : String;
+      pass : String) ;
 
 
    procedure set_auth_param
      (conn : GstRTSPConnection;
-      param : access GLIB.gchar;
-      value : access GLIB.gchar);
+      param : String;
+      value : String);
 
 
    procedure clear_auth_params (conn : GstRTSPConnection);
 
 
   -- configure DSCP
-   function set_qos_dscp (conn : GstRTSPConnection; qos_dscp : GLIB.guint) return GstRTSPResult;
+   procedure  set_qos_dscp (conn : GstRTSPConnection; qos_dscp : GLIB.guint) ;
 
 
   -- accessors
-   function get_url (conn : GstRTSPConnection) return access GStreamer.Rtsp.url.GstRTSPUrl;
+   function  get_url (conn : GstRTSPConnection) return access GStreamer.Rtsp.url.GstRTSPUrl;
 
 
-   function get_ip (conn : GstRTSPConnection) return access GLIB.gchar;
+   function  get_ip (conn : GstRTSPConnection) return String;
 
 
-   procedure set_ip (conn : GstRTSPConnection; ip : access GLIB.gchar);
+   procedure set_ip (conn : GstRTSPConnection; ip : String);
 
 
    function get_readfd (conn : GstRTSPConnection) return GLIB.gint;
@@ -134,10 +132,10 @@ package GStreamer.rtsp.connection is
    function is_tunneled (conn : GstRTSPConnection) return GLIB.gboolean;
 
 
-   function get_tunnelid (conn : GstRTSPConnection) return access GLIB.gchar;
+   function get_tunnelid (conn : GstRTSPConnection) return String;
 
 
-   function do_tunnel (conn : GstRTSPConnection; conn2 : GstRTSPConnection) return GstRTSPResult;
+   procedure  do_tunnel (conn : GstRTSPConnection; conn2 : GstRTSPConnection) ;
 
 
   -- async IO
