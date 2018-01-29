@@ -75,22 +75,22 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_gsttask_h is
 
   -- --- standard type macros ---  
    type GstTask;
-   type anon_191;
-   type anon_192 is record
+   type anon_192;
+   type anon_193 is record
       thread : access GStreamer.GST_Low_Level.glib_2_0_glib_gthread_h.GThread;  -- gst/gsttask.h:160
    end record;
-   pragma Convention (C_Pass_By_Copy, anon_192);
+   pragma Convention (C_Pass_By_Copy, anon_193);
    type u_GstTask_u_gst_reserved_array is array (0 .. 2) of System.Address;
-   type anon_191 (discr : unsigned := 0) is record
+   type anon_192 (discr : unsigned := 0) is record
       case discr is
          when 0 =>
-            ABI : aliased anon_192;  -- gst/gsttask.h:161
+            ABI : aliased anon_193;  -- gst/gsttask.h:161
          when others =>
             u_gst_reserved : u_GstTask_u_gst_reserved_array;  -- gst/gsttask.h:162
       end case;
    end record;
-   pragma Convention (C_Pass_By_Copy, anon_191);
-   pragma Unchecked_Union (anon_191);--subtype GstTask is u_GstTask;  -- gst/gsttask.h:49
+   pragma Convention (C_Pass_By_Copy, anon_192);
+   pragma Unchecked_Union (anon_192);--subtype GstTask is u_GstTask;  -- gst/gsttask.h:49
 
    type GstTaskClass;
    type u_GstTaskClass_u_gst_reserved_array is array (0 .. 3) of System.Address;
@@ -184,7 +184,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_gsttask_h is
    end record;
    pragma Convention (C_Pass_By_Copy, GstTaskThreadCallbacks);  -- gst/gsttask.h:129
 
-   --  skipped anonymous struct anon_190
+   --  skipped anonymous struct anon_191
 
   --< private > 
   --*
@@ -207,7 +207,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_gsttask_h is
       func : GstTaskFunction;  -- gst/gsttask.h:151
       data : System.Address;  -- gst/gsttask.h:152
       running : aliased GLIB.gboolean;  -- gst/gsttask.h:154
-      abidata : aliased anon_191;  -- gst/gsttask.h:163
+      abidata : aliased anon_192;  -- gst/gsttask.h:163
       priv : System.Address;  -- gst/gsttask.h:165
    end record;
    pragma Convention (C_Pass_By_Copy, GstTask);  -- gst/gsttask.h:142

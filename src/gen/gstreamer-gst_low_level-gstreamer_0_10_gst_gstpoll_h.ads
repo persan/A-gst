@@ -59,7 +59,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_gstpoll_h is
    end record;
    pragma Convention (C_Pass_By_Copy, GstPollFD);  -- gst/gstpoll.h:52
 
-   --  skipped anonymous struct anon_242
+   --  skipped anonymous struct anon_243
 
   --< private > 
   --*

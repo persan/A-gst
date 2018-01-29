@@ -1,179 +1,184 @@
 pragma Ada_2005;
-with glib;
+with Glib;
 with GStreamer.Rtsp.Url;
 with GStreamer.Rtsp.Message;
 with Ada.Finalization;
 with System;
-package GStreamer.rtsp.connection is
+--  private with GStreamer.GST_Low_Level.gstreamer_0_10_gst_rtsp_gstrtspconnection_h;
+package GStreamer.Rtsp.Connection is
 
-  type GstRTSPConnection(<>) is tagged private;
-
-
-   function create (url : access constant GStreamer.rtsp.url.GstRTSPUrl) return GstRTSPConnection;
-
-
-   function create_from_fd
-     (fd : GLIB.gint;
-      ip : String;
-      port : GLIB.guint16;
-      initial_buffer : access GLIB.gchar) return GstRTSPConnection ;
+   type GstRTSPConnection_Record (<>) is tagged private;
+   type GstRTSPConnection is access all GstRTSPConnection_Record'Class;
 
 
-   procedure  Do_accept (sock : GLIB.gint; conn : GstRTSPConnection) ;
+   function Create (Url : GStreamer.Rtsp.Url.GstRTSPUrl) return GstRTSPConnection;
 
 
-   procedure  connect (conn : GstRTSPConnection; timeout : access GLIB.GTime_Val) ;
+   function Create_From_Fd
+     (Fd             : GLIB.Gint;
+      Ip             : String;
+      Port           : GLIB.Guint16;
+      Initial_Buffer : access GLIB.Gchar) return GstRTSPConnection ;
 
 
-   procedure  close (conn : GstRTSPConnection) ;
+   procedure  Do_Accept (Sock : GLIB.Gint;
+                         Conn : access GstRTSPConnection_Record) ;
 
 
-   procedure  free (conn : GstRTSPConnection) ;
+   procedure  Connect (Conn    : access GstRTSPConnection_Record;
+                       Timeout : access GLIB.GTime_Val) ;
 
 
-  -- sending/receiving raw bytes
-   procedure  read
-     (conn : GstRTSPConnection;
-      data : access GLIB.guint8;
-      size : GLIB.guint;
-      timeout : access GLIB.GTime_Val) ;
+   procedure  Close (Conn : access GstRTSPConnection_Record) ;
 
 
-   procedure  write
-     (conn : GstRTSPConnection;
-      data : access GLIB.guint8;
-      size : GLIB.guint;
-      timeout : access GLIB.GTime_Val) ;
+   procedure  Free (Conn : access GstRTSPConnection_Record) ;
 
 
-  -- sending/receiving messages
-   procedure  send
-     (conn : GstRTSPConnection;
-      message : access GStreamer.Rtsp.message.GstRTSPMessage;
-      timeout : access GLIB.GTime_Val) ;
+   -- sending/receiving raw bytes
+   procedure  Read
+     (Conn    : access GstRTSPConnection_Record;
+      Data    : access GLIB.Guint8;
+      Size    : GLIB.Guint;
+      Timeout : access GLIB.GTime_Val) ;
 
 
-   procedure  receive
-     (conn : GstRTSPConnection;
-      message : access GStreamer.Rtsp.message.GstRTSPMessage;
-      timeout : access GLIB.GTime_Val) ;
+   procedure  Write
+     (Conn    : access GstRTSPConnection_Record;
+      Data    : access GLIB.Guint8;
+      Size    : GLIB.Guint;
+      Timeout : access GLIB.GTime_Val) ;
 
 
-  -- status management
-   procedure  poll
-     (conn : GstRTSPConnection;
-      events : GstRTSPEvent;
-      revents : access GstRTSPEvent;
-      timeout : access GLIB.GTime_Val) ;
+   -- sending/receiving messages
+   procedure  Send
+     (Conn    : access GstRTSPConnection_Record;
+      Message : GStreamer.Rtsp.Message.GstRTSPMessage;
+      Timeout : GLIB.GTime_Val) ;
 
 
-  -- reset the timeout
-   procedure  next_timeout (conn : GstRTSPConnection; timeout : access GLIB.GTime_Val) ;
+   procedure  Receive
+     (Conn    : access GstRTSPConnection_Record;
+      Message : GStreamer.Rtsp.Message.GstRTSPMessage;
+      Timeout : GLIB.GTime_Val) ;
 
 
-   procedure  reset_timeout (conn : GstRTSPConnection) ;
+   -- status management
+   procedure  Poll
+     (Conn    : access GstRTSPConnection_Record;
+      Events  : GstRTSPEvent;
+      Revents : access GstRTSPEvent;
+      Timeout : access GLIB.GTime_Val) ;
 
 
-  -- flushing state
-   procedure  flush (conn : GstRTSPConnection; flush : GLIB.gboolean) ;
+   -- reset the timeout
+   procedure  Next_Timeout (Conn : access GstRTSPConnection_Record; Timeout : access GLIB.GTime_Val) ;
 
 
-  -- HTTP proxy support
-   procedure  set_proxy
-     (conn : GstRTSPConnection;
-      host : String;
-      port : GLIB.guint) ;
+   procedure  Reset_Timeout (Conn : access GstRTSPConnection_Record) ;
 
 
-  -- configure authentication data
-   procedure  set_auth
-     (conn : GstRTSPConnection;
-      method : GstRTSPAuthMethod;
-      user : String;
-      pass : String) ;
+   -- flushing state
+   procedure  Flush (Conn : access GstRTSPConnection_Record; Flush : GLIB.Gboolean) ;
 
 
-   procedure set_auth_param
-     (conn : GstRTSPConnection;
-      param : String;
-      value : String);
+   -- HTTP proxy support
+   procedure  Set_Proxy
+     (Conn : access GstRTSPConnection_Record;
+      Host : String;
+      Port : GLIB.Guint) ;
 
 
-   procedure clear_auth_params (conn : GstRTSPConnection);
+   -- configure authentication data
+   procedure  Set_Auth
+     (Conn   : access GstRTSPConnection_Record;
+      Method : GstRTSPAuthMethod;
+      User   : String;
+      Pass   : String) ;
 
 
-  -- configure DSCP
-   procedure  set_qos_dscp (conn : GstRTSPConnection; qos_dscp : GLIB.guint) ;
+   procedure Set_Auth_Param
+     (Conn  : access GstRTSPConnection_Record;
+      Param : String;
+      Value : String);
 
 
-  -- accessors
-   function  get_url (conn : GstRTSPConnection) return access GStreamer.Rtsp.url.GstRTSPUrl;
+   procedure Clear_Auth_Params (Conn : access GstRTSPConnection_Record);
 
 
-   function  get_ip (conn : GstRTSPConnection) return String;
+   -- configure DSCP
+   procedure  Set_Qos_Dscp (Conn : access GstRTSPConnection_Record; Qos_Dscp : GLIB.Guint) ;
 
 
-   procedure set_ip (conn : GstRTSPConnection; ip : String);
+   -- accessors
+   function  Get_Url (Conn : access GstRTSPConnection_Record) return access GStreamer.Rtsp.Url.GstRTSPUrl;
 
 
-   function get_readfd (conn : GstRTSPConnection) return GLIB.gint;
+   function  Get_Ip (Conn : access GstRTSPConnection_Record) return String;
 
 
-   function get_writefd (conn : GstRTSPConnection) return GLIB.gint;
+   procedure Set_Ip (Conn : access GstRTSPConnection_Record; Ip : String);
 
 
-   procedure set_http_mode (conn : GstRTSPConnection; enable : GLIB.gboolean);
+   function Get_Readfd (Conn : access GstRTSPConnection_Record) return GLIB.Gint;
 
 
-  -- tunneling
-   procedure set_tunneled (conn : GstRTSPConnection; tunneled : GLIB.gboolean);
+   function Get_Writefd (Conn : access GstRTSPConnection_Record) return GLIB.Gint;
 
 
-   function is_tunneled (conn : GstRTSPConnection) return GLIB.gboolean;
+   procedure Set_Http_Mode (Conn : access GstRTSPConnection_Record; Enable : GLIB.Gboolean);
 
 
-   function get_tunnelid (conn : GstRTSPConnection) return String;
+   -- tunneling
+   procedure Set_Tunneled (Conn : access GstRTSPConnection_Record; Tunneled : GLIB.Gboolean);
 
 
-   procedure  do_tunnel (conn : GstRTSPConnection; conn2 : GstRTSPConnection) ;
+   function Is_Tunneled (Conn : access GstRTSPConnection_Record) return GLIB.Gboolean;
 
 
-  -- async IO
-  --*
-  -- * GstRTSPWatch:
-  -- *
-  -- * Opaque RTSP watch object that can be used for asynchronous RTSP
-  -- * operations.
-  --
+   function Get_Tunnelid (Conn : access GstRTSPConnection_Record) return String;
+
+
+   procedure  Do_Tunnel (Conn : access GstRTSPConnection_Record; Conn2 : GstRTSPConnection) ;
+
+
+   -- async IO
+   --*
+   -- * GstRTSPWatch:
+   -- *
+   -- * Opaque RTSP watch object that can be used for asynchronous RTSP
+   -- * operations.
+   --
 
    --  skipped empty struct u_GstRTSPWatch
 
    --  skipped empty struct GstRTSPWatch
 
-  --*
-  -- * GstRTSPWatchFuncs:
-  -- * @message_received: callback when a message was received
-  -- * @message_sent: callback when a message was sent
-  -- * @closed: callback when the connection is closed
-  -- * @error: callback when an error occured
-  -- * @tunnel_start: a client started a tunneled connection. The tunnelid of the
-  -- *   connection must be saved.
-  -- * @tunnel_complete: a client finished a tunneled connection. In this callback
-  -- *   you usually pair the tunnelid of this connection with the saved one using
-  -- *   do_tunnel().
-  -- * @error_full: callback when an error occured with more information than
-  -- *   the @error callback. Since 0.10.25
-  -- * @tunnel_lost: callback when the post connection of a tunnel is closed.
-  -- *   Since 0.10.29
-  -- *
-  -- * Callback functions from a #GstRTSPWatch.
-  -- *
-  -- * Since: 0.10.23
-  --
+   --*
+   -- * GstRTSPWatchFuncs:
+   -- * @message_received: callback when a message was received
+   -- * @message_sent: callback when a message was sent
+   -- * @closed: callback when the connection is closed
+   -- * @error: callback when an error occured
+   -- * @tunnel_start: a client started a tunneled connection. The tunnelid of the
+   -- *   connection must be saved.
+   -- * @tunnel_complete: a client finished a tunneled connection. In this callback
+   -- *   you usually pair the tunnelid of this connection with the saved one using
+   -- *   do_tunnel().
+   -- * @error_full: callback when an error occured with more information than
+   -- *   the @error callback. Since 0.10.25
+   -- * @tunnel_lost: callback when the post connection of a tunnel is closed.
+   -- *   Since 0.10.29
+   -- *
+   -- * Callback functions from a #GstRTSPWatch.
+   -- *
+   -- * Since: 0.10.23
+   --
 
 private
-   type GstRTSPConnection is new Ada.Finalization.Controlled with record
-      Data : System.Address;
+   type GstRTSPConnection_Record is new Ada.Finalization.Controlled with record
+      Data : System.Address; --  Actually GStreamer.GST_Low_Level.gstreamer_0_10_gst_rtsp_gstrtspconnection_h.GstRTSPConnection;
+
    end record;
 
-end GStreamer.rtsp.connection;
+end GStreamer.Rtsp.Connection;

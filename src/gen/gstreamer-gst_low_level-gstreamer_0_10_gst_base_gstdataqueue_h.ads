@@ -47,23 +47,23 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_base_gstdataqueue_h is
   --  
 
    type GstDataQueue;
-   type anon_310;
-   type anon_311 is record
+   type anon_311;
+   type anon_312 is record
       waiting_add : aliased GLIB.gboolean;  -- gst/base/gstdataqueue.h:140
       waiting_del : aliased GLIB.gboolean;  -- gst/base/gstdataqueue.h:141
    end record;
-   pragma Convention (C_Pass_By_Copy, anon_311);
+   pragma Convention (C_Pass_By_Copy, anon_312);
    type u_GstDataQueue_u_gst_reserved_array is array (0 .. 1) of System.Address;
-   type anon_310 (discr : unsigned := 0) is record
+   type anon_311 (discr : unsigned := 0) is record
       case discr is
          when 0 =>
-            ABI : aliased anon_311;  -- gst/base/gstdataqueue.h:142
+            ABI : aliased anon_312;  -- gst/base/gstdataqueue.h:142
          when others =>
             u_gst_reserved : u_GstDataQueue_u_gst_reserved_array;  -- gst/base/gstdataqueue.h:143
       end case;
    end record;
-   pragma Convention (C_Pass_By_Copy, anon_310);
-   pragma Unchecked_Union (anon_310);--subtype GstDataQueue is u_GstDataQueue;  -- gst/base/gstdataqueue.h:39
+   pragma Convention (C_Pass_By_Copy, anon_311);
+   pragma Unchecked_Union (anon_311);--subtype GstDataQueue is u_GstDataQueue;  -- gst/base/gstdataqueue.h:39
 
    type GstDataQueueClass;
    type u_GstDataQueueClass_u_gst_reserved_array is array (0 .. 3) of System.Address;
@@ -171,7 +171,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_base_gstdataqueue_h is
       flushing : aliased GLIB.gboolean;  -- gst/base/gstdataqueue.h:133
       fullcallback : GstDataQueueFullCallback;  -- gst/base/gstdataqueue.h:135
       emptycallback : GstDataQueueEmptyCallback;  -- gst/base/gstdataqueue.h:136
-      abidata : aliased anon_310;  -- gst/base/gstdataqueue.h:144
+      abidata : aliased anon_311;  -- gst/base/gstdataqueue.h:144
    end record;
    pragma Convention (C_Pass_By_Copy, GstDataQueue);  -- gst/base/gstdataqueue.h:118
 

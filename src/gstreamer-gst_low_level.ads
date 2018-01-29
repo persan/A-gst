@@ -16,6 +16,7 @@ with Interfaces.C.Extensions;
 with System;
 with Glib.Error;
 with Glib.Object;
+with Glib.Types;
 private package GStreamer.GST_Low_Level is
    use Interfaces.C;
 
@@ -57,7 +58,7 @@ private package GStreamer.GST_Low_Level is
    end  Glib_2_0_Gobject_Gparam_H;
 
    package Glib_2_0_Gobject_Gtype_H is
-      type GTypeInterface is new System.Address;
+      subtype GTypeInterface is Glib.Types.GType_Interface;
       type GTypeInstance is new System.Address;
       type GTypeClass is new System.Address;
       type GTimeVal is new System.Address;

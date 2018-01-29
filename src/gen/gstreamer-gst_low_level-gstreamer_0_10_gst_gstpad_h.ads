@@ -194,23 +194,23 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_gstpad_h is
   --  
 
    type GstPad;
-   type anon_199;
-   type anon_200 is record
+   type anon_200;
+   type anon_201 is record
       block_callback_called : aliased GLIB.gboolean;  -- gst/gstpad.h:739
       priv : System.Address;  -- gst/gstpad.h:740
    end record;
-   pragma Convention (C_Pass_By_Copy, anon_200);
+   pragma Convention (C_Pass_By_Copy, anon_201);
    type u_GstPad_u_gst_reserved_array is array (0 .. 1) of System.Address;
-   type anon_199 (discr : unsigned := 0) is record
+   type anon_200 (discr : unsigned := 0) is record
       case discr is
          when 0 =>
-            ABI : aliased anon_200;  -- gst/gstpad.h:741
+            ABI : aliased anon_201;  -- gst/gstpad.h:741
          when others =>
             u_gst_reserved : u_GstPad_u_gst_reserved_array;  -- gst/gstpad.h:742
       end case;
    end record;
-   pragma Convention (C_Pass_By_Copy, anon_199);
-   pragma Unchecked_Union (anon_199);--subtype GstPad is u_GstPad;  -- gst/gstpad.h:50
+   pragma Convention (C_Pass_By_Copy, anon_200);
+   pragma Unchecked_Union (anon_200);--subtype GstPad is u_GstPad;  -- gst/gstpad.h:50
 
    --  skipped empty struct u_GstPadPrivate
 
@@ -903,7 +903,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_gstpad_h is
       do_event_signals : aliased GLIB.gint;  -- gst/gstpad.h:727
       iterintlinkfunc : GstPadIterIntLinkFunction;  -- gst/gstpad.h:731
       block_destroy_data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.GDestroyNotify;  -- gst/gstpad.h:734
-      abidata : aliased anon_199;  -- gst/gstpad.h:743
+      abidata : aliased anon_200;  -- gst/gstpad.h:743
    end record;
    pragma Convention (C_Pass_By_Copy, GstPad);  -- gst/gstpad.h:659
 

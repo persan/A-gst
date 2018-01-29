@@ -514,17 +514,6 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_codecparsers_gstvc1parser_h i
    end record;
    pragma Convention (C_Pass_By_Copy, GstVC1FrameLayer);  -- gst/codecparsers/gstvc1parser.h:501
 
-   type anon_432 (discr : unsigned := 0) is record
-      case discr is
-         when 0 =>
-            simple : aliased GstVC1PicSimpleMain;  -- gst/codecparsers/gstvc1parser.h:542
-         when others =>
-            advanced : aliased GstVC1PicAdvanced;  -- gst/codecparsers/gstvc1parser.h:543
-      end case;
-   end record;
-   pragma Convention (C_Pass_By_Copy, anon_432);
-   pragma Unchecked_Union (anon_432);--subtype GstVC1FrameHdr is u_GstVC1FrameHdr;  -- gst/codecparsers/gstvc1parser.h:153
-
   -- calculated
   --*
   -- * GstVC1FrameHdr:
@@ -535,6 +524,17 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_codecparsers_gstvc1parser_h i
   --
 
   -- common fields
+   type anon_433 (discr : unsigned := 0) is record
+      case discr is
+         when 0 =>
+            simple : aliased GstVC1PicSimpleMain;  -- gst/codecparsers/gstvc1parser.h:542
+         when others =>
+            advanced : aliased GstVC1PicAdvanced;  -- gst/codecparsers/gstvc1parser.h:543
+      end case;
+   end record;
+   pragma Convention (C_Pass_By_Copy, anon_433);
+   pragma Unchecked_Union (anon_433);--subtype GstVC1FrameHdr is u_GstVC1FrameHdr;  -- gst/codecparsers/gstvc1parser.h:153
+
    type GstVC1FrameHdr is record
       ptype : aliased GstVC1PictureType;  -- gst/codecparsers/gstvc1parser.h:523
       interpfrm : aliased GLIB.guint8;  -- gst/codecparsers/gstvc1parser.h:524
@@ -547,7 +547,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_codecparsers_gstvc1parser_h i
       profile : aliased GLIB.guint8;  -- gst/codecparsers/gstvc1parser.h:535
       dquant : aliased GLIB.guint8;  -- gst/codecparsers/gstvc1parser.h:536
       vopdquant : aliased GstVC1VopDquant;  -- gst/codecparsers/gstvc1parser.h:539
-      pic : aliased anon_432;  -- gst/codecparsers/gstvc1parser.h:544
+      pic : aliased anon_433;  -- gst/codecparsers/gstvc1parser.h:544
       header_size : aliased GLIB.guint;  -- gst/codecparsers/gstvc1parser.h:547
    end record;
    pragma Convention (C_Pass_By_Copy, GstVC1FrameHdr);  -- gst/codecparsers/gstvc1parser.h:520

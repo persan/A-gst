@@ -189,7 +189,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_gstevent_h is
   --  
 
    type GstEvent;
-   type anon_186 (discr : unsigned := 0) is record
+   type anon_187 (discr : unsigned := 0) is record
       case discr is
          when 0 =>
             seqnum : aliased GLIB.guint32;  -- gst/gstevent.h:368
@@ -197,8 +197,8 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_gstevent_h is
             u_gst_reserved : System.Address;  -- gst/gstevent.h:369
       end case;
    end record;
-   pragma Convention (C_Pass_By_Copy, anon_186);
-   pragma Unchecked_Union (anon_186);--subtype GstEvent is u_GstEvent;  -- gst/gstevent.h:160
+   pragma Convention (C_Pass_By_Copy, anon_187);
+   pragma Unchecked_Union (anon_187);--subtype GstEvent is u_GstEvent;  -- gst/gstevent.h:160
 
    type GstEventClass;
    type u_GstEventClass_u_gst_reserved_array is array (0 .. 3) of System.Address;
@@ -387,7 +387,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_gstevent_h is
       timestamp : aliased GLIB.guint64;  -- gst/gstevent.h:361
       src : access GStreamer.GST_Low_Level.gstreamer_0_10_gst_gstobject_h.GstObject;  -- gst/gstevent.h:362
       structure : access GStreamer.GST_Low_Level.gstreamer_0_10_gst_gststructure_h.GstStructure;  -- gst/gstevent.h:364
-      abidata : aliased anon_186;  -- gst/gstevent.h:370
+      abidata : aliased anon_187;  -- gst/gstevent.h:370
    end record;
    pragma Convention (C_Pass_By_Copy, GstEvent);  -- gst/gstevent.h:356
 

@@ -154,7 +154,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_dataprotocol_dataprotocol_h i
    end record;
    pragma Convention (C_Pass_By_Copy, GstDPPacketizer);  -- gst/dataprotocol/dataprotocol.h:133
 
-   --  skipped anonymous struct anon_368
+   --  skipped anonymous struct anon_369
 
   --< private > 
    procedure gst_dp_init;  -- gst/dataprotocol/dataprotocol.h:136

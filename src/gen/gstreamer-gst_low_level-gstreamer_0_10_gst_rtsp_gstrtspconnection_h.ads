@@ -31,7 +31,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_rtsp_gstrtspconnection_h is
   -- * License along with this library; if not, write to the
   -- * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
   -- * Boston, MA 02111-1307, USA.
-  --
+  --  
 
   -- * Unless otherwise indicated, Source Code is licensed under MIT license.
   -- * See further explanation attached in License Statement (distributed in the file
@@ -54,19 +54,19 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_rtsp_gstrtspconnection_h is
   -- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
   -- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
   -- * SOFTWARE.
-  --
+  --  
 
   --*
   -- * GstRTSPConnection:
   -- *
   -- * Opaque RTSP connection object.
-  --
+  --  
 
    --  skipped empty struct u_GstRTSPConnection
 
    --  skipped empty struct GstRTSPConnection
 
-  -- opening/closing a connection
+  -- opening/closing a connection  
    function gst_rtsp_connection_create (url : access constant GStreamer.GST_Low_Level.gstreamer_0_10_gst_rtsp_gstrtspurl_h.GstRTSPUrl; conn : System.Address) return GStreamer.GST_Low_Level.gstreamer_0_10_gst_rtsp_gstrtspdefs_h.GstRTSPResult;  -- gst/rtsp/gstrtspconnection.h:63
    pragma Import (C, gst_rtsp_connection_create, "gst_rtsp_connection_create");
 
@@ -81,7 +81,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_rtsp_gstrtspconnection_h is
    function gst_rtsp_connection_accept (sock : GLIB.gint; conn : System.Address) return GStreamer.GST_Low_Level.gstreamer_0_10_gst_rtsp_gstrtspdefs_h.GstRTSPResult;  -- gst/rtsp/gstrtspconnection.h:69
    pragma Import (C, gst_rtsp_connection_accept, "gst_rtsp_connection_accept");
 
-   function gst_rtsp_connection_connect (conn : System.Address; timeout : access GLIB.GTime_Val) return GStreamer.GST_Low_Level.gstreamer_0_10_gst_rtsp_gstrtspdefs_h.GstRTSPResult;  -- gst/rtsp/gstrtspconnection.h:70
+   function gst_rtsp_connection_connect (conn : System.Address; timeout : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.GTimeVal) return GStreamer.GST_Low_Level.gstreamer_0_10_gst_rtsp_gstrtspdefs_h.GstRTSPResult;  -- gst/rtsp/gstrtspconnection.h:70
    pragma Import (C, gst_rtsp_connection_connect, "gst_rtsp_connection_connect");
 
    function gst_rtsp_connection_close (conn : System.Address) return GStreamer.GST_Low_Level.gstreamer_0_10_gst_rtsp_gstrtspdefs_h.GstRTSPResult;  -- gst/rtsp/gstrtspconnection.h:71
@@ -90,61 +90,61 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_rtsp_gstrtspconnection_h is
    function gst_rtsp_connection_free (conn : System.Address) return GStreamer.GST_Low_Level.gstreamer_0_10_gst_rtsp_gstrtspdefs_h.GstRTSPResult;  -- gst/rtsp/gstrtspconnection.h:72
    pragma Import (C, gst_rtsp_connection_free, "gst_rtsp_connection_free");
 
-  -- sending/receiving raw bytes
+  -- sending/receiving raw bytes  
    function gst_rtsp_connection_read
      (conn : System.Address;
       data : access GLIB.guint8;
       size : GLIB.guint;
-      timeout : access GLIB.GTime_Val) return GStreamer.GST_Low_Level.gstreamer_0_10_gst_rtsp_gstrtspdefs_h.GstRTSPResult;  -- gst/rtsp/gstrtspconnection.h:76
+      timeout : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.GTimeVal) return GStreamer.GST_Low_Level.gstreamer_0_10_gst_rtsp_gstrtspdefs_h.GstRTSPResult;  -- gst/rtsp/gstrtspconnection.h:76
    pragma Import (C, gst_rtsp_connection_read, "gst_rtsp_connection_read");
 
    function gst_rtsp_connection_write
      (conn : System.Address;
       data : access GLIB.guint8;
       size : GLIB.guint;
-      timeout : access GLIB.GTime_Val) return GStreamer.GST_Low_Level.gstreamer_0_10_gst_rtsp_gstrtspdefs_h.GstRTSPResult;  -- gst/rtsp/gstrtspconnection.h:78
+      timeout : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.GTimeVal) return GStreamer.GST_Low_Level.gstreamer_0_10_gst_rtsp_gstrtspdefs_h.GstRTSPResult;  -- gst/rtsp/gstrtspconnection.h:78
    pragma Import (C, gst_rtsp_connection_write, "gst_rtsp_connection_write");
 
-  -- sending/receiving messages
+  -- sending/receiving messages  
    function gst_rtsp_connection_send
      (conn : System.Address;
       message : access GStreamer.GST_Low_Level.gstreamer_0_10_gst_rtsp_gstrtspmessage_h.GstRTSPMessage;
-      timeout : access GLIB.GTime_Val) return GStreamer.GST_Low_Level.gstreamer_0_10_gst_rtsp_gstrtspdefs_h.GstRTSPResult;  -- gst/rtsp/gstrtspconnection.h:82
+      timeout : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.GTimeVal) return GStreamer.GST_Low_Level.gstreamer_0_10_gst_rtsp_gstrtspdefs_h.GstRTSPResult;  -- gst/rtsp/gstrtspconnection.h:82
    pragma Import (C, gst_rtsp_connection_send, "gst_rtsp_connection_send");
 
    function gst_rtsp_connection_receive
      (conn : System.Address;
       message : access GStreamer.GST_Low_Level.gstreamer_0_10_gst_rtsp_gstrtspmessage_h.GstRTSPMessage;
-      timeout : access GLIB.GTime_Val) return GStreamer.GST_Low_Level.gstreamer_0_10_gst_rtsp_gstrtspdefs_h.GstRTSPResult;  -- gst/rtsp/gstrtspconnection.h:84
+      timeout : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.GTimeVal) return GStreamer.GST_Low_Level.gstreamer_0_10_gst_rtsp_gstrtspdefs_h.GstRTSPResult;  -- gst/rtsp/gstrtspconnection.h:84
    pragma Import (C, gst_rtsp_connection_receive, "gst_rtsp_connection_receive");
 
-  -- status management
+  -- status management  
    function gst_rtsp_connection_poll
      (conn : System.Address;
       events : GStreamer.GST_Low_Level.gstreamer_0_10_gst_rtsp_gstrtspdefs_h.GstRTSPEvent;
       revents : access GStreamer.GST_Low_Level.gstreamer_0_10_gst_rtsp_gstrtspdefs_h.GstRTSPEvent;
-      timeout : access GLIB.GTime_Val) return GStreamer.GST_Low_Level.gstreamer_0_10_gst_rtsp_gstrtspdefs_h.GstRTSPResult;  -- gst/rtsp/gstrtspconnection.h:88
+      timeout : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.GTimeVal) return GStreamer.GST_Low_Level.gstreamer_0_10_gst_rtsp_gstrtspdefs_h.GstRTSPResult;  -- gst/rtsp/gstrtspconnection.h:88
    pragma Import (C, gst_rtsp_connection_poll, "gst_rtsp_connection_poll");
 
-  -- reset the timeout
-   function gst_rtsp_connection_next_timeout (conn : System.Address; timeout : access GLIB.GTime_Val) return GStreamer.GST_Low_Level.gstreamer_0_10_gst_rtsp_gstrtspdefs_h.GstRTSPResult;  -- gst/rtsp/gstrtspconnection.h:92
+  -- reset the timeout  
+   function gst_rtsp_connection_next_timeout (conn : System.Address; timeout : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.GTimeVal) return GStreamer.GST_Low_Level.gstreamer_0_10_gst_rtsp_gstrtspdefs_h.GstRTSPResult;  -- gst/rtsp/gstrtspconnection.h:92
    pragma Import (C, gst_rtsp_connection_next_timeout, "gst_rtsp_connection_next_timeout");
 
    function gst_rtsp_connection_reset_timeout (conn : System.Address) return GStreamer.GST_Low_Level.gstreamer_0_10_gst_rtsp_gstrtspdefs_h.GstRTSPResult;  -- gst/rtsp/gstrtspconnection.h:93
    pragma Import (C, gst_rtsp_connection_reset_timeout, "gst_rtsp_connection_reset_timeout");
 
-  -- flushing state
+  -- flushing state  
    function gst_rtsp_connection_flush (conn : System.Address; flush : GLIB.gboolean) return GStreamer.GST_Low_Level.gstreamer_0_10_gst_rtsp_gstrtspdefs_h.GstRTSPResult;  -- gst/rtsp/gstrtspconnection.h:96
    pragma Import (C, gst_rtsp_connection_flush, "gst_rtsp_connection_flush");
 
-  -- HTTP proxy support
+  -- HTTP proxy support  
    function gst_rtsp_connection_set_proxy
      (conn : System.Address;
       host : access GLIB.gchar;
       port : GLIB.guint) return GStreamer.GST_Low_Level.gstreamer_0_10_gst_rtsp_gstrtspdefs_h.GstRTSPResult;  -- gst/rtsp/gstrtspconnection.h:99
    pragma Import (C, gst_rtsp_connection_set_proxy, "gst_rtsp_connection_set_proxy");
 
-  -- configure authentication data
+  -- configure authentication data  
    function gst_rtsp_connection_set_auth
      (conn : System.Address;
       method : GStreamer.GST_Low_Level.gstreamer_0_10_gst_rtsp_gstrtspdefs_h.GstRTSPAuthMethod;
@@ -161,11 +161,11 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_rtsp_gstrtspconnection_h is
    procedure gst_rtsp_connection_clear_auth_params (conn : System.Address);  -- gst/rtsp/gstrtspconnection.h:109
    pragma Import (C, gst_rtsp_connection_clear_auth_params, "gst_rtsp_connection_clear_auth_params");
 
-  -- configure DSCP
+  -- configure DSCP  
    function gst_rtsp_connection_set_qos_dscp (conn : System.Address; qos_dscp : GLIB.guint) return GStreamer.GST_Low_Level.gstreamer_0_10_gst_rtsp_gstrtspdefs_h.GstRTSPResult;  -- gst/rtsp/gstrtspconnection.h:112
    pragma Import (C, gst_rtsp_connection_set_qos_dscp, "gst_rtsp_connection_set_qos_dscp");
 
-  -- accessors
+  -- accessors  
    function gst_rtsp_connection_get_url (conn : System.Address) return access GStreamer.GST_Low_Level.gstreamer_0_10_gst_rtsp_gstrtspurl_h.GstRTSPUrl;  -- gst/rtsp/gstrtspconnection.h:116
    pragma Import (C, gst_rtsp_connection_get_url, "gst_rtsp_connection_get_url");
 
@@ -184,7 +184,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_rtsp_gstrtspconnection_h is
    procedure gst_rtsp_connection_set_http_mode (conn : System.Address; enable : GLIB.gboolean);  -- gst/rtsp/gstrtspconnection.h:123
    pragma Import (C, gst_rtsp_connection_set_http_mode, "gst_rtsp_connection_set_http_mode");
 
-  -- tunneling
+  -- tunneling  
    procedure gst_rtsp_connection_set_tunneled (conn : System.Address; tunneled : GLIB.gboolean);  -- gst/rtsp/gstrtspconnection.h:127
    pragma Import (C, gst_rtsp_connection_set_tunneled, "gst_rtsp_connection_set_tunneled");
 
@@ -197,13 +197,13 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_rtsp_gstrtspconnection_h is
    function gst_rtsp_connection_do_tunnel (conn : System.Address; conn2 : System.Address) return GStreamer.GST_Low_Level.gstreamer_0_10_gst_rtsp_gstrtspdefs_h.GstRTSPResult;  -- gst/rtsp/gstrtspconnection.h:131
    pragma Import (C, gst_rtsp_connection_do_tunnel, "gst_rtsp_connection_do_tunnel");
 
-  -- async IO
+  -- async IO  
   --*
   -- * GstRTSPWatch:
   -- *
   -- * Opaque RTSP watch object that can be used for asynchronous RTSP
   -- * operations.
-  --
+  --  
 
    --  skipped empty struct u_GstRTSPWatch
 
@@ -228,26 +228,26 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_rtsp_gstrtspconnection_h is
   -- * Callback functions from a #GstRTSPWatch.
   -- *
   -- * Since: 0.10.23
-  --
+  --  
 
    type GstRTSPWatchFuncs_u_gst_reserved_array is array (0 .. 1) of System.Address;
    type GstRTSPWatchFuncs is record
-      message_received : access function
+      message_received : access function 
            (arg1 : System.Address;
             arg2 : access GStreamer.GST_Low_Level.gstreamer_0_10_gst_rtsp_gstrtspmessage_h.GstRTSPMessage;
             arg3 : System.Address) return GStreamer.GST_Low_Level.gstreamer_0_10_gst_rtsp_gstrtspdefs_h.GstRTSPResult;  -- gst/rtsp/gstrtspconnection.h:165
-      message_sent : access function
+      message_sent : access function 
            (arg1 : System.Address;
             arg2 : GLIB.guint;
             arg3 : System.Address) return GStreamer.GST_Low_Level.gstreamer_0_10_gst_rtsp_gstrtspdefs_h.GstRTSPResult;  -- gst/rtsp/gstrtspconnection.h:167
       closed : access function  (arg1 : System.Address; arg2 : System.Address) return GStreamer.GST_Low_Level.gstreamer_0_10_gst_rtsp_gstrtspdefs_h.GstRTSPResult;  -- gst/rtsp/gstrtspconnection.h:168
-      error : access function
+      error : access function 
            (arg1 : System.Address;
             arg2 : GStreamer.GST_Low_Level.gstreamer_0_10_gst_rtsp_gstrtspdefs_h.GstRTSPResult;
             arg3 : System.Address) return GStreamer.GST_Low_Level.gstreamer_0_10_gst_rtsp_gstrtspdefs_h.GstRTSPResult;  -- gst/rtsp/gstrtspconnection.h:170
       tunnel_start : access function  (arg1 : System.Address; arg2 : System.Address) return GStreamer.GST_Low_Level.gstreamer_0_10_gst_rtsp_gstrtspdefs_h.GstRTSPStatusCode;  -- gst/rtsp/gstrtspconnection.h:171
       tunnel_complete : access function  (arg1 : System.Address; arg2 : System.Address) return GStreamer.GST_Low_Level.gstreamer_0_10_gst_rtsp_gstrtspdefs_h.GstRTSPResult;  -- gst/rtsp/gstrtspconnection.h:172
-      error_full : access function
+      error_full : access function 
            (arg1 : System.Address;
             arg2 : GStreamer.GST_Low_Level.gstreamer_0_10_gst_rtsp_gstrtspdefs_h.GstRTSPResult;
             arg3 : access GStreamer.GST_Low_Level.gstreamer_0_10_gst_rtsp_gstrtspmessage_h.GstRTSPMessage;
@@ -258,9 +258,9 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_rtsp_gstrtspconnection_h is
    end record;
    pragma Convention (C_Pass_By_Copy, GstRTSPWatchFuncs);  -- gst/rtsp/gstrtspconnection.h:180
 
-   --  skipped anonymous struct anon_413
+   --  skipped anonymous struct anon_414
 
-  --< private >
+  --< private > 
    function gst_rtsp_watch_new
      (conn : System.Address;
       funcs : access GstRTSPWatchFuncs;

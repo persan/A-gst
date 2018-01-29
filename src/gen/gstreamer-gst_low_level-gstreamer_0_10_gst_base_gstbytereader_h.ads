@@ -165,7 +165,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_base_gstbytereader_h is
    end record;
    pragma Convention (C_Pass_By_Copy, GstByteReader);  -- gst/base/gstbytereader.h:44
 
-   --  skipped anonymous struct anon_308
+   --  skipped anonymous struct anon_309
 
   -- Byte position  
    function gst_byte_reader_new (data : access GLIB.guint8; size : GLIB.guint) return access GstByteReader;  -- gst/base/gstbytereader.h:46

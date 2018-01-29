@@ -104,7 +104,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_base_gstbytewriter_h is
    end record;
    pragma Convention (C_Pass_By_Copy, GstByteWriter);  -- gst/base/gstbytewriter.h:49
 
-   --  skipped anonymous struct anon_309
+   --  skipped anonymous struct anon_310
 
    function gst_byte_writer_new return access GstByteWriter;  -- gst/base/gstbytewriter.h:51
    pragma Import (C, gst_byte_writer_new, "gst_byte_writer_new");

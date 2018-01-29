@@ -94,7 +94,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_app_gstappsink_h is
    end record;
    pragma Convention (C_Pass_By_Copy, GstAppSinkCallbacks);  -- gst/app/gstappsink.h:79
 
-   --  skipped anonymous struct anon_369
+   --  skipped anonymous struct anon_370
 
   --< private > 
    type GstAppSink is record

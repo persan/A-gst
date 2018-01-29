@@ -74,24 +74,24 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_base_gstbasesrc_h is
    GST_BASE_SRC_FLAG_LAST : constant GstBaseSrcFlags := 4194304;  -- gst/base/gstbasesrc.h:50
 
    type GstBaseSrc;
-   type anon_306;
-   type anon_307 is record
+   type anon_307;
+   type anon_308 is record
       typefind : aliased GLIB.gboolean;  -- gst/base/gstbasesrc.h:108
       running : aliased GLIB.gboolean;  -- gst/base/gstbasesrc.h:109
       pending_seek : access GStreamer.GST_Low_Level.gstreamer_0_10_gst_gstevent_h.GstEvent;  -- gst/base/gstbasesrc.h:110
    end record;
-   pragma Convention (C_Pass_By_Copy, anon_307);
+   pragma Convention (C_Pass_By_Copy, anon_308);
    type u_GstBaseSrc_u_gst_reserved_array is array (0 .. 18) of System.Address;
-   type anon_306 (discr : unsigned := 0) is record
+   type anon_307 (discr : unsigned := 0) is record
       case discr is
          when 0 =>
-            ABI : aliased anon_307;  -- gst/base/gstbasesrc.h:111
+            ABI : aliased anon_308;  -- gst/base/gstbasesrc.h:111
          when others =>
             u_gst_reserved : u_GstBaseSrc_u_gst_reserved_array;  -- gst/base/gstbasesrc.h:112
       end case;
    end record;
-   pragma Convention (C_Pass_By_Copy, anon_306);
-   pragma Unchecked_Union (anon_306);--subtype GstBaseSrc is u_GstBaseSrc;  -- gst/base/gstbasesrc.h:52
+   pragma Convention (C_Pass_By_Copy, anon_307);
+   pragma Unchecked_Union (anon_307);--subtype GstBaseSrc is u_GstBaseSrc;  -- gst/base/gstbasesrc.h:52
 
    type GstBaseSrcClass;
    type u_GstBaseSrcClass_u_gst_reserved_array is array (0 .. 13) of System.Address;
@@ -134,7 +134,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_base_gstbasesrc_h is
       size : aliased GLIB.guint64;  -- gst/base/gstbasesrc.h:99
       num_buffers : aliased GLIB.gint;  -- gst/base/gstbasesrc.h:101
       num_buffers_left : aliased GLIB.gint;  -- gst/base/gstbasesrc.h:102
-      data : aliased anon_306;  -- gst/base/gstbasesrc.h:113
+      data : aliased anon_307;  -- gst/base/gstbasesrc.h:113
       priv : System.Address;  -- gst/base/gstbasesrc.h:115
    end record;
    pragma Convention (C_Pass_By_Copy, GstBaseSrc);  -- gst/base/gstbasesrc.h:70

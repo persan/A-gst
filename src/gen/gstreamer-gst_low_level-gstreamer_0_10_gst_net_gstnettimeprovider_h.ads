@@ -45,7 +45,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_net_gstnettimeprovider_h is
 
   -- to determinate os  
    type GstNetTimeProvider;
-   type anon_332 (discr : unsigned := 0) is record
+   type anon_333 (discr : unsigned := 0) is record
       case discr is
          when 0 =>
             u_gst_reserved1 : System.Address;  -- gst/net/gstnettimeprovider.h:87
@@ -53,8 +53,8 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_net_gstnettimeprovider_h is
             active : aliased GLIB.gint;  -- gst/net/gstnettimeprovider.h:89
       end case;
    end record;
-   pragma Convention (C_Pass_By_Copy, anon_332);
-   pragma Unchecked_Union (anon_332);type u_GstNetTimeProvider_control_sock_array is array (0 .. 1) of aliased int;
+   pragma Convention (C_Pass_By_Copy, anon_333);
+   pragma Unchecked_Union (anon_333);type u_GstNetTimeProvider_control_sock_array is array (0 .. 1) of aliased int;
    type u_GstNetTimeProvider_u_gst_reserved_array is array (0 .. 1) of System.Address;
    --subtype GstNetTimeProvider is u_GstNetTimeProvider;  -- gst/net/gstnettimeprovider.h:62
 
@@ -79,7 +79,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_net_gstnettimeprovider_h is
       control_sock : aliased u_GstNetTimeProvider_control_sock_array;  -- gst/net/gstnettimeprovider.h:80
       thread : access GStreamer.GST_Low_Level.glib_2_0_glib_gthread_h.GThread;  -- gst/net/gstnettimeprovider.h:82
       clock : access GStreamer.GST_Low_Level.gstreamer_0_10_gst_gstclock_h.GstClock;  -- gst/net/gstnettimeprovider.h:84
-      active : aliased anon_332;  -- gst/net/gstnettimeprovider.h:90
+      active : aliased anon_333;  -- gst/net/gstnettimeprovider.h:90
       priv : System.Address;  -- gst/net/gstnettimeprovider.h:93
       u_gst_reserved : u_GstNetTimeProvider_u_gst_reserved_array;  -- gst/net/gstnettimeprovider.h:95
    end record;

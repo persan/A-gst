@@ -172,8 +172,6 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_codecparsers_gsth264parser_h 
    pragma Convention (C, GstH264SliceType);  -- gst/codecparsers/gsth264parser.h:169
 
    type GstH264NalParser;
-   type GstH264SPS;
-   type GstH264PPS;
    --subtype GstH264NalParser is u_GstH264NalParser;  -- gst/codecparsers/gsth264parser.h:171
 
    type GstH264NalUnit;
@@ -201,7 +199,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_codecparsers_gsth264parser_h 
    --subtype GstH264VUIParams is u_GstH264VUIParams;  -- gst/codecparsers/gsth264parser.h:178
 
    type GstH264RefPicListModification;
-   type anon_448 (discr : unsigned := 0) is record
+   type anon_449 (discr : unsigned := 0) is record
       case discr is
          when 0 =>
             abs_diff_pic_num_minus1 : aliased GLIB.guint32;  -- gst/codecparsers/gsth264parser.h:495
@@ -209,10 +207,8 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_codecparsers_gsth264parser_h 
             long_term_pic_num : aliased GLIB.guint32;  -- gst/codecparsers/gsth264parser.h:497
       end case;
    end record;
-   pragma Convention (C_Pass_By_Copy, anon_448);
-   pragma Unchecked_Union (anon_448);--subtype GstH264RefPicListModification is u_GstH264RefPicListModification;  -- gst/codecparsers/gsth264parser.h:180
-
-
+   pragma Convention (C_Pass_By_Copy, anon_449);
+   pragma Unchecked_Union (anon_449);--subtype GstH264RefPicListModification is u_GstH264RefPicListModification;  -- gst/codecparsers/gsth264parser.h:180
 
    type GstH264DecRefPicMarking;
    --subtype GstH264DecRefPicMarking is u_GstH264DecRefPicMarking;  -- gst/codecparsers/gsth264parser.h:181
@@ -516,6 +512,8 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_codecparsers_gsth264parser_h 
       valid : aliased GLIB.gboolean;  -- gst/codecparsers/gsth264parser.h:486
    end record;
    pragma Convention (C_Pass_By_Copy, GstH264PPS);  -- gst/codecparsers/gsth264parser.h:443
+   type u_GstH264NalParser_sps_array is array (0 .. 31) of aliased GstH264SPS;
+   type u_GstH264NalParser_pps_array is array (0 .. 255) of aliased GstH264PPS;
 
   -- if num_slice_groups_minus1 > 0
   -- and if slice_group_map_type == 0
@@ -524,9 +522,11 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_codecparsers_gsth264parser_h 
   -- or if slice_group_map_type == 6
    type GstH264RefPicListModification is record
       modification_of_pic_nums_idc : aliased GLIB.guint8;  -- gst/codecparsers/gsth264parser.h:491
-      value : aliased anon_448;  -- gst/codecparsers/gsth264parser.h:498
+      value : aliased anon_449;  -- gst/codecparsers/gsth264parser.h:498
    end record;
    pragma Convention (C_Pass_By_Copy, GstH264RefPicListModification);  -- gst/codecparsers/gsth264parser.h:489
+   type u_GstH264SliceHdr_ref_pic_list_modification_l0_array is array (0 .. 31) of aliased GstH264RefPicListModification;
+   type u_GstH264SliceHdr_ref_pic_list_modification_l1_array is array (0 .. 31) of aliased GstH264RefPicListModification;
 
   -- if modification_of_pic_nums_idc == 0 || 1
   -- if modification_of_pic_nums_idc == 2
@@ -555,8 +555,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_codecparsers_gsth264parser_h 
       max_long_term_frame_idx_plus1 : aliased GLIB.guint32;  -- gst/codecparsers/gsth264parser.h:529
    end record;
    pragma Convention (C_Pass_By_Copy, GstH264RefPicMarking);  -- gst/codecparsers/gsth264parser.h:522
-
-   type U_GstH264DecRefPicMarking_Ref_Pic_Marking_Array is array (0 .. 9) of aliased GstH264RefPicMarking;
+   type u_GstH264DecRefPicMarking_ref_pic_marking_array is array (0 .. 9) of aliased GstH264RefPicMarking;
 
   -- if slice->nal_unit.IdrPicFlag
    type GstH264DecRefPicMarking is record
@@ -567,9 +566,6 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_codecparsers_gsth264parser_h 
       n_ref_pic_marking : aliased GLIB.guint8;  -- gst/codecparsers/gsth264parser.h:540
    end record;
    pragma Convention (C_Pass_By_Copy, GstH264DecRefPicMarking);  -- gst/codecparsers/gsth264parser.h:532
-
-   type u_GstH264SliceHdr_ref_pic_list_modification_l0_array is array (0 .. 31) of aliased GstH264RefPicListModification;
-   type u_GstH264SliceHdr_ref_pic_list_modification_l1_array is array (0 .. 31) of aliased GstH264RefPicListModification;
 
    type GstH264SliceHdr is record
       first_mb_in_slice : aliased GLIB.guint32;  -- gst/codecparsers/gsth264parser.h:546
@@ -632,8 +628,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_codecparsers_gsth264parser_h 
       time_offset : aliased GLIB.guint32;  -- gst/codecparsers/gsth264parser.h:623
    end record;
    pragma Convention (C_Pass_By_Copy, GstH264ClockTimestamp);  -- gst/codecparsers/gsth264parser.h:605
-
-   type U_GstH264PicTiming_Clock_Timestamp_Array is array (0 .. 2) of aliased GstH264ClockTimestamp;
+   type u_GstH264PicTiming_clock_timestamp_array is array (0 .. 2) of aliased GstH264ClockTimestamp;
 
    type GstH264PicTiming is record
       cpb_removal_delay : aliased GLIB.guint32;  -- gst/codecparsers/gsth264parser.h:628
@@ -657,8 +652,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_codecparsers_gsth264parser_h 
 
   -- seq->vui_parameters->nal_hrd_parameters_present_flag
   -- seq->vui_parameters->vcl_hrd_parameters_present_flag
-
-      type anon_449 (discr : unsigned := 0) is record
+   type anon_450 (discr : unsigned := 0) is record
       case discr is
          when 0 =>
             buffering_period : aliased GstH264BufferingPeriod;  -- gst/codecparsers/gsth264parser.h:657
@@ -666,17 +660,14 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_codecparsers_gsth264parser_h 
             pic_timing : aliased GstH264PicTiming;  -- gst/codecparsers/gsth264parser.h:658
       end case;
    end record;
-   pragma Convention (C_Pass_By_Copy, anon_449);
-   pragma Unchecked_Union (anon_449);--subtype GstH264SEIMessage is u_GstH264SEIMessage;  -- gst/codecparsers/gsth264parser.h:189
-
+   pragma Convention (C_Pass_By_Copy, anon_450);
+   pragma Unchecked_Union (anon_450);--subtype GstH264SEIMessage is u_GstH264SEIMessage;  -- gst/codecparsers/gsth264parser.h:189
 
    type GstH264SEIMessage is record
       payloadType : aliased GstH264SEIPayloadType;  -- gst/codecparsers/gsth264parser.h:654
-      field_2 : aliased anon_449;
+      field_2 : aliased anon_450;
    end record;
    pragma Convention (C_Pass_By_Copy, GstH264SEIMessage);  -- gst/codecparsers/gsth264parser.h:652
-   type U_GstH264NalParser_Sps_Array is array (0 .. 31) of aliased GstH264SPS;
-   type u_GstH264NalParser_pps_array is array (0 .. 255) of aliased GstH264PPS;
 
   -- ... could implement more
   --*

@@ -181,7 +181,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_base_gstbaseparse_h is
    end record;
    pragma Convention (C_Pass_By_Copy, GstBaseParseFrame);  -- gst/base/gstbaseparse.h:154
 
-   --  skipped anonymous struct anon_315
+   --  skipped anonymous struct anon_316
 
   --< private > 
    type GstBaseParse;

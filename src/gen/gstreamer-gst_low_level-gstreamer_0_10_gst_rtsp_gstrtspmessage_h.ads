@@ -78,35 +78,35 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_rtsp_gstrtspmessage_h is
    pragma Convention (C, GstRTSPMsgType);  -- gst/rtsp/gstrtspmessage.h:71
 
    type GstRTSPMessage;
-   type anon_409;
-   type anon_410 is record
+   type anon_410;
+   type anon_411 is record
       method : aliased GStreamer.GST_Low_Level.gstreamer_0_10_gst_rtsp_gstrtspdefs_h.GstRTSPMethod;  -- gst/rtsp/gstrtspmessage.h:88
       uri : access GLIB.gchar;  -- gst/rtsp/gstrtspmessage.h:89
       version : aliased GStreamer.GST_Low_Level.gstreamer_0_10_gst_rtsp_gstrtspdefs_h.GstRTSPVersion;  -- gst/rtsp/gstrtspmessage.h:90
    end record;
-   pragma Convention (C_Pass_By_Copy, anon_410);
-   type anon_411 is record
+   pragma Convention (C_Pass_By_Copy, anon_411);
+   type anon_412 is record
       code : aliased GStreamer.GST_Low_Level.gstreamer_0_10_gst_rtsp_gstrtspdefs_h.GstRTSPStatusCode;  -- gst/rtsp/gstrtspmessage.h:93
       reason : access GLIB.gchar;  -- gst/rtsp/gstrtspmessage.h:94
       version : aliased GStreamer.GST_Low_Level.gstreamer_0_10_gst_rtsp_gstrtspdefs_h.GstRTSPVersion;  -- gst/rtsp/gstrtspmessage.h:95
    end record;
-   pragma Convention (C_Pass_By_Copy, anon_411);
-   type anon_412 is record
+   pragma Convention (C_Pass_By_Copy, anon_412);
+   type anon_413 is record
       channel : aliased GLIB.guint8;  -- gst/rtsp/gstrtspmessage.h:98
    end record;
-   pragma Convention (C_Pass_By_Copy, anon_412);
-   type anon_409 (discr : unsigned := 0) is record
+   pragma Convention (C_Pass_By_Copy, anon_413);
+   type anon_410 (discr : unsigned := 0) is record
       case discr is
          when 0 =>
-            request : aliased anon_410;  -- gst/rtsp/gstrtspmessage.h:91
+            request : aliased anon_411;  -- gst/rtsp/gstrtspmessage.h:91
          when 1 =>
-            response : aliased anon_411;  -- gst/rtsp/gstrtspmessage.h:96
+            response : aliased anon_412;  -- gst/rtsp/gstrtspmessage.h:96
          when others =>
-            data : aliased anon_412;  -- gst/rtsp/gstrtspmessage.h:99
+            data : aliased anon_413;  -- gst/rtsp/gstrtspmessage.h:99
       end case;
    end record;
-   pragma Convention (C_Pass_By_Copy, anon_409);
-   pragma Unchecked_Union (anon_409);--subtype GstRTSPMessage is u_GstRTSPMessage;  -- gst/rtsp/gstrtspmessage.h:73
+   pragma Convention (C_Pass_By_Copy, anon_410);
+   pragma Unchecked_Union (anon_410);--subtype GstRTSPMessage is u_GstRTSPMessage;  -- gst/rtsp/gstrtspmessage.h:73
 
   --*
   -- * GstRTSPMessage:
@@ -118,7 +118,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_rtsp_gstrtspmessage_h is
 
    type GstRTSPMessage is record
       c_type : aliased GstRTSPMsgType;  -- gst/rtsp/gstrtspmessage.h:84
-      type_data : aliased anon_409;  -- gst/rtsp/gstrtspmessage.h:100
+      type_data : aliased anon_410;  -- gst/rtsp/gstrtspmessage.h:100
       hdr_fields : System.Address; --  access GStreamer.GST_Low_Level.glib_2_0_glib_garray_h.GArray  -- gst/rtsp/gstrtspmessage.h:103
       c_body : access GLIB.guint8;  -- gst/rtsp/gstrtspmessage.h:105
       body_size : aliased GLIB.guint;  -- gst/rtsp/gstrtspmessage.h:106

@@ -60,23 +60,23 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_rtp_gstbasertppayload_h is
   --  
 
    type GstBaseRTPPayload;
-   type anon_415;
-   type anon_416 is record
+   type anon_416;
+   type anon_417 is record
       ptime : aliased GLIB.guint64;  -- gst/rtp/gstbasertppayload.h:116
       ptime_multiple : aliased GLIB.guint64;  -- gst/rtp/gstbasertppayload.h:117
    end record;
-   pragma Convention (C_Pass_By_Copy, anon_416);
+   pragma Convention (C_Pass_By_Copy, anon_417);
    type u_GstBaseRTPPayload_u_gst_reserved_array is array (0 .. 1) of System.Address;
-   type anon_415 (discr : unsigned := 0) is record
+   type anon_416 (discr : unsigned := 0) is record
       case discr is
          when 0 =>
-            ABI : aliased anon_416;  -- gst/rtp/gstbasertppayload.h:118
+            ABI : aliased anon_417;  -- gst/rtp/gstbasertppayload.h:118
          when others =>
             u_gst_reserved : u_GstBaseRTPPayload_u_gst_reserved_array;  -- gst/rtp/gstbasertppayload.h:119
       end case;
    end record;
-   pragma Convention (C_Pass_By_Copy, anon_415);
-   pragma Unchecked_Union (anon_415);--subtype GstBaseRTPPayload is u_GstBaseRTPPayload;  -- gst/rtp/gstbasertppayload.h:42
+   pragma Convention (C_Pass_By_Copy, anon_416);
+   pragma Unchecked_Union (anon_416);--subtype GstBaseRTPPayload is u_GstBaseRTPPayload;  -- gst/rtp/gstbasertppayload.h:42
 
    --  skipped empty struct u_GstBaseRTPPayloadPrivate
 
@@ -139,7 +139,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_rtp_gstbasertppayload_h is
       segment : aliased GStreamer.GST_Low_Level.gstreamer_0_10_gst_gstsegment_h.GstSegment;  -- gst/rtp/gstbasertppayload.h:107
       min_ptime : aliased GLIB.guint64;  -- gst/rtp/gstbasertppayload.h:109
       priv : System.Address;  -- gst/rtp/gstbasertppayload.h:112
-      abidata : aliased anon_415;  -- gst/rtp/gstbasertppayload.h:120
+      abidata : aliased anon_416;  -- gst/rtp/gstbasertppayload.h:120
    end record;
    pragma Convention (C_Pass_By_Copy, GstBaseRTPPayload);  -- gst/rtp/gstbasertppayload.h:76
 

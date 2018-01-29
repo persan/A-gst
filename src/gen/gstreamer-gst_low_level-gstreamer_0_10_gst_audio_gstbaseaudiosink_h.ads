@@ -112,22 +112,22 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_audio_gstbaseaudiosink_h is
    pragma Convention (C, GstBaseAudioSinkSlaveMethod);  -- gst/audio/gstbaseaudiosink.h:96
 
    type GstBaseAudioSink;
-   type anon_354;
-   type anon_355 is record
+   type anon_355;
+   type anon_356 is record
       eos_rendering : aliased GLIB.gboolean;  -- gst/audio/gstbaseaudiosink.h:134
    end record;
-   pragma Convention (C_Pass_By_Copy, anon_355);
+   pragma Convention (C_Pass_By_Copy, anon_356);
    type u_GstBaseAudioSink_u_gst_reserved_array is array (0 .. 2) of System.Address;
-   type anon_354 (discr : unsigned := 0) is record
+   type anon_355 (discr : unsigned := 0) is record
       case discr is
          when 0 =>
-            ABI : aliased anon_355;  -- gst/audio/gstbaseaudiosink.h:135
+            ABI : aliased anon_356;  -- gst/audio/gstbaseaudiosink.h:135
          when others =>
             u_gst_reserved : u_GstBaseAudioSink_u_gst_reserved_array;  -- gst/audio/gstbaseaudiosink.h:136
       end case;
    end record;
-   pragma Convention (C_Pass_By_Copy, anon_354);
-   pragma Unchecked_Union (anon_354);--subtype GstBaseAudioSink is u_GstBaseAudioSink;  -- gst/audio/gstbaseaudiosink.h:100
+   pragma Convention (C_Pass_By_Copy, anon_355);
+   pragma Unchecked_Union (anon_355);--subtype GstBaseAudioSink is u_GstBaseAudioSink;  -- gst/audio/gstbaseaudiosink.h:100
 
    type GstBaseAudioSinkClass;
    type u_GstBaseAudioSinkClass_u_gst_reserved_array is array (0 .. 2) of System.Address;
@@ -152,7 +152,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_audio_gstbaseaudiosink_h is
       provide_clock : aliased GLIB.gboolean;  -- gst/audio/gstbaseaudiosink.h:124
       provided_clock : access GStreamer.GST_Low_Level.gstreamer_0_10_gst_gstclock_h.GstClock;  -- gst/audio/gstbaseaudiosink.h:125
       priv : System.Address;  -- gst/audio/gstbaseaudiosink.h:128
-      abidata : aliased anon_354;  -- gst/audio/gstbaseaudiosink.h:137
+      abidata : aliased anon_355;  -- gst/audio/gstbaseaudiosink.h:137
    end record;
    pragma Convention (C_Pass_By_Copy, GstBaseAudioSink);  -- gst/audio/gstbaseaudiosink.h:109
 

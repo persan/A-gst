@@ -46,23 +46,23 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_audio_gstaudioclock_h is
   --  
 
    type GstAudioClock;
-   type anon_350;
-   type anon_351 is record
+   type anon_351;
+   type anon_352 is record
       time_offset : aliased GStreamer.GST_Low_Level.gstreamer_0_10_gst_gstclock_h.GstClockTimeDiff;  -- gst/audio/gstaudioclock.h:78
       destroy_notify : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.GDestroyNotify;  -- gst/audio/gstaudioclock.h:79
    end record;
-   pragma Convention (C_Pass_By_Copy, anon_351);
+   pragma Convention (C_Pass_By_Copy, anon_352);
    type u_GstAudioClock_u_gst_reserved_array is array (0 .. 3) of System.Address;
-   type anon_350 (discr : unsigned := 0) is record
+   type anon_351 (discr : unsigned := 0) is record
       case discr is
          when 0 =>
-            ABI : aliased anon_351;  -- gst/audio/gstaudioclock.h:80
+            ABI : aliased anon_352;  -- gst/audio/gstaudioclock.h:80
          when others =>
             u_gst_reserved : u_GstAudioClock_u_gst_reserved_array;  -- gst/audio/gstaudioclock.h:82
       end case;
    end record;
-   pragma Convention (C_Pass_By_Copy, anon_350);
-   pragma Unchecked_Union (anon_350);--subtype GstAudioClock is u_GstAudioClock;  -- gst/audio/gstaudioclock.h:44
+   pragma Convention (C_Pass_By_Copy, anon_351);
+   pragma Unchecked_Union (anon_351);--subtype GstAudioClock is u_GstAudioClock;  -- gst/audio/gstaudioclock.h:44
 
    type GstAudioClockClass;
    type u_GstAudioClockClass_u_gst_reserved_array is array (0 .. 3) of System.Address;
@@ -95,7 +95,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_audio_gstaudioclock_h is
       func : GstAudioClockGetTimeFunc;  -- gst/audio/gstaudioclock.h:70
       user_data : System.Address;  -- gst/audio/gstaudioclock.h:71
       last_time : aliased GStreamer.GST_Low_Level.gstreamer_0_10_gst_gstclock_h.GstClockTime;  -- gst/audio/gstaudioclock.h:73
-      abidata : aliased anon_350;  -- gst/audio/gstaudioclock.h:83
+      abidata : aliased anon_351;  -- gst/audio/gstaudioclock.h:83
    end record;
    pragma Convention (C_Pass_By_Copy, GstAudioClock);  -- gst/audio/gstaudioclock.h:66
 

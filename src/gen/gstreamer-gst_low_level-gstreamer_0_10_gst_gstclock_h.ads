@@ -302,7 +302,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_gstclock_h is
 
    type GstClock;
    type u_GstClock_u_gst_reserved_array is array (0 .. 3) of aliased GstClockTime;
-   type anon_170 (discr : unsigned := 0) is record
+   type anon_171 (discr : unsigned := 0) is record
       case discr is
          when 0 =>
             priv : System.Address;  -- gst/gstclock.h:479
@@ -310,8 +310,8 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_gstclock_h is
             u_gst_reserved : aliased u_GstClock_u_gst_reserved_array;  -- gst/gstclock.h:480
       end case;
    end record;
-   pragma Convention (C_Pass_By_Copy, anon_170);
-   pragma Unchecked_Union (anon_170);--subtype GstClock is u_GstClock;  -- gst/gstclock.h:256
+   pragma Convention (C_Pass_By_Copy, anon_171);
+   pragma Unchecked_Union (anon_171);--subtype GstClock is u_GstClock;  -- gst/gstclock.h:256
 
    type GstClockClass;
    type u_GstClockClass_u_gst_reserved_array is array (0 .. 2) of System.Address;
@@ -535,7 +535,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_gstclock_h is
       timeout : aliased GstClockTime;  -- gst/gstclock.h:473
       times : access GstClockTime;  -- gst/gstclock.h:474
       clockid : GstClockID;  -- gst/gstclock.h:475
-      ABI : aliased anon_170;  -- gst/gstclock.h:481
+      ABI : aliased anon_171;  -- gst/gstclock.h:481
    end record;
    pragma Convention (C_Pass_By_Copy, GstClock);  -- gst/gstclock.h:447
 

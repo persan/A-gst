@@ -65,46 +65,46 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_base_gstcollectpads_h is
   --  
 
    type GstCollectData;
-   type anon_301;
-   type anon_302 is record
+   type anon_302;
+   type anon_303 is record
       flushing : aliased GLIB.gboolean;  -- gst/base/gstcollectpads.h:98
       new_segment : aliased GLIB.gboolean;  -- gst/base/gstcollectpads.h:99
       eos : aliased GLIB.gboolean;  -- gst/base/gstcollectpads.h:100
       refcount : aliased GLIB.gint;  -- gst/base/gstcollectpads.h:101
    end record;
-   pragma Convention (C_Pass_By_Copy, anon_302);
+   pragma Convention (C_Pass_By_Copy, anon_303);
    type u_GstCollectData_u_gst_reserved_array is array (0 .. 3) of System.Address;
-   type anon_301 (discr : unsigned := 0) is record
+   type anon_302 (discr : unsigned := 0) is record
       case discr is
          when 0 =>
-            ABI : aliased anon_302;  -- gst/base/gstcollectpads.h:102
+            ABI : aliased anon_303;  -- gst/base/gstcollectpads.h:102
          when others =>
             u_gst_reserved : u_GstCollectData_u_gst_reserved_array;  -- gst/base/gstcollectpads.h:104
       end case;
    end record;
-   pragma Convention (C_Pass_By_Copy, anon_301);
-   pragma Unchecked_Union (anon_301);--subtype GstCollectData is u_GstCollectData;  -- gst/base/gstcollectpads.h:36
+   pragma Convention (C_Pass_By_Copy, anon_302);
+   pragma Unchecked_Union (anon_302);--subtype GstCollectData is u_GstCollectData;  -- gst/base/gstcollectpads.h:36
 
    type GstCollectPads;
-   type anon_303;
-   type anon_304 is record
+   type anon_304;
+   type anon_305 is record
       pad_lock : access GStreamer.GST_Low_Level.glib_2_0_glib_gthread_h.GMutex;  -- gst/base/gstcollectpads.h:162
       pad_list : access GStreamer.GST_Low_Level.glib_2_0_glib_gslist_h.GSList;  -- gst/base/gstcollectpads.h:163
       pad_cookie : aliased GLIB.guint32;  -- gst/base/gstcollectpads.h:164
       priv : System.Address;  -- gst/base/gstcollectpads.h:165
    end record;
-   pragma Convention (C_Pass_By_Copy, anon_304);
+   pragma Convention (C_Pass_By_Copy, anon_305);
    type u_GstCollectPads_u_gst_reserved_array is array (0 .. 3) of System.Address;
-   type anon_303 (discr : unsigned := 0) is record
+   type anon_304 (discr : unsigned := 0) is record
       case discr is
          when 0 =>
-            ABI : aliased anon_304;  -- gst/base/gstcollectpads.h:166
+            ABI : aliased anon_305;  -- gst/base/gstcollectpads.h:166
          when others =>
             u_gst_reserved : u_GstCollectPads_u_gst_reserved_array;  -- gst/base/gstcollectpads.h:168
       end case;
    end record;
-   pragma Convention (C_Pass_By_Copy, anon_303);
-   pragma Unchecked_Union (anon_303);--subtype GstCollectPads is u_GstCollectPads;  -- gst/base/gstcollectpads.h:37
+   pragma Convention (C_Pass_By_Copy, anon_304);
+   pragma Unchecked_Union (anon_304);--subtype GstCollectPads is u_GstCollectPads;  -- gst/base/gstcollectpads.h:37
 
    --  skipped empty struct u_GstCollectPadsPrivate
 
@@ -174,7 +174,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_base_gstcollectpads_h is
       buffer : access GStreamer.GST_Low_Level.gstreamer_0_10_gst_gstbuffer_h.GstBuffer;  -- gst/base/gstcollectpads.h:91
       pos : aliased GLIB.guint;  -- gst/base/gstcollectpads.h:92
       segment : aliased GStreamer.GST_Low_Level.gstreamer_0_10_gst_gstsegment_h.GstSegment;  -- gst/base/gstcollectpads.h:93
-      abidata : aliased anon_301;  -- gst/base/gstcollectpads.h:105
+      abidata : aliased anon_302;  -- gst/base/gstcollectpads.h:105
    end record;
    pragma Convention (C_Pass_By_Copy, GstCollectData);  -- gst/base/gstcollectpads.h:86
 
@@ -213,7 +213,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_base_gstcollectpads_h is
       queuedpads : aliased GLIB.guint;  -- gst/base/gstcollectpads.h:152
       eospads : aliased GLIB.guint;  -- gst/base/gstcollectpads.h:153
       started : aliased GLIB.gboolean;  -- gst/base/gstcollectpads.h:156
-      abidata : aliased anon_303;  -- gst/base/gstcollectpads.h:169
+      abidata : aliased anon_304;  -- gst/base/gstcollectpads.h:169
    end record;
    pragma Convention (C_Pass_By_Copy, GstCollectPads);  -- gst/base/gstcollectpads.h:136
 

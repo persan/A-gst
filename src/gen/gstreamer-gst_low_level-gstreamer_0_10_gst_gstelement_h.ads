@@ -128,7 +128,39 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_gstelement_h is
   -- * Boston, MA 02111-1307, USA.
   --
 
- -- gstmessage.h needs State
+  -- gstelement.h and gstelementfactory.h include eachother
+   type GstElement;
+      type GstState is
+     (GST_STATE_VOID_PENDING,
+      GST_STATE_NULL,
+      GST_STATE_READY,
+      GST_STATE_PAUSED,
+      GST_STATE_PLAYING);
+   pragma Convention (C, GstState);  -- gst/gstelement.h:52
+
+   type anon_232;
+   type anon_233 is record
+      target_state : aliased GstState;  -- gst/gstelement.h:575
+      start_time : aliased GStreamer.GST_Low_Level.gstreamer_0_10_gst_gstclock_h.GstClockTime;  -- gst/gstelement.h:577
+   end record;
+   pragma Convention (C_Pass_By_Copy, anon_233);
+   type u_GstElement_u_gst_reserved_array is array (0 .. 3) of System.Address;
+   type anon_232 (discr : unsigned := 0) is record
+      case discr is
+         when 0 =>
+            ABI : aliased anon_233;  -- gst/gstelement.h:578
+         when others =>
+            u_gst_reserved : u_GstElement_u_gst_reserved_array;  -- gst/gstelement.h:580
+      end case;
+   end record;
+   pragma Convention (C_Pass_By_Copy, anon_232);
+   pragma Unchecked_Union (anon_232);--subtype GstElement is u_GstElement;  -- gst/gstelement.h:28
+
+   type GstElementClass;
+   type u_GstElementClass_u_gst_reserved_array is array (0 .. 0) of System.Address;
+   --subtype GstElementClass is u_GstElementClass;  -- gst/gstelement.h:29
+
+  -- gstmessage.h needs State
   --*
   -- * GstState:
   -- * @GST_STATE_VOID_PENDING: no pending state.
@@ -143,38 +175,6 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_gstelement_h is
   -- * The possible states an element can be in. States can be changed using
   -- * gst_element_set_state() and checked using gst_element_get_state().
   --
-
-   type GstState is
-     (GST_STATE_VOID_PENDING,
-      GST_STATE_NULL,
-      GST_STATE_READY,
-      GST_STATE_PAUSED,
-      GST_STATE_PLAYING);
-   pragma Convention (C, GstState);  -- gst/gstelement.h:52
-  -- gstelement.h and gstelementfactory.h include eachother
-   type GstElement;
-   type anon_231;
-   type anon_232 is record
-      target_state : aliased GstState;  -- gst/gstelement.h:575
-      start_time : aliased GStreamer.GST_Low_Level.gstreamer_0_10_gst_gstclock_h.GstClockTime;  -- gst/gstelement.h:577
-   end record;
-   pragma Convention (C_Pass_By_Copy, anon_232);
-   type u_GstElement_u_gst_reserved_array is array (0 .. 3) of System.Address;
-   type anon_231 (discr : unsigned := 0) is record
-      case discr is
-         when 0 =>
-            ABI : aliased anon_232;  -- gst/gstelement.h:578
-         when others =>
-            u_gst_reserved : u_GstElement_u_gst_reserved_array;  -- gst/gstelement.h:580
-      end case;
-   end record;
-   pragma Convention (C_Pass_By_Copy, anon_231);
-   pragma Unchecked_Union (anon_231);--subtype GstElement is u_GstElement;  -- gst/gstelement.h:28
-
-   type GstElementClass;
-   type u_GstElementClass_u_gst_reserved_array is array (0 .. 0) of System.Address;
-   --subtype GstElementClass is u_GstElementClass;  -- gst/gstelement.h:29
-
 
 
   --*
@@ -595,7 +595,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_gstelement_h is
       numsinkpads : aliased GLIB.guint16;  -- gst/gstelement.h:567
       sinkpads : access GStreamer.GST_Low_Level.glib_2_0_glib_glist_h.GList;  -- gst/gstelement.h:568
       pads_cookie : aliased GLIB.guint32;  -- gst/gstelement.h:569
-      abidata : aliased anon_231;  -- gst/gstelement.h:581
+      abidata : aliased anon_232;  -- gst/gstelement.h:581
    end record;
    pragma Convention (C_Pass_By_Copy, GstElement);  -- gst/gstelement.h:540
 

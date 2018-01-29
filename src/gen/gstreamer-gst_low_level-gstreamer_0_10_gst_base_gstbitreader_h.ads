@@ -82,7 +82,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_base_gstbitreader_h is
    end record;
    pragma Convention (C_Pass_By_Copy, GstBitReader);  -- gst/base/gstbitreader.h:47
 
-   --  skipped anonymous struct anon_316
+   --  skipped anonymous struct anon_317
 
   -- Byte position  
   -- Bit position in the current byte  

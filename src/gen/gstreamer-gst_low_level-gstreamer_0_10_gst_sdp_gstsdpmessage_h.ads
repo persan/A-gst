@@ -96,7 +96,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_sdp_gstsdpmessage_h is
    end record;
    pragma Convention (C_Pass_By_Copy, GstSDPOrigin);  -- gst/sdp/gstsdpmessage.h:77
 
-   --  skipped anonymous struct anon_334
+   --  skipped anonymous struct anon_335
 
   --*
   -- * GstSDPConnection:
@@ -119,7 +119,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_sdp_gstsdpmessage_h is
    end record;
    pragma Convention (C_Pass_By_Copy, GstSDPConnection);  -- gst/sdp/gstsdpmessage.h:96
 
-   --  skipped anonymous struct anon_335
+   --  skipped anonymous struct anon_336
 
   --*
   -- * GST_SDP_BWTYPE_CT:
@@ -178,7 +178,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_sdp_gstsdpmessage_h is
    end record;
    pragma Convention (C_Pass_By_Copy, GstSDPBandwidth);  -- gst/sdp/gstsdpmessage.h:154
 
-   --  skipped anonymous struct anon_336
+   --  skipped anonymous struct anon_337
 
   --*
   -- * GstSDPTime:
@@ -199,7 +199,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_sdp_gstsdpmessage_h is
    end record;
    pragma Convention (C_Pass_By_Copy, GstSDPTime);  -- gst/sdp/gstsdpmessage.h:171
 
-   --  skipped anonymous struct anon_337
+   --  skipped anonymous struct anon_338
 
   --*
   -- * GstSDPZone:
@@ -217,7 +217,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_sdp_gstsdpmessage_h is
    end record;
    pragma Convention (C_Pass_By_Copy, GstSDPZone);  -- gst/sdp/gstsdpmessage.h:185
 
-   --  skipped anonymous struct anon_338
+   --  skipped anonymous struct anon_339
 
   --*
   -- * GstSDPKey:
@@ -234,7 +234,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_sdp_gstsdpmessage_h is
    end record;
    pragma Convention (C_Pass_By_Copy, GstSDPKey);  -- gst/sdp/gstsdpmessage.h:198
 
-   --  skipped anonymous struct anon_339
+   --  skipped anonymous struct anon_340
 
   --*
   -- * GstSDPAttribute:
@@ -250,7 +250,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_sdp_gstsdpmessage_h is
    end record;
    pragma Convention (C_Pass_By_Copy, GstSDPAttribute);  -- gst/sdp/gstsdpmessage.h:210
 
-   --  skipped anonymous struct anon_340
+   --  skipped anonymous struct anon_341
 
   --*
   -- * GstSDPMedia:
@@ -282,7 +282,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_sdp_gstsdpmessage_h is
    end record;
    pragma Convention (C_Pass_By_Copy, GstSDPMedia);  -- gst/sdp/gstsdpmessage.h:238
 
-   --  skipped anonymous struct anon_341
+   --  skipped anonymous struct anon_342
 
   --*
   -- * GstSDPMessage:
@@ -322,7 +322,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_sdp_gstsdpmessage_h is
    end record;
    pragma Convention (C_Pass_By_Copy, GstSDPMessage);  -- gst/sdp/gstsdpmessage.h:274
 
-   --  skipped anonymous struct anon_342
+   --  skipped anonymous struct anon_343
 
   -- Session descriptions  
    function gst_sdp_message_new (msg : System.Address) return GStreamer.GST_Low_Level.gstreamer_0_10_gst_sdp_gstsdp_h.GstSDPResult;  -- gst/sdp/gstsdpmessage.h:277

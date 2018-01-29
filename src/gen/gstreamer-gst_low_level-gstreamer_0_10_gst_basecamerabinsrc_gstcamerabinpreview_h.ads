@@ -47,7 +47,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_basecamerabinsrc_gstcamerabin
    end record;
    pragma Convention (C_Pass_By_Copy, GstCameraBinPreviewPipelineData);  -- gst/basecamerabinsrc/gstcamerabinpreview.h:48
 
-   --  skipped anonymous struct anon_420
+   --  skipped anonymous struct anon_421
 
    function gst_camerabin_create_preview_pipeline (element : access GStreamer.GST_Low_Level.gstreamer_0_10_gst_gstelement_h.GstElement; filter : access GStreamer.GST_Low_Level.gstreamer_0_10_gst_gstelement_h.GstElement) return access GstCameraBinPreviewPipelineData;  -- gst/basecamerabinsrc/gstcamerabinpreview.h:50
    pragma Import (C, gst_camerabin_create_preview_pipeline, "gst_camerabin_create_preview_pipeline");

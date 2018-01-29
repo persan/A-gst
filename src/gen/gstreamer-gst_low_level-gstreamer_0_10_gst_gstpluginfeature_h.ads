@@ -131,7 +131,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_gstpluginfeature_h is
    end record;
    pragma Convention (C_Pass_By_Copy, GstTypeNameData);  -- gst/gstpluginfeature.h:112
 
-   --  skipped anonymous struct anon_216
+   --  skipped anonymous struct anon_217
 
   --*
   -- * GstPluginFeatureFilter:

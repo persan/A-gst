@@ -137,7 +137,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_check_gstcheck_h is
    end record;
    pragma Convention (C_Pass_By_Copy, GstCheckABIStruct);  -- gst/check/gstcheck.h:63
 
-   --  skipped anonymous struct anon_457
+   --  skipped anonymous struct anon_458
 
    procedure gst_check_init (argc : access int; argv : System.Address);  -- gst/check/gstcheck.h:65
    pragma Import (C, gst_check_init, "gst_check_init");
@@ -380,7 +380,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_check_gstcheck_h is
    function gst_g_cond_timed_wait
      (cond : access GStreamer.GST_Low_Level.glib_2_0_glib_gthread_h.GCond;
       mutex : access GStreamer.GST_Low_Level.glib_2_0_glib_gthread_h.GMutex;
-      abs_time : access GLIB.GTime_Val) return GLIB.gboolean;  -- gst/check/gstcheck.h:331
+      abs_time : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.GTimeVal) return GLIB.gboolean;  -- gst/check/gstcheck.h:331
    pragma Import (C, gst_g_cond_timed_wait, "gst_g_cond_timed_wait");
 
   -- would be nice if we had clock_rtoffset, but that didn't seem to

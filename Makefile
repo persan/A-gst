@@ -24,7 +24,7 @@ CFLAGS+=-fdump-ada-spec -C -fada-spec-parent=GStreamer.GST_Low_Level
 Initial_Code_Generation:
 	rm -rf .gen; mkdir .gen
 	echo "extern \"C\" {" >.gen/gen.cc
-	cd /usr/include/gstreamer-0.10; find -name "*.h" | grep -v vdpau/ | sed -e "s-^./-#include <-" -e "s-\.h-.h>-" >>${CURDIR}/.gen/gen.cc
+	cd /usr/include/gstreamer-0.10; find -name "*.h" | grep -v -e vdpau/ -e pygst | sed -e "s-^./-#include <-" -e "s-\.h-.h>-" >>${CURDIR}/.gen/gen.cc
 	echo "" >>.gen/gen.cc
 	echo "} }" >>.gen/gen.cc
 	cd .gen; gcc ${CFLAGS} -c gen.cc

@@ -93,7 +93,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_app_gstappsrc_h is
    end record;
    pragma Convention (C_Pass_By_Copy, GstAppSrcCallbacks);  -- gst/app/gstappsrc.h:70
 
-   --  skipped anonymous struct anon_370
+   --  skipped anonymous struct anon_371
 
   --< private > 
   --*

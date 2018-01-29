@@ -69,18 +69,6 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_gstindex_h is
   -- * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
   -- * Boston, MA 02111-1307, USA.
   --
-  --*
-  -- * GstAssocFlags:
-  -- * @GST_ASSOCIATION_FLAG_NONE: no extra flags
-  -- * @GST_ASSOCIATION_FLAG_KEY_UNIT: the entry marks a key unit, a key unit is one
-  -- *  that marks a place where one can randomly seek to.
-  -- * @GST_ASSOCIATION_FLAG_DELTA_UNIT: the entry marks a delta unit, a delta unit
-  -- *  is one that marks a place where one can relatively seek to.
-  -- * @GST_ASSOCIATION_FLAG_LAST: extra user defined flags should start here.
-  -- *
-  -- * Flags for an association entry.
-  --
-
   -- new flags should start here
    subtype GstAssocFlags is unsigned;
    GST_ASSOCIATION_FLAG_NONE : constant GstAssocFlags := 0;
@@ -88,45 +76,43 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_gstindex_h is
    GST_ASSOCIATION_FLAG_DELTA_UNIT : constant GstAssocFlags := 2;
    GST_ASSOCIATION_FLAG_LAST : constant GstAssocFlags := 256;  -- gst/gstindex.h:157
 
-
    type GstIndexEntry;
-   type anon_221;
-   type anon_222 is record
+   type anon_222;
+   type anon_223 is record
       description : access GLIB.gchar;  -- gst/gstindex.h:202
    end record;
-
-   pragma Convention (C_Pass_By_Copy, anon_222);
-   type anon_223 is record
+   pragma Convention (C_Pass_By_Copy, anon_223);
+   type anon_224 is record
       nassocs : aliased GLIB.gint;  -- gst/gstindex.h:205
       assocs : System.Address;  -- gst/gstindex.h:207
       flags : aliased GstAssocFlags;  -- gst/gstindex.h:208
    end record;
-   pragma Convention (C_Pass_By_Copy, anon_223);
-   type anon_224 is record
+   pragma Convention (C_Pass_By_Copy, anon_224);
+   type anon_225 is record
       key : access GLIB.gchar;  -- gst/gstindex.h:211
       c_type : aliased GLIB.GType;  -- gst/gstindex.h:212
       object : System.Address;  -- gst/gstindex.h:213
    end record;
-   pragma Convention (C_Pass_By_Copy, anon_224);
-   type anon_225 is record
+   pragma Convention (C_Pass_By_Copy, anon_225);
+   type anon_226 is record
       format : aliased GStreamer.GST_Low_Level.gstreamer_0_10_gst_gstformat_h.GstFormat;  -- gst/gstindex.h:216
       key : access GLIB.gchar;  -- gst/gstindex.h:217
    end record;
-   pragma Convention (C_Pass_By_Copy, anon_225);
-   type anon_221 (discr : unsigned := 0) is record
+   pragma Convention (C_Pass_By_Copy, anon_226);
+   type anon_222 (discr : unsigned := 0) is record
       case discr is
          when 0 =>
-            id : aliased anon_222;  -- gst/gstindex.h:203
+            id : aliased anon_223;  -- gst/gstindex.h:203
          when 1 =>
-            assoc : aliased anon_223;  -- gst/gstindex.h:209
+            assoc : aliased anon_224;  -- gst/gstindex.h:209
          when 2 =>
-            object : aliased anon_224;  -- gst/gstindex.h:214
+            object : aliased anon_225;  -- gst/gstindex.h:214
          when others =>
-            format : aliased anon_225;  -- gst/gstindex.h:218
+            format : aliased anon_226;  -- gst/gstindex.h:218
       end case;
    end record;
-   pragma Convention (C_Pass_By_Copy, anon_221);
-   pragma Unchecked_Union (anon_221);--subtype GstIndexEntry is u_GstIndexEntry;  -- gst/gstindex.h:42
+   pragma Convention (C_Pass_By_Copy, anon_222);
+   pragma Unchecked_Union (anon_222);--subtype GstIndexEntry is u_GstIndexEntry;  -- gst/gstindex.h:42
 
    type GstIndexGroup;
    --subtype GstIndexGroup is u_GstIndexGroup;  -- gst/gstindex.h:43
@@ -233,6 +219,18 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_gstindex_h is
    end record;
    pragma Convention (C_Pass_By_Copy, GstIndexAssociation);  -- gst/gstindex.h:134
 
+  --*
+  -- * GstAssocFlags:
+  -- * @GST_ASSOCIATION_FLAG_NONE: no extra flags
+  -- * @GST_ASSOCIATION_FLAG_KEY_UNIT: the entry marks a key unit, a key unit is one
+  -- *  that marks a place where one can randomly seek to.
+  -- * @GST_ASSOCIATION_FLAG_DELTA_UNIT: the entry marks a delta unit, a delta unit
+  -- *  is one that marks a place where one can relatively seek to.
+  -- * @GST_ASSOCIATION_FLAG_LAST: extra user defined flags should start here.
+  -- *
+  -- * Flags for an association entry.
+  --
+
 
   --*
   -- * GST_INDEX_FORMAT_FORMAT:
@@ -271,7 +269,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_gstindex_h is
    type GstIndexEntry is record
       c_type : aliased GstIndexEntryType;  -- gst/gstindex.h:197
       id : aliased GLIB.gint;  -- gst/gstindex.h:198
-      data : aliased anon_221;  -- gst/gstindex.h:219
+      data : aliased anon_222;  -- gst/gstindex.h:219
    end record;
    pragma Convention (C_Pass_By_Copy, GstIndexEntry);  -- gst/gstindex.h:195
 

@@ -215,7 +215,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_interfaces_photography_h is
    end record;
    pragma Convention (C_Pass_By_Copy, GstPhotoSettings);  -- gst/interfaces/photography.h:223
 
-   --  skipped anonymous struct anon_386
+   --  skipped anonymous struct anon_387
 
   --*
   -- * GstPhotoCapturePrepared:

@@ -61,24 +61,24 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_audio_gstringbuffer_h is
   --  
 
    type GstRingBuffer;
-   type anon_348;
-   type anon_349 is record
+   type anon_349;
+   type anon_350 is record
       flushing : aliased GLIB.gboolean;  -- gst/audio/gstringbuffer.h:332
       may_start : aliased GLIB.gint;  -- gst/audio/gstringbuffer.h:334
       active : aliased GLIB.gboolean;  -- gst/audio/gstringbuffer.h:335
    end record;
-   pragma Convention (C_Pass_By_Copy, anon_349);
+   pragma Convention (C_Pass_By_Copy, anon_350);
    type u_GstRingBuffer_u_gst_reserved_array is array (0 .. 3) of System.Address;
-   type anon_348 (discr : unsigned := 0) is record
+   type anon_349 (discr : unsigned := 0) is record
       case discr is
          when 0 =>
-            ABI : aliased anon_349;  -- gst/audio/gstringbuffer.h:336
+            ABI : aliased anon_350;  -- gst/audio/gstringbuffer.h:336
          when others =>
             u_gst_reserved : u_GstRingBuffer_u_gst_reserved_array;  -- gst/audio/gstringbuffer.h:338
       end case;
    end record;
-   pragma Convention (C_Pass_By_Copy, anon_348);
-   pragma Unchecked_Union (anon_348);--subtype GstRingBuffer is u_GstRingBuffer;  -- gst/audio/gstringbuffer.h:38
+   pragma Convention (C_Pass_By_Copy, anon_349);
+   pragma Unchecked_Union (anon_349);--subtype GstRingBuffer is u_GstRingBuffer;  -- gst/audio/gstringbuffer.h:38
 
    type GstRingBufferClass;
    type u_GstRingBufferClass_u_gst_reserved_array is array (0 .. 0) of System.Address;
@@ -375,7 +375,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_audio_gstringbuffer_h is
       waiting : aliased GLIB.gint;  -- gst/audio/gstringbuffer.h:323
       callback : GstRingBufferCallback;  -- gst/audio/gstringbuffer.h:326
       cb_data : System.Address;  -- gst/audio/gstringbuffer.h:327
-      abidata : aliased anon_348;  -- gst/audio/gstringbuffer.h:339
+      abidata : aliased anon_349;  -- gst/audio/gstringbuffer.h:339
    end record;
    pragma Convention (C_Pass_By_Copy, GstRingBuffer);  -- gst/audio/gstringbuffer.h:306
 

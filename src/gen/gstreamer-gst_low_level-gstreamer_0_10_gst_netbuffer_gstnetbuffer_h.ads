@@ -54,7 +54,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_netbuffer_gstnetbuffer_h is
 
    type GstNetAddress;
    type u_GstNetAddress_ip6_array is array (0 .. 15) of aliased GLIB.guint8;
-   type anon_324 (discr : unsigned := 0) is record
+   type anon_325 (discr : unsigned := 0) is record
       case discr is
          when 0 =>
             ip6 : aliased u_GstNetAddress_ip6_array;  -- gst/netbuffer/gstnetbuffer.h:71
@@ -62,8 +62,8 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_netbuffer_gstnetbuffer_h is
             ip4 : aliased GLIB.guint32;  -- gst/netbuffer/gstnetbuffer.h:72
       end case;
    end record;
-   pragma Convention (C_Pass_By_Copy, anon_324);
-   pragma Unchecked_Union (anon_324);type u_GstNetAddress_u_gst_reserved_array is array (0 .. 3) of System.Address;
+   pragma Convention (C_Pass_By_Copy, anon_325);
+   pragma Unchecked_Union (anon_325);type u_GstNetAddress_u_gst_reserved_array is array (0 .. 3) of System.Address;
    --subtype GstNetAddress is u_GstNetAddress;  -- gst/netbuffer/gstnetbuffer.h:29
 
   --*
@@ -99,7 +99,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_netbuffer_gstnetbuffer_h is
   --< private > 
    type GstNetAddress is record
       c_type : aliased GstNetType;  -- gst/netbuffer/gstnetbuffer.h:69
-      address : aliased anon_324;  -- gst/netbuffer/gstnetbuffer.h:73
+      address : aliased anon_325;  -- gst/netbuffer/gstnetbuffer.h:73
       port : aliased GLIB.guint16;  -- gst/netbuffer/gstnetbuffer.h:74
       u_gst_reserved : u_GstNetAddress_u_gst_reserved_array;  -- gst/netbuffer/gstnetbuffer.h:76
    end record;

@@ -67,24 +67,24 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_base_gstbasesink_h is
   --  
 
    type GstBaseSink;
-   type anon_312;
-   type anon_313 is record
+   type anon_313;
+   type anon_314 is record
       clip_segment : access GStreamer.GST_Low_Level.gstreamer_0_10_gst_gstsegment_h.GstSegment;  -- gst/base/gstbasesink.h:94
       max_lateness : aliased GLIB.gint64;  -- gst/base/gstbasesink.h:96
       running : aliased GLIB.gboolean;  -- gst/base/gstbasesink.h:97
    end record;
-   pragma Convention (C_Pass_By_Copy, anon_313);
+   pragma Convention (C_Pass_By_Copy, anon_314);
    type u_GstBaseSink_u_gst_reserved_array is array (0 .. 18) of System.Address;
-   type anon_312 (discr : unsigned := 0) is record
+   type anon_313 (discr : unsigned := 0) is record
       case discr is
          when 0 =>
-            ABI : aliased anon_313;  -- gst/base/gstbasesink.h:98
+            ABI : aliased anon_314;  -- gst/base/gstbasesink.h:98
          when others =>
             u_gst_reserved : u_GstBaseSink_u_gst_reserved_array;  -- gst/base/gstbasesink.h:99
       end case;
    end record;
-   pragma Convention (C_Pass_By_Copy, anon_312);
-   pragma Unchecked_Union (anon_312);--subtype GstBaseSink is u_GstBaseSink;  -- gst/base/gstbasesink.h:47
+   pragma Convention (C_Pass_By_Copy, anon_313);
+   pragma Unchecked_Union (anon_313);--subtype GstBaseSink is u_GstBaseSink;  -- gst/base/gstbasesink.h:47
 
    type GstBaseSinkClass;
    type u_GstBaseSinkClass_u_gst_reserved_array is array (0 .. 13) of System.Address;
@@ -123,7 +123,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_base_gstbasesink_h is
       end_time : aliased GStreamer.GST_Low_Level.gstreamer_0_10_gst_gstclock_h.GstClockTime;  -- gst/base/gstbasesink.h:86
       sync : aliased GLIB.gboolean;  -- gst/base/gstbasesink.h:87
       flushing : aliased GLIB.gboolean;  -- gst/base/gstbasesink.h:88
-      abidata : aliased anon_312;  -- gst/base/gstbasesink.h:100
+      abidata : aliased anon_313;  -- gst/base/gstbasesink.h:100
       priv : System.Address;  -- gst/base/gstbasesink.h:102
    end record;
    pragma Convention (C_Pass_By_Copy, GstBaseSink);  -- gst/base/gstbasesink.h:56

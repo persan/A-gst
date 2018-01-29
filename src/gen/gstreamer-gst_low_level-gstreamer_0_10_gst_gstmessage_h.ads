@@ -85,22 +85,22 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_gstmessage_h is
   --  
 
    type GstMessage;
-   type anon_207;
-   type anon_208 is record
+   type anon_208;
+   type anon_209 is record
       seqnum : aliased GLIB.guint32;  -- gst/gstmessage.h:295
    end record;
-   pragma Convention (C_Pass_By_Copy, anon_208);
+   pragma Convention (C_Pass_By_Copy, anon_209);
    type u_GstMessage_u_gst_reserved_array is array (0 .. 3) of System.Address;
-   type anon_207 (discr : unsigned := 0) is record
+   type anon_208 (discr : unsigned := 0) is record
       case discr is
          when 0 =>
-            ABI : aliased anon_208;  -- gst/gstmessage.h:296
+            ABI : aliased anon_209;  -- gst/gstmessage.h:296
          when others =>
             u_gst_reserved : u_GstMessage_u_gst_reserved_array;  -- gst/gstmessage.h:298
       end case;
    end record;
-   pragma Convention (C_Pass_By_Copy, anon_207);
-   pragma Unchecked_Union (anon_207);--subtype GstMessage is u_GstMessage;  -- gst/gstmessage.h:27
+   pragma Convention (C_Pass_By_Copy, anon_208);
+   pragma Unchecked_Union (anon_208);--subtype GstMessage is u_GstMessage;  -- gst/gstmessage.h:27
 
    type GstMessageClass;
    type u_GstMessageClass_u_gst_reserved_array is array (0 .. 3) of System.Address;
@@ -340,7 +340,7 @@ package GStreamer.GST_Low_Level.gstreamer_0_10_gst_gstmessage_h is
       timestamp : aliased GLIB.guint64;  -- gst/gstmessage.h:287
       src : access GStreamer.GST_Low_Level.gstreamer_0_10_gst_gstobject_h.GstObject;  -- gst/gstmessage.h:288
       structure : access GStreamer.GST_Low_Level.gstreamer_0_10_gst_gststructure_h.GstStructure;  -- gst/gstmessage.h:290
-      abidata : aliased anon_207;  -- gst/gstmessage.h:299
+      abidata : aliased anon_208;  -- gst/gstmessage.h:299
    end record;
    pragma Convention (C_Pass_By_Copy, GstMessage);  -- gst/gstmessage.h:277
 
