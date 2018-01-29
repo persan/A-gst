@@ -1,11 +1,14 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;
+with glib;
 with System;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
-with GStreamer.GST_Low_Level.glibconfig_h;
+with glib;
+with glib.Values;
+with System;
+with GLIB; --  with GStreamer.GST_Low_Level.glibconfig_h;
 
 package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstdatetime_h is
 
@@ -51,86 +54,86 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstdatetime_h is
   -- * Returns: the #GType of GstDateTime
   --  
 
-   function gst_date_time_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gstdatetime.h:54
+   function gst_date_time_get_type return GLIB.GType;  -- gst/gstdatetime.h:54
    pragma Import (C, gst_date_time_get_type, "gst_date_time_get_type");
 
   -- query which fields are set  
-   function gst_date_time_has_year (datetime : System.Address) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstdatetime.h:58
+   function gst_date_time_has_year (datetime : System.Address) return GLIB.gboolean;  -- gst/gstdatetime.h:58
    pragma Import (C, gst_date_time_has_year, "gst_date_time_has_year");
 
-   function gst_date_time_has_month (datetime : System.Address) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstdatetime.h:59
+   function gst_date_time_has_month (datetime : System.Address) return GLIB.gboolean;  -- gst/gstdatetime.h:59
    pragma Import (C, gst_date_time_has_month, "gst_date_time_has_month");
 
-   function gst_date_time_has_day (datetime : System.Address) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstdatetime.h:60
+   function gst_date_time_has_day (datetime : System.Address) return GLIB.gboolean;  -- gst/gstdatetime.h:60
    pragma Import (C, gst_date_time_has_day, "gst_date_time_has_day");
 
-   function gst_date_time_has_time (datetime : System.Address) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstdatetime.h:61
+   function gst_date_time_has_time (datetime : System.Address) return GLIB.gboolean;  -- gst/gstdatetime.h:61
    pragma Import (C, gst_date_time_has_time, "gst_date_time_has_time");
 
-   function gst_date_time_has_second (datetime : System.Address) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstdatetime.h:62
+   function gst_date_time_has_second (datetime : System.Address) return GLIB.gboolean;  -- gst/gstdatetime.h:62
    pragma Import (C, gst_date_time_has_second, "gst_date_time_has_second");
 
   -- field getters  
-   function gst_date_time_get_year (datetime : System.Address) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;  -- gst/gstdatetime.h:66
+   function gst_date_time_get_year (datetime : System.Address) return GLIB.gint;  -- gst/gstdatetime.h:66
    pragma Import (C, gst_date_time_get_year, "gst_date_time_get_year");
 
-   function gst_date_time_get_month (datetime : System.Address) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;  -- gst/gstdatetime.h:67
+   function gst_date_time_get_month (datetime : System.Address) return GLIB.gint;  -- gst/gstdatetime.h:67
    pragma Import (C, gst_date_time_get_month, "gst_date_time_get_month");
 
-   function gst_date_time_get_day (datetime : System.Address) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;  -- gst/gstdatetime.h:68
+   function gst_date_time_get_day (datetime : System.Address) return GLIB.gint;  -- gst/gstdatetime.h:68
    pragma Import (C, gst_date_time_get_day, "gst_date_time_get_day");
 
-   function gst_date_time_get_hour (datetime : System.Address) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;  -- gst/gstdatetime.h:69
+   function gst_date_time_get_hour (datetime : System.Address) return GLIB.gint;  -- gst/gstdatetime.h:69
    pragma Import (C, gst_date_time_get_hour, "gst_date_time_get_hour");
 
-   function gst_date_time_get_minute (datetime : System.Address) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;  -- gst/gstdatetime.h:70
+   function gst_date_time_get_minute (datetime : System.Address) return GLIB.gint;  -- gst/gstdatetime.h:70
    pragma Import (C, gst_date_time_get_minute, "gst_date_time_get_minute");
 
-   function gst_date_time_get_second (datetime : System.Address) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;  -- gst/gstdatetime.h:71
+   function gst_date_time_get_second (datetime : System.Address) return GLIB.gint;  -- gst/gstdatetime.h:71
    pragma Import (C, gst_date_time_get_second, "gst_date_time_get_second");
 
-   function gst_date_time_get_microsecond (datetime : System.Address) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;  -- gst/gstdatetime.h:72
+   function gst_date_time_get_microsecond (datetime : System.Address) return GLIB.gint;  -- gst/gstdatetime.h:72
    pragma Import (C, gst_date_time_get_microsecond, "gst_date_time_get_microsecond");
 
-   function gst_date_time_get_time_zone_offset (datetime : System.Address) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gfloat;  -- gst/gstdatetime.h:73
+   function gst_date_time_get_time_zone_offset (datetime : System.Address) return GLIB.gfloat;  -- gst/gstdatetime.h:73
    pragma Import (C, gst_date_time_get_time_zone_offset, "gst_date_time_get_time_zone_offset");
 
   -- constructors  
-   function gst_date_time_new_from_unix_epoch_local_time (secs : GStreamer.GST_Low_Level.glibconfig_h.gint64) return System.Address;  -- gst/gstdatetime.h:77
+   function gst_date_time_new_from_unix_epoch_local_time (secs : GLIB.gint64) return System.Address;  -- gst/gstdatetime.h:77
    pragma Import (C, gst_date_time_new_from_unix_epoch_local_time, "gst_date_time_new_from_unix_epoch_local_time");
 
-   function gst_date_time_new_from_unix_epoch_utc (secs : GStreamer.GST_Low_Level.glibconfig_h.gint64) return System.Address;  -- gst/gstdatetime.h:79
+   function gst_date_time_new_from_unix_epoch_utc (secs : GLIB.gint64) return System.Address;  -- gst/gstdatetime.h:79
    pragma Import (C, gst_date_time_new_from_unix_epoch_utc, "gst_date_time_new_from_unix_epoch_utc");
 
    function gst_date_time_new_local_time
-     (year : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;
-      month : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;
-      day : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;
-      hour : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;
-      minute : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;
-      seconds : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gdouble) return System.Address;  -- gst/gstdatetime.h:81
+     (year : GLIB.gint;
+      month : GLIB.gint;
+      day : GLIB.gint;
+      hour : GLIB.gint;
+      minute : GLIB.gint;
+      seconds : GLIB.gdouble) return System.Address;  -- gst/gstdatetime.h:81
    pragma Import (C, gst_date_time_new_local_time, "gst_date_time_new_local_time");
 
-   function gst_date_time_new_y (year : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint) return System.Address;  -- gst/gstdatetime.h:88
+   function gst_date_time_new_y (year : GLIB.gint) return System.Address;  -- gst/gstdatetime.h:88
    pragma Import (C, gst_date_time_new_y, "gst_date_time_new_y");
 
-   function gst_date_time_new_ym (year : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint; month : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint) return System.Address;  -- gst/gstdatetime.h:90
+   function gst_date_time_new_ym (year : GLIB.gint; month : GLIB.gint) return System.Address;  -- gst/gstdatetime.h:90
    pragma Import (C, gst_date_time_new_ym, "gst_date_time_new_ym");
 
    function gst_date_time_new_ymd
-     (year : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;
-      month : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;
-      day : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint) return System.Address;  -- gst/gstdatetime.h:93
+     (year : GLIB.gint;
+      month : GLIB.gint;
+      day : GLIB.gint) return System.Address;  -- gst/gstdatetime.h:93
    pragma Import (C, gst_date_time_new_ymd, "gst_date_time_new_ymd");
 
    function gst_date_time_new
-     (tzoffset : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gfloat;
-      year : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;
-      month : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;
-      day : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;
-      hour : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;
-      minute : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;
-      seconds : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gdouble) return System.Address;  -- gst/gstdatetime.h:97
+     (tzoffset : GLIB.gfloat;
+      year : GLIB.gint;
+      month : GLIB.gint;
+      day : GLIB.gint;
+      hour : GLIB.gint;
+      minute : GLIB.gint;
+      seconds : GLIB.gdouble) return System.Address;  -- gst/gstdatetime.h:97
    pragma Import (C, gst_date_time_new, "gst_date_time_new");
 
    function gst_date_time_new_now_local_time return System.Address;  -- gst/gstdatetime.h:103
@@ -139,10 +142,10 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstdatetime_h is
    function gst_date_time_new_now_utc return System.Address;  -- gst/gstdatetime.h:105
    pragma Import (C, gst_date_time_new_now_utc, "gst_date_time_new_now_utc");
 
-   function gst_date_time_to_iso8601_string (datetime : System.Address) return access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gstdatetime.h:108
+   function gst_date_time_to_iso8601_string (datetime : System.Address) return access GLIB.gchar;  -- gst/gstdatetime.h:108
    pragma Import (C, gst_date_time_to_iso8601_string, "gst_date_time_to_iso8601_string");
 
-   function gst_date_time_new_from_iso8601_string (string : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return System.Address;  -- gst/gstdatetime.h:109
+   function gst_date_time_new_from_iso8601_string (string : access GLIB.gchar) return System.Address;  -- gst/gstdatetime.h:109
    pragma Import (C, gst_date_time_new_from_iso8601_string, "gst_date_time_new_from_iso8601_string");
 
    function gst_date_time_to_g_date_time (datetime : System.Address) return System.Address;  -- gst/gstdatetime.h:111

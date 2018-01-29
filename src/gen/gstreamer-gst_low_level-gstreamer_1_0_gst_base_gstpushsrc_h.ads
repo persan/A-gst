@@ -1,13 +1,16 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
+with glib;
+with glib.Values;
+with System;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstbasesrc_h;
 with System;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;
+with glib;
 
 package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstpushsrc_h is
 
@@ -46,11 +49,11 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstpushsrc_h is
   --  
 
    type GstPushSrc;
-   type u_GstPushSrc_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstPushSrc_u_gst_reserved_array is array (0 .. 3) of System.Address;
    --subtype GstPushSrc is u_GstPushSrc;  -- gst/base/gstpushsrc.h:39
 
    type GstPushSrcClass;
-   type u_GstPushSrcClass_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstPushSrcClass_u_gst_reserved_array is array (0 .. 3) of System.Address;
    --subtype GstPushSrcClass is u_GstPushSrcClass;  -- gst/base/gstpushsrc.h:40
 
   --*
@@ -98,7 +101,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstpushsrc_h is
   -- allocate memory for a buffer  
   -- ask the subclass to fill a buffer  
   --< private > 
-   function gst_push_src_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/base/gstpushsrc.h:85
+   function gst_push_src_get_type return GLIB.GType;  -- gst/base/gstpushsrc.h:85
    pragma Import (C, gst_push_src_get_type, "gst_push_src_get_type");
 
    procedure glib_autoptr_cleanup_GstPushSrc (u_ptr : System.Address);  -- gst/base/gstpushsrc.h:88

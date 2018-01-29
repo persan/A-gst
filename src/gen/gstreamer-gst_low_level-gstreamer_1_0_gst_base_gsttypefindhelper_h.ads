@@ -1,14 +1,17 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h;
-with GStreamer.GST_Low_Level.glibconfig_h;
+with GLIB; --  with GStreamer.GST_Low_Level.glibconfig_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsttypefind_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
+with glib;
+with glib.Values;
+with System;
 with System;
 
 package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gsttypefindhelper_h is
@@ -36,13 +39,13 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gsttypefindhelper_h is
   -- * Boston, MA 02110-1301, USA.
   --  
 
-   function gst_type_find_helper (src : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstPad; size : GStreamer.GST_Low_Level.glibconfig_h.guint64) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h.GstCaps;  -- gst/base/gsttypefindhelper.h:31
+   function gst_type_find_helper (src : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstPad; size : GLIB.guint64) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h.GstCaps;  -- gst/base/gsttypefindhelper.h:31
    pragma Import (C, gst_type_find_helper, "gst_type_find_helper");
 
    function gst_type_find_helper_for_data
      (obj : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject;
-      data : access GStreamer.GST_Low_Level.glibconfig_h.guint8;
-      size : GStreamer.GST_Low_Level.glibconfig_h.gsize;
+      data : access GLIB.guint8;
+      size : GLIB.gsize;
       prob : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsttypefind_h.GstTypeFindProbability) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h.GstCaps;  -- gst/base/gsttypefindhelper.h:33
    pragma Import (C, gst_type_find_helper_for_data, "gst_type_find_helper_for_data");
 
@@ -52,7 +55,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gsttypefindhelper_h is
       prob : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsttypefind_h.GstTypeFindProbability) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h.GstCaps;  -- gst/base/gsttypefindhelper.h:37
    pragma Import (C, gst_type_find_helper_for_buffer, "gst_type_find_helper_for_buffer");
 
-   function gst_type_find_helper_for_extension (obj : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject; extension : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h.GstCaps;  -- gst/base/gsttypefindhelper.h:41
+   function gst_type_find_helper_for_extension (obj : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject; extension : access GLIB.gchar) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h.GstCaps;  -- gst/base/gsttypefindhelper.h:41
    pragma Import (C, gst_type_find_helper_for_extension, "gst_type_find_helper_for_extension");
 
   --*
@@ -77,8 +80,8 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gsttypefindhelper_h is
    type GstTypeFindHelperGetRangeFunction is access function 
         (arg1 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject;
          arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject;
-         arg3 : GStreamer.GST_Low_Level.glibconfig_h.guint64;
-         arg4 : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;
+         arg3 : GLIB.guint64;
+         arg4 : GLIB.guint;
          arg5 : System.Address) return GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstFlowReturn;
    pragma Convention (C, GstTypeFindHelperGetRangeFunction);  -- gst/base/gsttypefindhelper.h:62
 
@@ -86,8 +89,8 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gsttypefindhelper_h is
      (obj : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject;
       parent : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject;
       func : GstTypeFindHelperGetRangeFunction;
-      size : GStreamer.GST_Low_Level.glibconfig_h.guint64;
-      extension : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
+      size : GLIB.guint64;
+      extension : access GLIB.gchar;
       prob : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsttypefind_h.GstTypeFindProbability) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h.GstCaps;  -- gst/base/gsttypefindhelper.h:68
    pragma Import (C, gst_type_find_helper_get_range, "gst_type_find_helper_get_range");
 

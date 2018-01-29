@@ -1,8 +1,9 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;
+with glib;
 with System;
 
 package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsttocsetter_h is
@@ -62,7 +63,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsttocsetter_h is
 
   -- signals  
   -- virtual table  
-   function gst_toc_setter_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gsttocsetter.h:57
+   function gst_toc_setter_get_type return GLIB.GType;  -- gst/gsttocsetter.h:57
    pragma Import (C, gst_toc_setter_get_type, "gst_toc_setter_get_type");
 
    procedure gst_toc_setter_reset (setter : System.Address);  -- gst/gsttocsetter.h:59

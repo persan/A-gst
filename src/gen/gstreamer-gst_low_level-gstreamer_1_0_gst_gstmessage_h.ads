@@ -1,17 +1,20 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstminiobject_h;
-with GStreamer.GST_Low_Level.glibconfig_h;
+with GLIB; --  with GStreamer.GST_Low_Level.glibconfig_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gthread_h;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gquark_h;
+--  with GStreamer.GST_Low_Level.glib_2_0_glib_gthread_h;
+with glib;
+with glib;
+with glib.Values;
+with System;
+--  with GStreamer.GST_Low_Level.glib_2_0_glib_gquark_h;
 with System;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststructure_h;
-limited with GStreamer.GST_Low_Level.glib_2_0_glib_gerror_h;
+--  limited with GStreamer.GST_Low_Level.glib_2_0_glib_gerror_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsttaglist_h;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h;
@@ -358,9 +361,9 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmessage_h is
    type GstMessage is record
       mini_object : aliased GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstminiobject_h.GstMiniObject;  -- gst/gstmessage.h:330
       c_type : aliased GstMessageType;  -- gst/gstmessage.h:333
-      timestamp : aliased GStreamer.GST_Low_Level.glibconfig_h.guint64;  -- gst/gstmessage.h:334
+      timestamp : aliased GLIB.guint64;  -- gst/gstmessage.h:334
       src : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject;  -- gst/gstmessage.h:335
-      seqnum : aliased GStreamer.GST_Low_Level.glibconfig_h.guint32;  -- gst/gstmessage.h:336
+      seqnum : aliased GLIB.guint32;  -- gst/gstmessage.h:336
       lock : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gthread_h.GMutex;  -- gst/gstmessage.h:339
       cond : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gthread_h.GCond;  -- gst/gstmessage.h:340
    end record;
@@ -371,13 +374,13 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmessage_h is
   --< private > 
   -- with MESSAGE_LOCK  
   -- lock and cond for async delivery  
-   function gst_message_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gstmessage.h:345
+   function gst_message_get_type return GLIB.GType;  -- gst/gstmessage.h:345
    pragma Import (C, gst_message_get_type, "gst_message_get_type");
 
-   function gst_message_type_get_name (c_type : GstMessageType) return access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gstmessage.h:347
+   function gst_message_type_get_name (c_type : GstMessageType) return access GLIB.gchar;  -- gst/gstmessage.h:347
    pragma Import (C, gst_message_type_get_name, "gst_message_type_get_name");
 
-   function gst_message_type_to_quark (c_type : GstMessageType) return GStreamer.GST_Low_Level.glib_2_0_glib_gquark_h.GQuark;  -- gst/gstmessage.h:348
+   function gst_message_type_to_quark (c_type : GstMessageType) return Glib.GQuark;  -- gst/gstmessage.h:348
    pragma Import (C, gst_message_type_to_quark, "gst_message_type_to_quark");
 
   -- refcounting  
@@ -456,7 +459,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmessage_h is
   -- * Returns: %TRUE if @new_message was different from @old_message
   --  
 
-   function gst_message_replace (old_message : System.Address; new_message : access GstMessage) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstmessage.h:432
+   function gst_message_replace (old_message : System.Address; new_message : access GstMessage) return GLIB.gboolean;  -- gst/gstmessage.h:432
    pragma Import (C, gst_message_replace, "gst_message_replace");
 
   -- custom messages  
@@ -469,14 +472,14 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmessage_h is
    function gst_message_get_structure (message : access GstMessage) return access constant GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststructure_h.GstStructure;  -- gst/gstmessage.h:443
    pragma Import (C, gst_message_get_structure, "gst_message_get_structure");
 
-   function gst_message_has_name (message : access GstMessage; name : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstmessage.h:445
+   function gst_message_has_name (message : access GstMessage; name : access GLIB.gchar) return GLIB.gboolean;  -- gst/gstmessage.h:445
    pragma Import (C, gst_message_has_name, "gst_message_has_name");
 
   -- identifiers for events and messages  
-   function gst_message_get_seqnum (message : access GstMessage) return GStreamer.GST_Low_Level.glibconfig_h.guint32;  -- gst/gstmessage.h:448
+   function gst_message_get_seqnum (message : access GstMessage) return GLIB.guint32;  -- gst/gstmessage.h:448
    pragma Import (C, gst_message_get_seqnum, "gst_message_get_seqnum");
 
-   procedure gst_message_set_seqnum (message : access GstMessage; seqnum : GStreamer.GST_Low_Level.glibconfig_h.guint32);  -- gst/gstmessage.h:449
+   procedure gst_message_set_seqnum (message : access GstMessage; seqnum : GLIB.guint32);  -- gst/gstmessage.h:449
    pragma Import (C, gst_message_set_seqnum, "gst_message_set_seqnum");
 
   -- EOS  
@@ -486,14 +489,14 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmessage_h is
   -- ERROR  
    function gst_message_new_error
      (src : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject;
-      error : access GStreamer.GST_Low_Level.glib_2_0_glib_gerror_h.GError;
-      debug : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return access GstMessage;  -- gst/gstmessage.h:456
+      error : access Glib.Error.GError;
+      debug : access GLIB.gchar) return access GstMessage;  -- gst/gstmessage.h:456
    pragma Import (C, gst_message_new_error, "gst_message_new_error");
 
    function gst_message_new_error_with_details
      (src : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject;
-      error : access GStreamer.GST_Low_Level.glib_2_0_glib_gerror_h.GError;
-      debug : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
+      error : access Glib.Error.GError;
+      debug : access GLIB.gchar;
       details : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststructure_h.GstStructure) return access GstMessage;  -- gst/gstmessage.h:457
    pragma Import (C, gst_message_new_error_with_details, "gst_message_new_error_with_details");
 
@@ -509,14 +512,14 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmessage_h is
   -- WARNING  
    function gst_message_new_warning
      (src : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject;
-      error : access GStreamer.GST_Low_Level.glib_2_0_glib_gerror_h.GError;
-      debug : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return access GstMessage;  -- gst/gstmessage.h:462
+      error : access Glib.Error.GError;
+      debug : access GLIB.gchar) return access GstMessage;  -- gst/gstmessage.h:462
    pragma Import (C, gst_message_new_warning, "gst_message_new_warning");
 
    function gst_message_new_warning_with_details
      (src : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject;
-      error : access GStreamer.GST_Low_Level.glib_2_0_glib_gerror_h.GError;
-      debug : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
+      error : access Glib.Error.GError;
+      debug : access GLIB.gchar;
       details : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststructure_h.GstStructure) return access GstMessage;  -- gst/gstmessage.h:463
    pragma Import (C, gst_message_new_warning_with_details, "gst_message_new_warning_with_details");
 
@@ -532,14 +535,14 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmessage_h is
   -- INFO  
    function gst_message_new_info
      (src : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject;
-      error : access GStreamer.GST_Low_Level.glib_2_0_glib_gerror_h.GError;
-      debug : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return access GstMessage;  -- gst/gstmessage.h:468
+      error : access Glib.Error.GError;
+      debug : access GLIB.gchar) return access GstMessage;  -- gst/gstmessage.h:468
    pragma Import (C, gst_message_new_info, "gst_message_new_info");
 
    function gst_message_new_info_with_details
      (src : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject;
-      error : access GStreamer.GST_Low_Level.glib_2_0_glib_gerror_h.GError;
-      debug : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
+      error : access Glib.Error.GError;
+      debug : access GLIB.gchar;
       details : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststructure_h.GstStructure) return access GstMessage;  -- gst/gstmessage.h:469
    pragma Import (C, gst_message_new_info_with_details, "gst_message_new_info_with_details");
 
@@ -560,26 +563,26 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmessage_h is
    pragma Import (C, gst_message_parse_tag, "gst_message_parse_tag");
 
   -- BUFFERING  
-   function gst_message_new_buffering (src : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject; percent : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint) return access GstMessage;  -- gst/gstmessage.h:478
+   function gst_message_new_buffering (src : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject; percent : GLIB.gint) return access GstMessage;  -- gst/gstmessage.h:478
    pragma Import (C, gst_message_new_buffering, "gst_message_new_buffering");
 
-   procedure gst_message_parse_buffering (message : access GstMessage; percent : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint);  -- gst/gstmessage.h:479
+   procedure gst_message_parse_buffering (message : access GstMessage; percent : access GLIB.gint);  -- gst/gstmessage.h:479
    pragma Import (C, gst_message_parse_buffering, "gst_message_parse_buffering");
 
    procedure gst_message_set_buffering_stats
      (message : access GstMessage;
       mode : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h.GstBufferingMode;
-      avg_in : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;
-      avg_out : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;
-      buffering_left : GStreamer.GST_Low_Level.glibconfig_h.gint64);  -- gst/gstmessage.h:480
+      avg_in : GLIB.gint;
+      avg_out : GLIB.gint;
+      buffering_left : GLIB.gint64);  -- gst/gstmessage.h:480
    pragma Import (C, gst_message_set_buffering_stats, "gst_message_set_buffering_stats");
 
    procedure gst_message_parse_buffering_stats
      (message : access GstMessage;
       mode : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h.GstBufferingMode;
-      avg_in : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;
-      avg_out : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;
-      buffering_left : access GStreamer.GST_Low_Level.glibconfig_h.gint64);  -- gst/gstmessage.h:483
+      avg_in : access GLIB.gint;
+      avg_out : access GLIB.gint;
+      buffering_left : access GLIB.gint64);  -- gst/gstmessage.h:483
    pragma Import (C, gst_message_parse_buffering_stats, "gst_message_parse_buffering_stats");
 
   -- STATE_CHANGED  
@@ -605,36 +608,36 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmessage_h is
    function gst_message_new_step_done
      (src : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject;
       format : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstformat_h.GstFormat;
-      amount : GStreamer.GST_Low_Level.glibconfig_h.guint64;
-      rate : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gdouble;
-      flush : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;
-      intermediate : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;
-      duration : GStreamer.GST_Low_Level.glibconfig_h.guint64;
-      eos : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean) return access GstMessage;  -- gst/gstmessage.h:497
+      amount : GLIB.guint64;
+      rate : GLIB.gdouble;
+      flush : GLIB.gboolean;
+      intermediate : GLIB.gboolean;
+      duration : GLIB.guint64;
+      eos : GLIB.gboolean) return access GstMessage;  -- gst/gstmessage.h:497
    pragma Import (C, gst_message_new_step_done, "gst_message_new_step_done");
 
    procedure gst_message_parse_step_done
      (message : access GstMessage;
       format : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstformat_h.GstFormat;
-      amount : access GStreamer.GST_Low_Level.glibconfig_h.guint64;
-      rate : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gdouble;
-      flush : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;
-      intermediate : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;
-      duration : access GStreamer.GST_Low_Level.glibconfig_h.guint64;
-      eos : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean);  -- gst/gstmessage.h:500
+      amount : access GLIB.guint64;
+      rate : access GLIB.gdouble;
+      flush : access GLIB.gboolean;
+      intermediate : access GLIB.gboolean;
+      duration : access GLIB.guint64;
+      eos : access GLIB.gboolean);  -- gst/gstmessage.h:500
    pragma Import (C, gst_message_parse_step_done, "gst_message_parse_step_done");
 
   -- CLOCK_PROVIDE  
    function gst_message_new_clock_provide
      (src : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject;
       clock : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClock;
-      ready : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean) return access GstMessage;  -- gst/gstmessage.h:504
+      ready : GLIB.gboolean) return access GstMessage;  -- gst/gstmessage.h:504
    pragma Import (C, gst_message_new_clock_provide, "gst_message_new_clock_provide");
 
    procedure gst_message_parse_clock_provide
      (message : access GstMessage;
       clock : System.Address;
-      ready : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean);  -- gst/gstmessage.h:505
+      ready : access GLIB.gboolean);  -- gst/gstmessage.h:505
    pragma Import (C, gst_message_parse_clock_provide, "gst_message_parse_clock_provide");
 
   -- CLOCK_LOST  
@@ -663,26 +666,26 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmessage_h is
    function gst_message_new_segment_start
      (src : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject;
       format : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstformat_h.GstFormat;
-      position : GStreamer.GST_Low_Level.glibconfig_h.gint64) return access GstMessage;  -- gst/gstmessage.h:523
+      position : GLIB.gint64) return access GstMessage;  -- gst/gstmessage.h:523
    pragma Import (C, gst_message_new_segment_start, "gst_message_new_segment_start");
 
    procedure gst_message_parse_segment_start
      (message : access GstMessage;
       format : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstformat_h.GstFormat;
-      position : access GStreamer.GST_Low_Level.glibconfig_h.gint64);  -- gst/gstmessage.h:524
+      position : access GLIB.gint64);  -- gst/gstmessage.h:524
    pragma Import (C, gst_message_parse_segment_start, "gst_message_parse_segment_start");
 
   -- SEGMENT_DONE  
    function gst_message_new_segment_done
      (src : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject;
       format : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstformat_h.GstFormat;
-      position : GStreamer.GST_Low_Level.glibconfig_h.gint64) return access GstMessage;  -- gst/gstmessage.h:528
+      position : GLIB.gint64) return access GstMessage;  -- gst/gstmessage.h:528
    pragma Import (C, gst_message_new_segment_done, "gst_message_new_segment_done");
 
    procedure gst_message_parse_segment_done
      (message : access GstMessage;
       format : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstformat_h.GstFormat;
-      position : access GStreamer.GST_Low_Level.glibconfig_h.gint64);  -- gst/gstmessage.h:529
+      position : access GLIB.gint64);  -- gst/gstmessage.h:529
    pragma Import (C, gst_message_parse_segment_done, "gst_message_parse_segment_done");
 
   -- DURATION_CHANGED  
@@ -698,10 +701,10 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmessage_h is
    pragma Import (C, gst_message_new_async_start, "gst_message_new_async_start");
 
   -- ASYNC_DONE  
-   function gst_message_new_async_done (src : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject; running_time : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime) return access GstMessage;  -- gst/gstmessage.h:542
+   function gst_message_new_async_done (src : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject; running_time : GLIB.guint64) return access GstMessage;  -- gst/gstmessage.h:542
    pragma Import (C, gst_message_new_async_done, "gst_message_new_async_done");
 
-   procedure gst_message_parse_async_done (message : access GstMessage; running_time : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime);  -- gst/gstmessage.h:543
+   procedure gst_message_parse_async_done (message : access GstMessage; running_time : access GLIB.guint64);  -- gst/gstmessage.h:543
    pragma Import (C, gst_message_parse_async_done, "gst_message_parse_async_done");
 
   -- STRUCTURE CHANGE  
@@ -709,14 +712,14 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmessage_h is
      (src : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject;
       c_type : GstStructureChangeType;
       owner : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h.GstElement;
-      busy : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean) return access GstMessage;  -- gst/gstmessage.h:546
+      busy : GLIB.gboolean) return access GstMessage;  -- gst/gstmessage.h:546
    pragma Import (C, gst_message_new_structure_change, "gst_message_new_structure_change");
 
    procedure gst_message_parse_structure_change
      (message : access GstMessage;
       c_type : access GstStructureChangeType;
       owner : System.Address;
-      busy : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean);  -- gst/gstmessage.h:548
+      busy : access GLIB.gboolean);  -- gst/gstmessage.h:548
    pragma Import (C, gst_message_parse_structure_change, "gst_message_parse_structure_change");
 
   -- STREAM STATUS  
@@ -732,10 +735,10 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmessage_h is
       owner : System.Address);  -- gst/gstmessage.h:554
    pragma Import (C, gst_message_parse_stream_status, "gst_message_parse_stream_status");
 
-   procedure gst_message_set_stream_status_object (message : access GstMessage; object : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue);  -- gst/gstmessage.h:556
+   procedure gst_message_set_stream_status_object (message : access GstMessage; object : access constant Glib.Values.GValue);  -- gst/gstmessage.h:556
    pragma Import (C, gst_message_set_stream_status_object, "gst_message_set_stream_status_object");
 
-   function gst_message_get_stream_status_object (message : access GstMessage) return access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue;  -- gst/gstmessage.h:557
+   function gst_message_get_stream_status_object (message : access GstMessage) return access constant Glib.Values.GValue;  -- gst/gstmessage.h:557
    pragma Import (C, gst_message_get_stream_status_object, "gst_message_get_stream_status_object");
 
   -- REQUEST_STATE  
@@ -748,77 +751,77 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmessage_h is
   -- STEP_START  
    function gst_message_new_step_start
      (src : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject;
-      active : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;
+      active : GLIB.gboolean;
       format : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstformat_h.GstFormat;
-      amount : GStreamer.GST_Low_Level.glibconfig_h.guint64;
-      rate : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gdouble;
-      flush : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;
-      intermediate : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean) return access GstMessage;  -- gst/gstmessage.h:564
+      amount : GLIB.guint64;
+      rate : GLIB.gdouble;
+      flush : GLIB.gboolean;
+      intermediate : GLIB.gboolean) return access GstMessage;  -- gst/gstmessage.h:564
    pragma Import (C, gst_message_new_step_start, "gst_message_new_step_start");
 
    procedure gst_message_parse_step_start
      (message : access GstMessage;
-      active : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;
+      active : access GLIB.gboolean;
       format : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstformat_h.GstFormat;
-      amount : access GStreamer.GST_Low_Level.glibconfig_h.guint64;
-      rate : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gdouble;
-      flush : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;
-      intermediate : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean);  -- gst/gstmessage.h:567
+      amount : access GLIB.guint64;
+      rate : access GLIB.gdouble;
+      flush : access GLIB.gboolean;
+      intermediate : access GLIB.gboolean);  -- gst/gstmessage.h:567
    pragma Import (C, gst_message_parse_step_start, "gst_message_parse_step_start");
 
   -- QOS  
    function gst_message_new_qos
      (src : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject;
-      live : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;
-      running_time : GStreamer.GST_Low_Level.glibconfig_h.guint64;
-      stream_time : GStreamer.GST_Low_Level.glibconfig_h.guint64;
-      timestamp : GStreamer.GST_Low_Level.glibconfig_h.guint64;
-      duration : GStreamer.GST_Low_Level.glibconfig_h.guint64) return access GstMessage;  -- gst/gstmessage.h:572
+      live : GLIB.gboolean;
+      running_time : GLIB.guint64;
+      stream_time : GLIB.guint64;
+      timestamp : GLIB.guint64;
+      duration : GLIB.guint64) return access GstMessage;  -- gst/gstmessage.h:572
    pragma Import (C, gst_message_new_qos, "gst_message_new_qos");
 
    procedure gst_message_set_qos_values
      (message : access GstMessage;
-      jitter : GStreamer.GST_Low_Level.glibconfig_h.gint64;
-      proportion : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gdouble;
-      quality : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint);  -- gst/gstmessage.h:574
+      jitter : GLIB.gint64;
+      proportion : GLIB.gdouble;
+      quality : GLIB.gint);  -- gst/gstmessage.h:574
    pragma Import (C, gst_message_set_qos_values, "gst_message_set_qos_values");
 
    procedure gst_message_set_qos_stats
      (message : access GstMessage;
       format : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstformat_h.GstFormat;
-      processed : GStreamer.GST_Low_Level.glibconfig_h.guint64;
-      dropped : GStreamer.GST_Low_Level.glibconfig_h.guint64);  -- gst/gstmessage.h:576
+      processed : GLIB.guint64;
+      dropped : GLIB.guint64);  -- gst/gstmessage.h:576
    pragma Import (C, gst_message_set_qos_stats, "gst_message_set_qos_stats");
 
    procedure gst_message_parse_qos
      (message : access GstMessage;
-      live : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;
-      running_time : access GStreamer.GST_Low_Level.glibconfig_h.guint64;
-      stream_time : access GStreamer.GST_Low_Level.glibconfig_h.guint64;
-      timestamp : access GStreamer.GST_Low_Level.glibconfig_h.guint64;
-      duration : access GStreamer.GST_Low_Level.glibconfig_h.guint64);  -- gst/gstmessage.h:578
+      live : access GLIB.gboolean;
+      running_time : access GLIB.guint64;
+      stream_time : access GLIB.guint64;
+      timestamp : access GLIB.guint64;
+      duration : access GLIB.guint64);  -- gst/gstmessage.h:578
    pragma Import (C, gst_message_parse_qos, "gst_message_parse_qos");
 
    procedure gst_message_parse_qos_values
      (message : access GstMessage;
-      jitter : access GStreamer.GST_Low_Level.glibconfig_h.gint64;
-      proportion : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gdouble;
-      quality : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint);  -- gst/gstmessage.h:580
+      jitter : access GLIB.gint64;
+      proportion : access GLIB.gdouble;
+      quality : access GLIB.gint);  -- gst/gstmessage.h:580
    pragma Import (C, gst_message_parse_qos_values, "gst_message_parse_qos_values");
 
    procedure gst_message_parse_qos_stats
      (message : access GstMessage;
       format : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstformat_h.GstFormat;
-      processed : access GStreamer.GST_Low_Level.glibconfig_h.guint64;
-      dropped : access GStreamer.GST_Low_Level.glibconfig_h.guint64);  -- gst/gstmessage.h:582
+      processed : access GLIB.guint64;
+      dropped : access GLIB.guint64);  -- gst/gstmessage.h:582
    pragma Import (C, gst_message_parse_qos_stats, "gst_message_parse_qos_stats");
 
   -- PROGRESS  
    function gst_message_new_progress
      (src : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject;
       c_type : GstProgressType;
-      code : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      text : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return access GstMessage;  -- gst/gstmessage.h:585
+      code : access GLIB.gchar;
+      text : access GLIB.gchar) return access GstMessage;  -- gst/gstmessage.h:585
    pragma Import (C, gst_message_new_progress, "gst_message_new_progress");
 
    procedure gst_message_parse_progress
@@ -832,37 +835,37 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmessage_h is
    function gst_message_new_toc
      (src : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject;
       toc : System.Address;
-      updated : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean) return access GstMessage;  -- gst/gstmessage.h:591
+      updated : GLIB.gboolean) return access GstMessage;  -- gst/gstmessage.h:591
    pragma Import (C, gst_message_new_toc, "gst_message_new_toc");
 
    procedure gst_message_parse_toc
      (message : access GstMessage;
       toc : System.Address;
-      updated : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean);  -- gst/gstmessage.h:592
+      updated : access GLIB.gboolean);  -- gst/gstmessage.h:592
    pragma Import (C, gst_message_parse_toc, "gst_message_parse_toc");
 
   -- RESET_TIME  
-   function gst_message_new_reset_time (src : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject; running_time : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime) return access GstMessage;  -- gst/gstmessage.h:595
+   function gst_message_new_reset_time (src : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject; running_time : GLIB.guint64) return access GstMessage;  -- gst/gstmessage.h:595
    pragma Import (C, gst_message_new_reset_time, "gst_message_new_reset_time");
 
-   procedure gst_message_parse_reset_time (message : access GstMessage; running_time : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime);  -- gst/gstmessage.h:596
+   procedure gst_message_parse_reset_time (message : access GstMessage; running_time : access GLIB.guint64);  -- gst/gstmessage.h:596
    pragma Import (C, gst_message_parse_reset_time, "gst_message_parse_reset_time");
 
   -- STREAM_START  
    function gst_message_new_stream_start (src : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject) return access GstMessage;  -- gst/gstmessage.h:599
    pragma Import (C, gst_message_new_stream_start, "gst_message_new_stream_start");
 
-   procedure gst_message_set_group_id (message : access GstMessage; group_id : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint);  -- gst/gstmessage.h:601
+   procedure gst_message_set_group_id (message : access GstMessage; group_id : GLIB.guint);  -- gst/gstmessage.h:601
    pragma Import (C, gst_message_set_group_id, "gst_message_set_group_id");
 
-   function gst_message_parse_group_id (message : access GstMessage; group_id : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstmessage.h:602
+   function gst_message_parse_group_id (message : access GstMessage; group_id : access GLIB.guint) return GLIB.gboolean;  -- gst/gstmessage.h:602
    pragma Import (C, gst_message_parse_group_id, "gst_message_parse_group_id");
 
   -- NEED_CONTEXT  
-   function gst_message_new_need_context (src : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject; context_type : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return access GstMessage;  -- gst/gstmessage.h:605
+   function gst_message_new_need_context (src : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject; context_type : access GLIB.gchar) return access GstMessage;  -- gst/gstmessage.h:605
    pragma Import (C, gst_message_new_need_context, "gst_message_new_need_context");
 
-   function gst_message_parse_context_type (message : access GstMessage; context_type : System.Address) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstmessage.h:606
+   function gst_message_parse_context_type (message : access GstMessage; context_type : System.Address) return GLIB.gboolean;  -- gst/gstmessage.h:606
    pragma Import (C, gst_message_parse_context_type, "gst_message_parse_context_type");
 
   -- HAVE_CONTEXT  
@@ -889,8 +892,8 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmessage_h is
   -- PROPERTY_NOTIFY  
    function gst_message_new_property_notify
      (src : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject;
-      property_name : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      val : access GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue) return access GstMessage;  -- gst/gstmessage.h:621
+      property_name : access GLIB.gchar;
+      val : access Glib.Values.GValue) return access GstMessage;  -- gst/gstmessage.h:621
    pragma Import (C, gst_message_new_property_notify, "gst_message_new_property_notify");
 
    procedure gst_message_parse_property_notify
@@ -917,36 +920,36 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmessage_h is
    procedure gst_message_parse_streams_selected (message : access GstMessage; collection : System.Address);  -- gst/gstmessage.h:631
    pragma Import (C, gst_message_parse_streams_selected, "gst_message_parse_streams_selected");
 
-   function gst_message_streams_selected_get_size (message : access GstMessage) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;  -- gst/gstmessage.h:632
+   function gst_message_streams_selected_get_size (message : access GstMessage) return GLIB.guint;  -- gst/gstmessage.h:632
    pragma Import (C, gst_message_streams_selected_get_size, "gst_message_streams_selected_get_size");
 
-   function gst_message_streams_selected_get_stream (message : access GstMessage; idx : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststreams_h.GstStream;  -- gst/gstmessage.h:633
+   function gst_message_streams_selected_get_stream (message : access GstMessage; idx : GLIB.guint) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststreams_h.GstStream;  -- gst/gstmessage.h:633
    pragma Import (C, gst_message_streams_selected_get_stream, "gst_message_streams_selected_get_stream");
 
   -- REDIRECT  
    function gst_message_new_redirect
      (src : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject;
-      location : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
+      location : access GLIB.gchar;
       tag_list : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsttaglist_h.GstTagList;
       entry_struct : access constant GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststructure_h.GstStructure) return access GstMessage;  -- gst/gstmessage.h:636
    pragma Import (C, gst_message_new_redirect, "gst_message_new_redirect");
 
    procedure gst_message_add_redirect_entry
      (message : access GstMessage;
-      location : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
+      location : access GLIB.gchar;
       tag_list : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsttaglist_h.GstTagList;
       entry_struct : access constant GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststructure_h.GstStructure);  -- gst/gstmessage.h:637
    pragma Import (C, gst_message_add_redirect_entry, "gst_message_add_redirect_entry");
 
    procedure gst_message_parse_redirect_entry
      (message : access GstMessage;
-      entry_index : GStreamer.GST_Low_Level.glibconfig_h.gsize;
+      entry_index : GLIB.gsize;
       location : System.Address;
       tag_list : System.Address;
       entry_struct : System.Address);  -- gst/gstmessage.h:638
    pragma Import (C, gst_message_parse_redirect_entry, "gst_message_parse_redirect_entry");
 
-   function gst_message_get_num_redirect_entries (message : access GstMessage) return GStreamer.GST_Low_Level.glibconfig_h.gsize;  -- gst/gstmessage.h:639
+   function gst_message_get_num_redirect_entries (message : access GstMessage) return GLIB.gsize;  -- gst/gstmessage.h:639
    pragma Import (C, gst_message_get_num_redirect_entries, "gst_message_get_num_redirect_entries");
 
    procedure glib_autoptr_cleanup_GstMessage (u_ptr : System.Address);  -- gst/gstmessage.h:642

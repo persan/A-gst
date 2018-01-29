@@ -1,9 +1,12 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
-with GStreamer.GST_Low_Level.glibconfig_h;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
+with GLIB; --  with GStreamer.GST_Low_Level.glibconfig_h;
+with glib;
+with glib.Values;
+with System;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstsegment_h;
@@ -12,9 +15,9 @@ with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstevent_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h;
-limited with GStreamer.GST_Low_Level.glib_2_0_glib_gslist_h;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gthread_h;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;
+--  limited with GStreamer.GST_Low_Level.glib_2_0_glib_gslist_h;
+--  with GStreamer.GST_Low_Level.glib_2_0_glib_gthread_h;
+with glib;
 
 package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstcollectpads_h is
 
@@ -72,10 +75,10 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstcollectpads_h is
    type GstCollectData;
    type anon_236;
    type anon_237 is record
-      dts : aliased GStreamer.GST_Low_Level.glibconfig_h.gint64;  -- gst/base/gstcollectpads.h:162
+      dts : aliased GLIB.gint64;  -- gst/base/gstcollectpads.h:162
    end record;
    pragma Convention (C_Pass_By_Copy, anon_237);
-   type u_GstCollectData_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstCollectData_u_gst_reserved_array is array (0 .. 3) of System.Address;
    type anon_236 (discr : unsigned := 0) is record
       case discr is
          when 0 =>
@@ -92,7 +95,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstcollectpads_h is
    --  skipped empty struct GstCollectDataPrivate
 
    type GstCollectPads;
-   type u_GstCollectPads_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstCollectPads_u_gst_reserved_array is array (0 .. 3) of System.Address;
    --subtype GstCollectPads is u_GstCollectPads;  -- gst/base/gstcollectpads.h:39
 
    --  skipped empty struct u_GstCollectPadsPrivate
@@ -100,7 +103,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstcollectpads_h is
    --  skipped empty struct GstCollectPadsPrivate
 
    type GstCollectPadsClass;
-   type u_GstCollectPadsClass_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstCollectPadsClass_u_gst_reserved_array is array (0 .. 3) of System.Address;
    --subtype GstCollectPadsClass is u_GstCollectPadsClass;  -- gst/base/gstcollectpads.h:41
 
   --*
@@ -208,7 +211,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstcollectpads_h is
       collect : access GstCollectPads;  -- gst/base/gstcollectpads.h:146
       pad : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstPad;  -- gst/base/gstcollectpads.h:147
       buffer : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBuffer;  -- gst/base/gstcollectpads.h:148
-      pos : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;  -- gst/base/gstcollectpads.h:149
+      pos : aliased GLIB.guint;  -- gst/base/gstcollectpads.h:149
       segment : aliased GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstsegment_h.GstSegment;  -- gst/base/gstcollectpads.h:150
       state : aliased GstCollectPadsStateFlags;  -- gst/base/gstcollectpads.h:155
       priv : System.Address;  -- gst/base/gstcollectpads.h:157
@@ -232,7 +235,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstcollectpads_h is
   -- * Returns: %GST_FLOW_OK for success
   --  
 
-   type GstCollectPadsFunction is access function  (arg1 : access GstCollectPads; arg2 : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer) return GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstFlowReturn;
+   type GstCollectPadsFunction is access function  (arg1 : access GstCollectPads; arg2 : System.Address) return GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstFlowReturn;
    pragma Convention (C, GstCollectPadsFunction);  -- gst/base/gstcollectpads.h:178
 
   --*
@@ -253,7 +256,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstcollectpads_h is
         (arg1 : access GstCollectPads;
          arg2 : access GstCollectData;
          arg3 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBuffer;
-         arg4 : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer) return GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstFlowReturn;
+         arg4 : System.Address) return GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstFlowReturn;
    pragma Convention (C, GstCollectPadsBufferFunction);  -- gst/base/gstcollectpads.h:193
 
   --*
@@ -275,10 +278,10 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstcollectpads_h is
    type GstCollectPadsCompareFunction is access function 
         (arg1 : access GstCollectPads;
          arg2 : access GstCollectData;
-         arg3 : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime;
+         arg3 : GLIB.guint64;
          arg4 : access GstCollectData;
-         arg5 : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime;
-         arg6 : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;
+         arg5 : GLIB.guint64;
+         arg6 : System.Address) return GLIB.gint;
    pragma Convention (C, GstCollectPadsCompareFunction);  -- gst/base/gstcollectpads.h:211
 
   --*
@@ -300,7 +303,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstcollectpads_h is
         (arg1 : access GstCollectPads;
          arg2 : access GstCollectData;
          arg3 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstevent_h.GstEvent;
-         arg4 : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;
+         arg4 : System.Address) return GLIB.gboolean;
    pragma Convention (C, GstCollectPadsEventFunction);  -- gst/base/gstcollectpads.h:230
 
   --*
@@ -321,7 +324,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstcollectpads_h is
         (arg1 : access GstCollectPads;
          arg2 : access GstCollectData;
          arg3 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h.GstQuery;
-         arg4 : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;
+         arg4 : System.Address) return GLIB.gboolean;
    pragma Convention (C, GstCollectPadsQueryFunction);  -- gst/base/gstcollectpads.h:247
 
   --*
@@ -349,7 +352,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstcollectpads_h is
          arg2 : access GstCollectData;
          arg3 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBuffer;
          arg4 : System.Address;
-         arg5 : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer) return GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstFlowReturn;
+         arg5 : System.Address) return GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstFlowReturn;
    pragma Convention (C, GstCollectPadsClipFunction);  -- gst/base/gstcollectpads.h:269
 
   --*
@@ -367,7 +370,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstcollectpads_h is
   -- * Since: 1.4
   --  
 
-   type GstCollectPadsFlushFunction is access procedure  (arg1 : access GstCollectPads; arg2 : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer);
+   type GstCollectPadsFlushFunction is access procedure  (arg1 : access GstCollectPads; arg2 : System.Address);
    pragma Convention (C, GstCollectPadsFlushFunction);  -- gst/base/gstcollectpads.h:288
 
   --*
@@ -422,7 +425,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstcollectpads_h is
    pragma Convention (C_Pass_By_Copy, GstCollectPadsClass);  -- gst/base/gstcollectpads.h:335
 
   --< private > 
-   function gst_collect_pads_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/base/gstcollectpads.h:342
+   function gst_collect_pads_get_type return GLIB.GType;  -- gst/base/gstcollectpads.h:342
    pragma Import (C, gst_collect_pads_get_type, "gst_collect_pads_get_type");
 
   -- creating the object  
@@ -433,55 +436,55 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstcollectpads_h is
    procedure gst_collect_pads_set_function
      (pads : access GstCollectPads;
       func : GstCollectPadsFunction;
-      user_data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer);  -- gst/base/gstcollectpads.h:348
+      user_data : System.Address);  -- gst/base/gstcollectpads.h:348
    pragma Import (C, gst_collect_pads_set_function, "gst_collect_pads_set_function");
 
    procedure gst_collect_pads_set_buffer_function
      (pads : access GstCollectPads;
       func : GstCollectPadsBufferFunction;
-      user_data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer);  -- gst/base/gstcollectpads.h:351
+      user_data : System.Address);  -- gst/base/gstcollectpads.h:351
    pragma Import (C, gst_collect_pads_set_buffer_function, "gst_collect_pads_set_buffer_function");
 
    procedure gst_collect_pads_set_event_function
      (pads : access GstCollectPads;
       func : GstCollectPadsEventFunction;
-      user_data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer);  -- gst/base/gstcollectpads.h:354
+      user_data : System.Address);  -- gst/base/gstcollectpads.h:354
    pragma Import (C, gst_collect_pads_set_event_function, "gst_collect_pads_set_event_function");
 
    procedure gst_collect_pads_set_query_function
      (pads : access GstCollectPads;
       func : GstCollectPadsQueryFunction;
-      user_data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer);  -- gst/base/gstcollectpads.h:357
+      user_data : System.Address);  -- gst/base/gstcollectpads.h:357
    pragma Import (C, gst_collect_pads_set_query_function, "gst_collect_pads_set_query_function");
 
    procedure gst_collect_pads_set_compare_function
      (pads : access GstCollectPads;
       func : GstCollectPadsCompareFunction;
-      user_data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer);  -- gst/base/gstcollectpads.h:360
+      user_data : System.Address);  -- gst/base/gstcollectpads.h:360
    pragma Import (C, gst_collect_pads_set_compare_function, "gst_collect_pads_set_compare_function");
 
    procedure gst_collect_pads_set_clip_function
      (pads : access GstCollectPads;
       clipfunc : GstCollectPadsClipFunction;
-      user_data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer);  -- gst/base/gstcollectpads.h:363
+      user_data : System.Address);  -- gst/base/gstcollectpads.h:363
    pragma Import (C, gst_collect_pads_set_clip_function, "gst_collect_pads_set_clip_function");
 
    procedure gst_collect_pads_set_flush_function
      (pads : access GstCollectPads;
       func : GstCollectPadsFlushFunction;
-      user_data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer);  -- gst/base/gstcollectpads.h:366
+      user_data : System.Address);  -- gst/base/gstcollectpads.h:366
    pragma Import (C, gst_collect_pads_set_flush_function, "gst_collect_pads_set_flush_function");
 
   -- pad management  
    function gst_collect_pads_add_pad
      (pads : access GstCollectPads;
       pad : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstPad;
-      size : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;
+      size : GLIB.guint;
       destroy_notify : GstCollectDataDestroyNotify;
-      lock : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean) return access GstCollectData;  -- gst/base/gstcollectpads.h:371
+      lock : GLIB.gboolean) return access GstCollectData;  -- gst/base/gstcollectpads.h:371
    pragma Import (C, gst_collect_pads_add_pad, "gst_collect_pads_add_pad");
 
-   function gst_collect_pads_remove_pad (pads : access GstCollectPads; pad : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstPad) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/base/gstcollectpads.h:374
+   function gst_collect_pads_remove_pad (pads : access GstCollectPads; pad : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstPad) return GLIB.gboolean;  -- gst/base/gstcollectpads.h:374
    pragma Import (C, gst_collect_pads_remove_pad, "gst_collect_pads_remove_pad");
 
   -- start/stop collection  
@@ -491,7 +494,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstcollectpads_h is
    procedure gst_collect_pads_stop (pads : access GstCollectPads);  -- gst/base/gstcollectpads.h:378
    pragma Import (C, gst_collect_pads_stop, "gst_collect_pads_stop");
 
-   procedure gst_collect_pads_set_flushing (pads : access GstCollectPads; flushing : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean);  -- gst/base/gstcollectpads.h:379
+   procedure gst_collect_pads_set_flushing (pads : access GstCollectPads; flushing : GLIB.gboolean);  -- gst/base/gstcollectpads.h:379
    pragma Import (C, gst_collect_pads_set_flushing, "gst_collect_pads_set_flushing");
 
   -- get collected buffers  
@@ -502,32 +505,32 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstcollectpads_h is
    pragma Import (C, gst_collect_pads_pop, "gst_collect_pads_pop");
 
   -- get collected bytes  
-   function gst_collect_pads_available (pads : access GstCollectPads) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;  -- gst/base/gstcollectpads.h:386
+   function gst_collect_pads_available (pads : access GstCollectPads) return GLIB.guint;  -- gst/base/gstcollectpads.h:386
    pragma Import (C, gst_collect_pads_available, "gst_collect_pads_available");
 
    function gst_collect_pads_flush
      (pads : access GstCollectPads;
       data : access GstCollectData;
-      size : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;  -- gst/base/gstcollectpads.h:387
+      size : GLIB.guint) return GLIB.guint;  -- gst/base/gstcollectpads.h:387
    pragma Import (C, gst_collect_pads_flush, "gst_collect_pads_flush");
 
    function gst_collect_pads_read_buffer
      (pads : access GstCollectPads;
       data : access GstCollectData;
-      size : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBuffer;  -- gst/base/gstcollectpads.h:389
+      size : GLIB.guint) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBuffer;  -- gst/base/gstcollectpads.h:389
    pragma Import (C, gst_collect_pads_read_buffer, "gst_collect_pads_read_buffer");
 
    function gst_collect_pads_take_buffer
      (pads : access GstCollectPads;
       data : access GstCollectData;
-      size : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBuffer;  -- gst/base/gstcollectpads.h:391
+      size : GLIB.guint) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBuffer;  -- gst/base/gstcollectpads.h:391
    pragma Import (C, gst_collect_pads_take_buffer, "gst_collect_pads_take_buffer");
 
   -- setting and unsetting waiting mode  
    procedure gst_collect_pads_set_waiting
      (pads : access GstCollectPads;
       data : access GstCollectData;
-      waiting : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean);  -- gst/base/gstcollectpads.h:395
+      waiting : GLIB.gboolean);  -- gst/base/gstcollectpads.h:395
    pragma Import (C, gst_collect_pads_set_waiting, "gst_collect_pads_set_waiting");
 
   -- convenience helper  
@@ -536,7 +539,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstcollectpads_h is
       cdata : access GstCollectData;
       buf : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBuffer;
       outbuf : System.Address;
-      user_data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer) return GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstFlowReturn;  -- gst/base/gstcollectpads.h:399
+      user_data : System.Address) return GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstFlowReturn;  -- gst/base/gstcollectpads.h:399
    pragma Import (C, gst_collect_pads_clip_running_time, "gst_collect_pads_clip_running_time");
 
   -- default handlers  
@@ -544,20 +547,20 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstcollectpads_h is
      (pads : access GstCollectPads;
       data : access GstCollectData;
       event : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstevent_h.GstEvent;
-      discard : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/base/gstcollectpads.h:405
+      discard : GLIB.gboolean) return GLIB.gboolean;  -- gst/base/gstcollectpads.h:405
    pragma Import (C, gst_collect_pads_event_default, "gst_collect_pads_event_default");
 
    function gst_collect_pads_src_event_default
      (pads : access GstCollectPads;
       pad : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstPad;
-      event : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstevent_h.GstEvent) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/base/gstcollectpads.h:407
+      event : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstevent_h.GstEvent) return GLIB.gboolean;  -- gst/base/gstcollectpads.h:407
    pragma Import (C, gst_collect_pads_src_event_default, "gst_collect_pads_src_event_default");
 
    function gst_collect_pads_query_default
      (pads : access GstCollectPads;
       data : access GstCollectData;
       query : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h.GstQuery;
-      discard : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/base/gstcollectpads.h:409
+      discard : GLIB.gboolean) return GLIB.gboolean;  -- gst/base/gstcollectpads.h:409
    pragma Import (C, gst_collect_pads_query_default, "gst_collect_pads_query_default");
 
    procedure glib_autoptr_cleanup_GstCollectPads (u_ptr : System.Address);  -- gst/base/gstcollectpads.h:414

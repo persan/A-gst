@@ -1,12 +1,15 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
+with glib;
+with glib.Values;
+with System;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;
+with glib;
 with System;
 
 package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpadtemplate_h is
@@ -56,12 +59,12 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpadtemplate_h is
   --  
 
    type GstPadTemplate;
-   type u_GstPadTemplate_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
-   --subtype GstPadTemplate is u_GstPadTemplate;  -- gst/gstpadtemplate.h:29
+   type GstPadTemplate_u_gst_reserved_array is array (0 .. 3) of System.Address;
+   subtype GstPadTemplate is GstPadTemplate;  -- gst/gstpadtemplate.h:29
 
    type GstPadTemplateClass;
-   type u_GstPadTemplateClass_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
-   --subtype GstPadTemplateClass is u_GstPadTemplateClass;  -- gst/gstpadtemplate.h:30
+   type GstPadTemplateClass_u_gst_reserved_array is array (0 .. 3) of System.Address;
+   --  subtype GstPadTemplateClass is GstPadTemplateClass;  -- gst/gstpadtemplate.h:30
 
    type GstStaticPadTemplate;
    --subtype GstStaticPadTemplate is u_GstStaticPadTemplate;  -- gst/gstpadtemplate.h:31
@@ -136,11 +139,11 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpadtemplate_h is
 
    type GstPadTemplate is record
       object : aliased GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject;  -- gst/gstpadtemplate.h:122
-      name_template : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gstpadtemplate.h:124
+      name_template : access GLIB.gchar;  -- gst/gstpadtemplate.h:124
       direction : aliased GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstPadDirection;  -- gst/gstpadtemplate.h:125
       presence : aliased GstPadPresence;  -- gst/gstpadtemplate.h:126
       caps : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h.GstCaps;  -- gst/gstpadtemplate.h:127
-      u_gst_reserved : u_GstPadTemplate_u_gst_reserved_array;  -- gst/gstpadtemplate.h:130
+      u_gst_reserved : GstPadTemplate_u_gst_reserved_array;  -- gst/gstpadtemplate.h:130
    end record;
    pragma Convention (C_Pass_By_Copy, GstPadTemplate);  -- gst/gstpadtemplate.h:121
 
@@ -148,7 +151,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpadtemplate_h is
    type GstPadTemplateClass is record
       parent_class : aliased GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObjectClass;  -- gst/gstpadtemplate.h:134
       pad_created : access procedure  (arg1 : access GstPadTemplate; arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstPad);  -- gst/gstpadtemplate.h:137
-      u_gst_reserved : u_GstPadTemplateClass_u_gst_reserved_array;  -- gst/gstpadtemplate.h:140
+      u_gst_reserved : GstPadTemplateClass_u_gst_reserved_array;  -- gst/gstpadtemplate.h:140
    end record;
    pragma Convention (C_Pass_By_Copy, GstPadTemplateClass);  -- gst/gstpadtemplate.h:133
 
@@ -165,7 +168,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpadtemplate_h is
   --  
 
    type GstStaticPadTemplate is record
-      name_template : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gstpadtemplate.h:153
+      name_template : access GLIB.gchar;  -- gst/gstpadtemplate.h:153
       direction : aliased GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstPadDirection;  -- gst/gstpadtemplate.h:154
       presence : aliased GstPadPresence;  -- gst/gstpadtemplate.h:155
       static_caps : aliased GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h.GstStaticCaps;  -- gst/gstpadtemplate.h:156
@@ -184,14 +187,14 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpadtemplate_h is
   --  
 
   -- templates and factories  
-   function gst_pad_template_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gstpadtemplate.h:178
+   function gst_pad_template_get_type return GLIB.GType;  -- gst/gstpadtemplate.h:178
    pragma Import (C, gst_pad_template_get_type, "gst_pad_template_get_type");
 
-   function gst_static_pad_template_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gstpadtemplate.h:179
+   function gst_static_pad_template_get_type return GLIB.GType;  -- gst/gstpadtemplate.h:179
    pragma Import (C, gst_static_pad_template_get_type, "gst_static_pad_template_get_type");
 
    function gst_pad_template_new
-     (name_template : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
+     (name_template : access GLIB.gchar;
       direction : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstPadDirection;
       presence : GstPadPresence;
       caps : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h.GstCaps) return access GstPadTemplate;  -- gst/gstpadtemplate.h:181

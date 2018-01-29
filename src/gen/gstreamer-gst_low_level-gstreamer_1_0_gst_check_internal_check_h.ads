@@ -1,10 +1,11 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
 with Interfaces.C.Strings;
 with System;
-with GStreamer.GST_Low_Level.time_h;
+--  with GStreamer.GST_Low_Level.time_h;
 
 package GStreamer.GST_Low_Level.gstreamer_1_0_gst_check_internal_check_h is
 

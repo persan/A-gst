@@ -1,10 +1,13 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gquark_h;
+with glib;
+with glib.Values;
+with System;
+with glib;
+--  with GStreamer.GST_Low_Level.glib_2_0_glib_gquark_h;
 with System;
 
 package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstminiobject_h is
@@ -85,7 +88,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstminiobject_h is
   -- * Returns: %TRUE if the object should be cleaned up.
   --  
 
-   type GstMiniObjectDisposeFunction is access function  (arg1 : access GstMiniObject) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;
+   type GstMiniObjectDisposeFunction is access function  (arg1 : access GstMiniObject) return GLIB.gboolean;
    pragma Convention (C, GstMiniObjectDisposeFunction);  -- gst/gstminiobject.h:60
 
   --*
@@ -109,7 +112,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstminiobject_h is
   -- * last ref and @obj is about to be freed.
   --  
 
-   type GstMiniObjectNotify is access procedure  (arg1 : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer; arg2 : access GstMiniObject);
+   type GstMiniObjectNotify is access procedure  (arg1 : System.Address; arg2 : access GstMiniObject);
    pragma Convention (C, GstMiniObjectNotify);  -- gst/gstminiobject.h:79
 
   --*
@@ -229,15 +232,15 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstminiobject_h is
   --  
 
    type GstMiniObject is record
-      c_type : aliased GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gstminiobject.h:204
-      refcount : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;  -- gst/gstminiobject.h:207
-      lockstate : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;  -- gst/gstminiobject.h:208
-      flags : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;  -- gst/gstminiobject.h:209
+      c_type : aliased GLIB.GType;  -- gst/gstminiobject.h:204
+      refcount : aliased GLIB.gint;  -- gst/gstminiobject.h:207
+      lockstate : aliased GLIB.gint;  -- gst/gstminiobject.h:208
+      flags : aliased GLIB.guint;  -- gst/gstminiobject.h:209
       copy : GstMiniObjectCopyFunction;  -- gst/gstminiobject.h:211
       dispose : GstMiniObjectDisposeFunction;  -- gst/gstminiobject.h:212
       free : GstMiniObjectFreeFunction;  -- gst/gstminiobject.h:213
-      n_qdata : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;  -- gst/gstminiobject.h:217
-      qdata : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;  -- gst/gstminiobject.h:218
+      n_qdata : aliased GLIB.guint;  -- gst/gstminiobject.h:217
+      qdata : System.Address;  -- gst/gstminiobject.h:218
    end record;
    pragma Convention (C_Pass_By_Copy, GstMiniObject);  -- gst/gstminiobject.h:203
 
@@ -247,8 +250,8 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstminiobject_h is
   -- Used to keep track of weak ref notifies and qdata  
    procedure gst_mini_object_init
      (mini_object : access GstMiniObject;
-      flags : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;
-      c_type : GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;
+      flags : GLIB.guint;
+      c_type : GLIB.GType;
       copy_func : GstMiniObjectCopyFunction;
       dispose_func : GstMiniObjectDisposeFunction;
       free_func : GstMiniObjectFreeFunction);  -- gst/gstminiobject.h:221
@@ -264,23 +267,23 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstminiobject_h is
    procedure gst_mini_object_weak_ref
      (object : access GstMiniObject;
       notify : GstMiniObjectNotify;
-      data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer);  -- gst/gstminiobject.h:232
+      data : System.Address);  -- gst/gstminiobject.h:232
    pragma Import (C, gst_mini_object_weak_ref, "gst_mini_object_weak_ref");
 
    procedure gst_mini_object_weak_unref
      (object : access GstMiniObject;
       notify : GstMiniObjectNotify;
-      data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer);  -- gst/gstminiobject.h:235
+      data : System.Address);  -- gst/gstminiobject.h:235
    pragma Import (C, gst_mini_object_weak_unref, "gst_mini_object_weak_unref");
 
   -- locking  
-   function gst_mini_object_lock (object : access GstMiniObject; flags : GstLockFlags) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstminiobject.h:240
+   function gst_mini_object_lock (object : access GstMiniObject; flags : GstLockFlags) return GLIB.gboolean;  -- gst/gstminiobject.h:240
    pragma Import (C, gst_mini_object_lock, "gst_mini_object_lock");
 
    procedure gst_mini_object_unlock (object : access GstMiniObject; flags : GstLockFlags);  -- gst/gstminiobject.h:241
    pragma Import (C, gst_mini_object_unlock, "gst_mini_object_unlock");
 
-   function gst_mini_object_is_writable (mini_object : access constant GstMiniObject) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstminiobject.h:243
+   function gst_mini_object_is_writable (mini_object : access constant GstMiniObject) return GLIB.gboolean;  -- gst/gstminiobject.h:243
    pragma Import (C, gst_mini_object_is_writable, "gst_mini_object_is_writable");
 
    function gst_mini_object_make_writable (mini_object : access GstMiniObject) return access GstMiniObject;  -- gst/gstminiobject.h:244
@@ -334,21 +337,21 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstminiobject_h is
 
    procedure gst_mini_object_set_qdata
      (object : access GstMiniObject;
-      quark : GStreamer.GST_Low_Level.glib_2_0_glib_gquark_h.GQuark;
-      data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+      quark : Glib.GQuark;
+      data : System.Address;
       destroy : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.GDestroyNotify);  -- gst/gstminiobject.h:250
    pragma Import (C, gst_mini_object_set_qdata, "gst_mini_object_set_qdata");
 
-   function gst_mini_object_get_qdata (object : access GstMiniObject; quark : GStreamer.GST_Low_Level.glib_2_0_glib_gquark_h.GQuark) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;  -- gst/gstminiobject.h:252
+   function gst_mini_object_get_qdata (object : access GstMiniObject; quark : Glib.GQuark) return System.Address;  -- gst/gstminiobject.h:252
    pragma Import (C, gst_mini_object_get_qdata, "gst_mini_object_get_qdata");
 
-   function gst_mini_object_steal_qdata (object : access GstMiniObject; quark : GStreamer.GST_Low_Level.glib_2_0_glib_gquark_h.GQuark) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;  -- gst/gstminiobject.h:253
+   function gst_mini_object_steal_qdata (object : access GstMiniObject; quark : Glib.GQuark) return System.Address;  -- gst/gstminiobject.h:253
    pragma Import (C, gst_mini_object_steal_qdata, "gst_mini_object_steal_qdata");
 
-   function gst_mini_object_replace (olddata : System.Address; newdata : access GstMiniObject) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstminiobject.h:256
+   function gst_mini_object_replace (olddata : System.Address; newdata : access GstMiniObject) return GLIB.gboolean;  -- gst/gstminiobject.h:256
    pragma Import (C, gst_mini_object_replace, "gst_mini_object_replace");
 
-   function gst_mini_object_take (olddata : System.Address; newdata : access GstMiniObject) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstminiobject.h:257
+   function gst_mini_object_take (olddata : System.Address; newdata : access GstMiniObject) return GLIB.gboolean;  -- gst/gstminiobject.h:257
    pragma Import (C, gst_mini_object_take, "gst_mini_object_take");
 
    function gst_mini_object_steal (olddata : System.Address) return access GstMiniObject;  -- gst/gstminiobject.h:258

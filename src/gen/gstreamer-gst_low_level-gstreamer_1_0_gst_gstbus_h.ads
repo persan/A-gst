@@ -1,14 +1,17 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
+with glib;
+with glib.Values;
+with System;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmessage_h;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h;
 with System;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;
+with glib;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h;
-limited with GStreamer.GST_Low_Level.glib_2_0_glib_gmain_h;
+--  limited with GStreamer.GST_Low_Level.glib_2_0_glib_gmain_h;
 
 package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbus_h is
 
@@ -47,7 +50,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbus_h is
   --  
 
    type GstBus;
-   type u_GstBus_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstBus_u_gst_reserved_array is array (0 .. 3) of System.Address;
    --subtype GstBus is u_GstBus;  -- gst/gstbus.h:25
 
    --  skipped empty struct u_GstBusPrivate
@@ -55,7 +58,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbus_h is
    --  skipped empty struct GstBusPrivate
 
    type GstBusClass;
-   type u_GstBusClass_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstBusClass_u_gst_reserved_array is array (0 .. 3) of System.Address;
    --subtype GstBusClass is u_GstBusClass;  -- gst/gstbus.h:27
 
   -- --- standard type macros ---  
@@ -106,7 +109,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbus_h is
    type GstBusSyncHandler is access function 
         (arg1 : access GstBus;
          arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmessage_h.GstMessage;
-         arg3 : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer) return GstBusSyncReply;
+         arg3 : System.Address) return GstBusSyncReply;
    pragma Convention (C, GstBusSyncHandler);  -- gst/gstbus.h:86
 
   --*
@@ -131,7 +134,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbus_h is
    type GstBusFunc is access function 
         (arg1 : access GstBus;
          arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmessage_h.GstMessage;
-         arg3 : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;
+         arg3 : System.Address) return GLIB.gboolean;
    pragma Convention (C, GstBusFunc);  -- gst/gstbus.h:106
 
   --*
@@ -158,16 +161,16 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbus_h is
 
   -- signals  
   --< private > 
-   function gst_bus_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gstbus.h:135
+   function gst_bus_get_type return GLIB.GType;  -- gst/gstbus.h:135
    pragma Import (C, gst_bus_get_type, "gst_bus_get_type");
 
    function gst_bus_new return access GstBus;  -- gst/gstbus.h:137
    pragma Import (C, gst_bus_new, "gst_bus_new");
 
-   function gst_bus_post (bus : access GstBus; message : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmessage_h.GstMessage) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstbus.h:139
+   function gst_bus_post (bus : access GstBus; message : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmessage_h.GstMessage) return GLIB.gboolean;  -- gst/gstbus.h:139
    pragma Import (C, gst_bus_post, "gst_bus_post");
 
-   function gst_bus_have_pending (bus : access GstBus) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstbus.h:141
+   function gst_bus_have_pending (bus : access GstBus) return GLIB.gboolean;  -- gst/gstbus.h:141
    pragma Import (C, gst_bus_have_pending, "gst_bus_have_pending");
 
    function gst_bus_peek (bus : access GstBus) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmessage_h.GstMessage;  -- gst/gstbus.h:142
@@ -179,23 +182,23 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbus_h is
    function gst_bus_pop_filtered (bus : access GstBus; types : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmessage_h.GstMessageType) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmessage_h.GstMessage;  -- gst/gstbus.h:144
    pragma Import (C, gst_bus_pop_filtered, "gst_bus_pop_filtered");
 
-   function gst_bus_timed_pop (bus : access GstBus; timeout : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmessage_h.GstMessage;  -- gst/gstbus.h:145
+   function gst_bus_timed_pop (bus : access GstBus; timeout : GLIB.guint64) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmessage_h.GstMessage;  -- gst/gstbus.h:145
    pragma Import (C, gst_bus_timed_pop, "gst_bus_timed_pop");
 
    function gst_bus_timed_pop_filtered
      (bus : access GstBus;
-      timeout : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime;
+      timeout : GLIB.guint64;
       types : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmessage_h.GstMessageType) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmessage_h.GstMessage;  -- gst/gstbus.h:146
    pragma Import (C, gst_bus_timed_pop_filtered, "gst_bus_timed_pop_filtered");
 
-   procedure gst_bus_set_flushing (bus : access GstBus; flushing : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean);  -- gst/gstbus.h:147
+   procedure gst_bus_set_flushing (bus : access GstBus; flushing : GLIB.gboolean);  -- gst/gstbus.h:147
    pragma Import (C, gst_bus_set_flushing, "gst_bus_set_flushing");
 
   -- synchronous dispatching  
    procedure gst_bus_set_sync_handler
      (bus : access GstBus;
       func : GstBusSyncHandler;
-      user_data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+      user_data : System.Address;
       notify : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.GDestroyNotify);  -- gst/gstbus.h:150
    pragma Import (C, gst_bus_set_sync_handler, "gst_bus_set_sync_handler");
 
@@ -205,46 +208,46 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbus_h is
 
    function gst_bus_add_watch_full
      (bus : access GstBus;
-      priority : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;
+      priority : GLIB.gint;
       func : GstBusFunc;
-      user_data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
-      notify : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.GDestroyNotify) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;  -- gst/gstbus.h:154
+      user_data : System.Address;
+      notify : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.GDestroyNotify) return GLIB.guint;  -- gst/gstbus.h:154
    pragma Import (C, gst_bus_add_watch_full, "gst_bus_add_watch_full");
 
    function gst_bus_add_watch
      (bus : access GstBus;
       func : GstBusFunc;
-      user_data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;  -- gst/gstbus.h:159
+      user_data : System.Address) return GLIB.guint;  -- gst/gstbus.h:159
    pragma Import (C, gst_bus_add_watch, "gst_bus_add_watch");
 
-   function gst_bus_remove_watch (bus : access GstBus) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstbus.h:162
+   function gst_bus_remove_watch (bus : access GstBus) return GLIB.gboolean;  -- gst/gstbus.h:162
    pragma Import (C, gst_bus_remove_watch, "gst_bus_remove_watch");
 
   -- polling the bus  
    function gst_bus_poll
      (bus : access GstBus;
       events : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmessage_h.GstMessageType;
-      timeout : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmessage_h.GstMessage;  -- gst/gstbus.h:165
+      timeout : GLIB.guint64) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmessage_h.GstMessage;  -- gst/gstbus.h:165
    pragma Import (C, gst_bus_poll, "gst_bus_poll");
 
   -- signal based dispatching helper functions.  
    function gst_bus_async_signal_func
      (bus : access GstBus;
       message : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmessage_h.GstMessage;
-      data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstbus.h:169
+      data : System.Address) return GLIB.gboolean;  -- gst/gstbus.h:169
    pragma Import (C, gst_bus_async_signal_func, "gst_bus_async_signal_func");
 
    function gst_bus_sync_signal_handler
      (bus : access GstBus;
       message : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmessage_h.GstMessage;
-      data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer) return GstBusSyncReply;  -- gst/gstbus.h:171
+      data : System.Address) return GstBusSyncReply;  -- gst/gstbus.h:171
    pragma Import (C, gst_bus_sync_signal_handler, "gst_bus_sync_signal_handler");
 
   -- convenience api to add/remove a gsource that emits the async signals  
    procedure gst_bus_add_signal_watch (bus : access GstBus);  -- gst/gstbus.h:175
    pragma Import (C, gst_bus_add_signal_watch, "gst_bus_add_signal_watch");
 
-   procedure gst_bus_add_signal_watch_full (bus : access GstBus; priority : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint);  -- gst/gstbus.h:176
+   procedure gst_bus_add_signal_watch_full (bus : access GstBus; priority : GLIB.gint);  -- gst/gstbus.h:176
    pragma Import (C, gst_bus_add_signal_watch_full, "gst_bus_add_signal_watch_full");
 
    procedure gst_bus_remove_signal_watch (bus : access GstBus);  -- gst/gstbus.h:177

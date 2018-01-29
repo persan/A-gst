@@ -1,16 +1,19 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
+with glib;
+with glib.Values;
+with System;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstformat_h;
-with GStreamer.GST_Low_Level.glibconfig_h;
+with GLIB; --  with GStreamer.GST_Low_Level.glibconfig_h;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h;
 with System;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststructure_h;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;
+with glib;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstallocator_h;
@@ -58,7 +61,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbufferpool_h is
    --  skipped empty struct GstBufferPoolPrivate
 
    type GstBufferPoolClass;
-   type u_GstBufferPoolClass_u_gst_reserved_array is array (0 .. 1) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstBufferPoolClass_u_gst_reserved_array is array (0 .. 1) of System.Address;
    --subtype GstBufferPoolClass is u_GstBufferPoolClass;  -- gst/gstbufferpool.h:33
 
   --*
@@ -83,7 +86,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbufferpool_h is
    GST_BUFFER_POOL_ACQUIRE_FLAG_LAST : constant GstBufferPoolAcquireFlags := 65536;  -- gst/gstbufferpool.h:62
 
    type GstBufferPoolAcquireParams;
-   type u_GstBufferPoolAcquireParams_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstBufferPoolAcquireParams_u_gst_reserved_array is array (0 .. 3) of System.Address;
    --subtype GstBufferPoolAcquireParams is u_GstBufferPoolAcquireParams;  -- gst/gstbufferpool.h:64
 
   --*
@@ -103,8 +106,8 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbufferpool_h is
 
    type GstBufferPoolAcquireParams is record
       format : aliased GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstformat_h.GstFormat;  -- gst/gstbufferpool.h:81
-      start : aliased GStreamer.GST_Low_Level.glibconfig_h.gint64;  -- gst/gstbufferpool.h:82
-      stop : aliased GStreamer.GST_Low_Level.glibconfig_h.gint64;  -- gst/gstbufferpool.h:83
+      start : aliased GLIB.gint64;  -- gst/gstbufferpool.h:82
+      stop : aliased GLIB.gint64;  -- gst/gstbufferpool.h:83
       flags : aliased GstBufferPoolAcquireFlags;  -- gst/gstbufferpool.h:84
       u_gst_reserved : u_GstBufferPoolAcquireParams_u_gst_reserved_array;  -- gst/gstbufferpool.h:87
    end record;
@@ -126,10 +129,10 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbufferpool_h is
   -- * variables.
   --  
 
-   type u_GstBufferPool_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstBufferPool_u_gst_reserved_array is array (0 .. 3) of System.Address;
    type GstBufferPool is record
       object : aliased GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject;  -- gst/gstbufferpool.h:106
-      flushing : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;  -- gst/gstbufferpool.h:109
+      flushing : aliased GLIB.gint;  -- gst/gstbufferpool.h:109
       priv : System.Address;  -- gst/gstbufferpool.h:112
       u_gst_reserved : u_GstBufferPool_u_gst_reserved_array;  -- gst/gstbufferpool.h:114
    end record;
@@ -178,9 +181,9 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbufferpool_h is
    type GstBufferPoolClass is record
       object_class : aliased GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObjectClass;  -- gst/gstbufferpool.h:155
       get_options : access function  (arg1 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBufferPool) return System.Address;  -- gst/gstbufferpool.h:158
-      set_config : access function  (arg1 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBufferPool; arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststructure_h.GstStructure) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstbufferpool.h:159
-      start : access function  (arg1 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBufferPool) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstbufferpool.h:161
-      stop : access function  (arg1 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBufferPool) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstbufferpool.h:162
+      set_config : access function  (arg1 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBufferPool; arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststructure_h.GstStructure) return GLIB.gboolean;  -- gst/gstbufferpool.h:159
+      start : access function  (arg1 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBufferPool) return GLIB.gboolean;  -- gst/gstbufferpool.h:161
+      stop : access function  (arg1 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBufferPool) return GLIB.gboolean;  -- gst/gstbufferpool.h:162
       acquire_buffer : access function 
            (arg1 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBufferPool;
             arg2 : System.Address;
@@ -200,7 +203,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbufferpool_h is
 
   --< public > 
   --< private > 
-   function gst_buffer_pool_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gstbufferpool.h:178
+   function gst_buffer_pool_get_type return GLIB.GType;  -- gst/gstbufferpool.h:178
    pragma Import (C, gst_buffer_pool_get_type, "gst_buffer_pool_get_type");
 
   -- allocation  
@@ -208,13 +211,13 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbufferpool_h is
    pragma Import (C, gst_buffer_pool_new, "gst_buffer_pool_new");
 
   -- state management  
-   function gst_buffer_pool_set_active (pool : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBufferPool; active : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstbufferpool.h:184
+   function gst_buffer_pool_set_active (pool : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBufferPool; active : GLIB.gboolean) return GLIB.gboolean;  -- gst/gstbufferpool.h:184
    pragma Import (C, gst_buffer_pool_set_active, "gst_buffer_pool_set_active");
 
-   function gst_buffer_pool_is_active (pool : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBufferPool) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstbufferpool.h:185
+   function gst_buffer_pool_is_active (pool : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBufferPool) return GLIB.gboolean;  -- gst/gstbufferpool.h:185
    pragma Import (C, gst_buffer_pool_is_active, "gst_buffer_pool_is_active");
 
-   function gst_buffer_pool_set_config (pool : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBufferPool; config : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststructure_h.GstStructure) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstbufferpool.h:187
+   function gst_buffer_pool_set_config (pool : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBufferPool; config : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststructure_h.GstStructure) return GLIB.gboolean;  -- gst/gstbufferpool.h:187
    pragma Import (C, gst_buffer_pool_set_config, "gst_buffer_pool_set_config");
 
    function gst_buffer_pool_get_config (pool : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBufferPool) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststructure_h.GstStructure;  -- gst/gstbufferpool.h:188
@@ -223,27 +226,27 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbufferpool_h is
    function gst_buffer_pool_get_options (pool : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBufferPool) return System.Address;  -- gst/gstbufferpool.h:190
    pragma Import (C, gst_buffer_pool_get_options, "gst_buffer_pool_get_options");
 
-   function gst_buffer_pool_has_option (pool : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBufferPool; option : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstbufferpool.h:191
+   function gst_buffer_pool_has_option (pool : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBufferPool; option : access GLIB.gchar) return GLIB.gboolean;  -- gst/gstbufferpool.h:191
    pragma Import (C, gst_buffer_pool_has_option, "gst_buffer_pool_has_option");
 
-   procedure gst_buffer_pool_set_flushing (pool : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBufferPool; flushing : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean);  -- gst/gstbufferpool.h:193
+   procedure gst_buffer_pool_set_flushing (pool : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBufferPool; flushing : GLIB.gboolean);  -- gst/gstbufferpool.h:193
    pragma Import (C, gst_buffer_pool_set_flushing, "gst_buffer_pool_set_flushing");
 
   -- helpers for configuring the config structure  
    procedure gst_buffer_pool_config_set_params
      (config : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststructure_h.GstStructure;
       caps : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h.GstCaps;
-      size : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;
-      min_buffers : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;
-      max_buffers : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint);  -- gst/gstbufferpool.h:196
+      size : GLIB.guint;
+      min_buffers : GLIB.guint;
+      max_buffers : GLIB.guint);  -- gst/gstbufferpool.h:196
    pragma Import (C, gst_buffer_pool_config_set_params, "gst_buffer_pool_config_set_params");
 
    function gst_buffer_pool_config_get_params
      (config : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststructure_h.GstStructure;
       caps : System.Address;
-      size : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;
-      min_buffers : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;
-      max_buffers : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstbufferpool.h:198
+      size : access GLIB.guint;
+      min_buffers : access GLIB.guint;
+      max_buffers : access GLIB.guint) return GLIB.gboolean;  -- gst/gstbufferpool.h:198
    pragma Import (C, gst_buffer_pool_config_get_params, "gst_buffer_pool_config_get_params");
 
    procedure gst_buffer_pool_config_set_allocator
@@ -255,28 +258,28 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbufferpool_h is
    function gst_buffer_pool_config_get_allocator
      (config : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststructure_h.GstStructure;
       allocator : System.Address;
-      params : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstallocator_h.GstAllocationParams) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstbufferpool.h:202
+      params : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstallocator_h.GstAllocationParams) return GLIB.gboolean;  -- gst/gstbufferpool.h:202
    pragma Import (C, gst_buffer_pool_config_get_allocator, "gst_buffer_pool_config_get_allocator");
 
   -- options  
-   function gst_buffer_pool_config_n_options (config : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststructure_h.GstStructure) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;  -- gst/gstbufferpool.h:206
+   function gst_buffer_pool_config_n_options (config : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststructure_h.GstStructure) return GLIB.guint;  -- gst/gstbufferpool.h:206
    pragma Import (C, gst_buffer_pool_config_n_options, "gst_buffer_pool_config_n_options");
 
-   procedure gst_buffer_pool_config_add_option (config : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststructure_h.GstStructure; option : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar);  -- gst/gstbufferpool.h:207
+   procedure gst_buffer_pool_config_add_option (config : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststructure_h.GstStructure; option : access GLIB.gchar);  -- gst/gstbufferpool.h:207
    pragma Import (C, gst_buffer_pool_config_add_option, "gst_buffer_pool_config_add_option");
 
-   function gst_buffer_pool_config_get_option (config : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststructure_h.GstStructure; index : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint) return access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gstbufferpool.h:208
+   function gst_buffer_pool_config_get_option (config : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststructure_h.GstStructure; index : GLIB.guint) return access GLIB.gchar;  -- gst/gstbufferpool.h:208
    pragma Import (C, gst_buffer_pool_config_get_option, "gst_buffer_pool_config_get_option");
 
-   function gst_buffer_pool_config_has_option (config : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststructure_h.GstStructure; option : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstbufferpool.h:209
+   function gst_buffer_pool_config_has_option (config : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststructure_h.GstStructure; option : access GLIB.gchar) return GLIB.gboolean;  -- gst/gstbufferpool.h:209
    pragma Import (C, gst_buffer_pool_config_has_option, "gst_buffer_pool_config_has_option");
 
    function gst_buffer_pool_config_validate_params
      (config : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststructure_h.GstStructure;
       caps : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h.GstCaps;
-      size : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;
-      min_buffers : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;
-      max_buffers : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstbufferpool.h:210
+      size : GLIB.guint;
+      min_buffers : GLIB.guint;
+      max_buffers : GLIB.guint) return GLIB.gboolean;  -- gst/gstbufferpool.h:210
    pragma Import (C, gst_buffer_pool_config_validate_params, "gst_buffer_pool_config_validate_params");
 
   -- buffer management  

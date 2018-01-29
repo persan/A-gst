@@ -1,11 +1,14 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
+with glib;
+with glib.Values;
+with System;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_controller_gsttimedvaluecontrolsource_h;
 with System;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;
+with glib;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcontrolsource_h;
 
 package GStreamer.GST_Low_Level.gstreamer_1_0_gst_controller_gsttriggercontrolsource_h is
@@ -47,11 +50,11 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_controller_gsttriggercontrolso
   --  
 
    type GstTriggerControlSource;
-   type u_GstTriggerControlSource_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstTriggerControlSource_u_gst_reserved_array is array (0 .. 3) of System.Address;
    --subtype GstTriggerControlSource is u_GstTriggerControlSource;  -- gst/controller/gsttriggercontrolsource.h:51
 
    type GstTriggerControlSourceClass;
-   type u_GstTriggerControlSourceClass_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstTriggerControlSourceClass_u_gst_reserved_array is array (0 .. 3) of System.Address;
    --subtype GstTriggerControlSourceClass is u_GstTriggerControlSourceClass;  -- gst/controller/gsttriggercontrolsource.h:52
 
    --  skipped empty struct u_GstTriggerControlSourcePrivate
@@ -79,7 +82,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_controller_gsttriggercontrolso
    pragma Convention (C_Pass_By_Copy, GstTriggerControlSourceClass);  -- gst/controller/gsttriggercontrolsource.h:68
 
   --< private > 
-   function gst_trigger_control_source_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/controller/gsttriggercontrolsource.h:75
+   function gst_trigger_control_source_get_type return GLIB.GType;  -- gst/controller/gsttriggercontrolsource.h:75
    pragma Import (C, gst_trigger_control_source_get_type, "gst_trigger_control_source_get_type");
 
   -- Functions  

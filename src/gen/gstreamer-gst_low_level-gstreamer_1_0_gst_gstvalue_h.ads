@@ -1,10 +1,13 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
-with GStreamer.GST_Low_Level.glibconfig_h;
+with glib;
+with glib;
+with glib.Values;
+with System;
+with GLIB; --  with GStreamer.GST_Low_Level.glibconfig_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststructure_h;
 with System;
@@ -388,7 +391,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstvalue_h is
   -- * or GST_VALUE_UNORDERED
   --  
 
-   type GstValueCompareFunc is access function  (arg1 : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue; arg2 : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;
+   type GstValueCompareFunc is access function  (arg1 : access constant Glib.Values.GValue; arg2 : access constant Glib.Values.GValue) return GLIB.gint;
    pragma Convention (C, GstValueCompareFunc);  -- gst/gstvalue.h:392
 
   --*
@@ -402,7 +405,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstvalue_h is
   -- * Returns: (transfer full): the string representation of the value
   --  
 
-   type GstValueSerializeFunc is access function  (arg1 : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue) return access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
+   type GstValueSerializeFunc is access function  (arg1 : access constant Glib.Values.GValue) return access GLIB.gchar;
    pragma Convention (C, GstValueSerializeFunc);  -- gst/gstvalue.h:405
 
   --*
@@ -415,11 +418,11 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstvalue_h is
   -- * Returns: %TRUE for success
   --  
 
-   type GstValueDeserializeFunc is access function  (arg1 : access GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue; arg2 : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;
+   type GstValueDeserializeFunc is access function  (arg1 : access Glib.Values.GValue; arg2 : access GLIB.gchar) return GLIB.gboolean;
    pragma Convention (C, GstValueDeserializeFunc);  -- gst/gstvalue.h:416
 
    type GstValueTable;
-   type u_GstValueTable_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstValueTable_u_gst_reserved_array is array (0 .. 3) of System.Address;
    --subtype GstValueTable is u_GstValueTable;  -- gst/gstvalue.h:419
 
   --*
@@ -433,7 +436,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstvalue_h is
   --  
 
    type GstValueTable is record
-      c_type : aliased GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gstvalue.h:430
+      c_type : aliased GLIB.GType;  -- gst/gstvalue.h:430
       compare : GstValueCompareFunc;  -- gst/gstvalue.h:431
       serialize : GstValueSerializeFunc;  -- gst/gstvalue.h:432
       deserialize : GstValueDeserializeFunc;  -- gst/gstvalue.h:433
@@ -442,288 +445,288 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstvalue_h is
    pragma Convention (C_Pass_By_Copy, GstValueTable);  -- gst/gstvalue.h:429
 
   --< private > 
-   function gst_int_range_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gstvalue.h:439
+   function gst_int_range_get_type return GLIB.GType;  -- gst/gstvalue.h:439
    pragma Import (C, gst_int_range_get_type, "gst_int_range_get_type");
 
-   function gst_int64_range_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gstvalue.h:440
+   function gst_int64_range_get_type return GLIB.GType;  -- gst/gstvalue.h:440
    pragma Import (C, gst_int64_range_get_type, "gst_int64_range_get_type");
 
-   function gst_double_range_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gstvalue.h:441
+   function gst_double_range_get_type return GLIB.GType;  -- gst/gstvalue.h:441
    pragma Import (C, gst_double_range_get_type, "gst_double_range_get_type");
 
-   function gst_fraction_range_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gstvalue.h:442
+   function gst_fraction_range_get_type return GLIB.GType;  -- gst/gstvalue.h:442
    pragma Import (C, gst_fraction_range_get_type, "gst_fraction_range_get_type");
 
-   function gst_fraction_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gstvalue.h:443
+   function gst_fraction_get_type return GLIB.GType;  -- gst/gstvalue.h:443
    pragma Import (C, gst_fraction_get_type, "gst_fraction_get_type");
 
-   function gst_value_list_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gstvalue.h:444
+   function gst_value_list_get_type return GLIB.GType;  -- gst/gstvalue.h:444
    pragma Import (C, gst_value_list_get_type, "gst_value_list_get_type");
 
-   function gst_value_array_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gstvalue.h:445
+   function gst_value_array_get_type return GLIB.GType;  -- gst/gstvalue.h:445
    pragma Import (C, gst_value_array_get_type, "gst_value_array_get_type");
 
-   function gst_bitmask_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gstvalue.h:446
+   function gst_bitmask_get_type return GLIB.GType;  -- gst/gstvalue.h:446
    pragma Import (C, gst_bitmask_get_type, "gst_bitmask_get_type");
 
-   function gst_flagset_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gstvalue.h:447
+   function gst_flagset_get_type return GLIB.GType;  -- gst/gstvalue.h:447
    pragma Import (C, gst_flagset_get_type, "gst_flagset_get_type");
 
   -- Hide this compatibility type from introspection  
-   function gst_g_thread_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gstvalue.h:451
+   function gst_g_thread_get_type return GLIB.GType;  -- gst/gstvalue.h:451
    pragma Import (C, gst_g_thread_get_type, "gst_g_thread_get_type");
 
    procedure gst_value_register (table : access constant GstValueTable);  -- gst/gstvalue.h:454
    pragma Import (C, gst_value_register, "gst_value_register");
 
-   procedure gst_value_init_and_copy (dest : access GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue; src : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue);  -- gst/gstvalue.h:455
+   procedure gst_value_init_and_copy (dest : access Glib.Values.GValue; src : access constant Glib.Values.GValue);  -- gst/gstvalue.h:455
    pragma Import (C, gst_value_init_and_copy, "gst_value_init_and_copy");
 
-   function gst_value_serialize (value : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue) return access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gstvalue.h:458
+   function gst_value_serialize (value : access constant Glib.Values.GValue) return access GLIB.gchar;  -- gst/gstvalue.h:458
    pragma Import (C, gst_value_serialize, "gst_value_serialize");
 
-   function gst_value_deserialize (dest : access GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue; src : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstvalue.h:459
+   function gst_value_deserialize (dest : access Glib.Values.GValue; src : access GLIB.gchar) return GLIB.gboolean;  -- gst/gstvalue.h:459
    pragma Import (C, gst_value_deserialize, "gst_value_deserialize");
 
   -- list  
-   procedure gst_value_list_append_value (value : access GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue; append_value : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue);  -- gst/gstvalue.h:463
+   procedure gst_value_list_append_value (value : access Glib.Values.GValue; append_value : access constant Glib.Values.GValue);  -- gst/gstvalue.h:463
    pragma Import (C, gst_value_list_append_value, "gst_value_list_append_value");
 
-   procedure gst_value_list_append_and_take_value (value : access GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue; append_value : access GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue);  -- gst/gstvalue.h:465
+   procedure gst_value_list_append_and_take_value (value : access Glib.Values.GValue; append_value : access Glib.Values.GValue);  -- gst/gstvalue.h:465
    pragma Import (C, gst_value_list_append_and_take_value, "gst_value_list_append_and_take_value");
 
-   procedure gst_value_list_prepend_value (value : access GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue; prepend_value : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue);  -- gst/gstvalue.h:467
+   procedure gst_value_list_prepend_value (value : access Glib.Values.GValue; prepend_value : access constant Glib.Values.GValue);  -- gst/gstvalue.h:467
    pragma Import (C, gst_value_list_prepend_value, "gst_value_list_prepend_value");
 
    procedure gst_value_list_concat
-     (dest : access GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue;
-      value1 : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue;
-      value2 : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue);  -- gst/gstvalue.h:469
+     (dest : access Glib.Values.GValue;
+      value1 : access constant Glib.Values.GValue;
+      value2 : access constant Glib.Values.GValue);  -- gst/gstvalue.h:469
    pragma Import (C, gst_value_list_concat, "gst_value_list_concat");
 
    procedure gst_value_list_merge
-     (dest : access GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue;
-      value1 : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue;
-      value2 : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue);  -- gst/gstvalue.h:472
+     (dest : access Glib.Values.GValue;
+      value1 : access constant Glib.Values.GValue;
+      value2 : access constant Glib.Values.GValue);  -- gst/gstvalue.h:472
    pragma Import (C, gst_value_list_merge, "gst_value_list_merge");
 
-   function gst_value_list_get_size (value : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;  -- gst/gstvalue.h:475
+   function gst_value_list_get_size (value : access constant Glib.Values.GValue) return GLIB.guint;  -- gst/gstvalue.h:475
    pragma Import (C, gst_value_list_get_size, "gst_value_list_get_size");
 
-   function gst_value_list_get_value (value : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue; index : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint) return access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue;  -- gst/gstvalue.h:476
+   function gst_value_list_get_value (value : access constant Glib.Values.GValue; index : GLIB.guint) return access constant Glib.Values.GValue;  -- gst/gstvalue.h:476
    pragma Import (C, gst_value_list_get_value, "gst_value_list_get_value");
 
   -- array  
-   procedure gst_value_array_append_value (value : access GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue; append_value : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue);  -- gst/gstvalue.h:480
+   procedure gst_value_array_append_value (value : access Glib.Values.GValue; append_value : access constant Glib.Values.GValue);  -- gst/gstvalue.h:480
    pragma Import (C, gst_value_array_append_value, "gst_value_array_append_value");
 
-   procedure gst_value_array_append_and_take_value (value : access GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue; append_value : access GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue);  -- gst/gstvalue.h:482
+   procedure gst_value_array_append_and_take_value (value : access Glib.Values.GValue; append_value : access Glib.Values.GValue);  -- gst/gstvalue.h:482
    pragma Import (C, gst_value_array_append_and_take_value, "gst_value_array_append_and_take_value");
 
-   procedure gst_value_array_prepend_value (value : access GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue; prepend_value : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue);  -- gst/gstvalue.h:484
+   procedure gst_value_array_prepend_value (value : access Glib.Values.GValue; prepend_value : access constant Glib.Values.GValue);  -- gst/gstvalue.h:484
    pragma Import (C, gst_value_array_prepend_value, "gst_value_array_prepend_value");
 
-   function gst_value_array_get_size (value : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;  -- gst/gstvalue.h:486
+   function gst_value_array_get_size (value : access constant Glib.Values.GValue) return GLIB.guint;  -- gst/gstvalue.h:486
    pragma Import (C, gst_value_array_get_size, "gst_value_array_get_size");
 
-   function gst_value_array_get_value (value : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue; index : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint) return access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue;  -- gst/gstvalue.h:487
+   function gst_value_array_get_value (value : access constant Glib.Values.GValue; index : GLIB.guint) return access constant Glib.Values.GValue;  -- gst/gstvalue.h:487
    pragma Import (C, gst_value_array_get_value, "gst_value_array_get_value");
 
   -- int range  
    procedure gst_value_set_int_range
-     (value : access GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue;
-      start : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;
-      c_end : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint);  -- gst/gstvalue.h:491
+     (value : access Glib.Values.GValue;
+      start : GLIB.gint;
+      c_end : GLIB.gint);  -- gst/gstvalue.h:491
    pragma Import (C, gst_value_set_int_range, "gst_value_set_int_range");
 
    procedure gst_value_set_int_range_step
-     (value : access GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue;
-      start : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;
-      c_end : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;
-      step : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint);  -- gst/gstvalue.h:494
+     (value : access Glib.Values.GValue;
+      start : GLIB.gint;
+      c_end : GLIB.gint;
+      step : GLIB.gint);  -- gst/gstvalue.h:494
    pragma Import (C, gst_value_set_int_range_step, "gst_value_set_int_range_step");
 
-   function gst_value_get_int_range_min (value : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;  -- gst/gstvalue.h:498
+   function gst_value_get_int_range_min (value : access constant Glib.Values.GValue) return GLIB.gint;  -- gst/gstvalue.h:498
    pragma Import (C, gst_value_get_int_range_min, "gst_value_get_int_range_min");
 
-   function gst_value_get_int_range_max (value : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;  -- gst/gstvalue.h:499
+   function gst_value_get_int_range_max (value : access constant Glib.Values.GValue) return GLIB.gint;  -- gst/gstvalue.h:499
    pragma Import (C, gst_value_get_int_range_max, "gst_value_get_int_range_max");
 
-   function gst_value_get_int_range_step (value : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;  -- gst/gstvalue.h:500
+   function gst_value_get_int_range_step (value : access constant Glib.Values.GValue) return GLIB.gint;  -- gst/gstvalue.h:500
    pragma Import (C, gst_value_get_int_range_step, "gst_value_get_int_range_step");
 
   -- int64 range  
    procedure gst_value_set_int64_range
-     (value : access GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue;
-      start : GStreamer.GST_Low_Level.glibconfig_h.gint64;
-      c_end : GStreamer.GST_Low_Level.glibconfig_h.gint64);  -- gst/gstvalue.h:503
+     (value : access Glib.Values.GValue;
+      start : GLIB.gint64;
+      c_end : GLIB.gint64);  -- gst/gstvalue.h:503
    pragma Import (C, gst_value_set_int64_range, "gst_value_set_int64_range");
 
    procedure gst_value_set_int64_range_step
-     (value : access GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue;
-      start : GStreamer.GST_Low_Level.glibconfig_h.gint64;
-      c_end : GStreamer.GST_Low_Level.glibconfig_h.gint64;
-      step : GStreamer.GST_Low_Level.glibconfig_h.gint64);  -- gst/gstvalue.h:506
+     (value : access Glib.Values.GValue;
+      start : GLIB.gint64;
+      c_end : GLIB.gint64;
+      step : GLIB.gint64);  -- gst/gstvalue.h:506
    pragma Import (C, gst_value_set_int64_range_step, "gst_value_set_int64_range_step");
 
-   function gst_value_get_int64_range_min (value : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue) return GStreamer.GST_Low_Level.glibconfig_h.gint64;  -- gst/gstvalue.h:510
+   function gst_value_get_int64_range_min (value : access constant Glib.Values.GValue) return GLIB.gint64;  -- gst/gstvalue.h:510
    pragma Import (C, gst_value_get_int64_range_min, "gst_value_get_int64_range_min");
 
-   function gst_value_get_int64_range_max (value : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue) return GStreamer.GST_Low_Level.glibconfig_h.gint64;  -- gst/gstvalue.h:511
+   function gst_value_get_int64_range_max (value : access constant Glib.Values.GValue) return GLIB.gint64;  -- gst/gstvalue.h:511
    pragma Import (C, gst_value_get_int64_range_max, "gst_value_get_int64_range_max");
 
-   function gst_value_get_int64_range_step (value : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue) return GStreamer.GST_Low_Level.glibconfig_h.gint64;  -- gst/gstvalue.h:512
+   function gst_value_get_int64_range_step (value : access constant Glib.Values.GValue) return GLIB.gint64;  -- gst/gstvalue.h:512
    pragma Import (C, gst_value_get_int64_range_step, "gst_value_get_int64_range_step");
 
   -- double range  
    procedure gst_value_set_double_range
-     (value : access GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue;
-      start : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gdouble;
-      c_end : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gdouble);  -- gst/gstvalue.h:515
+     (value : access Glib.Values.GValue;
+      start : GLIB.gdouble;
+      c_end : GLIB.gdouble);  -- gst/gstvalue.h:515
    pragma Import (C, gst_value_set_double_range, "gst_value_set_double_range");
 
-   function gst_value_get_double_range_min (value : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gdouble;  -- gst/gstvalue.h:518
+   function gst_value_get_double_range_min (value : access constant Glib.Values.GValue) return GLIB.gdouble;  -- gst/gstvalue.h:518
    pragma Import (C, gst_value_get_double_range_min, "gst_value_get_double_range_min");
 
-   function gst_value_get_double_range_max (value : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gdouble;  -- gst/gstvalue.h:519
+   function gst_value_get_double_range_max (value : access constant Glib.Values.GValue) return GLIB.gdouble;  -- gst/gstvalue.h:519
    pragma Import (C, gst_value_get_double_range_max, "gst_value_get_double_range_max");
 
   -- caps  
-   function gst_value_get_caps (value : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue) return access constant GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h.GstCaps;  -- gst/gstvalue.h:522
+   function gst_value_get_caps (value : access constant Glib.Values.GValue) return access constant GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h.GstCaps;  -- gst/gstvalue.h:522
    pragma Import (C, gst_value_get_caps, "gst_value_get_caps");
 
-   procedure gst_value_set_caps (value : access GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue; caps : access constant GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h.GstCaps);  -- gst/gstvalue.h:523
+   procedure gst_value_set_caps (value : access Glib.Values.GValue; caps : access constant GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h.GstCaps);  -- gst/gstvalue.h:523
    pragma Import (C, gst_value_set_caps, "gst_value_set_caps");
 
   -- structure  
-   function gst_value_get_structure (value : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue) return access constant GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststructure_h.GstStructure;  -- gst/gstvalue.h:528
+   function gst_value_get_structure (value : access constant Glib.Values.GValue) return access constant GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststructure_h.GstStructure;  -- gst/gstvalue.h:528
    pragma Import (C, gst_value_get_structure, "gst_value_get_structure");
 
-   procedure gst_value_set_structure (value : access GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue; structure : access constant GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststructure_h.GstStructure);  -- gst/gstvalue.h:529
+   procedure gst_value_set_structure (value : access Glib.Values.GValue; structure : access constant GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststructure_h.GstStructure);  -- gst/gstvalue.h:529
    pragma Import (C, gst_value_set_structure, "gst_value_set_structure");
 
   -- caps features  
-   function gst_value_get_caps_features (value : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue) return System.Address;  -- gst/gstvalue.h:534
+   function gst_value_get_caps_features (value : access constant Glib.Values.GValue) return System.Address;  -- gst/gstvalue.h:534
    pragma Import (C, gst_value_get_caps_features, "gst_value_get_caps_features");
 
-   procedure gst_value_set_caps_features (value : access GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue; features : System.Address);  -- gst/gstvalue.h:535
+   procedure gst_value_set_caps_features (value : access Glib.Values.GValue; features : System.Address);  -- gst/gstvalue.h:535
    pragma Import (C, gst_value_set_caps_features, "gst_value_set_caps_features");
 
   -- fraction  
    procedure gst_value_set_fraction
-     (value : access GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue;
-      numerator : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;
-      denominator : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint);  -- gst/gstvalue.h:539
+     (value : access Glib.Values.GValue;
+      numerator : GLIB.gint;
+      denominator : GLIB.gint);  -- gst/gstvalue.h:539
    pragma Import (C, gst_value_set_fraction, "gst_value_set_fraction");
 
-   function gst_value_get_fraction_numerator (value : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;  -- gst/gstvalue.h:542
+   function gst_value_get_fraction_numerator (value : access constant Glib.Values.GValue) return GLIB.gint;  -- gst/gstvalue.h:542
    pragma Import (C, gst_value_get_fraction_numerator, "gst_value_get_fraction_numerator");
 
-   function gst_value_get_fraction_denominator (value : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;  -- gst/gstvalue.h:543
+   function gst_value_get_fraction_denominator (value : access constant Glib.Values.GValue) return GLIB.gint;  -- gst/gstvalue.h:543
    pragma Import (C, gst_value_get_fraction_denominator, "gst_value_get_fraction_denominator");
 
    function gst_value_fraction_multiply
-     (product : access GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue;
-      factor1 : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue;
-      factor2 : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstvalue.h:544
+     (product : access Glib.Values.GValue;
+      factor1 : access constant Glib.Values.GValue;
+      factor2 : access constant Glib.Values.GValue) return GLIB.gboolean;  -- gst/gstvalue.h:544
    pragma Import (C, gst_value_fraction_multiply, "gst_value_fraction_multiply");
 
    function gst_value_fraction_subtract
-     (dest : access GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue;
-      minuend : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue;
-      subtrahend : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstvalue.h:547
+     (dest : access Glib.Values.GValue;
+      minuend : access constant Glib.Values.GValue;
+      subtrahend : access constant Glib.Values.GValue) return GLIB.gboolean;  -- gst/gstvalue.h:547
    pragma Import (C, gst_value_fraction_subtract, "gst_value_fraction_subtract");
 
   -- fraction range  
    procedure gst_value_set_fraction_range
-     (value : access GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue;
-      start : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue;
-      c_end : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue);  -- gst/gstvalue.h:552
+     (value : access Glib.Values.GValue;
+      start : access constant Glib.Values.GValue;
+      c_end : access constant Glib.Values.GValue);  -- gst/gstvalue.h:552
    pragma Import (C, gst_value_set_fraction_range, "gst_value_set_fraction_range");
 
    procedure gst_value_set_fraction_range_full
-     (value : access GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue;
-      numerator_start : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;
-      denominator_start : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;
-      numerator_end : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;
-      denominator_end : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint);  -- gst/gstvalue.h:555
+     (value : access Glib.Values.GValue;
+      numerator_start : GLIB.gint;
+      denominator_start : GLIB.gint;
+      numerator_end : GLIB.gint;
+      denominator_end : GLIB.gint);  -- gst/gstvalue.h:555
    pragma Import (C, gst_value_set_fraction_range_full, "gst_value_set_fraction_range_full");
 
-   function gst_value_get_fraction_range_min (value : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue) return access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue;  -- gst/gstvalue.h:560
+   function gst_value_get_fraction_range_min (value : access constant Glib.Values.GValue) return access constant Glib.Values.GValue;  -- gst/gstvalue.h:560
    pragma Import (C, gst_value_get_fraction_range_min, "gst_value_get_fraction_range_min");
 
-   function gst_value_get_fraction_range_max (value : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue) return access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue;  -- gst/gstvalue.h:561
+   function gst_value_get_fraction_range_max (value : access constant Glib.Values.GValue) return access constant Glib.Values.GValue;  -- gst/gstvalue.h:561
    pragma Import (C, gst_value_get_fraction_range_max, "gst_value_get_fraction_range_max");
 
   -- bitmask  
-   function gst_value_get_bitmask (value : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue) return GStreamer.GST_Low_Level.glibconfig_h.guint64;  -- gst/gstvalue.h:564
+   function gst_value_get_bitmask (value : access constant Glib.Values.GValue) return GLIB.guint64;  -- gst/gstvalue.h:564
    pragma Import (C, gst_value_get_bitmask, "gst_value_get_bitmask");
 
-   procedure gst_value_set_bitmask (value : access GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue; bitmask : GStreamer.GST_Low_Level.glibconfig_h.guint64);  -- gst/gstvalue.h:565
+   procedure gst_value_set_bitmask (value : access Glib.Values.GValue; bitmask : GLIB.guint64);  -- gst/gstvalue.h:565
    pragma Import (C, gst_value_set_bitmask, "gst_value_set_bitmask");
 
   -- flagset  
    procedure gst_value_set_flagset
-     (value : access GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue;
-      flags : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;
-      mask : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint);  -- gst/gstvalue.h:568
+     (value : access Glib.Values.GValue;
+      flags : GLIB.guint;
+      mask : GLIB.guint);  -- gst/gstvalue.h:568
    pragma Import (C, gst_value_set_flagset, "gst_value_set_flagset");
 
-   function gst_value_get_flagset_flags (value : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;  -- gst/gstvalue.h:569
+   function gst_value_get_flagset_flags (value : access constant Glib.Values.GValue) return GLIB.guint;  -- gst/gstvalue.h:569
    pragma Import (C, gst_value_get_flagset_flags, "gst_value_get_flagset_flags");
 
-   function gst_value_get_flagset_mask (value : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;  -- gst/gstvalue.h:570
+   function gst_value_get_flagset_mask (value : access constant Glib.Values.GValue) return GLIB.guint;  -- gst/gstvalue.h:570
    pragma Import (C, gst_value_get_flagset_mask, "gst_value_get_flagset_mask");
 
   -- compare  
-   function gst_value_compare (value1 : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue; value2 : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;  -- gst/gstvalue.h:573
+   function gst_value_compare (value1 : access constant Glib.Values.GValue; value2 : access constant Glib.Values.GValue) return GLIB.gint;  -- gst/gstvalue.h:573
    pragma Import (C, gst_value_compare, "gst_value_compare");
 
-   function gst_value_can_compare (value1 : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue; value2 : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstvalue.h:575
+   function gst_value_can_compare (value1 : access constant Glib.Values.GValue; value2 : access constant Glib.Values.GValue) return GLIB.gboolean;  -- gst/gstvalue.h:575
    pragma Import (C, gst_value_can_compare, "gst_value_can_compare");
 
-   function gst_value_is_subset (value1 : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue; value2 : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstvalue.h:577
+   function gst_value_is_subset (value1 : access constant Glib.Values.GValue; value2 : access constant Glib.Values.GValue) return GLIB.gboolean;  -- gst/gstvalue.h:577
    pragma Import (C, gst_value_is_subset, "gst_value_is_subset");
 
   -- union  
    function gst_value_union
-     (dest : access GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue;
-      value1 : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue;
-      value2 : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstvalue.h:581
+     (dest : access Glib.Values.GValue;
+      value1 : access constant Glib.Values.GValue;
+      value2 : access constant Glib.Values.GValue) return GLIB.gboolean;  -- gst/gstvalue.h:581
    pragma Import (C, gst_value_union, "gst_value_union");
 
-   function gst_value_can_union (value1 : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue; value2 : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstvalue.h:584
+   function gst_value_can_union (value1 : access constant Glib.Values.GValue; value2 : access constant Glib.Values.GValue) return GLIB.gboolean;  -- gst/gstvalue.h:584
    pragma Import (C, gst_value_can_union, "gst_value_can_union");
 
   -- intersection  
    function gst_value_intersect
-     (dest : access GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue;
-      value1 : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue;
-      value2 : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstvalue.h:588
+     (dest : access Glib.Values.GValue;
+      value1 : access constant Glib.Values.GValue;
+      value2 : access constant Glib.Values.GValue) return GLIB.gboolean;  -- gst/gstvalue.h:588
    pragma Import (C, gst_value_intersect, "gst_value_intersect");
 
-   function gst_value_can_intersect (value1 : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue; value2 : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstvalue.h:591
+   function gst_value_can_intersect (value1 : access constant Glib.Values.GValue; value2 : access constant Glib.Values.GValue) return GLIB.gboolean;  -- gst/gstvalue.h:591
    pragma Import (C, gst_value_can_intersect, "gst_value_can_intersect");
 
   -- subtraction  
    function gst_value_subtract
-     (dest : access GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue;
-      minuend : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue;
-      subtrahend : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstvalue.h:595
+     (dest : access Glib.Values.GValue;
+      minuend : access constant Glib.Values.GValue;
+      subtrahend : access constant Glib.Values.GValue) return GLIB.gboolean;  -- gst/gstvalue.h:595
    pragma Import (C, gst_value_subtract, "gst_value_subtract");
 
-   function gst_value_can_subtract (minuend : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue; subtrahend : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstvalue.h:598
+   function gst_value_can_subtract (minuend : access constant Glib.Values.GValue; subtrahend : access constant Glib.Values.GValue) return GLIB.gboolean;  -- gst/gstvalue.h:598
    pragma Import (C, gst_value_can_subtract, "gst_value_can_subtract");
 
   -- fixation  
-   function gst_value_is_fixed (value : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstvalue.h:602
+   function gst_value_is_fixed (value : access constant Glib.Values.GValue) return GLIB.gboolean;  -- gst/gstvalue.h:602
    pragma Import (C, gst_value_is_fixed, "gst_value_is_fixed");
 
-   function gst_value_fixate (dest : access GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue; src : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstvalue.h:603
+   function gst_value_fixate (dest : access Glib.Values.GValue; src : access constant Glib.Values.GValue) return GLIB.gboolean;  -- gst/gstvalue.h:603
    pragma Import (C, gst_value_fixate, "gst_value_fixate");
 
   -- Flagset registration wrapper  
-   function gst_flagset_register (flags_type : GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType) return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gstvalue.h:607
+   function gst_flagset_register (flags_type : GLIB.GType) return GLIB.GType;  -- gst/gstvalue.h:607
    pragma Import (C, gst_flagset_register, "gst_flagset_register");
 
 end GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstvalue_h;

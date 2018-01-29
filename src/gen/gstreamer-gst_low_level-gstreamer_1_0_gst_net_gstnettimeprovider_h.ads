@@ -1,11 +1,14 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
+with glib;
+with glib.Values;
+with System;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h;
 with System;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;
+with glib;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h;
 
 package GStreamer.GST_Low_Level.gstreamer_1_0_gst_net_gstnettimeprovider_h is
@@ -41,11 +44,11 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_net_gstnettimeprovider_h is
   --  
 
    type GstNetTimeProvider;
-   type u_GstNetTimeProvider_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstNetTimeProvider_u_gst_reserved_array is array (0 .. 3) of System.Address;
    --subtype GstNetTimeProvider is u_GstNetTimeProvider;  -- gst/net/gstnettimeprovider.h:41
 
    type GstNetTimeProviderClass;
-   type u_GstNetTimeProviderClass_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstNetTimeProviderClass_u_gst_reserved_array is array (0 .. 3) of System.Address;
    --subtype GstNetTimeProviderClass is u_GstNetTimeProviderClass;  -- gst/net/gstnettimeprovider.h:42
 
    --  skipped empty struct u_GstNetTimeProviderPrivate
@@ -72,13 +75,13 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_net_gstnettimeprovider_h is
    end record;
    pragma Convention (C_Pass_By_Copy, GstNetTimeProviderClass);  -- gst/net/gstnettimeprovider.h:59
 
-   function gst_net_time_provider_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/net/gstnettimeprovider.h:65
+   function gst_net_time_provider_get_type return GLIB.GType;  -- gst/net/gstnettimeprovider.h:65
    pragma Import (C, gst_net_time_provider_get_type, "gst_net_time_provider_get_type");
 
    function gst_net_time_provider_new
      (clock : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClock;
-      address : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      port : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint) return access GstNetTimeProvider;  -- gst/net/gstnettimeprovider.h:67
+      address : access GLIB.gchar;
+      port : GLIB.gint) return access GstNetTimeProvider;  -- gst/net/gstnettimeprovider.h:67
    pragma Import (C, gst_net_time_provider_new, "gst_net_time_provider_new");
 
    procedure glib_autoptr_cleanup_GstNetTimeProvider (u_ptr : System.Address);  -- gst/net/gstnettimeprovider.h:72

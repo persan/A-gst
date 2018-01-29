@@ -1,13 +1,16 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbufferpool_h;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstminiobject_h;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h;
-with GStreamer.GST_Low_Level.glibconfig_h;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
+with GLIB; --  with GStreamer.GST_Low_Level.glibconfig_h;
+with glib;
+with glib;
+with glib.Values;
+with System;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstallocator_h;
 with System;
@@ -309,11 +312,11 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h is
    type GstBuffer is record
       mini_object : aliased GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstminiobject_h.GstMiniObject;  -- gst/gstbuffer.h:258
       pool : access GstBufferPool;  -- gst/gstbuffer.h:261
-      pts : aliased GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime;  -- gst/gstbuffer.h:264
-      dts : aliased GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime;  -- gst/gstbuffer.h:265
-      duration : aliased GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime;  -- gst/gstbuffer.h:266
-      offset : aliased GStreamer.GST_Low_Level.glibconfig_h.guint64;  -- gst/gstbuffer.h:269
-      offset_end : aliased GStreamer.GST_Low_Level.glibconfig_h.guint64;  -- gst/gstbuffer.h:270
+      pts : aliased GLIB.guint64;  -- gst/gstbuffer.h:264
+      dts : aliased GLIB.guint64;  -- gst/gstbuffer.h:265
+      duration : aliased GLIB.guint64;  -- gst/gstbuffer.h:266
+      offset : aliased GLIB.guint64;  -- gst/gstbuffer.h:269
+      offset_end : aliased GLIB.guint64;  -- gst/gstbuffer.h:270
    end record;
    pragma Convention (C_Pass_By_Copy, GstBuffer);  -- gst/gstbuffer.h:257
 
@@ -321,10 +324,10 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h is
   -- with COW  
   -- timestamp  
   -- media specific offset  
-   function gst_buffer_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gstbuffer.h:273
+   function gst_buffer_get_type return GLIB.GType;  -- gst/gstbuffer.h:273
    pragma Import (C, gst_buffer_get_type, "gst_buffer_get_type");
 
-   function gst_buffer_get_max_memory return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;  -- gst/gstbuffer.h:275
+   function gst_buffer_get_max_memory return GLIB.guint;  -- gst/gstbuffer.h:275
    pragma Import (C, gst_buffer_get_max_memory, "gst_buffer_get_max_memory");
 
   -- allocation  
@@ -333,53 +336,53 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h is
 
    function gst_buffer_new_allocate
      (allocator : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h.GstAllocator;
-      size : GStreamer.GST_Low_Level.glibconfig_h.gsize;
+      size : GLIB.gsize;
       params : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstallocator_h.GstAllocationParams) return access GstBuffer;  -- gst/gstbuffer.h:279
    pragma Import (C, gst_buffer_new_allocate, "gst_buffer_new_allocate");
 
    function gst_buffer_new_wrapped_full
      (flags : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h.GstMemoryFlags;
-      data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
-      maxsize : GStreamer.GST_Low_Level.glibconfig_h.gsize;
-      offset : GStreamer.GST_Low_Level.glibconfig_h.gsize;
-      size : GStreamer.GST_Low_Level.glibconfig_h.gsize;
-      user_data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+      data : System.Address;
+      maxsize : GLIB.gsize;
+      offset : GLIB.gsize;
+      size : GLIB.gsize;
+      user_data : System.Address;
       notify : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.GDestroyNotify) return access GstBuffer;  -- gst/gstbuffer.h:281
    pragma Import (C, gst_buffer_new_wrapped_full, "gst_buffer_new_wrapped_full");
 
-   function gst_buffer_new_wrapped (data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer; size : GStreamer.GST_Low_Level.glibconfig_h.gsize) return access GstBuffer;  -- gst/gstbuffer.h:284
+   function gst_buffer_new_wrapped (data : System.Address; size : GLIB.gsize) return access GstBuffer;  -- gst/gstbuffer.h:284
    pragma Import (C, gst_buffer_new_wrapped, "gst_buffer_new_wrapped");
 
   -- memory blocks  
-   function gst_buffer_n_memory (buffer : access GstBuffer) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;  -- gst/gstbuffer.h:287
+   function gst_buffer_n_memory (buffer : access GstBuffer) return GLIB.guint;  -- gst/gstbuffer.h:287
    pragma Import (C, gst_buffer_n_memory, "gst_buffer_n_memory");
 
    procedure gst_buffer_insert_memory
      (buffer : access GstBuffer;
-      idx : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;
+      idx : GLIB.gint;
       mem : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h.GstMemory);  -- gst/gstbuffer.h:288
    pragma Import (C, gst_buffer_insert_memory, "gst_buffer_insert_memory");
 
    procedure gst_buffer_replace_memory_range
      (buffer : access GstBuffer;
-      idx : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;
-      length : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;
+      idx : GLIB.guint;
+      length : GLIB.gint;
       mem : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h.GstMemory);  -- gst/gstbuffer.h:289
    pragma Import (C, gst_buffer_replace_memory_range, "gst_buffer_replace_memory_range");
 
-   function gst_buffer_peek_memory (buffer : access GstBuffer; idx : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h.GstMemory;  -- gst/gstbuffer.h:290
+   function gst_buffer_peek_memory (buffer : access GstBuffer; idx : GLIB.guint) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h.GstMemory;  -- gst/gstbuffer.h:290
    pragma Import (C, gst_buffer_peek_memory, "gst_buffer_peek_memory");
 
    function gst_buffer_get_memory_range
      (buffer : access GstBuffer;
-      idx : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;
-      length : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h.GstMemory;  -- gst/gstbuffer.h:291
+      idx : GLIB.guint;
+      length : GLIB.gint) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h.GstMemory;  -- gst/gstbuffer.h:291
    pragma Import (C, gst_buffer_get_memory_range, "gst_buffer_get_memory_range");
 
    procedure gst_buffer_remove_memory_range
      (buffer : access GstBuffer;
-      idx : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;
-      length : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint);  -- gst/gstbuffer.h:292
+      idx : GLIB.guint;
+      length : GLIB.gint);  -- gst/gstbuffer.h:292
    pragma Import (C, gst_buffer_remove_memory_range, "gst_buffer_remove_memory_range");
 
    procedure gst_buffer_prepend_memory (buffer : access GstBuffer; mem : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h.GstMemory);  -- gst/gstbuffer.h:294
@@ -390,20 +393,20 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h is
 
    procedure gst_buffer_replace_memory
      (buffer : access GstBuffer;
-      idx : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;
+      idx : GLIB.guint;
       mem : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h.GstMemory);  -- gst/gstbuffer.h:296
    pragma Import (C, gst_buffer_replace_memory, "gst_buffer_replace_memory");
 
    procedure gst_buffer_replace_all_memory (buffer : access GstBuffer; mem : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h.GstMemory);  -- gst/gstbuffer.h:297
    pragma Import (C, gst_buffer_replace_all_memory, "gst_buffer_replace_all_memory");
 
-   function gst_buffer_get_memory (buffer : access GstBuffer; idx : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h.GstMemory;  -- gst/gstbuffer.h:298
+   function gst_buffer_get_memory (buffer : access GstBuffer; idx : GLIB.guint) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h.GstMemory;  -- gst/gstbuffer.h:298
    pragma Import (C, gst_buffer_get_memory, "gst_buffer_get_memory");
 
    function gst_buffer_get_all_memory (buffer : access GstBuffer) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h.GstMemory;  -- gst/gstbuffer.h:299
    pragma Import (C, gst_buffer_get_all_memory, "gst_buffer_get_all_memory");
 
-   procedure gst_buffer_remove_memory (buffer : access GstBuffer; idx : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint);  -- gst/gstbuffer.h:300
+   procedure gst_buffer_remove_memory (buffer : access GstBuffer; idx : GLIB.guint);  -- gst/gstbuffer.h:300
    pragma Import (C, gst_buffer_remove_memory, "gst_buffer_remove_memory");
 
    procedure gst_buffer_remove_all_memory (buffer : access GstBuffer);  -- gst/gstbuffer.h:301
@@ -411,73 +414,73 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h is
 
    function gst_buffer_find_memory
      (buffer : access GstBuffer;
-      offset : GStreamer.GST_Low_Level.glibconfig_h.gsize;
-      size : GStreamer.GST_Low_Level.glibconfig_h.gsize;
-      idx : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;
-      length : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;
-      skip : access GStreamer.GST_Low_Level.glibconfig_h.gsize) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstbuffer.h:303
+      offset : GLIB.gsize;
+      size : GLIB.gsize;
+      idx : access GLIB.guint;
+      length : access GLIB.guint;
+      skip : access GLIB.gsize) return GLIB.gboolean;  -- gst/gstbuffer.h:303
    pragma Import (C, gst_buffer_find_memory, "gst_buffer_find_memory");
 
    function gst_buffer_is_memory_range_writable
      (buffer : access GstBuffer;
-      idx : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;
-      length : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstbuffer.h:306
+      idx : GLIB.guint;
+      length : GLIB.gint) return GLIB.gboolean;  -- gst/gstbuffer.h:306
    pragma Import (C, gst_buffer_is_memory_range_writable, "gst_buffer_is_memory_range_writable");
 
-   function gst_buffer_is_all_memory_writable (buffer : access GstBuffer) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstbuffer.h:307
+   function gst_buffer_is_all_memory_writable (buffer : access GstBuffer) return GLIB.gboolean;  -- gst/gstbuffer.h:307
    pragma Import (C, gst_buffer_is_all_memory_writable, "gst_buffer_is_all_memory_writable");
 
    function gst_buffer_fill
      (buffer : access GstBuffer;
-      offset : GStreamer.GST_Low_Level.glibconfig_h.gsize;
-      src : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gconstpointer;
-      size : GStreamer.GST_Low_Level.glibconfig_h.gsize) return GStreamer.GST_Low_Level.glibconfig_h.gsize;  -- gst/gstbuffer.h:309
+      offset : GLIB.gsize;
+      src : Interfaces.C.Extensions.void_ptr;
+      size : GLIB.gsize) return GLIB.gsize;  -- gst/gstbuffer.h:309
    pragma Import (C, gst_buffer_fill, "gst_buffer_fill");
 
    function gst_buffer_extract
      (buffer : access GstBuffer;
-      offset : GStreamer.GST_Low_Level.glibconfig_h.gsize;
-      dest : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
-      size : GStreamer.GST_Low_Level.glibconfig_h.gsize) return GStreamer.GST_Low_Level.glibconfig_h.gsize;  -- gst/gstbuffer.h:311
+      offset : GLIB.gsize;
+      dest : System.Address;
+      size : GLIB.gsize) return GLIB.gsize;  -- gst/gstbuffer.h:311
    pragma Import (C, gst_buffer_extract, "gst_buffer_extract");
 
    function gst_buffer_memcmp
      (buffer : access GstBuffer;
-      offset : GStreamer.GST_Low_Level.glibconfig_h.gsize;
-      mem : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gconstpointer;
-      size : GStreamer.GST_Low_Level.glibconfig_h.gsize) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;  -- gst/gstbuffer.h:313
+      offset : GLIB.gsize;
+      mem : Interfaces.C.Extensions.void_ptr;
+      size : GLIB.gsize) return GLIB.gint;  -- gst/gstbuffer.h:313
    pragma Import (C, gst_buffer_memcmp, "gst_buffer_memcmp");
 
    function gst_buffer_memset
      (buffer : access GstBuffer;
-      offset : GStreamer.GST_Low_Level.glibconfig_h.gsize;
-      val : GStreamer.GST_Low_Level.glibconfig_h.guint8;
-      size : GStreamer.GST_Low_Level.glibconfig_h.gsize) return GStreamer.GST_Low_Level.glibconfig_h.gsize;  -- gst/gstbuffer.h:315
+      offset : GLIB.gsize;
+      val : GLIB.guint8;
+      size : GLIB.gsize) return GLIB.gsize;  -- gst/gstbuffer.h:315
    pragma Import (C, gst_buffer_memset, "gst_buffer_memset");
 
    function gst_buffer_get_sizes_range
      (buffer : access GstBuffer;
-      idx : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;
-      length : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;
-      offset : access GStreamer.GST_Low_Level.glibconfig_h.gsize;
-      maxsize : access GStreamer.GST_Low_Level.glibconfig_h.gsize) return GStreamer.GST_Low_Level.glibconfig_h.gsize;  -- gst/gstbuffer.h:318
+      idx : GLIB.guint;
+      length : GLIB.gint;
+      offset : access GLIB.gsize;
+      maxsize : access GLIB.gsize) return GLIB.gsize;  -- gst/gstbuffer.h:318
    pragma Import (C, gst_buffer_get_sizes_range, "gst_buffer_get_sizes_range");
 
    function gst_buffer_resize_range
      (buffer : access GstBuffer;
-      idx : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;
-      length : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;
+      idx : GLIB.guint;
+      length : GLIB.gint;
       offset : GStreamer.GST_Low_Level.glibconfig_h.gssize;
-      size : GStreamer.GST_Low_Level.glibconfig_h.gssize) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstbuffer.h:320
+      size : GStreamer.GST_Low_Level.glibconfig_h.gssize) return GLIB.gboolean;  -- gst/gstbuffer.h:320
    pragma Import (C, gst_buffer_resize_range, "gst_buffer_resize_range");
 
    function gst_buffer_get_sizes
      (buffer : access GstBuffer;
-      offset : access GStreamer.GST_Low_Level.glibconfig_h.gsize;
-      maxsize : access GStreamer.GST_Low_Level.glibconfig_h.gsize) return GStreamer.GST_Low_Level.glibconfig_h.gsize;  -- gst/gstbuffer.h:323
+      offset : access GLIB.gsize;
+      maxsize : access GLIB.gsize) return GLIB.gsize;  -- gst/gstbuffer.h:323
    pragma Import (C, gst_buffer_get_sizes, "gst_buffer_get_sizes");
 
-   function gst_buffer_get_size (buffer : access GstBuffer) return GStreamer.GST_Low_Level.glibconfig_h.gsize;  -- gst/gstbuffer.h:324
+   function gst_buffer_get_size (buffer : access GstBuffer) return GLIB.gsize;  -- gst/gstbuffer.h:324
    pragma Import (C, gst_buffer_get_size, "gst_buffer_get_size");
 
    procedure gst_buffer_resize
@@ -491,16 +494,16 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h is
 
    function gst_buffer_map_range
      (buffer : access GstBuffer;
-      idx : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;
-      length : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;
+      idx : GLIB.guint;
+      length : GLIB.gint;
       info : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h.GstMapInfo;
-      flags : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h.GstMapFlags) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstbuffer.h:328
+      flags : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h.GstMapFlags) return GLIB.gboolean;  -- gst/gstbuffer.h:328
    pragma Import (C, gst_buffer_map_range, "gst_buffer_map_range");
 
    function gst_buffer_map
      (buffer : access GstBuffer;
       info : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h.GstMapInfo;
-      flags : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h.GstMapFlags) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstbuffer.h:330
+      flags : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h.GstMapFlags) return GLIB.gboolean;  -- gst/gstbuffer.h:330
    pragma Import (C, gst_buffer_map, "gst_buffer_map");
 
    procedure gst_buffer_unmap (buffer : access GstBuffer; info : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h.GstMapInfo);  -- gst/gstbuffer.h:332
@@ -508,22 +511,22 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h is
 
    procedure gst_buffer_extract_dup
      (buffer : access GstBuffer;
-      offset : GStreamer.GST_Low_Level.glibconfig_h.gsize;
-      size : GStreamer.GST_Low_Level.glibconfig_h.gsize;
+      offset : GLIB.gsize;
+      size : GLIB.gsize;
       dest : System.Address;
-      dest_size : access GStreamer.GST_Low_Level.glibconfig_h.gsize);  -- gst/gstbuffer.h:333
+      dest_size : access GLIB.gsize);  -- gst/gstbuffer.h:333
    pragma Import (C, gst_buffer_extract_dup, "gst_buffer_extract_dup");
 
    function gst_buffer_get_flags (buffer : access GstBuffer) return GstBufferFlags;  -- gst/gstbuffer.h:337
    pragma Import (C, gst_buffer_get_flags, "gst_buffer_get_flags");
 
-   function gst_buffer_has_flags (buffer : access GstBuffer; flags : GstBufferFlags) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstbuffer.h:338
+   function gst_buffer_has_flags (buffer : access GstBuffer; flags : GstBufferFlags) return GLIB.gboolean;  -- gst/gstbuffer.h:338
    pragma Import (C, gst_buffer_has_flags, "gst_buffer_has_flags");
 
-   function gst_buffer_set_flags (buffer : access GstBuffer; flags : GstBufferFlags) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstbuffer.h:339
+   function gst_buffer_set_flags (buffer : access GstBuffer; flags : GstBufferFlags) return GLIB.gboolean;  -- gst/gstbuffer.h:339
    pragma Import (C, gst_buffer_set_flags, "gst_buffer_set_flags");
 
-   function gst_buffer_unset_flags (buffer : access GstBuffer; flags : GstBufferFlags) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstbuffer.h:340
+   function gst_buffer_unset_flags (buffer : access GstBuffer; flags : GstBufferFlags) return GLIB.gboolean;  -- gst/gstbuffer.h:340
    pragma Import (C, gst_buffer_unset_flags, "gst_buffer_unset_flags");
 
   -- refcounting  
@@ -625,8 +628,8 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h is
      (dest : access GstBuffer;
       src : access GstBuffer;
       flags : GstBufferCopyFlags;
-      offset : GStreamer.GST_Low_Level.glibconfig_h.gsize;
-      size : GStreamer.GST_Low_Level.glibconfig_h.gsize) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstbuffer.h:447
+      offset : GLIB.gsize;
+      size : GLIB.gsize) return GLIB.gboolean;  -- gst/gstbuffer.h:447
    pragma Import (C, gst_buffer_copy_into, "gst_buffer_copy_into");
 
   --*
@@ -682,15 +685,15 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h is
   -- * Returns: %TRUE when @obuf was different from @nbuf.
   --  
 
-   function gst_buffer_replace (obuf : System.Address; nbuf : access GstBuffer) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstbuffer.h:505
+   function gst_buffer_replace (obuf : System.Address; nbuf : access GstBuffer) return GLIB.gboolean;  -- gst/gstbuffer.h:505
    pragma Import (C, gst_buffer_replace, "gst_buffer_replace");
 
   -- creating a region  
    function gst_buffer_copy_region
      (parent : access GstBuffer;
       flags : GstBufferCopyFlags;
-      offset : GStreamer.GST_Low_Level.glibconfig_h.gsize;
-      size : GStreamer.GST_Low_Level.glibconfig_h.gsize) return access GstBuffer;  -- gst/gstbuffer.h:511
+      offset : GLIB.gsize;
+      size : GLIB.gsize) return access GstBuffer;  -- gst/gstbuffer.h:511
    pragma Import (C, gst_buffer_copy_region, "gst_buffer_copy_region");
 
   -- append two buffers  
@@ -727,19 +730,19 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h is
    type GstBufferForeachMetaFunc is access function 
         (arg1 : access GstBuffer;
          arg2 : System.Address;
-         arg3 : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;
+         arg3 : System.Address) return GLIB.gboolean;
    pragma Convention (C, GstBufferForeachMetaFunc);  -- gst/gstbuffer.h:540
 
-   function gst_buffer_get_meta (buffer : access GstBuffer; api : GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmeta_h.GstMeta;  -- gst/gstbuffer.h:543
+   function gst_buffer_get_meta (buffer : access GstBuffer; api : GLIB.GType) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmeta_h.GstMeta;  -- gst/gstbuffer.h:543
    pragma Import (C, gst_buffer_get_meta, "gst_buffer_get_meta");
 
    function gst_buffer_add_meta
      (buffer : access GstBuffer;
       info : access constant GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmeta_h.GstMetaInfo;
-      params : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmeta_h.GstMeta;  -- gst/gstbuffer.h:544
+      params : System.Address) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmeta_h.GstMeta;  -- gst/gstbuffer.h:544
    pragma Import (C, gst_buffer_add_meta, "gst_buffer_add_meta");
 
-   function gst_buffer_remove_meta (buffer : access GstBuffer; meta : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmeta_h.GstMeta) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstbuffer.h:546
+   function gst_buffer_remove_meta (buffer : access GstBuffer; meta : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmeta_h.GstMeta) return GLIB.gboolean;  -- gst/gstbuffer.h:546
    pragma Import (C, gst_buffer_remove_meta, "gst_buffer_remove_meta");
 
    function gst_buffer_iterate_meta (buffer : access GstBuffer; state : System.Address) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmeta_h.GstMeta;  -- gst/gstbuffer.h:548
@@ -748,13 +751,13 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h is
    function gst_buffer_iterate_meta_filtered
      (buffer : access GstBuffer;
       state : System.Address;
-      meta_api_type : GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmeta_h.GstMeta;  -- gst/gstbuffer.h:550
+      meta_api_type : GLIB.GType) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmeta_h.GstMeta;  -- gst/gstbuffer.h:550
    pragma Import (C, gst_buffer_iterate_meta_filtered, "gst_buffer_iterate_meta_filtered");
 
    function gst_buffer_foreach_meta
      (buffer : access GstBuffer;
       func : GstBufferForeachMetaFunc;
-      user_data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstbuffer.h:554
+      user_data : System.Address) return GLIB.gboolean;  -- gst/gstbuffer.h:554
    pragma Import (C, gst_buffer_foreach_meta, "gst_buffer_foreach_meta");
 
   --*
@@ -811,7 +814,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h is
    pragma Convention (C_Pass_By_Copy, GstParentBufferMeta);  -- gst/gstbuffer.h:604
 
   --< public > 
-   function gst_parent_buffer_meta_api_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gstbuffer.h:612
+   function gst_parent_buffer_meta_api_get_type return GLIB.GType;  -- gst/gstbuffer.h:612
    pragma Import (C, gst_parent_buffer_meta_api_get_type, "gst_parent_buffer_meta_api_get_type");
 
   --*

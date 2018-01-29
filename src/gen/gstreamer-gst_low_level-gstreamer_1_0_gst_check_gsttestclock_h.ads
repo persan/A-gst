@@ -1,12 +1,15 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h;
 with System;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
-limited with GStreamer.GST_Low_Level.glib_2_0_glib_glist_h;
+with glib;
+with glib;
+with glib.Values;
+with System;
+--  limited with GStreamer.GST_Low_Level.glib_2_0_glib_glist_h;
 
 package GStreamer.GST_Low_Level.gstreamer_1_0_gst_check_gsttestclock_h is
 
@@ -86,55 +89,55 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_check_gsttestclock_h is
    end record;
    pragma Convention (C_Pass_By_Copy, GstTestClockClass);  -- gst/check/gsttestclock.h:72
 
-   function gst_test_clock_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/check/gsttestclock.h:77
+   function gst_test_clock_get_type return GLIB.GType;  -- gst/check/gsttestclock.h:77
    pragma Import (C, gst_test_clock_get_type, "gst_test_clock_get_type");
 
    function gst_test_clock_new return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClock;  -- gst/check/gsttestclock.h:79
    pragma Import (C, gst_test_clock_new, "gst_test_clock_new");
 
-   function gst_test_clock_new_with_start_time (start_time : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClock;  -- gst/check/gsttestclock.h:81
+   function gst_test_clock_new_with_start_time (start_time : GLIB.guint64) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClock;  -- gst/check/gsttestclock.h:81
    pragma Import (C, gst_test_clock_new_with_start_time, "gst_test_clock_new_with_start_time");
 
-   procedure gst_test_clock_set_time (test_clock : access GstTestClock; new_time : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime);  -- gst/check/gsttestclock.h:83
+   procedure gst_test_clock_set_time (test_clock : access GstTestClock; new_time : GLIB.guint64);  -- gst/check/gsttestclock.h:83
    pragma Import (C, gst_test_clock_set_time, "gst_test_clock_set_time");
 
-   procedure gst_test_clock_advance_time (test_clock : access GstTestClock; c_delta : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTimeDiff);  -- gst/check/gsttestclock.h:86
+   procedure gst_test_clock_advance_time (test_clock : access GstTestClock; c_delta : GLIB.guint64Diff);  -- gst/check/gsttestclock.h:86
    pragma Import (C, gst_test_clock_advance_time, "gst_test_clock_advance_time");
 
-   function gst_test_clock_peek_id_count (test_clock : access GstTestClock) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;  -- gst/check/gsttestclock.h:89
+   function gst_test_clock_peek_id_count (test_clock : access GstTestClock) return GLIB.guint;  -- gst/check/gsttestclock.h:89
    pragma Import (C, gst_test_clock_peek_id_count, "gst_test_clock_peek_id_count");
 
-   function gst_test_clock_has_id (test_clock : access GstTestClock; id : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockID) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/check/gsttestclock.h:91
+   function gst_test_clock_has_id (test_clock : access GstTestClock; id : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockID) return GLIB.gboolean;  -- gst/check/gsttestclock.h:91
    pragma Import (C, gst_test_clock_has_id, "gst_test_clock_has_id");
 
-   function gst_test_clock_peek_next_pending_id (test_clock : access GstTestClock; pending_id : System.Address) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/check/gsttestclock.h:93
+   function gst_test_clock_peek_next_pending_id (test_clock : access GstTestClock; pending_id : System.Address) return GLIB.gboolean;  -- gst/check/gsttestclock.h:93
    pragma Import (C, gst_test_clock_peek_next_pending_id, "gst_test_clock_peek_next_pending_id");
 
    procedure gst_test_clock_wait_for_next_pending_id (test_clock : access GstTestClock; pending_id : System.Address);  -- gst/check/gsttestclock.h:96
    pragma Import (C, gst_test_clock_wait_for_next_pending_id, "gst_test_clock_wait_for_next_pending_id");
 
-   procedure gst_test_clock_wait_for_pending_id_count (test_clock : access GstTestClock; count : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint);  -- gst/check/gsttestclock.h:100
+   procedure gst_test_clock_wait_for_pending_id_count (test_clock : access GstTestClock; count : GLIB.guint);  -- gst/check/gsttestclock.h:100
    pragma Import (C, gst_test_clock_wait_for_pending_id_count, "gst_test_clock_wait_for_pending_id_count");
 
    function gst_test_clock_process_next_clock_id (test_clock : access GstTestClock) return GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockID;  -- gst/check/gsttestclock.h:104
    pragma Import (C, gst_test_clock_process_next_clock_id, "gst_test_clock_process_next_clock_id");
 
-   function gst_test_clock_get_next_entry_time (test_clock : access GstTestClock) return GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime;  -- gst/check/gsttestclock.h:106
+   function gst_test_clock_get_next_entry_time (test_clock : access GstTestClock) return GLIB.guint64;  -- gst/check/gsttestclock.h:106
    pragma Import (C, gst_test_clock_get_next_entry_time, "gst_test_clock_get_next_entry_time");
 
    procedure gst_test_clock_wait_for_multiple_pending_ids
      (test_clock : access GstTestClock;
-      count : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;
+      count : GLIB.guint;
       pending_list : System.Address);  -- gst/check/gsttestclock.h:108
    pragma Import (C, gst_test_clock_wait_for_multiple_pending_ids, "gst_test_clock_wait_for_multiple_pending_ids");
 
-   function gst_test_clock_process_id_list (test_clock : access GstTestClock; pending_list : access constant GStreamer.GST_Low_Level.glib_2_0_glib_glist_h.GList) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;  -- gst/check/gsttestclock.h:112
+   function gst_test_clock_process_id_list (test_clock : access GstTestClock; pending_list : access constant GStreamer.GST_Low_Level.glib_2_0_glib_glist_h.GList) return GLIB.guint;  -- gst/check/gsttestclock.h:112
    pragma Import (C, gst_test_clock_process_id_list, "gst_test_clock_process_id_list");
 
-   function gst_test_clock_id_list_get_latest_time (pending_list : access constant GStreamer.GST_Low_Level.glib_2_0_glib_glist_h.GList) return GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime;  -- gst/check/gsttestclock.h:115
+   function gst_test_clock_id_list_get_latest_time (pending_list : access constant GStreamer.GST_Low_Level.glib_2_0_glib_glist_h.GList) return GLIB.guint64;  -- gst/check/gsttestclock.h:115
    pragma Import (C, gst_test_clock_id_list_get_latest_time, "gst_test_clock_id_list_get_latest_time");
 
-   function gst_test_clock_crank (test_clock : access GstTestClock) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/check/gsttestclock.h:117
+   function gst_test_clock_crank (test_clock : access GstTestClock) return GLIB.gboolean;  -- gst/check/gsttestclock.h:117
    pragma Import (C, gst_test_clock_crank, "gst_test_clock_crank");
 
    procedure glib_autoptr_cleanup_GstTestClock (u_ptr : System.Address);  -- gst/check/gsttestclock.h:120

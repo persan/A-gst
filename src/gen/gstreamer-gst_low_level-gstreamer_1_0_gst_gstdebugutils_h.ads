@@ -1,9 +1,12 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbin_h;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
+with glib;
+with glib.Values;
+with System;
 
 package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstdebugutils_h is
 
@@ -59,19 +62,19 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstdebugutils_h is
    GST_DEBUG_GRAPH_SHOW_VERBOSE : constant GstDebugGraphDetails := -1;  -- gst/gstdebugutils.h:56
 
   --********* pipeline graphs ********* 
-   function gst_debug_bin_to_dot_data (bin : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbin_h.GstBin; details : GstDebugGraphDetails) return access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gstdebugutils.h:61
+   function gst_debug_bin_to_dot_data (bin : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbin_h.GstBin; details : GstDebugGraphDetails) return access GLIB.gchar;  -- gst/gstdebugutils.h:61
    pragma Import (C, gst_debug_bin_to_dot_data, "gst_debug_bin_to_dot_data");
 
    procedure gst_debug_bin_to_dot_file
      (bin : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbin_h.GstBin;
       details : GstDebugGraphDetails;
-      file_name : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar);  -- gst/gstdebugutils.h:62
+      file_name : access GLIB.gchar);  -- gst/gstdebugutils.h:62
    pragma Import (C, gst_debug_bin_to_dot_file, "gst_debug_bin_to_dot_file");
 
    procedure gst_debug_bin_to_dot_file_with_ts
      (bin : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbin_h.GstBin;
       details : GstDebugGraphDetails;
-      file_name : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar);  -- gst/gstdebugutils.h:63
+      file_name : access GLIB.gchar);  -- gst/gstdebugutils.h:63
    pragma Import (C, gst_debug_bin_to_dot_file_with_ts, "gst_debug_bin_to_dot_file_with_ts");
 
   --*

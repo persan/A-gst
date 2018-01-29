@@ -1,12 +1,15 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
-with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h;
-limited with GStreamer.GST_Low_Level.glib_2_0_glib_glist_h;
+with glib;
+with glib.Values;
 with System;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;
+with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h;
+--  limited with GStreamer.GST_Low_Level.glib_2_0_glib_glist_h;
+with System;
+with glib;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbus_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstdevice_h;
 
@@ -47,11 +50,11 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstdeviceprovider_h is
   --  
 
    type GstDeviceProvider;
-   type u_GstDeviceProvider_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstDeviceProvider_u_gst_reserved_array is array (0 .. 3) of System.Address;
    --subtype GstDeviceProvider is u_GstDeviceProvider;  -- gst/gstdeviceprovider.h:31
 
    type GstDeviceProviderClass;
-   type u_GstDeviceProviderClass_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstDeviceProviderClass_u_gst_reserved_array is array (0 .. 3) of System.Address;
    --subtype GstDeviceProviderClass is u_GstDeviceProviderClass;  -- gst/gstdeviceprovider.h:32
 
    --  skipped empty struct u_GstDeviceProviderPrivate
@@ -99,28 +102,28 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstdeviceprovider_h is
       parent_class : aliased GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObjectClass;  -- gst/gstdeviceprovider.h:86
       factory : System.Address;  -- gst/gstdeviceprovider.h:88
       probe : access function  (arg1 : access GstDeviceProvider) return access GStreamer.GST_Low_Level.glib_2_0_glib_glist_h.GList;  -- gst/gstdeviceprovider.h:90
-      start : access function  (arg1 : access GstDeviceProvider) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstdeviceprovider.h:92
+      start : access function  (arg1 : access GstDeviceProvider) return GLIB.gboolean;  -- gst/gstdeviceprovider.h:92
       stop : access procedure  (arg1 : access GstDeviceProvider);  -- gst/gstdeviceprovider.h:93
-      metadata : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;  -- gst/gstdeviceprovider.h:96
+      metadata : System.Address;  -- gst/gstdeviceprovider.h:96
       u_gst_reserved : u_GstDeviceProviderClass_u_gst_reserved_array;  -- gst/gstdeviceprovider.h:99
    end record;
    pragma Convention (C_Pass_By_Copy, GstDeviceProviderClass);  -- gst/gstdeviceprovider.h:85
 
   --< private > 
   --< private > 
-   function gst_device_provider_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gstdeviceprovider.h:102
+   function gst_device_provider_get_type return GLIB.GType;  -- gst/gstdeviceprovider.h:102
    pragma Import (C, gst_device_provider_get_type, "gst_device_provider_get_type");
 
    function gst_device_provider_get_devices (provider : access GstDeviceProvider) return access GStreamer.GST_Low_Level.glib_2_0_glib_glist_h.GList;  -- gst/gstdeviceprovider.h:105
    pragma Import (C, gst_device_provider_get_devices, "gst_device_provider_get_devices");
 
-   function gst_device_provider_start (provider : access GstDeviceProvider) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstdeviceprovider.h:107
+   function gst_device_provider_start (provider : access GstDeviceProvider) return GLIB.gboolean;  -- gst/gstdeviceprovider.h:107
    pragma Import (C, gst_device_provider_start, "gst_device_provider_start");
 
    procedure gst_device_provider_stop (provider : access GstDeviceProvider);  -- gst/gstdeviceprovider.h:108
    pragma Import (C, gst_device_provider_stop, "gst_device_provider_stop");
 
-   function gst_device_provider_can_monitor (provider : access GstDeviceProvider) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstdeviceprovider.h:110
+   function gst_device_provider_can_monitor (provider : access GstDeviceProvider) return GLIB.gboolean;  -- gst/gstdeviceprovider.h:110
    pragma Import (C, gst_device_provider_can_monitor, "gst_device_provider_can_monitor");
 
    function gst_device_provider_get_bus (provider : access GstDeviceProvider) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbus_h.GstBus;  -- gst/gstdeviceprovider.h:112
@@ -135,42 +138,42 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstdeviceprovider_h is
    function gst_device_provider_get_hidden_providers (provider : access GstDeviceProvider) return System.Address;  -- gst/gstdeviceprovider.h:119
    pragma Import (C, gst_device_provider_get_hidden_providers, "gst_device_provider_get_hidden_providers");
 
-   procedure gst_device_provider_hide_provider (provider : access GstDeviceProvider; name : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar);  -- gst/gstdeviceprovider.h:120
+   procedure gst_device_provider_hide_provider (provider : access GstDeviceProvider; name : access GLIB.gchar);  -- gst/gstdeviceprovider.h:120
    pragma Import (C, gst_device_provider_hide_provider, "gst_device_provider_hide_provider");
 
-   procedure gst_device_provider_unhide_provider (provider : access GstDeviceProvider; name : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar);  -- gst/gstdeviceprovider.h:122
+   procedure gst_device_provider_unhide_provider (provider : access GstDeviceProvider; name : access GLIB.gchar);  -- gst/gstdeviceprovider.h:122
    pragma Import (C, gst_device_provider_unhide_provider, "gst_device_provider_unhide_provider");
 
   -- device provider class meta data  
    procedure gst_device_provider_class_set_metadata
      (klass : access GstDeviceProviderClass;
-      longname : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      classification : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      description : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      author : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar);  -- gst/gstdeviceprovider.h:127
+      longname : access GLIB.gchar;
+      classification : access GLIB.gchar;
+      description : access GLIB.gchar;
+      author : access GLIB.gchar);  -- gst/gstdeviceprovider.h:127
    pragma Import (C, gst_device_provider_class_set_metadata, "gst_device_provider_class_set_metadata");
 
    procedure gst_device_provider_class_set_static_metadata
      (klass : access GstDeviceProviderClass;
-      longname : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      classification : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      description : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      author : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar);  -- gst/gstdeviceprovider.h:132
+      longname : access GLIB.gchar;
+      classification : access GLIB.gchar;
+      description : access GLIB.gchar;
+      author : access GLIB.gchar);  -- gst/gstdeviceprovider.h:132
    pragma Import (C, gst_device_provider_class_set_static_metadata, "gst_device_provider_class_set_static_metadata");
 
    procedure gst_device_provider_class_add_metadata
      (klass : access GstDeviceProviderClass;
-      key : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      value : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar);  -- gst/gstdeviceprovider.h:137
+      key : access GLIB.gchar;
+      value : access GLIB.gchar);  -- gst/gstdeviceprovider.h:137
    pragma Import (C, gst_device_provider_class_add_metadata, "gst_device_provider_class_add_metadata");
 
    procedure gst_device_provider_class_add_static_metadata
      (klass : access GstDeviceProviderClass;
-      key : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      value : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar);  -- gst/gstdeviceprovider.h:139
+      key : access GLIB.gchar;
+      value : access GLIB.gchar);  -- gst/gstdeviceprovider.h:139
    pragma Import (C, gst_device_provider_class_add_static_metadata, "gst_device_provider_class_add_static_metadata");
 
-   function gst_device_provider_class_get_metadata (klass : access GstDeviceProviderClass; key : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gstdeviceprovider.h:141
+   function gst_device_provider_class_get_metadata (klass : access GstDeviceProviderClass; key : access GLIB.gchar) return access GLIB.gchar;  -- gst/gstdeviceprovider.h:141
    pragma Import (C, gst_device_provider_class_get_metadata, "gst_device_provider_class_get_metadata");
 
   -- factory management  

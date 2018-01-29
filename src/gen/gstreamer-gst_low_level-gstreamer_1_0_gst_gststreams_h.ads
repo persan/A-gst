@@ -1,11 +1,14 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
+with glib;
+with glib.Values;
+with System;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h;
 with System;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;
+with glib;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstevent_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsttaglist_h;
@@ -72,11 +75,11 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststreams_h is
    GST_STREAM_TYPE_TEXT : constant GstStreamType := 16;  -- gst/gststreams.h:61
 
    type GstStream;
-   type u_GstStream_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstStream_u_gst_reserved_array is array (0 .. 3) of System.Address;
    --subtype GstStream is u_GstStream;  -- gst/gststreams.h:64
 
    type GstStreamClass;
-   type u_GstStreamClass_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstStreamClass_u_gst_reserved_array is array (0 .. 3) of System.Address;
    --subtype GstStreamClass is u_GstStreamClass;  -- gst/gststreams.h:65
 
    --  skipped empty struct u_GstStreamPrivate
@@ -103,7 +106,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststreams_h is
 
    type GstStream is record
       object : aliased GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject;  -- gst/gststreams.h:86
-      stream_id : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gststreams.h:89
+      stream_id : access GLIB.gchar;  -- gst/gststreams.h:89
       priv : System.Address;  -- gst/gststreams.h:92
       u_gst_reserved : u_GstStream_u_gst_reserved_array;  -- gst/gststreams.h:94
    end record;
@@ -125,17 +128,17 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststreams_h is
    pragma Convention (C_Pass_By_Copy, GstStreamClass);  -- gst/gststreams.h:103
 
   --< private > 
-   function gst_stream_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gststreams.h:110
+   function gst_stream_get_type return GLIB.GType;  -- gst/gststreams.h:110
    pragma Import (C, gst_stream_get_type, "gst_stream_get_type");
 
    function gst_stream_new
-     (stream_id : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
+     (stream_id : access GLIB.gchar;
       caps : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h.GstCaps;
       c_type : GstStreamType;
       flags : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstevent_h.GstStreamFlags) return access GstStream;  -- gst/gststreams.h:114
    pragma Import (C, gst_stream_new, "gst_stream_new");
 
-   function gst_stream_get_stream_id (stream : access GstStream) return access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gststreams.h:119
+   function gst_stream_get_stream_id (stream : access GstStream) return access GLIB.gchar;  -- gst/gststreams.h:119
    pragma Import (C, gst_stream_get_stream_id, "gst_stream_get_stream_id");
 
    procedure gst_stream_set_stream_flags (stream : access GstStream; flags : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstevent_h.GstStreamFlags);  -- gst/gststreams.h:121
@@ -162,7 +165,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststreams_h is
    function gst_stream_get_caps (stream : access GstStream) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h.GstCaps;  -- gst/gststreams.h:131
    pragma Import (C, gst_stream_get_caps, "gst_stream_get_caps");
 
-   function gst_stream_type_get_name (stype : GstStreamType) return access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gststreams.h:133
+   function gst_stream_type_get_name (stype : GstStreamType) return access GLIB.gchar;  -- gst/gststreams.h:133
    pragma Import (C, gst_stream_type_get_name, "gst_stream_type_get_name");
 
    procedure glib_autoptr_cleanup_GstStream (u_ptr : System.Address);  -- gst/gststreams.h:136

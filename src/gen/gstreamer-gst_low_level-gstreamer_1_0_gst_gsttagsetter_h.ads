@@ -1,11 +1,14 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;
+with glib;
 with System;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsttaglist_h;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
+with glib;
+with glib.Values;
+with System;
 
 package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsttagsetter_h is
 
@@ -68,7 +71,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsttagsetter_h is
 
   -- signals  
   -- virtual table  
-   function gst_tag_setter_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gsttagsetter.h:59
+   function gst_tag_setter_get_type return GLIB.GType;  -- gst/gsttagsetter.h:59
    pragma Import (C, gst_tag_setter_get_type, "gst_tag_setter_get_type");
 
    procedure gst_tag_setter_reset_tags (setter : System.Address);  -- gst/gsttagsetter.h:61
@@ -83,36 +86,36 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsttagsetter_h is
    procedure gst_tag_setter_add_tags
      (setter : System.Address;
       mode : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsttaglist_h.GstTagMergeMode;
-      tag : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar  -- , ...
+      tag : access GLIB.gchar  -- , ...
       );  -- gst/gsttagsetter.h:66
    pragma Import (C, gst_tag_setter_add_tags, "gst_tag_setter_add_tags");
 
    procedure gst_tag_setter_add_tag_values
      (setter : System.Address;
       mode : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsttaglist_h.GstTagMergeMode;
-      tag : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar  -- , ...
+      tag : access GLIB.gchar  -- , ...
       );  -- gst/gsttagsetter.h:71
    pragma Import (C, gst_tag_setter_add_tag_values, "gst_tag_setter_add_tag_values");
 
    procedure gst_tag_setter_add_tag_valist
      (setter : System.Address;
       mode : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsttaglist_h.GstTagMergeMode;
-      tag : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
+      tag : access GLIB.gchar;
       var_args : access System.Address);  -- gst/gsttagsetter.h:76
    pragma Import (C, gst_tag_setter_add_tag_valist, "gst_tag_setter_add_tag_valist");
 
    procedure gst_tag_setter_add_tag_valist_values
      (setter : System.Address;
       mode : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsttaglist_h.GstTagMergeMode;
-      tag : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
+      tag : access GLIB.gchar;
       var_args : access System.Address);  -- gst/gsttagsetter.h:81
    pragma Import (C, gst_tag_setter_add_tag_valist_values, "gst_tag_setter_add_tag_valist_values");
 
    procedure gst_tag_setter_add_tag_value
      (setter : System.Address;
       mode : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsttaglist_h.GstTagMergeMode;
-      tag : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      value : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue);  -- gst/gsttagsetter.h:86
+      tag : access GLIB.gchar;
+      value : access constant Glib.Values.GValue);  -- gst/gsttagsetter.h:86
    pragma Import (C, gst_tag_setter_add_tag_value, "gst_tag_setter_add_tag_value");
 
    function gst_tag_setter_get_tag_list (setter : System.Address) return access constant GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsttaglist_h.GstTagList;  -- gst/gsttagsetter.h:92

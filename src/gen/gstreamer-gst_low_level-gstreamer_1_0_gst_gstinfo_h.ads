@@ -1,11 +1,14 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
-limited with GStreamer.GST_Low_Level.glib_2_0_gobject_gobject_h;
+with glib;
+with glib.Values;
 with System;
-limited with GStreamer.GST_Low_Level.glib_2_0_glib_gslist_h;
+--  limited --  with GStreamer.GST_Low_Level.glib_2_0_gobject_gobject_h;
+with System;
+--  limited with GStreamer.GST_Low_Level.glib_2_0_glib_gslist_h;
 
 package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstinfo_h is
 
@@ -277,10 +280,10 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstinfo_h is
 
   --< private > 
    type GstDebugCategory is record
-      threshold : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;  -- gst/gstinfo.h:216
-      color : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;  -- gst/gstinfo.h:217
-      name : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gstinfo.h:219
-      description : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gstinfo.h:220
+      threshold : aliased GLIB.gint;  -- gst/gstinfo.h:216
+      color : aliased GLIB.guint;  -- gst/gstinfo.h:217
+      name : access GLIB.gchar;  -- gst/gstinfo.h:219
+      description : access GLIB.gchar;  -- gst/gstinfo.h:220
    end record;
    pragma Convention (C_Pass_By_Copy, GstDebugCategory);  -- gst/gstinfo.h:214
 
@@ -366,33 +369,33 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstinfo_h is
    type GstLogFunction is access procedure 
         (arg1 : access GstDebugCategory;
          arg2 : GstDebugLevel;
-         arg3 : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-         arg4 : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-         arg5 : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;
-         arg6 : access GStreamer.GST_Low_Level.glib_2_0_gobject_gobject_h.GObject;
+         arg3 : access GLIB.gchar;
+         arg4 : access GLIB.gchar;
+         arg5 : GLIB.gint;
+         arg6 : access GLIB.Object.GObject;
          arg7 : System.Address;
-         arg8 : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer);
+         arg8 : System.Address);
    pragma Convention (C, GstLogFunction);  -- gst/gstinfo.h:317
 
    procedure gst_debug_log
      (category : access GstDebugCategory;
       level : GstDebugLevel;
-      file : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      c_function : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      line : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;
-      object : access GStreamer.GST_Low_Level.glib_2_0_gobject_gobject_h.GObject;
-      format : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar  -- , ...
+      file : access GLIB.gchar;
+      c_function : access GLIB.gchar;
+      line : GLIB.gint;
+      object : access GLIB.Object.GObject;
+      format : access GLIB.gchar  -- , ...
       );  -- gst/gstinfo.h:326
    pragma Import (C, gst_debug_log, "gst_debug_log");
 
    procedure gst_debug_log_valist
      (category : access GstDebugCategory;
       level : GstDebugLevel;
-      file : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      c_function : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      line : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;
-      object : access GStreamer.GST_Low_Level.glib_2_0_gobject_gobject_h.GObject;
-      format : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
+      file : access GLIB.gchar;
+      c_function : access GLIB.gchar;
+      line : GLIB.gint;
+      object : access GLIB.Object.GObject;
+      format : access GLIB.gchar;
       args : access System.Address);  -- gst/gstinfo.h:335
    pragma Import (C, gst_debug_log_valist, "gst_debug_log_valist");
 
@@ -418,51 +421,51 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstinfo_h is
 
    --  skipped func _gst_debug_nameof_funcptr
 
-   function gst_debug_message_get (message : System.Address) return access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gstinfo.h:370
+   function gst_debug_message_get (message : System.Address) return access GLIB.gchar;  -- gst/gstinfo.h:370
    pragma Import (C, gst_debug_message_get, "gst_debug_message_get");
 
    procedure gst_debug_log_default
      (category : access GstDebugCategory;
       level : GstDebugLevel;
-      file : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      c_function : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      line : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;
-      object : access GStreamer.GST_Low_Level.glib_2_0_gobject_gobject_h.GObject;
+      file : access GLIB.gchar;
+      c_function : access GLIB.gchar;
+      line : GLIB.gint;
+      object : access GLIB.Object.GObject;
       message : System.Address;
-      user_data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer);  -- gst/gstinfo.h:372
+      user_data : System.Address);  -- gst/gstinfo.h:372
    pragma Import (C, gst_debug_log_default, "gst_debug_log_default");
 
-   function gst_debug_level_get_name (level : GstDebugLevel) return access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gstinfo.h:381
+   function gst_debug_level_get_name (level : GstDebugLevel) return access GLIB.gchar;  -- gst/gstinfo.h:381
    pragma Import (C, gst_debug_level_get_name, "gst_debug_level_get_name");
 
    procedure gst_debug_add_log_function
      (func : GstLogFunction;
-      user_data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+      user_data : System.Address;
       notify : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.GDestroyNotify);  -- gst/gstinfo.h:383
    pragma Import (C, gst_debug_add_log_function, "gst_debug_add_log_function");
 
-   function gst_debug_remove_log_function (func : GstLogFunction) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;  -- gst/gstinfo.h:387
+   function gst_debug_remove_log_function (func : GstLogFunction) return GLIB.guint;  -- gst/gstinfo.h:387
    pragma Import (C, gst_debug_remove_log_function, "gst_debug_remove_log_function");
 
-   function gst_debug_remove_log_function_by_data (data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;  -- gst/gstinfo.h:388
+   function gst_debug_remove_log_function_by_data (data : System.Address) return GLIB.guint;  -- gst/gstinfo.h:388
    pragma Import (C, gst_debug_remove_log_function_by_data, "gst_debug_remove_log_function_by_data");
 
-   procedure gst_debug_set_active (active : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean);  -- gst/gstinfo.h:390
+   procedure gst_debug_set_active (active : GLIB.gboolean);  -- gst/gstinfo.h:390
    pragma Import (C, gst_debug_set_active, "gst_debug_set_active");
 
-   function gst_debug_is_active return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstinfo.h:391
+   function gst_debug_is_active return GLIB.gboolean;  -- gst/gstinfo.h:391
    pragma Import (C, gst_debug_is_active, "gst_debug_is_active");
 
-   procedure gst_debug_set_colored (colored : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean);  -- gst/gstinfo.h:393
+   procedure gst_debug_set_colored (colored : GLIB.gboolean);  -- gst/gstinfo.h:393
    pragma Import (C, gst_debug_set_colored, "gst_debug_set_colored");
 
    procedure gst_debug_set_color_mode (mode : GstDebugColorMode);  -- gst/gstinfo.h:394
    pragma Import (C, gst_debug_set_color_mode, "gst_debug_set_color_mode");
 
-   procedure gst_debug_set_color_mode_from_string (mode : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar);  -- gst/gstinfo.h:395
+   procedure gst_debug_set_color_mode_from_string (mode : access GLIB.gchar);  -- gst/gstinfo.h:395
    pragma Import (C, gst_debug_set_color_mode_from_string, "gst_debug_set_color_mode_from_string");
 
-   function gst_debug_is_colored return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstinfo.h:396
+   function gst_debug_is_colored return GLIB.gboolean;  -- gst/gstinfo.h:396
    pragma Import (C, gst_debug_is_colored, "gst_debug_is_colored");
 
    function gst_debug_get_color_mode return GstDebugColorMode;  -- gst/gstinfo.h:397
@@ -474,13 +477,13 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstinfo_h is
    function gst_debug_get_default_threshold return GstDebugLevel;  -- gst/gstinfo.h:400
    pragma Import (C, gst_debug_get_default_threshold, "gst_debug_get_default_threshold");
 
-   procedure gst_debug_set_threshold_for_name (name : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar; level : GstDebugLevel);  -- gst/gstinfo.h:401
+   procedure gst_debug_set_threshold_for_name (name : access GLIB.gchar; level : GstDebugLevel);  -- gst/gstinfo.h:401
    pragma Import (C, gst_debug_set_threshold_for_name, "gst_debug_set_threshold_for_name");
 
-   procedure gst_debug_set_threshold_from_string (list : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar; reset : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean);  -- gst/gstinfo.h:403
+   procedure gst_debug_set_threshold_from_string (list : access GLIB.gchar; reset : GLIB.gboolean);  -- gst/gstinfo.h:403
    pragma Import (C, gst_debug_set_threshold_from_string, "gst_debug_set_threshold_from_string");
 
-   procedure gst_debug_unset_threshold_for_name (name : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar);  -- gst/gstinfo.h:404
+   procedure gst_debug_unset_threshold_for_name (name : access GLIB.gchar);  -- gst/gstinfo.h:404
    pragma Import (C, gst_debug_unset_threshold_for_name, "gst_debug_unset_threshold_for_name");
 
    procedure gst_debug_category_free (category : access GstDebugCategory);  -- gst/gstinfo.h:407
@@ -495,50 +498,50 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstinfo_h is
    function gst_debug_category_get_threshold (category : access GstDebugCategory) return GstDebugLevel;  -- gst/gstinfo.h:411
    pragma Import (C, gst_debug_category_get_threshold, "gst_debug_category_get_threshold");
 
-   function gst_debug_category_get_name (category : access GstDebugCategory) return access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gstinfo.h:412
+   function gst_debug_category_get_name (category : access GstDebugCategory) return access GLIB.gchar;  -- gst/gstinfo.h:412
    pragma Import (C, gst_debug_category_get_name, "gst_debug_category_get_name");
 
-   function gst_debug_category_get_color (category : access GstDebugCategory) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;  -- gst/gstinfo.h:413
+   function gst_debug_category_get_color (category : access GstDebugCategory) return GLIB.guint;  -- gst/gstinfo.h:413
    pragma Import (C, gst_debug_category_get_color, "gst_debug_category_get_color");
 
-   function gst_debug_category_get_description (category : access GstDebugCategory) return access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gstinfo.h:414
+   function gst_debug_category_get_description (category : access GstDebugCategory) return access GLIB.gchar;  -- gst/gstinfo.h:414
    pragma Import (C, gst_debug_category_get_description, "gst_debug_category_get_description");
 
    function gst_debug_get_all_categories return access GStreamer.GST_Low_Level.glib_2_0_glib_gslist_h.GSList;  -- gst/gstinfo.h:415
    pragma Import (C, gst_debug_get_all_categories, "gst_debug_get_all_categories");
 
-   function gst_debug_construct_term_color (colorinfo : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint) return access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gstinfo.h:418
+   function gst_debug_construct_term_color (colorinfo : GLIB.guint) return access GLIB.gchar;  -- gst/gstinfo.h:418
    pragma Import (C, gst_debug_construct_term_color, "gst_debug_construct_term_color");
 
-   function gst_debug_construct_win_color (colorinfo : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;  -- gst/gstinfo.h:419
+   function gst_debug_construct_win_color (colorinfo : GLIB.guint) return GLIB.gint;  -- gst/gstinfo.h:419
    pragma Import (C, gst_debug_construct_win_color, "gst_debug_construct_win_color");
 
    function gst_info_vasprintf
      (result : System.Address;
-      format : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      args : access System.Address) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;  -- gst/gstinfo.h:421
+      format : access GLIB.gchar;
+      args : access System.Address) return GLIB.gint;  -- gst/gstinfo.h:421
    pragma Import (C, gst_info_vasprintf, "gst_info_vasprintf");
 
-   function gst_info_strdup_vprintf (format : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar; args : access System.Address) return access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gstinfo.h:424
+   function gst_info_strdup_vprintf (format : access GLIB.gchar; args : access System.Address) return access GLIB.gchar;  -- gst/gstinfo.h:424
    pragma Import (C, gst_info_strdup_vprintf, "gst_info_strdup_vprintf");
 
-   function gst_info_strdup_printf (format : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar  -- , ...
-      ) return access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gstinfo.h:425
+   function gst_info_strdup_printf (format : access GLIB.gchar  -- , ...
+      ) return access GLIB.gchar;  -- gst/gstinfo.h:425
    pragma Import (C, gst_info_strdup_printf, "gst_info_strdup_printf");
 
-   procedure gst_print (format : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar  -- , ...
+   procedure gst_print (format : access GLIB.gchar  -- , ...
       );  -- gst/gstinfo.h:427
    pragma Import (C, gst_print, "gst_print");
 
-   procedure gst_println (format : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar  -- , ...
+   procedure gst_println (format : access GLIB.gchar  -- , ...
       );  -- gst/gstinfo.h:428
    pragma Import (C, gst_println, "gst_println");
 
-   procedure gst_printerr (format : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar  -- , ...
+   procedure gst_printerr (format : access GLIB.gchar  -- , ...
       );  -- gst/gstinfo.h:430
    pragma Import (C, gst_printerr, "gst_printerr");
 
-   procedure gst_printerrln (format : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar  -- , ...
+   procedure gst_printerrln (format : access GLIB.gchar  -- , ...
       );  -- gst/gstinfo.h:431
    pragma Import (C, gst_printerrln, "gst_printerrln");
 
@@ -1054,7 +1057,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstinfo_h is
    procedure gst_debug_print_stack_trace;  -- gst/gstinfo.h:1676
    pragma Import (C, gst_debug_print_stack_trace, "gst_debug_print_stack_trace");
 
-   function gst_debug_get_stack_trace (flags : GstStackTraceFlags) return access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gstinfo.h:1677
+   function gst_debug_get_stack_trace (flags : GstStackTraceFlags) return access GLIB.gchar;  -- gst/gstinfo.h:1677
    pragma Import (C, gst_debug_get_stack_trace, "gst_debug_get_stack_trace");
 
 end GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstinfo_h;

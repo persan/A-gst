@@ -1,13 +1,16 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
+with glib;
+with glib.Values;
+with System;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h;
 with System;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;
+with glib;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbus_h;
-limited with GStreamer.GST_Low_Level.glib_2_0_glib_glist_h;
+--  limited with GStreamer.GST_Low_Level.glib_2_0_glib_glist_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h;
 
 package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstdevicemonitor_h is
@@ -47,7 +50,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstdevicemonitor_h is
   --  
 
    type GstDeviceMonitor;
-   type u_GstDeviceMonitor_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstDeviceMonitor_u_gst_reserved_array is array (0 .. 3) of System.Address;
    --subtype GstDeviceMonitor is u_GstDeviceMonitor;  -- gst/gstdevicemonitor.h:33
 
    --  skipped empty struct u_GstDeviceMonitorPrivate
@@ -55,7 +58,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstdevicemonitor_h is
    --  skipped empty struct GstDeviceMonitorPrivate
 
    type GstDeviceMonitorClass;
-   type u_GstDeviceMonitorClass_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstDeviceMonitorClass_u_gst_reserved_array is array (0 .. 3) of System.Address;
    --subtype GstDeviceMonitorClass is u_GstDeviceMonitorClass;  -- gst/gstdevicemonitor.h:35
 
   --*
@@ -91,7 +94,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstdevicemonitor_h is
    pragma Convention (C_Pass_By_Copy, GstDeviceMonitorClass);  -- gst/gstdevicemonitor.h:71
 
   --< private > 
-   function gst_device_monitor_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gstdevicemonitor.h:78
+   function gst_device_monitor_get_type return GLIB.GType;  -- gst/gstdevicemonitor.h:78
    pragma Import (C, gst_device_monitor_get_type, "gst_device_monitor_get_type");
 
    function gst_device_monitor_new return access GstDeviceMonitor;  -- gst/gstdevicemonitor.h:80
@@ -103,7 +106,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstdevicemonitor_h is
    function gst_device_monitor_get_devices (monitor : access GstDeviceMonitor) return access GStreamer.GST_Low_Level.glib_2_0_glib_glist_h.GList;  -- gst/gstdevicemonitor.h:84
    pragma Import (C, gst_device_monitor_get_devices, "gst_device_monitor_get_devices");
 
-   function gst_device_monitor_start (monitor : access GstDeviceMonitor) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstdevicemonitor.h:87
+   function gst_device_monitor_start (monitor : access GstDeviceMonitor) return GLIB.gboolean;  -- gst/gstdevicemonitor.h:87
    pragma Import (C, gst_device_monitor_start, "gst_device_monitor_start");
 
    procedure gst_device_monitor_stop (monitor : access GstDeviceMonitor);  -- gst/gstdevicemonitor.h:89
@@ -111,20 +114,20 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstdevicemonitor_h is
 
    function gst_device_monitor_add_filter
      (monitor : access GstDeviceMonitor;
-      classes : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      caps : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h.GstCaps) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;  -- gst/gstdevicemonitor.h:92
+      classes : access GLIB.gchar;
+      caps : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h.GstCaps) return GLIB.guint;  -- gst/gstdevicemonitor.h:92
    pragma Import (C, gst_device_monitor_add_filter, "gst_device_monitor_add_filter");
 
-   function gst_device_monitor_remove_filter (monitor : access GstDeviceMonitor; filter_id : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstdevicemonitor.h:95
+   function gst_device_monitor_remove_filter (monitor : access GstDeviceMonitor; filter_id : GLIB.guint) return GLIB.gboolean;  -- gst/gstdevicemonitor.h:95
    pragma Import (C, gst_device_monitor_remove_filter, "gst_device_monitor_remove_filter");
 
    function gst_device_monitor_get_providers (monitor : access GstDeviceMonitor) return System.Address;  -- gst/gstdevicemonitor.h:98
    pragma Import (C, gst_device_monitor_get_providers, "gst_device_monitor_get_providers");
 
-   procedure gst_device_monitor_set_show_all_devices (monitor : access GstDeviceMonitor; show_all : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean);  -- gst/gstdevicemonitor.h:100
+   procedure gst_device_monitor_set_show_all_devices (monitor : access GstDeviceMonitor; show_all : GLIB.gboolean);  -- gst/gstdevicemonitor.h:100
    pragma Import (C, gst_device_monitor_set_show_all_devices, "gst_device_monitor_set_show_all_devices");
 
-   function gst_device_monitor_get_show_all_devices (monitor : access GstDeviceMonitor) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstdevicemonitor.h:101
+   function gst_device_monitor_get_show_all_devices (monitor : access GstDeviceMonitor) return GLIB.gboolean;  -- gst/gstdevicemonitor.h:101
    pragma Import (C, gst_device_monitor_get_show_all_devices, "gst_device_monitor_get_show_all_devices");
 
    procedure glib_autoptr_cleanup_GstDeviceMonitor (u_ptr : System.Address);  -- gst/gstdevicemonitor.h:104

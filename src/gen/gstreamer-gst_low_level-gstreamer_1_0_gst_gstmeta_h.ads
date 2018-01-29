@@ -1,12 +1,15 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
+with glib;
+with glib.Values;
+with System;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h;
-with GStreamer.GST_Low_Level.glibconfig_h;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gquark_h;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;
+with GLIB; --  with GStreamer.GST_Low_Level.glibconfig_h;
+--  with GStreamer.GST_Low_Level.glib_2_0_glib_gquark_h;
+with glib;
 with System;
 
 package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmeta_h is
@@ -136,8 +139,8 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmeta_h is
 
    type GstMetaInitFunction is access function 
         (arg1 : access GstMeta;
-         arg2 : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
-         arg3 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBuffer) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;
+         arg2 : System.Address;
+         arg3 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBuffer) return GLIB.gboolean;
    pragma Convention (C, GstMetaInitFunction);  -- gst/gstmeta.h:118
 
   --*
@@ -174,9 +177,9 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmeta_h is
   --  
 
    type GstMetaTransformCopy is record
-      region : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstmeta.h:153
-      offset : aliased GStreamer.GST_Low_Level.glibconfig_h.gsize;  -- gst/gstmeta.h:154
-      size : aliased GStreamer.GST_Low_Level.glibconfig_h.gsize;  -- gst/gstmeta.h:155
+      region : aliased GLIB.gboolean;  -- gst/gstmeta.h:153
+      offset : aliased GLIB.gsize;  -- gst/gstmeta.h:154
+      size : aliased GLIB.gsize;  -- gst/gstmeta.h:155
    end record;
    pragma Convention (C_Pass_By_Copy, GstMetaTransformCopy);  -- gst/gstmeta.h:156
 
@@ -205,8 +208,8 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmeta_h is
         (arg1 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBuffer;
          arg2 : access GstMeta;
          arg3 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBuffer;
-         arg4 : GStreamer.GST_Low_Level.glib_2_0_glib_gquark_h.GQuark;
-         arg5 : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;
+         arg4 : Glib.GQuark;
+         arg5 : System.Address) return GLIB.gboolean;
    pragma Convention (C, GstMetaTransformFunction);  -- gst/gstmeta.h:176
 
   --*
@@ -223,9 +226,9 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmeta_h is
   --  
 
    type GstMetaInfo is record
-      api : aliased GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gstmeta.h:193
-      c_type : aliased GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gstmeta.h:194
-      size : aliased GStreamer.GST_Low_Level.glibconfig_h.gsize;  -- gst/gstmeta.h:195
+      api : aliased GLIB.GType;  -- gst/gstmeta.h:193
+      c_type : aliased GLIB.GType;  -- gst/gstmeta.h:194
+      size : aliased GLIB.gsize;  -- gst/gstmeta.h:195
       init_func : GstMetaInitFunction;  -- gst/gstmeta.h:197
       free_func : GstMetaFreeFunction;  -- gst/gstmeta.h:198
       transform_func : GstMetaTransformFunction;  -- gst/gstmeta.h:199
@@ -236,25 +239,25 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmeta_h is
   --   * not subclassable or stack-allocatable, so we can extend it as we please
   --   * just like interfaces  
 
-   function gst_meta_api_type_register (api : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar; tags : System.Address) return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gstmeta.h:206
+   function gst_meta_api_type_register (api : access GLIB.gchar; tags : System.Address) return GLIB.GType;  -- gst/gstmeta.h:206
    pragma Import (C, gst_meta_api_type_register, "gst_meta_api_type_register");
 
-   function gst_meta_api_type_has_tag (api : GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType; tag : GStreamer.GST_Low_Level.glib_2_0_glib_gquark_h.GQuark) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstmeta.h:208
+   function gst_meta_api_type_has_tag (api : GLIB.GType; tag : Glib.GQuark) return GLIB.gboolean;  -- gst/gstmeta.h:208
    pragma Import (C, gst_meta_api_type_has_tag, "gst_meta_api_type_has_tag");
 
    function gst_meta_register
-     (api : GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;
-      impl : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      size : GStreamer.GST_Low_Level.glibconfig_h.gsize;
+     (api : GLIB.GType;
+      impl : access GLIB.gchar;
+      size : GLIB.gsize;
       init_func : GstMetaInitFunction;
       free_func : GstMetaFreeFunction;
       transform_func : GstMetaTransformFunction) return access constant GstMetaInfo;  -- gst/gstmeta.h:210
    pragma Import (C, gst_meta_register, "gst_meta_register");
 
-   function gst_meta_get_info (impl : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return access constant GstMetaInfo;  -- gst/gstmeta.h:215
+   function gst_meta_get_info (impl : access GLIB.gchar) return access constant GstMetaInfo;  -- gst/gstmeta.h:215
    pragma Import (C, gst_meta_get_info, "gst_meta_get_info");
 
-   function gst_meta_api_type_get_tags (api : GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType) return System.Address;  -- gst/gstmeta.h:216
+   function gst_meta_api_type_get_tags (api : GLIB.GType) return System.Address;  -- gst/gstmeta.h:216
    pragma Import (C, gst_meta_api_type_get_tags, "gst_meta_api_type_get_tags");
 
   -- some default tags  

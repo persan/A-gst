@@ -1,14 +1,17 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
+with glib;
+with glib;
+with glib.Values;
 with System;
-limited with GStreamer.GST_Low_Level.glib_2_0_glib_glist_h;
+with System;
+--  limited with GStreamer.GST_Low_Level.glib_2_0_glib_glist_h;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsturi_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h;
-with GStreamer.GST_Low_Level.glibconfig_h;
+with GLIB; --  with GStreamer.GST_Low_Level.glibconfig_h;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpluginfeature_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h;
@@ -105,22 +108,22 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelementfactory_h is
 
    --  skipped empty struct GstElementFactoryClass
 
-   function gst_element_factory_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gstelementfactory.h:53
+   function gst_element_factory_get_type return GLIB.GType;  -- gst/gstelementfactory.h:53
    pragma Import (C, gst_element_factory_get_type, "gst_element_factory_get_type");
 
-   function gst_element_factory_find (name : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return System.Address;  -- gst/gstelementfactory.h:55
+   function gst_element_factory_find (name : access GLIB.gchar) return System.Address;  -- gst/gstelementfactory.h:55
    pragma Import (C, gst_element_factory_find, "gst_element_factory_find");
 
-   function gst_element_factory_get_element_type (factory : System.Address) return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gstelementfactory.h:57
+   function gst_element_factory_get_element_type (factory : System.Address) return GLIB.GType;  -- gst/gstelementfactory.h:57
    pragma Import (C, gst_element_factory_get_element_type, "gst_element_factory_get_element_type");
 
-   function gst_element_factory_get_metadata (factory : System.Address; key : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gstelementfactory.h:59
+   function gst_element_factory_get_metadata (factory : System.Address; key : access GLIB.gchar) return access GLIB.gchar;  -- gst/gstelementfactory.h:59
    pragma Import (C, gst_element_factory_get_metadata, "gst_element_factory_get_metadata");
 
    function gst_element_factory_get_metadata_keys (factory : System.Address) return System.Address;  -- gst/gstelementfactory.h:60
    pragma Import (C, gst_element_factory_get_metadata_keys, "gst_element_factory_get_metadata_keys");
 
-   function gst_element_factory_get_num_pad_templates (factory : System.Address) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;  -- gst/gstelementfactory.h:62
+   function gst_element_factory_get_num_pad_templates (factory : System.Address) return GLIB.guint;  -- gst/gstelementfactory.h:62
    pragma Import (C, gst_element_factory_get_num_pad_templates, "gst_element_factory_get_num_pad_templates");
 
    function gst_element_factory_get_static_pad_templates (factory : System.Address) return access constant GStreamer.GST_Low_Level.glib_2_0_glib_glist_h.GList;  -- gst/gstelementfactory.h:63
@@ -132,20 +135,20 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelementfactory_h is
    function gst_element_factory_get_uri_protocols (factory : System.Address) return System.Address;  -- gst/gstelementfactory.h:66
    pragma Import (C, gst_element_factory_get_uri_protocols, "gst_element_factory_get_uri_protocols");
 
-   function gst_element_factory_has_interface (factory : System.Address; interfacename : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstelementfactory.h:68
+   function gst_element_factory_has_interface (factory : System.Address; interfacename : access GLIB.gchar) return GLIB.gboolean;  -- gst/gstelementfactory.h:68
    pragma Import (C, gst_element_factory_has_interface, "gst_element_factory_has_interface");
 
-   function gst_element_factory_create (factory : System.Address; name : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h.GstElement;  -- gst/gstelementfactory.h:71
+   function gst_element_factory_create (factory : System.Address; name : access GLIB.gchar) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h.GstElement;  -- gst/gstelementfactory.h:71
    pragma Import (C, gst_element_factory_create, "gst_element_factory_create");
 
-   function gst_element_factory_make (factoryname : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar; name : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h.GstElement;  -- gst/gstelementfactory.h:73
+   function gst_element_factory_make (factoryname : access GLIB.gchar; name : access GLIB.gchar) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h.GstElement;  -- gst/gstelementfactory.h:73
    pragma Import (C, gst_element_factory_make, "gst_element_factory_make");
 
    function gst_element_register
      (plugin : System.Address;
-      name : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      rank : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;
-      c_type : GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstelementfactory.h:75
+      name : access GLIB.gchar;
+      rank : GLIB.guint;
+      c_type : GLIB.GType) return GLIB.gboolean;  -- gst/gstelementfactory.h:75
    pragma Import (C, gst_element_register, "gst_element_register");
 
   -- Factory list functions  
@@ -177,7 +180,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelementfactory_h is
   -- * matching the specified media types will be selected.
   --  
 
-   subtype GstElementFactoryListType is GStreamer.GST_Low_Level.glibconfig_h.guint64;  -- gst/gstelementfactory.h:108
+   subtype GstElementFactoryListType is GLIB.guint64;  -- gst/gstelementfactory.h:108
 
   --*
   -- * GST_ELEMENT_FACTORY_TYPE_ANY: (value 562949953421311) (type GstElementFactoryListType)
@@ -220,7 +223,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelementfactory_h is
   --  
 
   -- Element klass defines  
-   function gst_element_factory_list_is_type (factory : System.Address; c_type : GstElementFactoryListType) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstelementfactory.h:198
+   function gst_element_factory_list_is_type (factory : System.Address; c_type : GstElementFactoryListType) return GLIB.gboolean;  -- gst/gstelementfactory.h:198
    pragma Import (C, gst_element_factory_list_is_type, "gst_element_factory_list_is_type");
 
    function gst_element_factory_list_get_elements (c_type : GstElementFactoryListType; minrank : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpluginfeature_h.GstRank) return access GStreamer.GST_Low_Level.glib_2_0_glib_glist_h.GList;  -- gst/gstelementfactory.h:201
@@ -230,7 +233,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelementfactory_h is
      (list : access GStreamer.GST_Low_Level.glib_2_0_glib_glist_h.GList;
       caps : access constant GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h.GstCaps;
       direction : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstPadDirection;
-      subsetonly : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean) return access GStreamer.GST_Low_Level.glib_2_0_glib_glist_h.GList;  -- gst/gstelementfactory.h:205
+      subsetonly : GLIB.gboolean) return access GStreamer.GST_Low_Level.glib_2_0_glib_glist_h.GList;  -- gst/gstelementfactory.h:205
    pragma Import (C, gst_element_factory_list_filter, "gst_element_factory_list_filter");
 
    procedure glib_autoptr_cleanup_GstElementFactory (u_ptr : System.Address);  -- gst/gstelementfactory.h:209

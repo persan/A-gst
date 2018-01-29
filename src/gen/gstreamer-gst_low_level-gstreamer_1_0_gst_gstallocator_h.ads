@@ -1,10 +1,13 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;
-with GStreamer.GST_Low_Level.glibconfig_h;
+with glib;
+with glib.Values;
+with System;
+with glib;
+with GLIB; --  with GStreamer.GST_Low_Level.glibconfig_h;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h;
 with System;
@@ -53,14 +56,14 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstallocator_h is
    --  skipped empty struct GstAllocatorPrivate
 
    type GstAllocatorClass;
-   type u_GstAllocatorClass_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstAllocatorClass_u_gst_reserved_array is array (0 .. 3) of System.Address;
    --subtype GstAllocatorClass is u_GstAllocatorClass;  -- gst/gstallocator.h:32
 
-   function gst_allocation_params_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gstallocator.h:43
+   function gst_allocation_params_get_type return GLIB.GType;  -- gst/gstallocator.h:43
    pragma Import (C, gst_allocation_params_get_type, "gst_allocation_params_get_type");
 
    type GstAllocationParams;
-   type u_GstAllocationParams_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstAllocationParams_u_gst_reserved_array is array (0 .. 3) of System.Address;
    --subtype GstAllocationParams is u_GstAllocationParams;  -- gst/gstallocator.h:45
 
   --*
@@ -70,7 +73,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstallocator_h is
   -- * an alignment of 7 would be the same as what malloc() guarantees.
   --  
 
-   gst_memory_alignment : aliased GStreamer.GST_Low_Level.glibconfig_h.gsize;  -- gst/gstallocator.h:53
+   gst_memory_alignment : aliased GLIB.gsize;  -- gst/gstallocator.h:53
    pragma Import (C, gst_memory_alignment, "gst_memory_alignment");
 
   --*
@@ -91,9 +94,9 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstallocator_h is
 
    type GstAllocationParams is record
       flags : aliased GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h.GstMemoryFlags;  -- gst/gstallocator.h:72
-      align : aliased GStreamer.GST_Low_Level.glibconfig_h.gsize;  -- gst/gstallocator.h:73
-      prefix : aliased GStreamer.GST_Low_Level.glibconfig_h.gsize;  -- gst/gstallocator.h:74
-      padding : aliased GStreamer.GST_Low_Level.glibconfig_h.gsize;  -- gst/gstallocator.h:75
+      align : aliased GLIB.gsize;  -- gst/gstallocator.h:73
+      prefix : aliased GLIB.gsize;  -- gst/gstallocator.h:74
+      padding : aliased GLIB.gsize;  -- gst/gstallocator.h:75
       u_gst_reserved : u_GstAllocationParams_u_gst_reserved_array;  -- gst/gstallocator.h:78
    end record;
    pragma Convention (C_Pass_By_Copy, GstAllocationParams);  -- gst/gstallocator.h:71
@@ -126,10 +129,10 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstallocator_h is
   -- * The #GstAllocator is used to create new memory.
   --  
 
-   type u_GstAllocator_u_gst_reserved_array is array (0 .. 1) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstAllocator_u_gst_reserved_array is array (0 .. 1) of System.Address;
    type GstAllocator is record
       object : aliased GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject;  -- gst/gstallocator.h:110
-      mem_type : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gstallocator.h:112
+      mem_type : access GLIB.gchar;  -- gst/gstallocator.h:112
       mem_map : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h.GstMemoryMapFunction;  -- gst/gstallocator.h:115
       mem_unmap : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h.GstMemoryUnmapFunction;  -- gst/gstallocator.h:116
       mem_copy : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h.GstMemoryCopyFunction;  -- gst/gstallocator.h:118
@@ -157,7 +160,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstallocator_h is
       object_class : aliased GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObjectClass;  -- gst/gstallocator.h:140
       alloc : access function 
            (arg1 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h.GstAllocator;
-            arg2 : GStreamer.GST_Low_Level.glibconfig_h.gsize;
+            arg2 : GLIB.gsize;
             arg3 : access GstAllocationParams) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h.GstMemory;  -- gst/gstallocator.h:144
       free : access procedure  (arg1 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h.GstAllocator; arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h.GstMemory);  -- gst/gstallocator.h:145
       u_gst_reserved : u_GstAllocatorClass_u_gst_reserved_array;  -- gst/gstallocator.h:148
@@ -166,14 +169,14 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstallocator_h is
 
   --< public > 
   --< private > 
-   function gst_allocator_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gstallocator.h:151
+   function gst_allocator_get_type return GLIB.GType;  -- gst/gstallocator.h:151
    pragma Import (C, gst_allocator_get_type, "gst_allocator_get_type");
 
   -- allocators  
-   procedure gst_allocator_register (name : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar; allocator : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h.GstAllocator);  -- gst/gstallocator.h:154
+   procedure gst_allocator_register (name : access GLIB.gchar; allocator : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h.GstAllocator);  -- gst/gstallocator.h:154
    pragma Import (C, gst_allocator_register, "gst_allocator_register");
 
-   function gst_allocator_find (name : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h.GstAllocator;  -- gst/gstallocator.h:155
+   function gst_allocator_find (name : access GLIB.gchar) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h.GstAllocator;  -- gst/gstallocator.h:155
    pragma Import (C, gst_allocator_find, "gst_allocator_find");
 
    procedure gst_allocator_set_default (allocator : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h.GstAllocator);  -- gst/gstallocator.h:156
@@ -192,7 +195,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstallocator_h is
   -- allocating memory blocks  
    function gst_allocator_alloc
      (allocator : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h.GstAllocator;
-      size : GStreamer.GST_Low_Level.glibconfig_h.gsize;
+      size : GLIB.gsize;
       params : access GstAllocationParams) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h.GstMemory;  -- gst/gstallocator.h:165
    pragma Import (C, gst_allocator_alloc, "gst_allocator_alloc");
 
@@ -201,11 +204,11 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstallocator_h is
 
    function gst_memory_new_wrapped
      (flags : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h.GstMemoryFlags;
-      data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
-      maxsize : GStreamer.GST_Low_Level.glibconfig_h.gsize;
-      offset : GStreamer.GST_Low_Level.glibconfig_h.gsize;
-      size : GStreamer.GST_Low_Level.glibconfig_h.gsize;
-      user_data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+      data : System.Address;
+      maxsize : GLIB.gsize;
+      offset : GLIB.gsize;
+      size : GLIB.gsize;
+      user_data : System.Address;
       notify : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.GDestroyNotify) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h.GstMemory;  -- gst/gstallocator.h:169
    pragma Import (C, gst_memory_new_wrapped, "gst_memory_new_wrapped");
 

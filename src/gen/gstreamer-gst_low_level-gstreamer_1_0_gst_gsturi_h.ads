@@ -1,13 +1,16 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gquark_h;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;
+--  with GStreamer.GST_Low_Level.glib_2_0_glib_gquark_h;
+with glib;
 with System;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
+with glib;
+with glib.Values;
+with System;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h;
-limited with GStreamer.GST_Low_Level.glib_2_0_glib_glist_h;
+--  limited with GStreamer.GST_Low_Level.glib_2_0_glib_glist_h;
 
 package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsturi_h is
 
@@ -56,7 +59,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsturi_h is
   -- * Boston, MA 02110-1301, USA.
   --  
 
-   function gst_uri_error_quark return GStreamer.GST_Low_Level.glib_2_0_glib_gquark_h.GQuark;  -- gst/gsturi.h:34
+   function gst_uri_error_quark return Glib.GQuark;  -- gst/gsturi.h:34
    pragma Import (C, gst_uri_error_quark, "gst_uri_error_quark");
 
   --*
@@ -133,13 +136,13 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsturi_h is
 
    type GstURIHandlerInterface is record
       parent : aliased GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GTypeInterface;  -- gst/gsturi.h:114
-      get_type : access function  (arg1 : GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType) return GstURIType;  -- gst/gsturi.h:119
-      get_protocols : access function  (arg1 : GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType) return System.Address;  -- gst/gsturi.h:120
-      get_uri : access function  (arg1 : System.Address) return access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gsturi.h:123
+      get_type : access function  (arg1 : GLIB.GType) return GstURIType;  -- gst/gsturi.h:119
+      get_protocols : access function  (arg1 : GLIB.GType) return System.Address;  -- gst/gsturi.h:120
+      get_uri : access function  (arg1 : System.Address) return access GLIB.gchar;  -- gst/gsturi.h:123
       set_uri : access function 
            (arg1 : System.Address;
-            arg2 : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-            arg3 : System.Address) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gsturi.h:126
+            arg2 : access GLIB.gchar;
+            arg3 : System.Address) return GLIB.gboolean;  -- gst/gsturi.h:126
    end record;
    pragma Convention (C_Pass_By_Copy, GstURIHandlerInterface);  -- gst/gsturi.h:113
 
@@ -148,39 +151,39 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsturi_h is
   -- querying capabilities  
   -- using the interface  
   -- general URI functions  
-   function gst_uri_protocol_is_valid (protocol : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gsturi.h:131
+   function gst_uri_protocol_is_valid (protocol : access GLIB.gchar) return GLIB.gboolean;  -- gst/gsturi.h:131
    pragma Import (C, gst_uri_protocol_is_valid, "gst_uri_protocol_is_valid");
 
-   function gst_uri_protocol_is_supported (c_type : GstURIType; protocol : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gsturi.h:132
+   function gst_uri_protocol_is_supported (c_type : GstURIType; protocol : access GLIB.gchar) return GLIB.gboolean;  -- gst/gsturi.h:132
    pragma Import (C, gst_uri_protocol_is_supported, "gst_uri_protocol_is_supported");
 
-   function gst_uri_is_valid (uri : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gsturi.h:134
+   function gst_uri_is_valid (uri : access GLIB.gchar) return GLIB.gboolean;  -- gst/gsturi.h:134
    pragma Import (C, gst_uri_is_valid, "gst_uri_is_valid");
 
-   function gst_uri_get_protocol (uri : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gsturi.h:135
+   function gst_uri_get_protocol (uri : access GLIB.gchar) return access GLIB.gchar;  -- gst/gsturi.h:135
    pragma Import (C, gst_uri_get_protocol, "gst_uri_get_protocol");
 
-   function gst_uri_has_protocol (uri : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar; protocol : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gsturi.h:136
+   function gst_uri_has_protocol (uri : access GLIB.gchar; protocol : access GLIB.gchar) return GLIB.gboolean;  -- gst/gsturi.h:136
    pragma Import (C, gst_uri_has_protocol, "gst_uri_has_protocol");
 
-   function gst_uri_get_location (uri : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gsturi.h:138
+   function gst_uri_get_location (uri : access GLIB.gchar) return access GLIB.gchar;  -- gst/gsturi.h:138
    pragma Import (C, gst_uri_get_location, "gst_uri_get_location");
 
-   function gst_uri_construct (protocol : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar; location : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gsturi.h:139
+   function gst_uri_construct (protocol : access GLIB.gchar; location : access GLIB.gchar) return access GLIB.gchar;  -- gst/gsturi.h:139
    pragma Import (C, gst_uri_construct, "gst_uri_construct");
 
-   function gst_filename_to_uri (filename : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar; error : System.Address) return access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gsturi.h:142
+   function gst_filename_to_uri (filename : access GLIB.gchar; error : System.Address) return access GLIB.gchar;  -- gst/gsturi.h:142
    pragma Import (C, gst_filename_to_uri, "gst_filename_to_uri");
 
    function gst_element_make_from_uri
      (c_type : GstURIType;
-      uri : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      elementname : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
+      uri : access GLIB.gchar;
+      elementname : access GLIB.gchar;
       error : System.Address) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h.GstElement;  -- gst/gsturi.h:145
    pragma Import (C, gst_element_make_from_uri, "gst_element_make_from_uri");
 
   -- accessing the interface  
-   function gst_uri_handler_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gsturi.h:151
+   function gst_uri_handler_get_type return GLIB.GType;  -- gst/gsturi.h:151
    pragma Import (C, gst_uri_handler_get_type, "gst_uri_handler_get_type");
 
    function gst_uri_handler_get_uri_type (handler : System.Address) return GstURIType;  -- gst/gsturi.h:153
@@ -189,13 +192,13 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsturi_h is
    function gst_uri_handler_get_protocols (handler : System.Address) return System.Address;  -- gst/gsturi.h:154
    pragma Import (C, gst_uri_handler_get_protocols, "gst_uri_handler_get_protocols");
 
-   function gst_uri_handler_get_uri (handler : System.Address) return access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gsturi.h:155
+   function gst_uri_handler_get_uri (handler : System.Address) return access GLIB.gchar;  -- gst/gsturi.h:155
    pragma Import (C, gst_uri_handler_get_uri, "gst_uri_handler_get_uri");
 
    function gst_uri_handler_set_uri
      (handler : System.Address;
-      uri : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      error : System.Address) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gsturi.h:156
+      uri : access GLIB.gchar;
+      error : System.Address) return GLIB.gboolean;  -- gst/gsturi.h:156
    pragma Import (C, gst_uri_handler_set_uri, "gst_uri_handler_set_uri");
 
   -- * GstUri Type macros.
@@ -218,145 +221,145 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsturi_h is
   --  
 
   -- used by GST_TYPE_URI  
-   function gst_uri_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gsturi.h:185
+   function gst_uri_get_type return GLIB.GType;  -- gst/gsturi.h:185
    pragma Import (C, gst_uri_get_type, "gst_uri_get_type");
 
   -- * Method definitions.
   --  
 
    function gst_uri_new
-     (scheme : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      userinfo : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      host : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      port : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;
-      path : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      query : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      fragment : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return System.Address;  -- gst/gsturi.h:191
+     (scheme : access GLIB.gchar;
+      userinfo : access GLIB.gchar;
+      host : access GLIB.gchar;
+      port : GLIB.guint;
+      path : access GLIB.gchar;
+      query : access GLIB.gchar;
+      fragment : access GLIB.gchar) return System.Address;  -- gst/gsturi.h:191
    pragma Import (C, gst_uri_new, "gst_uri_new");
 
    function gst_uri_new_with_base
      (base : System.Address;
-      scheme : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      userinfo : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      host : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      port : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;
-      path : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      query : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      fragment : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return System.Address;  -- gst/gsturi.h:198
+      scheme : access GLIB.gchar;
+      userinfo : access GLIB.gchar;
+      host : access GLIB.gchar;
+      port : GLIB.guint;
+      path : access GLIB.gchar;
+      query : access GLIB.gchar;
+      fragment : access GLIB.gchar) return System.Address;  -- gst/gsturi.h:198
    pragma Import (C, gst_uri_new_with_base, "gst_uri_new_with_base");
 
-   function gst_uri_from_string (uri : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return System.Address;  -- gst/gsturi.h:206
+   function gst_uri_from_string (uri : access GLIB.gchar) return System.Address;  -- gst/gsturi.h:206
    pragma Import (C, gst_uri_from_string, "gst_uri_from_string");
 
-   function gst_uri_from_string_with_base (base : System.Address; uri : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return System.Address;  -- gst/gsturi.h:207
+   function gst_uri_from_string_with_base (base : System.Address; uri : access GLIB.gchar) return System.Address;  -- gst/gsturi.h:207
    pragma Import (C, gst_uri_from_string_with_base, "gst_uri_from_string_with_base");
 
-   function gst_uri_equal (first : System.Address; second : System.Address) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gsturi.h:209
+   function gst_uri_equal (first : System.Address; second : System.Address) return GLIB.gboolean;  -- gst/gsturi.h:209
    pragma Import (C, gst_uri_equal, "gst_uri_equal");
 
    function gst_uri_join (base_uri : System.Address; ref_uri : System.Address) return System.Address;  -- gst/gsturi.h:211
    pragma Import (C, gst_uri_join, "gst_uri_join");
 
-   function gst_uri_join_strings (base_uri : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar; ref_uri : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gsturi.h:213
+   function gst_uri_join_strings (base_uri : access GLIB.gchar; ref_uri : access GLIB.gchar) return access GLIB.gchar;  -- gst/gsturi.h:213
    pragma Import (C, gst_uri_join_strings, "gst_uri_join_strings");
 
-   function gst_uri_is_writable (uri : System.Address) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gsturi.h:215
+   function gst_uri_is_writable (uri : System.Address) return GLIB.gboolean;  -- gst/gsturi.h:215
    pragma Import (C, gst_uri_is_writable, "gst_uri_is_writable");
 
    function gst_uri_make_writable (uri : System.Address) return System.Address;  -- gst/gsturi.h:216
    pragma Import (C, gst_uri_make_writable, "gst_uri_make_writable");
 
-   function gst_uri_to_string (uri : System.Address) return access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gsturi.h:217
+   function gst_uri_to_string (uri : System.Address) return access GLIB.gchar;  -- gst/gsturi.h:217
    pragma Import (C, gst_uri_to_string, "gst_uri_to_string");
 
-   function gst_uri_is_normalized (uri : System.Address) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gsturi.h:218
+   function gst_uri_is_normalized (uri : System.Address) return GLIB.gboolean;  -- gst/gsturi.h:218
    pragma Import (C, gst_uri_is_normalized, "gst_uri_is_normalized");
 
-   function gst_uri_normalize (uri : System.Address) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gsturi.h:219
+   function gst_uri_normalize (uri : System.Address) return GLIB.gboolean;  -- gst/gsturi.h:219
    pragma Import (C, gst_uri_normalize, "gst_uri_normalize");
 
-   function gst_uri_get_scheme (uri : System.Address) return access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gsturi.h:220
+   function gst_uri_get_scheme (uri : System.Address) return access GLIB.gchar;  -- gst/gsturi.h:220
    pragma Import (C, gst_uri_get_scheme, "gst_uri_get_scheme");
 
-   function gst_uri_set_scheme (uri : System.Address; scheme : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gsturi.h:221
+   function gst_uri_set_scheme (uri : System.Address; scheme : access GLIB.gchar) return GLIB.gboolean;  -- gst/gsturi.h:221
    pragma Import (C, gst_uri_set_scheme, "gst_uri_set_scheme");
 
-   function gst_uri_get_userinfo (uri : System.Address) return access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gsturi.h:222
+   function gst_uri_get_userinfo (uri : System.Address) return access GLIB.gchar;  -- gst/gsturi.h:222
    pragma Import (C, gst_uri_get_userinfo, "gst_uri_get_userinfo");
 
-   function gst_uri_set_userinfo (uri : System.Address; userinfo : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gsturi.h:223
+   function gst_uri_set_userinfo (uri : System.Address; userinfo : access GLIB.gchar) return GLIB.gboolean;  -- gst/gsturi.h:223
    pragma Import (C, gst_uri_set_userinfo, "gst_uri_set_userinfo");
 
-   function gst_uri_get_host (uri : System.Address) return access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gsturi.h:224
+   function gst_uri_get_host (uri : System.Address) return access GLIB.gchar;  -- gst/gsturi.h:224
    pragma Import (C, gst_uri_get_host, "gst_uri_get_host");
 
-   function gst_uri_set_host (uri : System.Address; host : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gsturi.h:225
+   function gst_uri_set_host (uri : System.Address; host : access GLIB.gchar) return GLIB.gboolean;  -- gst/gsturi.h:225
    pragma Import (C, gst_uri_set_host, "gst_uri_set_host");
 
-   function gst_uri_get_port (uri : System.Address) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;  -- gst/gsturi.h:226
+   function gst_uri_get_port (uri : System.Address) return GLIB.guint;  -- gst/gsturi.h:226
    pragma Import (C, gst_uri_get_port, "gst_uri_get_port");
 
-   function gst_uri_set_port (uri : System.Address; port : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gsturi.h:227
+   function gst_uri_set_port (uri : System.Address; port : GLIB.guint) return GLIB.gboolean;  -- gst/gsturi.h:227
    pragma Import (C, gst_uri_set_port, "gst_uri_set_port");
 
-   function gst_uri_get_path (uri : System.Address) return access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gsturi.h:228
+   function gst_uri_get_path (uri : System.Address) return access GLIB.gchar;  -- gst/gsturi.h:228
    pragma Import (C, gst_uri_get_path, "gst_uri_get_path");
 
-   function gst_uri_set_path (uri : System.Address; path : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gsturi.h:229
+   function gst_uri_set_path (uri : System.Address; path : access GLIB.gchar) return GLIB.gboolean;  -- gst/gsturi.h:229
    pragma Import (C, gst_uri_set_path, "gst_uri_set_path");
 
-   function gst_uri_get_path_string (uri : System.Address) return access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gsturi.h:230
+   function gst_uri_get_path_string (uri : System.Address) return access GLIB.gchar;  -- gst/gsturi.h:230
    pragma Import (C, gst_uri_get_path_string, "gst_uri_get_path_string");
 
-   function gst_uri_set_path_string (uri : System.Address; path : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gsturi.h:231
+   function gst_uri_set_path_string (uri : System.Address; path : access GLIB.gchar) return GLIB.gboolean;  -- gst/gsturi.h:231
    pragma Import (C, gst_uri_set_path_string, "gst_uri_set_path_string");
 
    function gst_uri_get_path_segments (uri : System.Address) return access GStreamer.GST_Low_Level.glib_2_0_glib_glist_h.GList;  -- gst/gsturi.h:232
    pragma Import (C, gst_uri_get_path_segments, "gst_uri_get_path_segments");
 
-   function gst_uri_set_path_segments (uri : System.Address; path_segments : access GStreamer.GST_Low_Level.glib_2_0_glib_glist_h.GList) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gsturi.h:233
+   function gst_uri_set_path_segments (uri : System.Address; path_segments : access GStreamer.GST_Low_Level.glib_2_0_glib_glist_h.GList) return GLIB.gboolean;  -- gst/gsturi.h:233
    pragma Import (C, gst_uri_set_path_segments, "gst_uri_set_path_segments");
 
-   function gst_uri_append_path (uri : System.Address; relative_path : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gsturi.h:234
+   function gst_uri_append_path (uri : System.Address; relative_path : access GLIB.gchar) return GLIB.gboolean;  -- gst/gsturi.h:234
    pragma Import (C, gst_uri_append_path, "gst_uri_append_path");
 
-   function gst_uri_append_path_segment (uri : System.Address; path_segment : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gsturi.h:236
+   function gst_uri_append_path_segment (uri : System.Address; path_segment : access GLIB.gchar) return GLIB.gboolean;  -- gst/gsturi.h:236
    pragma Import (C, gst_uri_append_path_segment, "gst_uri_append_path_segment");
 
-   function gst_uri_get_query_string (uri : System.Address) return access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gsturi.h:238
+   function gst_uri_get_query_string (uri : System.Address) return access GLIB.gchar;  -- gst/gsturi.h:238
    pragma Import (C, gst_uri_get_query_string, "gst_uri_get_query_string");
 
-   function gst_uri_set_query_string (uri : System.Address; query : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gsturi.h:239
+   function gst_uri_set_query_string (uri : System.Address; query : access GLIB.gchar) return GLIB.gboolean;  -- gst/gsturi.h:239
    pragma Import (C, gst_uri_set_query_string, "gst_uri_set_query_string");
 
    function gst_uri_get_query_table (uri : System.Address) return System.Address;  -- gst/gsturi.h:240
    pragma Import (C, gst_uri_get_query_table, "gst_uri_get_query_table");
 
-   function gst_uri_set_query_table (uri : System.Address; query_table : System.Address) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gsturi.h:241
+   function gst_uri_set_query_table (uri : System.Address; query_table : System.Address) return GLIB.gboolean;  -- gst/gsturi.h:241
    pragma Import (C, gst_uri_set_query_table, "gst_uri_set_query_table");
 
    function gst_uri_set_query_value
      (uri : System.Address;
-      query_key : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      query_value : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gsturi.h:243
+      query_key : access GLIB.gchar;
+      query_value : access GLIB.gchar) return GLIB.gboolean;  -- gst/gsturi.h:243
    pragma Import (C, gst_uri_set_query_value, "gst_uri_set_query_value");
 
-   function gst_uri_remove_query_key (uri : System.Address; query_key : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gsturi.h:245
+   function gst_uri_remove_query_key (uri : System.Address; query_key : access GLIB.gchar) return GLIB.gboolean;  -- gst/gsturi.h:245
    pragma Import (C, gst_uri_remove_query_key, "gst_uri_remove_query_key");
 
-   function gst_uri_query_has_key (uri : System.Address; query_key : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gsturi.h:246
+   function gst_uri_query_has_key (uri : System.Address; query_key : access GLIB.gchar) return GLIB.gboolean;  -- gst/gsturi.h:246
    pragma Import (C, gst_uri_query_has_key, "gst_uri_query_has_key");
 
-   function gst_uri_get_query_value (uri : System.Address; query_key : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gsturi.h:248
+   function gst_uri_get_query_value (uri : System.Address; query_key : access GLIB.gchar) return access GLIB.gchar;  -- gst/gsturi.h:248
    pragma Import (C, gst_uri_get_query_value, "gst_uri_get_query_value");
 
    function gst_uri_get_query_keys (uri : System.Address) return access GStreamer.GST_Low_Level.glib_2_0_glib_glist_h.GList;  -- gst/gsturi.h:250
    pragma Import (C, gst_uri_get_query_keys, "gst_uri_get_query_keys");
 
-   function gst_uri_get_fragment (uri : System.Address) return access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gsturi.h:251
+   function gst_uri_get_fragment (uri : System.Address) return access GLIB.gchar;  -- gst/gsturi.h:251
    pragma Import (C, gst_uri_get_fragment, "gst_uri_get_fragment");
 
-   function gst_uri_set_fragment (uri : System.Address; fragment : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gsturi.h:252
+   function gst_uri_set_fragment (uri : System.Address; fragment : access GLIB.gchar) return GLIB.gboolean;  -- gst/gsturi.h:252
    pragma Import (C, gst_uri_set_fragment, "gst_uri_set_fragment");
 
    function gst_uri_get_media_fragment_table (uri : System.Address) return System.Address;  -- gst/gsturi.h:253

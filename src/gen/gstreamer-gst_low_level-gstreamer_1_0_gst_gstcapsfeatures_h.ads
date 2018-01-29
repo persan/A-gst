@@ -1,11 +1,14 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
+with glib;
+with glib;
+with glib.Values;
 with System;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gquark_h;
+with System;
+--  with GStreamer.GST_Low_Level.glib_2_0_glib_gquark_h;
 
 package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcapsfeatures_h is
 
@@ -44,10 +47,10 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcapsfeatures_h is
 
    --  skipped empty struct GstCapsFeatures
 
-   function gst_caps_features_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gstcapsfeatures.h:48
+   function gst_caps_features_get_type return GLIB.GType;  -- gst/gstcapsfeatures.h:48
    pragma Import (C, gst_caps_features_get_type, "gst_caps_features_get_type");
 
-   function gst_is_caps_features (obj : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gconstpointer) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstcapsfeatures.h:49
+   function gst_is_caps_features (obj : Interfaces.C.Extensions.void_ptr) return GLIB.gboolean;  -- gst/gstcapsfeatures.h:49
    pragma Import (C, gst_is_caps_features, "gst_is_caps_features");
 
    function gst_caps_features_new_empty return System.Address;  -- gst/gstcapsfeatures.h:51
@@ -56,21 +59,21 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcapsfeatures_h is
    function gst_caps_features_new_any return System.Address;  -- gst/gstcapsfeatures.h:52
    pragma Import (C, gst_caps_features_new_any, "gst_caps_features_new_any");
 
-   function gst_caps_features_new (feature1 : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar  -- , ...
+   function gst_caps_features_new (feature1 : access GLIB.gchar  -- , ...
       ) return System.Address;  -- gst/gstcapsfeatures.h:53
    pragma Import (C, gst_caps_features_new, "gst_caps_features_new");
 
-   function gst_caps_features_new_valist (feature1 : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar; varargs : access System.Address) return System.Address;  -- gst/gstcapsfeatures.h:54
+   function gst_caps_features_new_valist (feature1 : access GLIB.gchar; varargs : access System.Address) return System.Address;  -- gst/gstcapsfeatures.h:54
    pragma Import (C, gst_caps_features_new_valist, "gst_caps_features_new_valist");
 
-   function gst_caps_features_new_id (feature1 : GStreamer.GST_Low_Level.glib_2_0_glib_gquark_h.GQuark  -- , ...
+   function gst_caps_features_new_id (feature1 : Glib.GQuark  -- , ...
       ) return System.Address;  -- gst/gstcapsfeatures.h:55
    pragma Import (C, gst_caps_features_new_id, "gst_caps_features_new_id");
 
-   function gst_caps_features_new_id_valist (feature1 : GStreamer.GST_Low_Level.glib_2_0_glib_gquark_h.GQuark; varargs : access System.Address) return System.Address;  -- gst/gstcapsfeatures.h:56
+   function gst_caps_features_new_id_valist (feature1 : Glib.GQuark; varargs : access System.Address) return System.Address;  -- gst/gstcapsfeatures.h:56
    pragma Import (C, gst_caps_features_new_id_valist, "gst_caps_features_new_id_valist");
 
-   function gst_caps_features_set_parent_refcount (features : System.Address; refcount : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstcapsfeatures.h:58
+   function gst_caps_features_set_parent_refcount (features : System.Address; refcount : access GLIB.gint) return GLIB.gboolean;  -- gst/gstcapsfeatures.h:58
    pragma Import (C, gst_caps_features_set_parent_refcount, "gst_caps_features_set_parent_refcount");
 
    function gst_caps_features_copy (features : System.Address) return System.Address;  -- gst/gstcapsfeatures.h:60
@@ -79,43 +82,43 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcapsfeatures_h is
    procedure gst_caps_features_free (features : System.Address);  -- gst/gstcapsfeatures.h:61
    pragma Import (C, gst_caps_features_free, "gst_caps_features_free");
 
-   function gst_caps_features_to_string (features : System.Address) return access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gstcapsfeatures.h:63
+   function gst_caps_features_to_string (features : System.Address) return access GLIB.gchar;  -- gst/gstcapsfeatures.h:63
    pragma Import (C, gst_caps_features_to_string, "gst_caps_features_to_string");
 
-   function gst_caps_features_from_string (features : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return System.Address;  -- gst/gstcapsfeatures.h:64
+   function gst_caps_features_from_string (features : access GLIB.gchar) return System.Address;  -- gst/gstcapsfeatures.h:64
    pragma Import (C, gst_caps_features_from_string, "gst_caps_features_from_string");
 
-   function gst_caps_features_get_size (features : System.Address) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;  -- gst/gstcapsfeatures.h:66
+   function gst_caps_features_get_size (features : System.Address) return GLIB.guint;  -- gst/gstcapsfeatures.h:66
    pragma Import (C, gst_caps_features_get_size, "gst_caps_features_get_size");
 
-   function gst_caps_features_get_nth (features : System.Address; i : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint) return access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gstcapsfeatures.h:67
+   function gst_caps_features_get_nth (features : System.Address; i : GLIB.guint) return access GLIB.gchar;  -- gst/gstcapsfeatures.h:67
    pragma Import (C, gst_caps_features_get_nth, "gst_caps_features_get_nth");
 
-   function gst_caps_features_get_nth_id (features : System.Address; i : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint) return GStreamer.GST_Low_Level.glib_2_0_glib_gquark_h.GQuark;  -- gst/gstcapsfeatures.h:68
+   function gst_caps_features_get_nth_id (features : System.Address; i : GLIB.guint) return Glib.GQuark;  -- gst/gstcapsfeatures.h:68
    pragma Import (C, gst_caps_features_get_nth_id, "gst_caps_features_get_nth_id");
 
-   function gst_caps_features_contains (features : System.Address; feature : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstcapsfeatures.h:70
+   function gst_caps_features_contains (features : System.Address; feature : access GLIB.gchar) return GLIB.gboolean;  -- gst/gstcapsfeatures.h:70
    pragma Import (C, gst_caps_features_contains, "gst_caps_features_contains");
 
-   function gst_caps_features_contains_id (features : System.Address; feature : GStreamer.GST_Low_Level.glib_2_0_glib_gquark_h.GQuark) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstcapsfeatures.h:71
+   function gst_caps_features_contains_id (features : System.Address; feature : Glib.GQuark) return GLIB.gboolean;  -- gst/gstcapsfeatures.h:71
    pragma Import (C, gst_caps_features_contains_id, "gst_caps_features_contains_id");
 
-   function gst_caps_features_is_equal (features1 : System.Address; features2 : System.Address) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstcapsfeatures.h:72
+   function gst_caps_features_is_equal (features1 : System.Address; features2 : System.Address) return GLIB.gboolean;  -- gst/gstcapsfeatures.h:72
    pragma Import (C, gst_caps_features_is_equal, "gst_caps_features_is_equal");
 
-   function gst_caps_features_is_any (features : System.Address) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstcapsfeatures.h:74
+   function gst_caps_features_is_any (features : System.Address) return GLIB.gboolean;  -- gst/gstcapsfeatures.h:74
    pragma Import (C, gst_caps_features_is_any, "gst_caps_features_is_any");
 
-   procedure gst_caps_features_add (features : System.Address; feature : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar);  -- gst/gstcapsfeatures.h:76
+   procedure gst_caps_features_add (features : System.Address; feature : access GLIB.gchar);  -- gst/gstcapsfeatures.h:76
    pragma Import (C, gst_caps_features_add, "gst_caps_features_add");
 
-   procedure gst_caps_features_add_id (features : System.Address; feature : GStreamer.GST_Low_Level.glib_2_0_glib_gquark_h.GQuark);  -- gst/gstcapsfeatures.h:77
+   procedure gst_caps_features_add_id (features : System.Address; feature : Glib.GQuark);  -- gst/gstcapsfeatures.h:77
    pragma Import (C, gst_caps_features_add_id, "gst_caps_features_add_id");
 
-   procedure gst_caps_features_remove (features : System.Address; feature : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar);  -- gst/gstcapsfeatures.h:79
+   procedure gst_caps_features_remove (features : System.Address; feature : access GLIB.gchar);  -- gst/gstcapsfeatures.h:79
    pragma Import (C, gst_caps_features_remove, "gst_caps_features_remove");
 
-   procedure gst_caps_features_remove_id (features : System.Address; feature : GStreamer.GST_Low_Level.glib_2_0_glib_gquark_h.GQuark);  -- gst/gstcapsfeatures.h:80
+   procedure gst_caps_features_remove_id (features : System.Address; feature : Glib.GQuark);  -- gst/gstcapsfeatures.h:80
    pragma Import (C, gst_caps_features_remove_id, "gst_caps_features_remove_id");
 
    procedure glib_autoptr_cleanup_GstCapsFeatures (u_ptr : System.Address);  -- gst/gstcapsfeatures.h:83

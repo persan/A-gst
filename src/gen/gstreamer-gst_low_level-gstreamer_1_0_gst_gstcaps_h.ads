@@ -1,13 +1,16 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
+with glib;
+with glib.Values;
+with System;
 with System;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstminiobject_h;
 with Interfaces.C.Strings;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststructure_h;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;
+with glib;
 
 package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h is
 
@@ -154,7 +157,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h is
    --subtype GstCaps is u_GstCaps;  -- gst/gstcaps.h:136
 
    type GstStaticCaps;
-   type u_GstStaticCaps_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstStaticCaps_u_gst_reserved_array is array (0 .. 3) of System.Address;
    --subtype GstStaticCaps is u_GstStaticCaps;  -- gst/gstcaps.h:137
 
   --*
@@ -299,7 +302,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h is
   -- * Returns: %TRUE if @new_caps was different from @old_caps
   --  
 
-   function gst_caps_replace (old_caps : System.Address; new_caps : access GstCaps) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstcaps.h:294
+   function gst_caps_replace (old_caps : System.Address; new_caps : access GstCaps) return GLIB.gboolean;  -- gst/gstcaps.h:294
    pragma Import (C, gst_caps_replace, "gst_caps_replace");
 
   --*
@@ -316,7 +319,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h is
   -- * Returns: %TRUE if @new_caps was different from @old_caps
   --  
 
-   function gst_caps_take (old_caps : System.Address; new_caps : access GstCaps) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstcaps.h:313
+   function gst_caps_take (old_caps : System.Address; new_caps : access GstCaps) return GLIB.gboolean;  -- gst/gstcaps.h:313
    pragma Import (C, gst_caps_take, "gst_caps_take");
 
   --*
@@ -368,7 +371,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h is
    type GstCapsForeachFunc is access function 
         (arg1 : System.Address;
          arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststructure_h.GstStructure;
-         arg3 : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;
+         arg3 : System.Address) return GLIB.gboolean;
    pragma Convention (C, GstCapsForeachFunc);  -- gst/gstcaps.h:360
 
   --*
@@ -387,7 +390,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h is
    type GstCapsMapFunc is access function 
         (arg1 : System.Address;
          arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststructure_h.GstStructure;
-         arg3 : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;
+         arg3 : System.Address) return GLIB.gboolean;
    pragma Convention (C, GstCapsMapFunc);  -- gst/gstcaps.h:376
 
   --*
@@ -407,10 +410,10 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h is
    type GstCapsFilterMapFunc is access function 
         (arg1 : System.Address;
          arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststructure_h.GstStructure;
-         arg3 : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;
+         arg3 : System.Address) return GLIB.gboolean;
    pragma Convention (C, GstCapsFilterMapFunc);  -- gst/gstcaps.h:393
 
-   function gst_caps_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gstcaps.h:398
+   function gst_caps_get_type return GLIB.GType;  -- gst/gstcaps.h:398
    pragma Import (C, gst_caps_get_type, "gst_caps_get_type");
 
    function gst_caps_new_empty return access GstCaps;  -- gst/gstcaps.h:400
@@ -433,7 +436,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h is
    function gst_caps_new_full_valist (structure : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststructure_h.GstStructure; var_args : access System.Address) return access GstCaps;  -- gst/gstcaps.h:408
    pragma Import (C, gst_caps_new_full_valist, "gst_caps_new_full_valist");
 
-   function gst_static_caps_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gstcaps.h:411
+   function gst_static_caps_get_type return GLIB.GType;  -- gst/gstcaps.h:411
    pragma Import (C, gst_static_caps_get_type, "gst_static_caps_get_type");
 
    function gst_static_caps_get (static_caps : access GstStaticCaps) return access GstCaps;  -- gst/gstcaps.h:412
@@ -455,7 +458,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h is
       features : System.Address);  -- gst/gstcaps.h:420
    pragma Import (C, gst_caps_append_structure_full, "gst_caps_append_structure_full");
 
-   procedure gst_caps_remove_structure (caps : access GstCaps; idx : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint);  -- gst/gstcaps.h:423
+   procedure gst_caps_remove_structure (caps : access GstCaps; idx : GLIB.guint);  -- gst/gstcaps.h:423
    pragma Import (C, gst_caps_remove_structure, "gst_caps_remove_structure");
 
    function gst_caps_merge (caps1 : access GstCaps; caps2 : access GstCaps) return access GstCaps;  -- gst/gstcaps.h:424
@@ -470,25 +473,25 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h is
       features : System.Address) return access GstCaps;  -- gst/gstcaps.h:428
    pragma Import (C, gst_caps_merge_structure_full, "gst_caps_merge_structure_full");
 
-   function gst_caps_get_size (caps : access constant GstCaps) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;  -- gst/gstcaps.h:431
+   function gst_caps_get_size (caps : access constant GstCaps) return GLIB.guint;  -- gst/gstcaps.h:431
    pragma Import (C, gst_caps_get_size, "gst_caps_get_size");
 
-   function gst_caps_get_structure (caps : access constant GstCaps; index : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststructure_h.GstStructure;  -- gst/gstcaps.h:432
+   function gst_caps_get_structure (caps : access constant GstCaps; index : GLIB.guint) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststructure_h.GstStructure;  -- gst/gstcaps.h:432
    pragma Import (C, gst_caps_get_structure, "gst_caps_get_structure");
 
-   function gst_caps_steal_structure (caps : access GstCaps; index : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststructure_h.GstStructure;  -- gst/gstcaps.h:434
+   function gst_caps_steal_structure (caps : access GstCaps; index : GLIB.guint) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststructure_h.GstStructure;  -- gst/gstcaps.h:434
    pragma Import (C, gst_caps_steal_structure, "gst_caps_steal_structure");
 
    procedure gst_caps_set_features
      (caps : access GstCaps;
-      index : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;
+      index : GLIB.guint;
       features : System.Address);  -- gst/gstcaps.h:436
    pragma Import (C, gst_caps_set_features, "gst_caps_set_features");
 
-   function gst_caps_get_features (caps : access constant GstCaps; index : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint) return System.Address;  -- gst/gstcaps.h:439
+   function gst_caps_get_features (caps : access constant GstCaps; index : GLIB.guint) return System.Address;  -- gst/gstcaps.h:439
    pragma Import (C, gst_caps_get_features, "gst_caps_get_features");
 
-   function gst_caps_copy_nth (caps : access constant GstCaps; nth : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint) return access GstCaps;  -- gst/gstcaps.h:441
+   function gst_caps_copy_nth (caps : access constant GstCaps; nth : GLIB.guint) return access GstCaps;  -- gst/gstcaps.h:441
    pragma Import (C, gst_caps_copy_nth, "gst_caps_copy_nth");
 
    function gst_caps_truncate (caps : access GstCaps) return access GstCaps;  -- gst/gstcaps.h:442
@@ -497,7 +500,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h is
    procedure gst_caps_set_value
      (caps : access GstCaps;
       field : Interfaces.C.Strings.chars_ptr;
-      value : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue);  -- gst/gstcaps.h:443
+      value : access constant Glib.Values.GValue);  -- gst/gstcaps.h:443
    pragma Import (C, gst_caps_set_value, "gst_caps_set_value");
 
    procedure gst_caps_set_simple (caps : access GstCaps; field : Interfaces.C.Strings.chars_ptr  -- , ...
@@ -513,56 +516,56 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h is
    function gst_caps_foreach
      (caps : access constant GstCaps;
       func : GstCapsForeachFunc;
-      user_data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstcaps.h:452
+      user_data : System.Address) return GLIB.gboolean;  -- gst/gstcaps.h:452
    pragma Import (C, gst_caps_foreach, "gst_caps_foreach");
 
    function gst_caps_map_in_place
      (caps : access GstCaps;
       func : GstCapsMapFunc;
-      user_data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstcaps.h:456
+      user_data : System.Address) return GLIB.gboolean;  -- gst/gstcaps.h:456
    pragma Import (C, gst_caps_map_in_place, "gst_caps_map_in_place");
 
    procedure gst_caps_filter_and_map_in_place
      (caps : access GstCaps;
       func : GstCapsFilterMapFunc;
-      user_data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer);  -- gst/gstcaps.h:460
+      user_data : System.Address);  -- gst/gstcaps.h:460
    pragma Import (C, gst_caps_filter_and_map_in_place, "gst_caps_filter_and_map_in_place");
 
   -- tests  
-   function gst_caps_is_any (caps : access constant GstCaps) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstcaps.h:465
+   function gst_caps_is_any (caps : access constant GstCaps) return GLIB.gboolean;  -- gst/gstcaps.h:465
    pragma Import (C, gst_caps_is_any, "gst_caps_is_any");
 
-   function gst_caps_is_empty (caps : access constant GstCaps) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstcaps.h:466
+   function gst_caps_is_empty (caps : access constant GstCaps) return GLIB.gboolean;  -- gst/gstcaps.h:466
    pragma Import (C, gst_caps_is_empty, "gst_caps_is_empty");
 
-   function gst_caps_is_fixed (caps : access constant GstCaps) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstcaps.h:467
+   function gst_caps_is_fixed (caps : access constant GstCaps) return GLIB.gboolean;  -- gst/gstcaps.h:467
    pragma Import (C, gst_caps_is_fixed, "gst_caps_is_fixed");
 
-   function gst_caps_is_always_compatible (caps1 : access constant GstCaps; caps2 : access constant GstCaps) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstcaps.h:468
+   function gst_caps_is_always_compatible (caps1 : access constant GstCaps; caps2 : access constant GstCaps) return GLIB.gboolean;  -- gst/gstcaps.h:468
    pragma Import (C, gst_caps_is_always_compatible, "gst_caps_is_always_compatible");
 
-   function gst_caps_is_subset (subset : access constant GstCaps; superset : access constant GstCaps) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstcaps.h:470
+   function gst_caps_is_subset (subset : access constant GstCaps; superset : access constant GstCaps) return GLIB.gboolean;  -- gst/gstcaps.h:470
    pragma Import (C, gst_caps_is_subset, "gst_caps_is_subset");
 
-   function gst_caps_is_subset_structure (caps : access constant GstCaps; structure : access constant GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststructure_h.GstStructure) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstcaps.h:472
+   function gst_caps_is_subset_structure (caps : access constant GstCaps; structure : access constant GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststructure_h.GstStructure) return GLIB.gboolean;  -- gst/gstcaps.h:472
    pragma Import (C, gst_caps_is_subset_structure, "gst_caps_is_subset_structure");
 
    function gst_caps_is_subset_structure_full
      (caps : access constant GstCaps;
       structure : access constant GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststructure_h.GstStructure;
-      features : System.Address) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstcaps.h:474
+      features : System.Address) return GLIB.gboolean;  -- gst/gstcaps.h:474
    pragma Import (C, gst_caps_is_subset_structure_full, "gst_caps_is_subset_structure_full");
 
-   function gst_caps_is_equal (caps1 : access constant GstCaps; caps2 : access constant GstCaps) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstcaps.h:477
+   function gst_caps_is_equal (caps1 : access constant GstCaps; caps2 : access constant GstCaps) return GLIB.gboolean;  -- gst/gstcaps.h:477
    pragma Import (C, gst_caps_is_equal, "gst_caps_is_equal");
 
-   function gst_caps_is_equal_fixed (caps1 : access constant GstCaps; caps2 : access constant GstCaps) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstcaps.h:479
+   function gst_caps_is_equal_fixed (caps1 : access constant GstCaps; caps2 : access constant GstCaps) return GLIB.gboolean;  -- gst/gstcaps.h:479
    pragma Import (C, gst_caps_is_equal_fixed, "gst_caps_is_equal_fixed");
 
-   function gst_caps_can_intersect (caps1 : access constant GstCaps; caps2 : access constant GstCaps) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstcaps.h:481
+   function gst_caps_can_intersect (caps1 : access constant GstCaps; caps2 : access constant GstCaps) return GLIB.gboolean;  -- gst/gstcaps.h:481
    pragma Import (C, gst_caps_can_intersect, "gst_caps_can_intersect");
 
-   function gst_caps_is_strictly_equal (caps1 : access constant GstCaps; caps2 : access constant GstCaps) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstcaps.h:483
+   function gst_caps_is_strictly_equal (caps1 : access constant GstCaps; caps2 : access constant GstCaps) return GLIB.gboolean;  -- gst/gstcaps.h:483
    pragma Import (C, gst_caps_is_strictly_equal, "gst_caps_is_strictly_equal");
 
   -- operations  
@@ -588,10 +591,10 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h is
    pragma Import (C, gst_caps_fixate, "gst_caps_fixate");
 
   -- utility  
-   function gst_caps_to_string (caps : access constant GstCaps) return access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gstcaps.h:501
+   function gst_caps_to_string (caps : access constant GstCaps) return access GLIB.gchar;  -- gst/gstcaps.h:501
    pragma Import (C, gst_caps_to_string, "gst_caps_to_string");
 
-   function gst_caps_from_string (string : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return access GstCaps;  -- gst/gstcaps.h:502
+   function gst_caps_from_string (string : access GLIB.gchar) return access GstCaps;  -- gst/gstcaps.h:502
    pragma Import (C, gst_caps_from_string, "gst_caps_from_string");
 
    procedure glib_autoptr_cleanup_GstCaps (u_ptr : System.Address);  -- gst/gstcaps.h:505

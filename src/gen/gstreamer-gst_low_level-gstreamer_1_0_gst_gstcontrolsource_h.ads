@@ -1,11 +1,14 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
+with glib;
+with glib.Values;
+with System;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;
+with glib;
 with System;
 
 package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcontrolsource_h is
@@ -44,11 +47,11 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcontrolsource_h is
   --  
 
    type GstControlSource;
-   type u_GstControlSource_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstControlSource_u_gst_reserved_array is array (0 .. 3) of System.Address;
    --subtype GstControlSource is u_GstControlSource;  -- gst/gstcontrolsource.h:47
 
    type GstControlSourceClass;
-   type u_GstControlSourceClass_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstControlSourceClass_u_gst_reserved_array is array (0 .. 3) of System.Address;
    --subtype GstControlSourceClass is u_GstControlSourceClass;  -- gst/gstcontrolsource.h:48
 
    type GstTimedValue;
@@ -67,8 +70,8 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcontrolsource_h is
   --  
 
    type GstTimedValue is record
-      timestamp : aliased GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime;  -- gst/gstcontrolsource.h:61
-      value : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gdouble;  -- gst/gstcontrolsource.h:62
+      timestamp : aliased GLIB.guint64;  -- gst/gstcontrolsource.h:61
+      value : aliased GLIB.gdouble;  -- gst/gstcontrolsource.h:62
    end record;
    pragma Convention (C_Pass_By_Copy, GstTimedValue);  -- gst/gstcontrolsource.h:59
 
@@ -86,8 +89,8 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcontrolsource_h is
 
    type GstControlSourceGetValue is access function 
         (arg1 : access GstControlSource;
-         arg2 : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime;
-         arg3 : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gdouble) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;
+         arg2 : GLIB.guint64;
+         arg3 : access GLIB.gdouble) return GLIB.gboolean;
    pragma Convention (C, GstControlSourceGetValue);  -- gst/gstcontrolsource.h:76
 
   --*
@@ -106,10 +109,10 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcontrolsource_h is
 
    type GstControlSourceGetValueArray is access function 
         (arg1 : access GstControlSource;
-         arg2 : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime;
-         arg3 : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime;
-         arg4 : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;
-         arg5 : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gdouble) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;
+         arg2 : GLIB.guint64;
+         arg3 : GLIB.guint64;
+         arg4 : GLIB.guint;
+         arg5 : access GLIB.gdouble) return GLIB.gboolean;
    pragma Convention (C, GstControlSourceGetValueArray);  -- gst/gstcontrolsource.h:92
 
   --*
@@ -146,22 +149,22 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcontrolsource_h is
    pragma Convention (C_Pass_By_Copy, GstControlSourceClass);  -- gst/gstcontrolsource.h:120
 
   --< private > 
-   function gst_control_source_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gstcontrolsource.h:128
+   function gst_control_source_get_type return GLIB.GType;  -- gst/gstcontrolsource.h:128
    pragma Import (C, gst_control_source_get_type, "gst_control_source_get_type");
 
   -- Functions  
    function gst_control_source_get_value
      (self : access GstControlSource;
-      timestamp : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime;
-      value : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gdouble) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstcontrolsource.h:131
+      timestamp : GLIB.guint64;
+      value : access GLIB.gdouble) return GLIB.gboolean;  -- gst/gstcontrolsource.h:131
    pragma Import (C, gst_control_source_get_value, "gst_control_source_get_value");
 
    function gst_control_source_get_value_array
      (self : access GstControlSource;
-      timestamp : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime;
-      interval : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime;
-      n_values : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;
-      values : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gdouble) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstcontrolsource.h:133
+      timestamp : GLIB.guint64;
+      interval : GLIB.guint64;
+      n_values : GLIB.guint;
+      values : access GLIB.gdouble) return GLIB.gboolean;  -- gst/gstcontrolsource.h:133
    pragma Import (C, gst_control_source_get_value_array, "gst_control_source_get_value_array");
 
    procedure glib_autoptr_cleanup_GstControlSource (u_ptr : System.Address);  -- gst/gstcontrolsource.h:137

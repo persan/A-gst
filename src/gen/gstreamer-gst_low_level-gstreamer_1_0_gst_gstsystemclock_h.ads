@@ -1,11 +1,14 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
+with glib;
+with glib.Values;
+with System;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h;
 with System;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;
+with glib;
 
 package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstsystemclock_h is
 
@@ -46,11 +49,11 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstsystemclock_h is
   --  
 
    type GstSystemClock;
-   type u_GstSystemClock_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstSystemClock_u_gst_reserved_array is array (0 .. 3) of System.Address;
    --subtype GstSystemClock is u_GstSystemClock;  -- gst/gstsystemclock.h:41
 
    type GstSystemClockClass;
-   type u_GstSystemClockClass_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstSystemClockClass_u_gst_reserved_array is array (0 .. 3) of System.Address;
    --subtype GstSystemClockClass is u_GstSystemClockClass;  -- gst/gstsystemclock.h:42
 
    --  skipped empty struct u_GstSystemClockPrivate
@@ -94,7 +97,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstsystemclock_h is
    pragma Convention (C_Pass_By_Copy, GstSystemClockClass);  -- gst/gstsystemclock.h:74
 
   --< private > 
-   function gst_system_clock_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gstsystemclock.h:81
+   function gst_system_clock_get_type return GLIB.GType;  -- gst/gstsystemclock.h:81
    pragma Import (C, gst_system_clock_get_type, "gst_system_clock_get_type");
 
    function gst_system_clock_obtain return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClock;  -- gst/gstsystemclock.h:83

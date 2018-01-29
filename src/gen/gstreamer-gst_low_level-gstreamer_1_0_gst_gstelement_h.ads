@@ -1,16 +1,19 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
+with glib;
+with glib.Values;
+with System;
 with Interfaces.C.Strings;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststructure_h;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gthread_h;
-with GStreamer.GST_Low_Level.glibconfig_h;
+--  with GStreamer.GST_Low_Level.glib_2_0_glib_gthread_h;
+with GLIB; --  with GStreamer.GST_Low_Level.glibconfig_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbus_h;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h;
-limited with GStreamer.GST_Low_Level.glib_2_0_glib_glist_h;
+--  limited with GStreamer.GST_Low_Level.glib_2_0_glib_glist_h;
 with System;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpadtemplate_h;
@@ -18,11 +21,11 @@ limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstevent_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmessage_h;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;
+with glib;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstiterator_h;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstformat_h;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstsegment_h;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gquark_h;
+--  with GStreamer.GST_Low_Level.glib_2_0_glib_gquark_h;
 
 package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h is
 
@@ -131,11 +134,11 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h is
 
   -- gstelement.h and gstelementfactory.h include eachother  
    type GstElement;
-   type u_GstElement_u_gst_reserved_array is array (0 .. 2) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstElement_u_gst_reserved_array is array (0 .. 2) of System.Address;
    --subtype GstElement is u_GstElement;  -- gst/gstelement.h:32
 
    type GstElementClass;
-   type u_GstElementClass_u_gst_reserved_array is array (0 .. 17) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstElementClass_u_gst_reserved_array is array (0 .. 17) of System.Address;
    --subtype GstElementClass is u_GstElementClass;  -- gst/gstelement.h:33
 
   -- gstmessage.h needs State  
@@ -584,7 +587,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h is
       object : aliased GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject;  -- gst/gstelement.h:608
       state_lock : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gthread_h.GRecMutex;  -- gst/gstelement.h:611
       state_cond : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gthread_h.GCond;  -- gst/gstelement.h:614
-      state_cookie : aliased GStreamer.GST_Low_Level.glibconfig_h.guint32;  -- gst/gstelement.h:615
+      state_cookie : aliased GLIB.guint32;  -- gst/gstelement.h:615
       target_state : aliased GstState;  -- gst/gstelement.h:616
       current_state : aliased GstState;  -- gst/gstelement.h:617
       next_state : aliased GstState;  -- gst/gstelement.h:618
@@ -592,15 +595,15 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h is
       last_return : aliased GstStateChangeReturn;  -- gst/gstelement.h:620
       bus : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbus_h.GstBus;  -- gst/gstelement.h:622
       clock : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClock;  -- gst/gstelement.h:625
-      base_time : aliased GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTimeDiff;  -- gst/gstelement.h:626
-      start_time : aliased GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime;  -- gst/gstelement.h:627
-      numpads : aliased GStreamer.GST_Low_Level.glibconfig_h.guint16;  -- gst/gstelement.h:631
+      base_time : aliased GLIB.guint64Diff;  -- gst/gstelement.h:626
+      start_time : aliased GLIB.guint64;  -- gst/gstelement.h:627
+      numpads : aliased GLIB.guint16;  -- gst/gstelement.h:631
       pads : access GStreamer.GST_Low_Level.glib_2_0_glib_glist_h.GList;  -- gst/gstelement.h:632
-      numsrcpads : aliased GStreamer.GST_Low_Level.glibconfig_h.guint16;  -- gst/gstelement.h:633
+      numsrcpads : aliased GLIB.guint16;  -- gst/gstelement.h:633
       srcpads : access GStreamer.GST_Low_Level.glib_2_0_glib_glist_h.GList;  -- gst/gstelement.h:634
-      numsinkpads : aliased GStreamer.GST_Low_Level.glibconfig_h.guint16;  -- gst/gstelement.h:635
+      numsinkpads : aliased GLIB.guint16;  -- gst/gstelement.h:635
       sinkpads : access GStreamer.GST_Low_Level.glib_2_0_glib_glist_h.GList;  -- gst/gstelement.h:636
-      pads_cookie : aliased GStreamer.GST_Low_Level.glibconfig_h.guint32;  -- gst/gstelement.h:637
+      pads_cookie : aliased GLIB.guint32;  -- gst/gstelement.h:637
       contexts : access GStreamer.GST_Low_Level.glib_2_0_glib_glist_h.GList;  -- gst/gstelement.h:640
       u_gst_reserved : u_GstElement_u_gst_reserved_array;  -- gst/gstelement.h:643
    end record;
@@ -645,25 +648,25 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h is
 
    type GstElementClass is record
       parent_class : aliased GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObjectClass;  -- gst/gstelement.h:674
-      metadata : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;  -- gst/gstelement.h:678
+      metadata : System.Address;  -- gst/gstelement.h:678
       elementfactory : System.Address;  -- gst/gstelement.h:681
       padtemplates : access GStreamer.GST_Low_Level.glib_2_0_glib_glist_h.GList;  -- gst/gstelement.h:684
-      numpadtemplates : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;  -- gst/gstelement.h:685
-      pad_templ_cookie : aliased GStreamer.GST_Low_Level.glibconfig_h.guint32;  -- gst/gstelement.h:686
+      numpadtemplates : aliased GLIB.gint;  -- gst/gstelement.h:685
+      pad_templ_cookie : aliased GLIB.guint32;  -- gst/gstelement.h:686
       pad_added : access procedure  (arg1 : access GstElement; arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstPad);  -- gst/gstelement.h:690
       pad_removed : access procedure  (arg1 : access GstElement; arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstPad);  -- gst/gstelement.h:691
       no_more_pads : access procedure  (arg1 : access GstElement);  -- gst/gstelement.h:692
       request_new_pad : access function 
            (arg1 : access GstElement;
             arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpadtemplate_h.GstPadTemplate;
-            arg3 : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
+            arg3 : access GLIB.gchar;
             arg4 : access constant GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h.GstCaps) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstPad;  -- gst/gstelement.h:700
       release_pad : access procedure  (arg1 : access GstElement; arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstPad);  -- gst/gstelement.h:702
       get_state : access function 
            (arg1 : access GstElement;
             arg2 : access GstState;
             arg3 : access GstState;
-            arg4 : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime) return GstStateChangeReturn;  -- gst/gstelement.h:706
+            arg4 : GLIB.guint64) return GstStateChangeReturn;  -- gst/gstelement.h:706
       set_state : access function  (arg1 : access GstElement; arg2 : GstState) return GstStateChangeReturn;  -- gst/gstelement.h:707
       change_state : access function  (arg1 : access GstElement; arg2 : GstStateChange) return GstStateChangeReturn;  -- gst/gstelement.h:708
       state_changed : access procedure 
@@ -673,10 +676,10 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h is
             arg4 : GstState);  -- gst/gstelement.h:710
       set_bus : access procedure  (arg1 : access GstElement; arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbus_h.GstBus);  -- gst/gstelement.h:713
       provide_clock : access function  (arg1 : access GstElement) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClock;  -- gst/gstelement.h:716
-      set_clock : access function  (arg1 : access GstElement; arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClock) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstelement.h:717
-      send_event : access function  (arg1 : access GstElement; arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstevent_h.GstEvent) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstelement.h:720
-      query : access function  (arg1 : access GstElement; arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h.GstQuery) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstelement.h:722
-      post_message : access function  (arg1 : access GstElement; arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmessage_h.GstMessage) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstelement.h:724
+      set_clock : access function  (arg1 : access GstElement; arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClock) return GLIB.gboolean;  -- gst/gstelement.h:717
+      send_event : access function  (arg1 : access GstElement; arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstevent_h.GstEvent) return GLIB.gboolean;  -- gst/gstelement.h:720
+      query : access function  (arg1 : access GstElement; arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h.GstQuery) return GLIB.gboolean;  -- gst/gstelement.h:722
+      post_message : access function  (arg1 : access GstElement; arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmessage_h.GstMessage) return GLIB.gboolean;  -- gst/gstelement.h:724
       set_context : access procedure  (arg1 : access GstElement; arg2 : System.Address);  -- gst/gstelement.h:726
       u_gst_reserved : u_GstElementClass_u_gst_reserved_array;  -- gst/gstelement.h:729
    end record;
@@ -704,7 +707,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h is
    procedure gst_element_class_add_static_pad_template (klass : access GstElementClass; static_templ : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpadtemplate_h.GstStaticPadTemplate);  -- gst/gstelement.h:735
    pragma Import (C, gst_element_class_add_static_pad_template, "gst_element_class_add_static_pad_template");
 
-   function gst_element_class_get_pad_template (element_class : access GstElementClass; name : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpadtemplate_h.GstPadTemplate;  -- gst/gstelement.h:737
+   function gst_element_class_get_pad_template (element_class : access GstElementClass; name : access GLIB.gchar) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpadtemplate_h.GstPadTemplate;  -- gst/gstelement.h:737
    pragma Import (C, gst_element_class_get_pad_template, "gst_element_class_get_pad_template");
 
    function gst_element_class_get_pad_template_list (element_class : access GstElementClass) return access GStreamer.GST_Low_Level.glib_2_0_glib_glist_h.GList;  -- gst/gstelement.h:738
@@ -713,37 +716,37 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h is
   -- element class meta data  
    procedure gst_element_class_set_metadata
      (klass : access GstElementClass;
-      longname : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      classification : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      description : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      author : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar);  -- gst/gstelement.h:741
+      longname : access GLIB.gchar;
+      classification : access GLIB.gchar;
+      description : access GLIB.gchar;
+      author : access GLIB.gchar);  -- gst/gstelement.h:741
    pragma Import (C, gst_element_class_set_metadata, "gst_element_class_set_metadata");
 
    procedure gst_element_class_set_static_metadata
      (klass : access GstElementClass;
-      longname : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      classification : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      description : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      author : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar);  -- gst/gstelement.h:746
+      longname : access GLIB.gchar;
+      classification : access GLIB.gchar;
+      description : access GLIB.gchar;
+      author : access GLIB.gchar);  -- gst/gstelement.h:746
    pragma Import (C, gst_element_class_set_static_metadata, "gst_element_class_set_static_metadata");
 
    procedure gst_element_class_add_metadata
      (klass : access GstElementClass;
-      key : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      value : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar);  -- gst/gstelement.h:751
+      key : access GLIB.gchar;
+      value : access GLIB.gchar);  -- gst/gstelement.h:751
    pragma Import (C, gst_element_class_add_metadata, "gst_element_class_add_metadata");
 
    procedure gst_element_class_add_static_metadata
      (klass : access GstElementClass;
-      key : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      value : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar);  -- gst/gstelement.h:753
+      key : access GLIB.gchar;
+      value : access GLIB.gchar);  -- gst/gstelement.h:753
    pragma Import (C, gst_element_class_add_static_metadata, "gst_element_class_add_static_metadata");
 
-   function gst_element_class_get_metadata (klass : access GstElementClass; key : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gstelement.h:755
+   function gst_element_class_get_metadata (klass : access GstElementClass; key : access GLIB.gchar) return access GLIB.gchar;  -- gst/gstelement.h:755
    pragma Import (C, gst_element_class_get_metadata, "gst_element_class_get_metadata");
 
   -- element instance  
-   function gst_element_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gstelement.h:760
+   function gst_element_get_type return GLIB.GType;  -- gst/gstelement.h:760
    pragma Import (C, gst_element_get_type, "gst_element_get_type");
 
   -- basic name and parentage stuff from GstObject  
@@ -793,19 +796,19 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h is
    function gst_element_get_clock (element : access GstElement) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClock;  -- gst/gstelement.h:809
    pragma Import (C, gst_element_get_clock, "gst_element_get_clock");
 
-   function gst_element_set_clock (element : access GstElement; clock : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClock) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstelement.h:810
+   function gst_element_set_clock (element : access GstElement; clock : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClock) return GLIB.gboolean;  -- gst/gstelement.h:810
    pragma Import (C, gst_element_set_clock, "gst_element_set_clock");
 
-   procedure gst_element_set_base_time (element : access GstElement; time : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime);  -- gst/gstelement.h:811
+   procedure gst_element_set_base_time (element : access GstElement; time : GLIB.guint64);  -- gst/gstelement.h:811
    pragma Import (C, gst_element_set_base_time, "gst_element_set_base_time");
 
-   function gst_element_get_base_time (element : access GstElement) return GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime;  -- gst/gstelement.h:812
+   function gst_element_get_base_time (element : access GstElement) return GLIB.guint64;  -- gst/gstelement.h:812
    pragma Import (C, gst_element_get_base_time, "gst_element_get_base_time");
 
-   procedure gst_element_set_start_time (element : access GstElement; time : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime);  -- gst/gstelement.h:813
+   procedure gst_element_set_start_time (element : access GstElement; time : GLIB.guint64);  -- gst/gstelement.h:813
    pragma Import (C, gst_element_set_start_time, "gst_element_set_start_time");
 
-   function gst_element_get_start_time (element : access GstElement) return GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime;  -- gst/gstelement.h:814
+   function gst_element_get_start_time (element : access GstElement) return GLIB.guint64;  -- gst/gstelement.h:814
    pragma Import (C, gst_element_get_start_time, "gst_element_get_start_time");
 
   -- bus  
@@ -822,32 +825,32 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h is
    function gst_element_get_contexts (element : access GstElement) return access GStreamer.GST_Low_Level.glib_2_0_glib_glist_h.GList;  -- gst/gstelement.h:822
    pragma Import (C, gst_element_get_contexts, "gst_element_get_contexts");
 
-   function gst_element_get_context (element : access GstElement; context_type : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return System.Address;  -- gst/gstelement.h:823
+   function gst_element_get_context (element : access GstElement; context_type : access GLIB.gchar) return System.Address;  -- gst/gstelement.h:823
    pragma Import (C, gst_element_get_context, "gst_element_get_context");
 
-   function gst_element_get_context_unlocked (element : access GstElement; context_type : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return System.Address;  -- gst/gstelement.h:824
+   function gst_element_get_context_unlocked (element : access GstElement; context_type : access GLIB.gchar) return System.Address;  -- gst/gstelement.h:824
    pragma Import (C, gst_element_get_context_unlocked, "gst_element_get_context_unlocked");
 
   -- pad management  
-   function gst_element_add_pad (element : access GstElement; pad : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstPad) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstelement.h:827
+   function gst_element_add_pad (element : access GstElement; pad : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstPad) return GLIB.gboolean;  -- gst/gstelement.h:827
    pragma Import (C, gst_element_add_pad, "gst_element_add_pad");
 
-   function gst_element_remove_pad (element : access GstElement; pad : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstPad) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstelement.h:828
+   function gst_element_remove_pad (element : access GstElement; pad : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstPad) return GLIB.gboolean;  -- gst/gstelement.h:828
    pragma Import (C, gst_element_remove_pad, "gst_element_remove_pad");
 
    procedure gst_element_no_more_pads (element : access GstElement);  -- gst/gstelement.h:829
    pragma Import (C, gst_element_no_more_pads, "gst_element_no_more_pads");
 
-   function gst_element_get_static_pad (element : access GstElement; name : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstPad;  -- gst/gstelement.h:831
+   function gst_element_get_static_pad (element : access GstElement; name : access GLIB.gchar) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstPad;  -- gst/gstelement.h:831
    pragma Import (C, gst_element_get_static_pad, "gst_element_get_static_pad");
 
-   function gst_element_get_request_pad (element : access GstElement; name : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstPad;  -- gst/gstelement.h:832
+   function gst_element_get_request_pad (element : access GstElement; name : access GLIB.gchar) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstPad;  -- gst/gstelement.h:832
    pragma Import (C, gst_element_get_request_pad, "gst_element_get_request_pad");
 
    function gst_element_request_pad
      (element : access GstElement;
       templ : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpadtemplate_h.GstPadTemplate;
-      name : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
+      name : access GLIB.gchar;
       caps : access constant GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h.GstCaps) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstPad;  -- gst/gstelement.h:833
    pragma Import (C, gst_element_request_pad, "gst_element_request_pad");
 
@@ -864,25 +867,25 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h is
    pragma Import (C, gst_element_iterate_sink_pads, "gst_element_iterate_sink_pads");
 
   -- event/query/format stuff  
-   function gst_element_send_event (element : access GstElement; event : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstevent_h.GstEvent) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstelement.h:842
+   function gst_element_send_event (element : access GstElement; event : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstevent_h.GstEvent) return GLIB.gboolean;  -- gst/gstelement.h:842
    pragma Import (C, gst_element_send_event, "gst_element_send_event");
 
    function gst_element_seek
      (element : access GstElement;
-      rate : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gdouble;
+      rate : GLIB.gdouble;
       format : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstformat_h.GstFormat;
       flags : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstsegment_h.GstSeekFlags;
       start_type : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstsegment_h.GstSeekType;
-      start : GStreamer.GST_Low_Level.glibconfig_h.gint64;
+      start : GLIB.gint64;
       stop_type : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstsegment_h.GstSeekType;
-      stop : GStreamer.GST_Low_Level.glibconfig_h.gint64) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstelement.h:843
+      stop : GLIB.gint64) return GLIB.gboolean;  -- gst/gstelement.h:843
    pragma Import (C, gst_element_seek, "gst_element_seek");
 
-   function gst_element_query (element : access GstElement; query : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h.GstQuery) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstelement.h:847
+   function gst_element_query (element : access GstElement; query : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h.GstQuery) return GLIB.gboolean;  -- gst/gstelement.h:847
    pragma Import (C, gst_element_query, "gst_element_query");
 
   -- messages  
-   function gst_element_post_message (element : access GstElement; message : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmessage_h.GstMessage) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstelement.h:850
+   function gst_element_post_message (element : access GstElement; message : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmessage_h.GstMessage) return GLIB.gboolean;  -- gst/gstelement.h:850
    pragma Import (C, gst_element_post_message, "gst_element_post_message");
 
   -- error handling  
@@ -892,43 +895,43 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h is
    procedure gst_element_message_full
      (element : access GstElement;
       c_type : int;
-      domain : GStreamer.GST_Low_Level.glib_2_0_glib_gquark_h.GQuark;
-      code : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;
-      text : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      debug : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      file : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      c_function : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      line : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint);  -- gst/gstelement.h:859
+      domain : Glib.GQuark;
+      code : GLIB.gint;
+      text : access GLIB.gchar;
+      debug : access GLIB.gchar;
+      file : access GLIB.gchar;
+      c_function : access GLIB.gchar;
+      line : GLIB.gint);  -- gst/gstelement.h:859
    pragma Import (C, gst_element_message_full, "gst_element_message_full");
 
    procedure gst_element_message_full_with_details
      (element : access GstElement;
       c_type : int;
-      domain : GStreamer.GST_Low_Level.glib_2_0_glib_gquark_h.GQuark;
-      code : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;
-      text : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      debug : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      file : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      c_function : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      line : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;
+      domain : Glib.GQuark;
+      code : GLIB.gint;
+      text : access GLIB.gchar;
+      debug : access GLIB.gchar;
+      file : access GLIB.gchar;
+      c_function : access GLIB.gchar;
+      line : GLIB.gint;
       structure : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststructure_h.GstStructure);  -- gst/gstelement.h:864
    pragma Import (C, gst_element_message_full_with_details, "gst_element_message_full_with_details");
 
   -- state management  
-   function gst_element_is_locked_state (element : access GstElement) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstelement.h:871
+   function gst_element_is_locked_state (element : access GstElement) return GLIB.gboolean;  -- gst/gstelement.h:871
    pragma Import (C, gst_element_is_locked_state, "gst_element_is_locked_state");
 
-   function gst_element_set_locked_state (element : access GstElement; locked_state : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstelement.h:872
+   function gst_element_set_locked_state (element : access GstElement; locked_state : GLIB.gboolean) return GLIB.gboolean;  -- gst/gstelement.h:872
    pragma Import (C, gst_element_set_locked_state, "gst_element_set_locked_state");
 
-   function gst_element_sync_state_with_parent (element : access GstElement) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstelement.h:873
+   function gst_element_sync_state_with_parent (element : access GstElement) return GLIB.gboolean;  -- gst/gstelement.h:873
    pragma Import (C, gst_element_sync_state_with_parent, "gst_element_sync_state_with_parent");
 
    function gst_element_get_state
      (element : access GstElement;
       state : access GstState;
       pending : access GstState;
-      timeout : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime) return GstStateChangeReturn;  -- gst/gstelement.h:875
+      timeout : GLIB.guint64) return GstStateChangeReturn;  -- gst/gstelement.h:875
    pragma Import (C, gst_element_get_state, "gst_element_get_state");
 
    function gst_element_set_state (element : access GstElement; state : GstState) return GstStateChangeReturn;  -- gst/gstelement.h:879
@@ -946,13 +949,13 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h is
    procedure gst_element_lost_state (element : access GstElement);  -- gst/gstelement.h:886
    pragma Import (C, gst_element_lost_state, "gst_element_lost_state");
 
-   type GstElementCallAsyncFunc is access procedure  (arg1 : access GstElement; arg2 : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer);
+   type GstElementCallAsyncFunc is access procedure  (arg1 : access GstElement; arg2 : System.Address);
    pragma Convention (C, GstElementCallAsyncFunc);  -- gst/gstelement.h:888
 
    procedure gst_element_call_async
      (element : access GstElement;
       func : GstElementCallAsyncFunc;
-      user_data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+      user_data : System.Address;
       destroy_notify : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.GDestroyNotify);  -- gst/gstelement.h:891
    pragma Import (C, gst_element_call_async, "gst_element_call_async");
 
@@ -963,17 +966,17 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h is
   -- utility functions  
    function gst_element_add_property_notify_watch
      (element : access GstElement;
-      property_name : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      include_value : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gulong;  -- gst/gstelement.h:899
+      property_name : access GLIB.gchar;
+      include_value : GLIB.gboolean) return GLIB.gulong;  -- gst/gstelement.h:899
    pragma Import (C, gst_element_add_property_notify_watch, "gst_element_add_property_notify_watch");
 
    function gst_element_add_property_deep_notify_watch
      (element : access GstElement;
-      property_name : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      include_value : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gulong;  -- gst/gstelement.h:903
+      property_name : access GLIB.gchar;
+      include_value : GLIB.gboolean) return GLIB.gulong;  -- gst/gstelement.h:903
    pragma Import (C, gst_element_add_property_deep_notify_watch, "gst_element_add_property_deep_notify_watch");
 
-   procedure gst_element_remove_property_notify_watch (element : access GstElement; watch_id : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gulong);  -- gst/gstelement.h:907
+   procedure gst_element_remove_property_notify_watch (element : access GstElement; watch_id : GLIB.gulong);  -- gst/gstelement.h:907
    pragma Import (C, gst_element_remove_property_notify_watch, "gst_element_remove_property_notify_watch");
 
    procedure glib_autoptr_cleanup_GstElement (u_ptr : System.Address);  -- gst/gstelement.h:911

@@ -1,13 +1,16 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
-limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstminiobject_h;
-with GStreamer.GST_Low_Level.glibconfig_h;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gobject_h;
+with glib;
+with glib.Values;
 with System;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;
+limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstminiobject_h;
+with GLIB; --  with GStreamer.GST_Low_Level.glibconfig_h;
+--  with GStreamer.GST_Low_Level.glib_2_0_gobject_gobject_h;
+with System;
+with glib;
 
 package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstdataqueue_h is
 
@@ -42,18 +45,18 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstdataqueue_h is
   --  
 
    type GstDataQueue;
-   type u_GstDataQueue_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstDataQueue_u_gst_reserved_array is array (0 .. 3) of System.Address;
    --subtype GstDataQueue is u_GstDataQueue;  -- gst/base/gstdataqueue.h:39
 
    type GstDataQueueClass;
-   type u_GstDataQueueClass_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstDataQueueClass_u_gst_reserved_array is array (0 .. 3) of System.Address;
    --subtype GstDataQueueClass is u_GstDataQueueClass;  -- gst/base/gstdataqueue.h:40
 
    type GstDataQueueSize;
    --subtype GstDataQueueSize is u_GstDataQueueSize;  -- gst/base/gstdataqueue.h:41
 
    type GstDataQueueItem;
-   type u_GstDataQueueItem_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstDataQueueItem_u_gst_reserved_array is array (0 .. 3) of System.Address;
    --subtype GstDataQueueItem is u_GstDataQueueItem;  -- gst/base/gstdataqueue.h:42
 
    --  skipped empty struct u_GstDataQueuePrivate
@@ -77,9 +80,9 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstdataqueue_h is
 
    type GstDataQueueItem is record
       object : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstminiobject_h.GstMiniObject;  -- gst/base/gstdataqueue.h:62
-      size : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;  -- gst/base/gstdataqueue.h:63
-      duration : aliased GStreamer.GST_Low_Level.glibconfig_h.guint64;  -- gst/base/gstdataqueue.h:64
-      visible : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/base/gstdataqueue.h:65
+      size : aliased GLIB.guint;  -- gst/base/gstdataqueue.h:63
+      duration : aliased GLIB.guint64;  -- gst/base/gstdataqueue.h:64
+      visible : aliased GLIB.gboolean;  -- gst/base/gstdataqueue.h:65
       destroy : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.GDestroyNotify;  -- gst/base/gstdataqueue.h:68
       u_gst_reserved : u_GstDataQueueItem_u_gst_reserved_array;  -- gst/base/gstdataqueue.h:71
    end record;
@@ -97,9 +100,9 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstdataqueue_h is
   --  
 
    type GstDataQueueSize is record
-      visible : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;  -- gst/base/gstdataqueue.h:84
-      bytes : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;  -- gst/base/gstdataqueue.h:85
-      time : aliased GStreamer.GST_Low_Level.glibconfig_h.guint64;  -- gst/base/gstdataqueue.h:86
+      visible : aliased GLIB.guint;  -- gst/base/gstdataqueue.h:84
+      bytes : aliased GLIB.guint;  -- gst/base/gstdataqueue.h:85
+      time : aliased GLIB.guint64;  -- gst/base/gstdataqueue.h:86
    end record;
    pragma Convention (C_Pass_By_Copy, GstDataQueueSize);  -- gst/base/gstdataqueue.h:82
 
@@ -119,16 +122,16 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstdataqueue_h is
 
    type GstDataQueueCheckFullFunction is access function 
         (arg1 : access GstDataQueue;
-         arg2 : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;
-         arg3 : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;
-         arg4 : GStreamer.GST_Low_Level.glibconfig_h.guint64;
-         arg5 : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;
+         arg2 : GLIB.guint;
+         arg3 : GLIB.guint;
+         arg4 : GLIB.guint64;
+         arg5 : System.Address) return GLIB.gboolean;
    pragma Convention (C, GstDataQueueCheckFullFunction);  -- gst/base/gstdataqueue.h:102
 
-   type GstDataQueueFullCallback is access procedure  (arg1 : access GstDataQueue; arg2 : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer);
+   type GstDataQueueFullCallback is access procedure  (arg1 : access GstDataQueue; arg2 : System.Address);
    pragma Convention (C, GstDataQueueFullCallback);  -- gst/base/gstdataqueue.h:105
 
-   type GstDataQueueEmptyCallback is access procedure  (arg1 : access GstDataQueue; arg2 : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer);
+   type GstDataQueueEmptyCallback is access procedure  (arg1 : access GstDataQueue; arg2 : System.Address);
    pragma Convention (C, GstDataQueueEmptyCallback);  -- gst/base/gstdataqueue.h:106
 
   --*
@@ -139,7 +142,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstdataqueue_h is
   --  
 
    type GstDataQueue is record
-      object : aliased GStreamer.GST_Low_Level.glib_2_0_gobject_gobject_h.GObject;  -- gst/base/gstdataqueue.h:116
+      object : aliased GLIB.Object.GObject;  -- gst/base/gstdataqueue.h:116
       priv : System.Address;  -- gst/base/gstdataqueue.h:119
       u_gst_reserved : u_GstDataQueue_u_gst_reserved_array;  -- gst/base/gstdataqueue.h:120
    end record;
@@ -151,7 +154,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstdataqueue_h is
   --  
 
    type GstDataQueueClass is record
-      parent_class : aliased GStreamer.GST_Low_Level.glib_2_0_gobject_gobject_h.GObjectClass;  -- gst/base/gstdataqueue.h:128
+      parent_class : aliased GLIB.Object.GObject_Class;  -- gst/base/gstdataqueue.h:128
       empty : access procedure  (arg1 : access GstDataQueue);  -- gst/base/gstdataqueue.h:131
       full : access procedure  (arg1 : access GstDataQueue);  -- gst/base/gstdataqueue.h:132
       u_gst_reserved : u_GstDataQueueClass_u_gst_reserved_array;  -- gst/base/gstdataqueue.h:134
@@ -159,41 +162,41 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstdataqueue_h is
    pragma Convention (C_Pass_By_Copy, GstDataQueueClass);  -- gst/base/gstdataqueue.h:126
 
   -- signals  
-   function gst_data_queue_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/base/gstdataqueue.h:137
+   function gst_data_queue_get_type return GLIB.GType;  -- gst/base/gstdataqueue.h:137
    pragma Import (C, gst_data_queue_get_type, "gst_data_queue_get_type");
 
    function gst_data_queue_new
      (checkfull : GstDataQueueCheckFullFunction;
       fullcallback : GstDataQueueFullCallback;
       emptycallback : GstDataQueueEmptyCallback;
-      checkdata : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer) return access GstDataQueue;  -- gst/base/gstdataqueue.h:139
+      checkdata : System.Address) return access GstDataQueue;  -- gst/base/gstdataqueue.h:139
    pragma Import (C, gst_data_queue_new, "gst_data_queue_new");
 
-   function gst_data_queue_push (queue : access GstDataQueue; item : access GstDataQueueItem) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/base/gstdataqueue.h:144
+   function gst_data_queue_push (queue : access GstDataQueue; item : access GstDataQueueItem) return GLIB.gboolean;  -- gst/base/gstdataqueue.h:144
    pragma Import (C, gst_data_queue_push, "gst_data_queue_push");
 
-   function gst_data_queue_push_force (queue : access GstDataQueue; item : access GstDataQueueItem) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/base/gstdataqueue.h:145
+   function gst_data_queue_push_force (queue : access GstDataQueue; item : access GstDataQueueItem) return GLIB.gboolean;  -- gst/base/gstdataqueue.h:145
    pragma Import (C, gst_data_queue_push_force, "gst_data_queue_push_force");
 
-   function gst_data_queue_pop (queue : access GstDataQueue; item : System.Address) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/base/gstdataqueue.h:147
+   function gst_data_queue_pop (queue : access GstDataQueue; item : System.Address) return GLIB.gboolean;  -- gst/base/gstdataqueue.h:147
    pragma Import (C, gst_data_queue_pop, "gst_data_queue_pop");
 
-   function gst_data_queue_peek (queue : access GstDataQueue; item : System.Address) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/base/gstdataqueue.h:148
+   function gst_data_queue_peek (queue : access GstDataQueue; item : System.Address) return GLIB.gboolean;  -- gst/base/gstdataqueue.h:148
    pragma Import (C, gst_data_queue_peek, "gst_data_queue_peek");
 
    procedure gst_data_queue_flush (queue : access GstDataQueue);  -- gst/base/gstdataqueue.h:150
    pragma Import (C, gst_data_queue_flush, "gst_data_queue_flush");
 
-   procedure gst_data_queue_set_flushing (queue : access GstDataQueue; flushing : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean);  -- gst/base/gstdataqueue.h:152
+   procedure gst_data_queue_set_flushing (queue : access GstDataQueue; flushing : GLIB.gboolean);  -- gst/base/gstdataqueue.h:152
    pragma Import (C, gst_data_queue_set_flushing, "gst_data_queue_set_flushing");
 
-   function gst_data_queue_drop_head (queue : access GstDataQueue; c_type : GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/base/gstdataqueue.h:154
+   function gst_data_queue_drop_head (queue : access GstDataQueue; c_type : GLIB.GType) return GLIB.gboolean;  -- gst/base/gstdataqueue.h:154
    pragma Import (C, gst_data_queue_drop_head, "gst_data_queue_drop_head");
 
-   function gst_data_queue_is_full (queue : access GstDataQueue) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/base/gstdataqueue.h:156
+   function gst_data_queue_is_full (queue : access GstDataQueue) return GLIB.gboolean;  -- gst/base/gstdataqueue.h:156
    pragma Import (C, gst_data_queue_is_full, "gst_data_queue_is_full");
 
-   function gst_data_queue_is_empty (queue : access GstDataQueue) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/base/gstdataqueue.h:158
+   function gst_data_queue_is_empty (queue : access GstDataQueue) return GLIB.gboolean;  -- gst/base/gstdataqueue.h:158
    pragma Import (C, gst_data_queue_is_empty, "gst_data_queue_is_empty");
 
    procedure gst_data_queue_get_level (queue : access GstDataQueue; level : access GstDataQueueSize);  -- gst/base/gstdataqueue.h:160

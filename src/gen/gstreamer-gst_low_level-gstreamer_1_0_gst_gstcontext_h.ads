@@ -1,10 +1,13 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;
+with glib;
 with System;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
+with glib;
+with glib.Values;
+with System;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststructure_h;
 
 package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcontext_h is
@@ -47,7 +50,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcontext_h is
 
    --  skipped empty struct GstContext
 
-   function gst_context_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gstcontext.h:45
+   function gst_context_get_type return GLIB.GType;  -- gst/gstcontext.h:45
    pragma Import (C, gst_context_get_type, "gst_context_get_type");
 
   -- refcounting  
@@ -126,16 +129,16 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcontext_h is
   -- * Returns: %TRUE if @new_context was different from @old_context
   --  
 
-   function gst_context_replace (old_context : System.Address; new_context : System.Address) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstcontext.h:130
+   function gst_context_replace (old_context : System.Address; new_context : System.Address) return GLIB.gboolean;  -- gst/gstcontext.h:130
    pragma Import (C, gst_context_replace, "gst_context_replace");
 
-   function gst_context_new (context_type : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar; persistent : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean) return System.Address;  -- gst/gstcontext.h:135
+   function gst_context_new (context_type : access GLIB.gchar; persistent : GLIB.gboolean) return System.Address;  -- gst/gstcontext.h:135
    pragma Import (C, gst_context_new, "gst_context_new");
 
-   function gst_context_get_context_type (context : System.Address) return access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gstcontext.h:138
+   function gst_context_get_context_type (context : System.Address) return access GLIB.gchar;  -- gst/gstcontext.h:138
    pragma Import (C, gst_context_get_context_type, "gst_context_get_context_type");
 
-   function gst_context_has_context_type (context : System.Address; context_type : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstcontext.h:139
+   function gst_context_has_context_type (context : System.Address; context_type : access GLIB.gchar) return GLIB.gboolean;  -- gst/gstcontext.h:139
    pragma Import (C, gst_context_has_context_type, "gst_context_has_context_type");
 
    function gst_context_get_structure (context : System.Address) return access constant GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststructure_h.GstStructure;  -- gst/gstcontext.h:140
@@ -144,7 +147,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcontext_h is
    function gst_context_writable_structure (context : System.Address) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststructure_h.GstStructure;  -- gst/gstcontext.h:141
    pragma Import (C, gst_context_writable_structure, "gst_context_writable_structure");
 
-   function gst_context_is_persistent (context : System.Address) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstcontext.h:143
+   function gst_context_is_persistent (context : System.Address) return GLIB.gboolean;  -- gst/gstcontext.h:143
    pragma Import (C, gst_context_is_persistent, "gst_context_is_persistent");
 
    procedure glib_autoptr_cleanup_GstContext (u_ptr : System.Address);  -- gst/gstcontext.h:146

@@ -1,12 +1,15 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
+with glib;
+with glib.Values;
+with System;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h;
 with System;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gclosure_h;
+with glib;
+--  with GStreamer.GST_Low_Level.glib_2_0_gobject_gclosure_h;
 
 package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsttracer_h is
 
@@ -45,7 +48,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsttracer_h is
   --  
 
    type GstTracer;
-   type u_GstTracer_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstTracer_u_gst_reserved_array is array (0 .. 3) of System.Address;
    --subtype GstTracer is u_GstTracer;  -- gst/gsttracer.h:32
 
    --  skipped empty struct u_GstTracerPrivate
@@ -53,7 +56,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsttracer_h is
    --  skipped empty struct GstTracerPrivate
 
    type GstTracerClass;
-   type u_GstTracerClass_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstTracerClass_u_gst_reserved_array is array (0 .. 3) of System.Address;
    --subtype GstTracerClass is u_GstTracerClass;  -- gst/gsttracer.h:34
 
    type GstTracer is record
@@ -71,20 +74,20 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsttracer_h is
    pragma Convention (C_Pass_By_Copy, GstTracerClass);  -- gst/gsttracer.h:51
 
   --< private > 
-   function gst_tracer_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gsttracer.h:58
+   function gst_tracer_get_type return GLIB.GType;  -- gst/gsttracer.h:58
    pragma Import (C, gst_tracer_get_type, "gst_tracer_get_type");
 
    procedure gst_tracing_register_hook
      (tracer : access GstTracer;
-      detail : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
+      detail : access GLIB.gchar;
       func : GStreamer.GST_Low_Level.glib_2_0_gobject_gclosure_h.GCallback);  -- gst/gsttracer.h:62
    pragma Import (C, gst_tracing_register_hook, "gst_tracing_register_hook");
 
   -- tracing modules  
    function gst_tracer_register
      (plugin : System.Address;
-      name : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      c_type : GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gsttracer.h:66
+      name : access GLIB.gchar;
+      c_type : GLIB.GType) return GLIB.gboolean;  -- gst/gsttracer.h:66
    pragma Import (C, gst_tracer_register, "gst_tracer_register");
 
    procedure glib_autoptr_cleanup_GstTracer (u_ptr : System.Address);  -- gst/gsttracer.h:71

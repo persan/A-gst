@@ -1,12 +1,15 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
+with glib;
+with glib.Values;
+with System;
 with System;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h;
-limited with GStreamer.GST_Low_Level.glib_2_0_glib_gthreadpool_h;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;
+--  limited with GStreamer.GST_Low_Level.glib_2_0_glib_gthreadpool_h;
+with glib;
 
 package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsttaskpool_h is
 
@@ -46,11 +49,11 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsttaskpool_h is
 
   -- --- standard type macros ---  
    type GstTaskPool;
-   type u_GstTaskPool_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstTaskPool_u_gst_reserved_array is array (0 .. 3) of System.Address;
    --subtype GstTaskPool is u_GstTaskPool;  -- gst/gsttaskpool.h:38
 
    type GstTaskPoolClass;
-   type u_GstTaskPoolClass_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstTaskPoolClass_u_gst_reserved_array is array (0 .. 3) of System.Address;
    --subtype GstTaskPoolClass is u_GstTaskPoolClass;  -- gst/gsttaskpool.h:39
 
   --*
@@ -95,16 +98,16 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsttaskpool_h is
       push : access function 
            (arg1 : access GstTaskPool;
             arg2 : GstTaskPoolFunction;
-            arg3 : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
-            arg4 : System.Address) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;  -- gst/gsttaskpool.h:81
-      join : access procedure  (arg1 : access GstTaskPool; arg2 : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer);  -- gst/gsttaskpool.h:82
+            arg3 : System.Address;
+            arg4 : System.Address) return System.Address;  -- gst/gsttaskpool.h:81
+      join : access procedure  (arg1 : access GstTaskPool; arg2 : System.Address);  -- gst/gsttaskpool.h:82
       u_gst_reserved : u_GstTaskPoolClass_u_gst_reserved_array;  -- gst/gsttaskpool.h:85
    end record;
    pragma Convention (C_Pass_By_Copy, GstTaskPoolClass);  -- gst/gsttaskpool.h:73
 
   --< public > 
   --< private > 
-   function gst_task_pool_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gsttaskpool.h:88
+   function gst_task_pool_get_type return GLIB.GType;  -- gst/gsttaskpool.h:88
    pragma Import (C, gst_task_pool_get_type, "gst_task_pool_get_type");
 
    function gst_task_pool_new return access GstTaskPool;  -- gst/gsttaskpool.h:90
@@ -116,11 +119,11 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsttaskpool_h is
    function gst_task_pool_push
      (pool : access GstTaskPool;
       func : GstTaskPoolFunction;
-      user_data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
-      error : System.Address) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;  -- gst/gsttaskpool.h:93
+      user_data : System.Address;
+      error : System.Address) return System.Address;  -- gst/gsttaskpool.h:93
    pragma Import (C, gst_task_pool_push, "gst_task_pool_push");
 
-   procedure gst_task_pool_join (pool : access GstTaskPool; id : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer);  -- gst/gsttaskpool.h:95
+   procedure gst_task_pool_join (pool : access GstTaskPool; id : System.Address);  -- gst/gsttaskpool.h:95
    pragma Import (C, gst_task_pool_join, "gst_task_pool_join");
 
    procedure gst_task_pool_cleanup (pool : access GstTaskPool);  -- gst/gsttaskpool.h:97

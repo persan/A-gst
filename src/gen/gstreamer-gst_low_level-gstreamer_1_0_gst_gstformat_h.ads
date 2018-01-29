@@ -1,9 +1,12 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gquark_h;
+with glib;
+with glib.Values;
+with System;
+--  with GStreamer.GST_Low_Level.glib_2_0_glib_gquark_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstiterator_h;
 
 package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstformat_h is
@@ -92,27 +95,27 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstformat_h is
 
    type GstFormatDefinition is record
       value : aliased GstFormat;  -- gst/gstformat.h:89
-      nick : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gstformat.h:90
-      description : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gstformat.h:91
-      quark : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gquark_h.GQuark;  -- gst/gstformat.h:92
+      nick : access GLIB.gchar;  -- gst/gstformat.h:90
+      description : access GLIB.gchar;  -- gst/gstformat.h:91
+      quark : aliased Glib.GQuark;  -- gst/gstformat.h:92
    end record;
    pragma Convention (C_Pass_By_Copy, GstFormatDefinition);  -- gst/gstformat.h:87
 
-   function gst_format_get_name (format : GstFormat) return access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gstformat.h:95
+   function gst_format_get_name (format : GstFormat) return access GLIB.gchar;  -- gst/gstformat.h:95
    pragma Import (C, gst_format_get_name, "gst_format_get_name");
 
-   function gst_format_to_quark (format : GstFormat) return GStreamer.GST_Low_Level.glib_2_0_glib_gquark_h.GQuark;  -- gst/gstformat.h:96
+   function gst_format_to_quark (format : GstFormat) return Glib.GQuark;  -- gst/gstformat.h:96
    pragma Import (C, gst_format_to_quark, "gst_format_to_quark");
 
   -- register a new format  
-   function gst_format_register (nick : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar; description : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return GstFormat;  -- gst/gstformat.h:99
+   function gst_format_register (nick : access GLIB.gchar; description : access GLIB.gchar) return GstFormat;  -- gst/gstformat.h:99
    pragma Import (C, gst_format_register, "gst_format_register");
 
-   function gst_format_get_by_nick (nick : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return GstFormat;  -- gst/gstformat.h:101
+   function gst_format_get_by_nick (nick : access GLIB.gchar) return GstFormat;  -- gst/gstformat.h:101
    pragma Import (C, gst_format_get_by_nick, "gst_format_get_by_nick");
 
   -- check if a format is in an array of formats  
-   function gst_formats_contains (formats : access GstFormat; format : GstFormat) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstformat.h:104
+   function gst_formats_contains (formats : access GstFormat; format : GstFormat) return GLIB.gboolean;  -- gst/gstformat.h:104
    pragma Import (C, gst_formats_contains, "gst_formats_contains");
 
   -- query for format details  

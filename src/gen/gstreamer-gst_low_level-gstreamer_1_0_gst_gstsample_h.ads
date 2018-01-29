@@ -1,8 +1,9 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;
+with glib;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstsegment_h;
@@ -58,7 +59,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstsample_h is
 
    --  skipped empty struct GstSample
 
-   function gst_sample_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gstsample.h:50
+   function gst_sample_get_type return GLIB.GType;  -- gst/gstsample.h:50
    pragma Import (C, gst_sample_get_type, "gst_sample_get_type");
 
   -- allocation  

@@ -1,10 +1,11 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmeta_h;
 limited with GStreamer.GST_Low_Level.glib_2_0_gio_giotypes_h;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;
+with glib;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h;
 
 package GStreamer.GST_Low_Level.gstreamer_1_0_gst_net_gstnetcontrolmessagemeta_h is
@@ -50,7 +51,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_net_gstnetcontrolmessagemeta_h
    end record;
    pragma Convention (C_Pass_By_Copy, GstNetControlMessageMeta);  -- gst/net/gstnetcontrolmessagemeta.h:38
 
-   function gst_net_control_message_meta_api_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/net/gstnetcontrolmessagemeta.h:44
+   function gst_net_control_message_meta_api_get_type return GLIB.GType;  -- gst/net/gstnetcontrolmessagemeta.h:44
    pragma Import (C, gst_net_control_message_meta_api_get_type, "gst_net_control_message_meta_api_get_type");
 
   -- implementation  

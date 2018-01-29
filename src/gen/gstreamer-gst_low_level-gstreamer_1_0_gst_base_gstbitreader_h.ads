@@ -1,9 +1,12 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
-with GStreamer.GST_Low_Level.glibconfig_h;
+with glib;
+with glib.Values;
+with System;
+with GLIB; --  with GStreamer.GST_Low_Level.glibconfig_h;
 
 package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstbitreader_h is
 
@@ -69,12 +72,12 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstbitreader_h is
   -- * A bit reader instance.
   --  
 
-   type GstBitReader_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type GstBitReader_u_gst_reserved_array is array (0 .. 3) of System.Address;
    type GstBitReader is record
-      data : access GStreamer.GST_Low_Level.glibconfig_h.guint8;  -- gst/base/gstbitreader.h:43
-      size : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;  -- gst/base/gstbitreader.h:44
-      byte : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;  -- gst/base/gstbitreader.h:46
-      bit : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;  -- gst/base/gstbitreader.h:47
+      data : access GLIB.guint8;  -- gst/base/gstbitreader.h:43
+      size : aliased GLIB.guint;  -- gst/base/gstbitreader.h:44
+      byte : aliased GLIB.guint;  -- gst/base/gstbitreader.h:46
+      bit : aliased GLIB.guint;  -- gst/base/gstbitreader.h:47
       u_gst_reserved : GstBitReader_u_gst_reserved_array;  -- gst/base/gstbitreader.h:50
    end record;
    pragma Convention (C_Pass_By_Copy, GstBitReader);  -- gst/base/gstbitreader.h:51
@@ -84,7 +87,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstbitreader_h is
   -- Byte position  
   -- Bit position in the current byte  
   -- < private >  
-   function gst_bit_reader_new (data : access GStreamer.GST_Low_Level.glibconfig_h.guint8; size : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint) return access GstBitReader;  -- gst/base/gstbitreader.h:53
+   function gst_bit_reader_new (data : access GLIB.guint8; size : GLIB.guint) return access GstBitReader;  -- gst/base/gstbitreader.h:53
    pragma Import (C, gst_bit_reader_new, "gst_bit_reader_new");
 
    procedure gst_bit_reader_free (reader : access GstBitReader);  -- gst/base/gstbitreader.h:54
@@ -92,74 +95,74 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstbitreader_h is
 
    procedure gst_bit_reader_init
      (reader : access GstBitReader;
-      data : access GStreamer.GST_Low_Level.glibconfig_h.guint8;
-      size : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint);  -- gst/base/gstbitreader.h:56
+      data : access GLIB.guint8;
+      size : GLIB.guint);  -- gst/base/gstbitreader.h:56
    pragma Import (C, gst_bit_reader_init, "gst_bit_reader_init");
 
-   function gst_bit_reader_set_pos (reader : access GstBitReader; pos : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/base/gstbitreader.h:58
+   function gst_bit_reader_set_pos (reader : access GstBitReader; pos : GLIB.guint) return GLIB.gboolean;  -- gst/base/gstbitreader.h:58
    pragma Import (C, gst_bit_reader_set_pos, "gst_bit_reader_set_pos");
 
-   function gst_bit_reader_get_pos (reader : access constant GstBitReader) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;  -- gst/base/gstbitreader.h:59
+   function gst_bit_reader_get_pos (reader : access constant GstBitReader) return GLIB.guint;  -- gst/base/gstbitreader.h:59
    pragma Import (C, gst_bit_reader_get_pos, "gst_bit_reader_get_pos");
 
-   function gst_bit_reader_get_remaining (reader : access constant GstBitReader) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;  -- gst/base/gstbitreader.h:61
+   function gst_bit_reader_get_remaining (reader : access constant GstBitReader) return GLIB.guint;  -- gst/base/gstbitreader.h:61
    pragma Import (C, gst_bit_reader_get_remaining, "gst_bit_reader_get_remaining");
 
-   function gst_bit_reader_get_size (reader : access constant GstBitReader) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;  -- gst/base/gstbitreader.h:63
+   function gst_bit_reader_get_size (reader : access constant GstBitReader) return GLIB.guint;  -- gst/base/gstbitreader.h:63
    pragma Import (C, gst_bit_reader_get_size, "gst_bit_reader_get_size");
 
-   function gst_bit_reader_skip (reader : access GstBitReader; nbits : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/base/gstbitreader.h:65
+   function gst_bit_reader_skip (reader : access GstBitReader; nbits : GLIB.guint) return GLIB.gboolean;  -- gst/base/gstbitreader.h:65
    pragma Import (C, gst_bit_reader_skip, "gst_bit_reader_skip");
 
-   function gst_bit_reader_skip_to_byte (reader : access GstBitReader) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/base/gstbitreader.h:66
+   function gst_bit_reader_skip_to_byte (reader : access GstBitReader) return GLIB.gboolean;  -- gst/base/gstbitreader.h:66
    pragma Import (C, gst_bit_reader_skip_to_byte, "gst_bit_reader_skip_to_byte");
 
    function gst_bit_reader_get_bits_uint8
      (reader : access GstBitReader;
-      val : access GStreamer.GST_Low_Level.glibconfig_h.guint8;
-      nbits : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/base/gstbitreader.h:68
+      val : access GLIB.guint8;
+      nbits : GLIB.guint) return GLIB.gboolean;  -- gst/base/gstbitreader.h:68
    pragma Import (C, gst_bit_reader_get_bits_uint8, "gst_bit_reader_get_bits_uint8");
 
    function gst_bit_reader_get_bits_uint16
      (reader : access GstBitReader;
-      val : access GStreamer.GST_Low_Level.glibconfig_h.guint16;
-      nbits : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/base/gstbitreader.h:69
+      val : access GLIB.guint16;
+      nbits : GLIB.guint) return GLIB.gboolean;  -- gst/base/gstbitreader.h:69
    pragma Import (C, gst_bit_reader_get_bits_uint16, "gst_bit_reader_get_bits_uint16");
 
    function gst_bit_reader_get_bits_uint32
      (reader : access GstBitReader;
-      val : access GStreamer.GST_Low_Level.glibconfig_h.guint32;
-      nbits : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/base/gstbitreader.h:70
+      val : access GLIB.guint32;
+      nbits : GLIB.guint) return GLIB.gboolean;  -- gst/base/gstbitreader.h:70
    pragma Import (C, gst_bit_reader_get_bits_uint32, "gst_bit_reader_get_bits_uint32");
 
    function gst_bit_reader_get_bits_uint64
      (reader : access GstBitReader;
-      val : access GStreamer.GST_Low_Level.glibconfig_h.guint64;
-      nbits : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/base/gstbitreader.h:71
+      val : access GLIB.guint64;
+      nbits : GLIB.guint) return GLIB.gboolean;  -- gst/base/gstbitreader.h:71
    pragma Import (C, gst_bit_reader_get_bits_uint64, "gst_bit_reader_get_bits_uint64");
 
    function gst_bit_reader_peek_bits_uint8
      (reader : access constant GstBitReader;
-      val : access GStreamer.GST_Low_Level.glibconfig_h.guint8;
-      nbits : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/base/gstbitreader.h:73
+      val : access GLIB.guint8;
+      nbits : GLIB.guint) return GLIB.gboolean;  -- gst/base/gstbitreader.h:73
    pragma Import (C, gst_bit_reader_peek_bits_uint8, "gst_bit_reader_peek_bits_uint8");
 
    function gst_bit_reader_peek_bits_uint16
      (reader : access constant GstBitReader;
-      val : access GStreamer.GST_Low_Level.glibconfig_h.guint16;
-      nbits : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/base/gstbitreader.h:74
+      val : access GLIB.guint16;
+      nbits : GLIB.guint) return GLIB.gboolean;  -- gst/base/gstbitreader.h:74
    pragma Import (C, gst_bit_reader_peek_bits_uint16, "gst_bit_reader_peek_bits_uint16");
 
    function gst_bit_reader_peek_bits_uint32
      (reader : access constant GstBitReader;
-      val : access GStreamer.GST_Low_Level.glibconfig_h.guint32;
-      nbits : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/base/gstbitreader.h:75
+      val : access GLIB.guint32;
+      nbits : GLIB.guint) return GLIB.gboolean;  -- gst/base/gstbitreader.h:75
    pragma Import (C, gst_bit_reader_peek_bits_uint32, "gst_bit_reader_peek_bits_uint32");
 
    function gst_bit_reader_peek_bits_uint64
      (reader : access constant GstBitReader;
-      val : access GStreamer.GST_Low_Level.glibconfig_h.guint64;
-      nbits : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/base/gstbitreader.h:76
+      val : access GLIB.guint64;
+      nbits : GLIB.guint) return GLIB.gboolean;  -- gst/base/gstbitreader.h:76
    pragma Import (C, gst_bit_reader_peek_bits_uint64, "gst_bit_reader_peek_bits_uint64");
 
   --*
@@ -174,34 +177,34 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstbitreader_h is
   --  
 
   -- Unchecked variants  
-   procedure gst_bit_reader_skip_unchecked (reader : access GstBitReader; nbits : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint);  -- gst/base/gstbitreader.h:93
+   procedure gst_bit_reader_skip_unchecked (reader : access GstBitReader; nbits : GLIB.guint);  -- gst/base/gstbitreader.h:93
    pragma Import (C, gst_bit_reader_skip_unchecked, "gst_bit_reader_skip_unchecked");
 
    procedure gst_bit_reader_skip_to_byte_unchecked (reader : access GstBitReader);  -- gst/base/gstbitreader.h:101
    pragma Import (C, gst_bit_reader_skip_to_byte_unchecked, "gst_bit_reader_skip_to_byte_unchecked");
 
-   function gst_bit_reader_get_bits_uint8_unchecked (reader : access GstBitReader; nbits : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint) return GStreamer.GST_Low_Level.glibconfig_h.guint8;  -- gst/base/gstbitreader.h:150
+   function gst_bit_reader_get_bits_uint8_unchecked (reader : access GstBitReader; nbits : GLIB.guint) return GLIB.guint8;  -- gst/base/gstbitreader.h:150
    pragma Import (C, gst_bit_reader_get_bits_uint8_unchecked, "gst_bit_reader_get_bits_uint8_unchecked");
 
-   function gst_bit_reader_peek_bits_uint8_unchecked (reader : access constant GstBitReader; nbits : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint) return GStreamer.GST_Low_Level.glibconfig_h.guint8;  -- gst/base/gstbitreader.h:150
+   function gst_bit_reader_peek_bits_uint8_unchecked (reader : access constant GstBitReader; nbits : GLIB.guint) return GLIB.guint8;  -- gst/base/gstbitreader.h:150
    pragma Import (C, gst_bit_reader_peek_bits_uint8_unchecked, "gst_bit_reader_peek_bits_uint8_unchecked");
 
-   function gst_bit_reader_get_bits_uint16_unchecked (reader : access GstBitReader; nbits : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint) return GStreamer.GST_Low_Level.glibconfig_h.guint16;  -- gst/base/gstbitreader.h:151
+   function gst_bit_reader_get_bits_uint16_unchecked (reader : access GstBitReader; nbits : GLIB.guint) return GLIB.guint16;  -- gst/base/gstbitreader.h:151
    pragma Import (C, gst_bit_reader_get_bits_uint16_unchecked, "gst_bit_reader_get_bits_uint16_unchecked");
 
-   function gst_bit_reader_peek_bits_uint16_unchecked (reader : access constant GstBitReader; nbits : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint) return GStreamer.GST_Low_Level.glibconfig_h.guint16;  -- gst/base/gstbitreader.h:151
+   function gst_bit_reader_peek_bits_uint16_unchecked (reader : access constant GstBitReader; nbits : GLIB.guint) return GLIB.guint16;  -- gst/base/gstbitreader.h:151
    pragma Import (C, gst_bit_reader_peek_bits_uint16_unchecked, "gst_bit_reader_peek_bits_uint16_unchecked");
 
-   function gst_bit_reader_get_bits_uint32_unchecked (reader : access GstBitReader; nbits : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint) return GStreamer.GST_Low_Level.glibconfig_h.guint32;  -- gst/base/gstbitreader.h:152
+   function gst_bit_reader_get_bits_uint32_unchecked (reader : access GstBitReader; nbits : GLIB.guint) return GLIB.guint32;  -- gst/base/gstbitreader.h:152
    pragma Import (C, gst_bit_reader_get_bits_uint32_unchecked, "gst_bit_reader_get_bits_uint32_unchecked");
 
-   function gst_bit_reader_peek_bits_uint32_unchecked (reader : access constant GstBitReader; nbits : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint) return GStreamer.GST_Low_Level.glibconfig_h.guint32;  -- gst/base/gstbitreader.h:152
+   function gst_bit_reader_peek_bits_uint32_unchecked (reader : access constant GstBitReader; nbits : GLIB.guint) return GLIB.guint32;  -- gst/base/gstbitreader.h:152
    pragma Import (C, gst_bit_reader_peek_bits_uint32_unchecked, "gst_bit_reader_peek_bits_uint32_unchecked");
 
-   function gst_bit_reader_get_bits_uint64_unchecked (reader : access GstBitReader; nbits : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint) return GStreamer.GST_Low_Level.glibconfig_h.guint64;  -- gst/base/gstbitreader.h:153
+   function gst_bit_reader_get_bits_uint64_unchecked (reader : access GstBitReader; nbits : GLIB.guint) return GLIB.guint64;  -- gst/base/gstbitreader.h:153
    pragma Import (C, gst_bit_reader_get_bits_uint64_unchecked, "gst_bit_reader_get_bits_uint64_unchecked");
 
-   function gst_bit_reader_peek_bits_uint64_unchecked (reader : access constant GstBitReader; nbits : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint) return GStreamer.GST_Low_Level.glibconfig_h.guint64;  -- gst/base/gstbitreader.h:153
+   function gst_bit_reader_peek_bits_uint64_unchecked (reader : access constant GstBitReader; nbits : GLIB.guint) return GLIB.guint64;  -- gst/base/gstbitreader.h:153
    pragma Import (C, gst_bit_reader_peek_bits_uint64_unchecked, "gst_bit_reader_peek_bits_uint64_unchecked");
 
   -- unchecked variants -- do not use  

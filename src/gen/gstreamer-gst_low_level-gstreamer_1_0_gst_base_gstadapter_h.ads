@@ -1,13 +1,16 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;
+with glib;
 with System;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h;
-with GStreamer.GST_Low_Level.glibconfig_h;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
-limited with GStreamer.GST_Low_Level.glib_2_0_glib_glist_h;
+with GLIB; --  with GStreamer.GST_Low_Level.glibconfig_h;
+with glib;
+with glib.Values;
+with System;
+--  limited with GStreamer.GST_Low_Level.glib_2_0_glib_glist_h;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h;
 
 package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstadapter_h is
@@ -56,7 +59,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstadapter_h is
 
    --  skipped empty struct GstAdapterClass
 
-   function gst_adapter_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/base/gstadapter.h:49
+   function gst_adapter_get_type return GLIB.GType;  -- gst/base/gstadapter.h:49
    pragma Import (C, gst_adapter_get_type, "gst_adapter_get_type");
 
    function gst_adapter_new return System.Address;  -- gst/base/gstadapter.h:51
@@ -68,7 +71,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstadapter_h is
    procedure gst_adapter_push (adapter : System.Address; buf : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBuffer);  -- gst/base/gstadapter.h:54
    pragma Import (C, gst_adapter_push, "gst_adapter_push");
 
-   function gst_adapter_map (adapter : System.Address; size : GStreamer.GST_Low_Level.glibconfig_h.gsize) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gconstpointer;  -- gst/base/gstadapter.h:55
+   function gst_adapter_map (adapter : System.Address; size : GLIB.gsize) return Interfaces.C.Extensions.void_ptr;  -- gst/base/gstadapter.h:55
    pragma Import (C, gst_adapter_map, "gst_adapter_map");
 
    procedure gst_adapter_unmap (adapter : System.Address);  -- gst/base/gstadapter.h:56
@@ -76,101 +79,101 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstadapter_h is
 
    procedure gst_adapter_copy
      (adapter : System.Address;
-      dest : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
-      offset : GStreamer.GST_Low_Level.glibconfig_h.gsize;
-      size : GStreamer.GST_Low_Level.glibconfig_h.gsize);  -- gst/base/gstadapter.h:57
+      dest : System.Address;
+      offset : GLIB.gsize;
+      size : GLIB.gsize);  -- gst/base/gstadapter.h:57
    pragma Import (C, gst_adapter_copy, "gst_adapter_copy");
 
    function gst_adapter_copy_bytes
      (adapter : System.Address;
-      offset : GStreamer.GST_Low_Level.glibconfig_h.gsize;
-      size : GStreamer.GST_Low_Level.glibconfig_h.gsize) return System.Address;  -- gst/base/gstadapter.h:59
+      offset : GLIB.gsize;
+      size : GLIB.gsize) return System.Address;  -- gst/base/gstadapter.h:59
    pragma Import (C, gst_adapter_copy_bytes, "gst_adapter_copy_bytes");
 
-   procedure gst_adapter_flush (adapter : System.Address; flush : GStreamer.GST_Low_Level.glibconfig_h.gsize);  -- gst/base/gstadapter.h:61
+   procedure gst_adapter_flush (adapter : System.Address; flush : GLIB.gsize);  -- gst/base/gstadapter.h:61
    pragma Import (C, gst_adapter_flush, "gst_adapter_flush");
 
-   function gst_adapter_take (adapter : System.Address; nbytes : GStreamer.GST_Low_Level.glibconfig_h.gsize) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;  -- gst/base/gstadapter.h:62
+   function gst_adapter_take (adapter : System.Address; nbytes : GLIB.gsize) return System.Address;  -- gst/base/gstadapter.h:62
    pragma Import (C, gst_adapter_take, "gst_adapter_take");
 
-   function gst_adapter_take_buffer (adapter : System.Address; nbytes : GStreamer.GST_Low_Level.glibconfig_h.gsize) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBuffer;  -- gst/base/gstadapter.h:63
+   function gst_adapter_take_buffer (adapter : System.Address; nbytes : GLIB.gsize) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBuffer;  -- gst/base/gstadapter.h:63
    pragma Import (C, gst_adapter_take_buffer, "gst_adapter_take_buffer");
 
-   function gst_adapter_take_list (adapter : System.Address; nbytes : GStreamer.GST_Low_Level.glibconfig_h.gsize) return access GStreamer.GST_Low_Level.glib_2_0_glib_glist_h.GList;  -- gst/base/gstadapter.h:64
+   function gst_adapter_take_list (adapter : System.Address; nbytes : GLIB.gsize) return access GStreamer.GST_Low_Level.glib_2_0_glib_glist_h.GList;  -- gst/base/gstadapter.h:64
    pragma Import (C, gst_adapter_take_list, "gst_adapter_take_list");
 
-   function gst_adapter_take_buffer_fast (adapter : System.Address; nbytes : GStreamer.GST_Low_Level.glibconfig_h.gsize) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBuffer;  -- gst/base/gstadapter.h:65
+   function gst_adapter_take_buffer_fast (adapter : System.Address; nbytes : GLIB.gsize) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBuffer;  -- gst/base/gstadapter.h:65
    pragma Import (C, gst_adapter_take_buffer_fast, "gst_adapter_take_buffer_fast");
 
-   function gst_adapter_take_buffer_list (adapter : System.Address; nbytes : GStreamer.GST_Low_Level.glibconfig_h.gsize) return System.Address;  -- gst/base/gstadapter.h:66
+   function gst_adapter_take_buffer_list (adapter : System.Address; nbytes : GLIB.gsize) return System.Address;  -- gst/base/gstadapter.h:66
    pragma Import (C, gst_adapter_take_buffer_list, "gst_adapter_take_buffer_list");
 
-   function gst_adapter_get_buffer (adapter : System.Address; nbytes : GStreamer.GST_Low_Level.glibconfig_h.gsize) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBuffer;  -- gst/base/gstadapter.h:67
+   function gst_adapter_get_buffer (adapter : System.Address; nbytes : GLIB.gsize) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBuffer;  -- gst/base/gstadapter.h:67
    pragma Import (C, gst_adapter_get_buffer, "gst_adapter_get_buffer");
 
-   function gst_adapter_get_list (adapter : System.Address; nbytes : GStreamer.GST_Low_Level.glibconfig_h.gsize) return access GStreamer.GST_Low_Level.glib_2_0_glib_glist_h.GList;  -- gst/base/gstadapter.h:68
+   function gst_adapter_get_list (adapter : System.Address; nbytes : GLIB.gsize) return access GStreamer.GST_Low_Level.glib_2_0_glib_glist_h.GList;  -- gst/base/gstadapter.h:68
    pragma Import (C, gst_adapter_get_list, "gst_adapter_get_list");
 
-   function gst_adapter_get_buffer_fast (adapter : System.Address; nbytes : GStreamer.GST_Low_Level.glibconfig_h.gsize) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBuffer;  -- gst/base/gstadapter.h:69
+   function gst_adapter_get_buffer_fast (adapter : System.Address; nbytes : GLIB.gsize) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBuffer;  -- gst/base/gstadapter.h:69
    pragma Import (C, gst_adapter_get_buffer_fast, "gst_adapter_get_buffer_fast");
 
-   function gst_adapter_get_buffer_list (adapter : System.Address; nbytes : GStreamer.GST_Low_Level.glibconfig_h.gsize) return System.Address;  -- gst/base/gstadapter.h:70
+   function gst_adapter_get_buffer_list (adapter : System.Address; nbytes : GLIB.gsize) return System.Address;  -- gst/base/gstadapter.h:70
    pragma Import (C, gst_adapter_get_buffer_list, "gst_adapter_get_buffer_list");
 
-   function gst_adapter_available (adapter : System.Address) return GStreamer.GST_Low_Level.glibconfig_h.gsize;  -- gst/base/gstadapter.h:71
+   function gst_adapter_available (adapter : System.Address) return GLIB.gsize;  -- gst/base/gstadapter.h:71
    pragma Import (C, gst_adapter_available, "gst_adapter_available");
 
-   function gst_adapter_available_fast (adapter : System.Address) return GStreamer.GST_Low_Level.glibconfig_h.gsize;  -- gst/base/gstadapter.h:72
+   function gst_adapter_available_fast (adapter : System.Address) return GLIB.gsize;  -- gst/base/gstadapter.h:72
    pragma Import (C, gst_adapter_available_fast, "gst_adapter_available_fast");
 
-   function gst_adapter_prev_pts (adapter : System.Address; distance : access GStreamer.GST_Low_Level.glibconfig_h.guint64) return GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime;  -- gst/base/gstadapter.h:74
+   function gst_adapter_prev_pts (adapter : System.Address; distance : access GLIB.guint64) return GLIB.guint64;  -- gst/base/gstadapter.h:74
    pragma Import (C, gst_adapter_prev_pts, "gst_adapter_prev_pts");
 
-   function gst_adapter_prev_dts (adapter : System.Address; distance : access GStreamer.GST_Low_Level.glibconfig_h.guint64) return GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime;  -- gst/base/gstadapter.h:75
+   function gst_adapter_prev_dts (adapter : System.Address; distance : access GLIB.guint64) return GLIB.guint64;  -- gst/base/gstadapter.h:75
    pragma Import (C, gst_adapter_prev_dts, "gst_adapter_prev_dts");
 
    function gst_adapter_prev_pts_at_offset
      (adapter : System.Address;
-      offset : GStreamer.GST_Low_Level.glibconfig_h.gsize;
-      distance : access GStreamer.GST_Low_Level.glibconfig_h.guint64) return GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime;  -- gst/base/gstadapter.h:76
+      offset : GLIB.gsize;
+      distance : access GLIB.guint64) return GLIB.guint64;  -- gst/base/gstadapter.h:76
    pragma Import (C, gst_adapter_prev_pts_at_offset, "gst_adapter_prev_pts_at_offset");
 
    function gst_adapter_prev_dts_at_offset
      (adapter : System.Address;
-      offset : GStreamer.GST_Low_Level.glibconfig_h.gsize;
-      distance : access GStreamer.GST_Low_Level.glibconfig_h.guint64) return GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime;  -- gst/base/gstadapter.h:77
+      offset : GLIB.gsize;
+      distance : access GLIB.guint64) return GLIB.guint64;  -- gst/base/gstadapter.h:77
    pragma Import (C, gst_adapter_prev_dts_at_offset, "gst_adapter_prev_dts_at_offset");
 
-   function gst_adapter_prev_offset (adapter : System.Address; distance : access GStreamer.GST_Low_Level.glibconfig_h.guint64) return GStreamer.GST_Low_Level.glibconfig_h.guint64;  -- gst/base/gstadapter.h:78
+   function gst_adapter_prev_offset (adapter : System.Address; distance : access GLIB.guint64) return GLIB.guint64;  -- gst/base/gstadapter.h:78
    pragma Import (C, gst_adapter_prev_offset, "gst_adapter_prev_offset");
 
-   function gst_adapter_pts_at_discont (adapter : System.Address) return GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime;  -- gst/base/gstadapter.h:80
+   function gst_adapter_pts_at_discont (adapter : System.Address) return GLIB.guint64;  -- gst/base/gstadapter.h:80
    pragma Import (C, gst_adapter_pts_at_discont, "gst_adapter_pts_at_discont");
 
-   function gst_adapter_dts_at_discont (adapter : System.Address) return GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime;  -- gst/base/gstadapter.h:81
+   function gst_adapter_dts_at_discont (adapter : System.Address) return GLIB.guint64;  -- gst/base/gstadapter.h:81
    pragma Import (C, gst_adapter_dts_at_discont, "gst_adapter_dts_at_discont");
 
-   function gst_adapter_offset_at_discont (adapter : System.Address) return GStreamer.GST_Low_Level.glibconfig_h.guint64;  -- gst/base/gstadapter.h:82
+   function gst_adapter_offset_at_discont (adapter : System.Address) return GLIB.guint64;  -- gst/base/gstadapter.h:82
    pragma Import (C, gst_adapter_offset_at_discont, "gst_adapter_offset_at_discont");
 
-   function gst_adapter_distance_from_discont (adapter : System.Address) return GStreamer.GST_Low_Level.glibconfig_h.guint64;  -- gst/base/gstadapter.h:84
+   function gst_adapter_distance_from_discont (adapter : System.Address) return GLIB.guint64;  -- gst/base/gstadapter.h:84
    pragma Import (C, gst_adapter_distance_from_discont, "gst_adapter_distance_from_discont");
 
    function gst_adapter_masked_scan_uint32
      (adapter : System.Address;
-      mask : GStreamer.GST_Low_Level.glibconfig_h.guint32;
-      pattern : GStreamer.GST_Low_Level.glibconfig_h.guint32;
-      offset : GStreamer.GST_Low_Level.glibconfig_h.gsize;
-      size : GStreamer.GST_Low_Level.glibconfig_h.gsize) return GStreamer.GST_Low_Level.glibconfig_h.gssize;  -- gst/base/gstadapter.h:86
+      mask : GLIB.guint32;
+      pattern : GLIB.guint32;
+      offset : GLIB.gsize;
+      size : GLIB.gsize) return GStreamer.GST_Low_Level.glibconfig_h.gssize;  -- gst/base/gstadapter.h:86
    pragma Import (C, gst_adapter_masked_scan_uint32, "gst_adapter_masked_scan_uint32");
 
    function gst_adapter_masked_scan_uint32_peek
      (adapter : System.Address;
-      mask : GStreamer.GST_Low_Level.glibconfig_h.guint32;
-      pattern : GStreamer.GST_Low_Level.glibconfig_h.guint32;
-      offset : GStreamer.GST_Low_Level.glibconfig_h.gsize;
-      size : GStreamer.GST_Low_Level.glibconfig_h.gsize;
-      value : access GStreamer.GST_Low_Level.glibconfig_h.guint32) return GStreamer.GST_Low_Level.glibconfig_h.gssize;  -- gst/base/gstadapter.h:89
+      mask : GLIB.guint32;
+      pattern : GLIB.guint32;
+      offset : GLIB.gsize;
+      size : GLIB.gsize;
+      value : access GLIB.guint32) return GStreamer.GST_Low_Level.glibconfig_h.gssize;  -- gst/base/gstadapter.h:89
    pragma Import (C, gst_adapter_masked_scan_uint32_peek, "gst_adapter_masked_scan_uint32_peek");
 
    procedure glib_autoptr_cleanup_GstAdapter (u_ptr : System.Address);  -- gst/base/gstadapter.h:93

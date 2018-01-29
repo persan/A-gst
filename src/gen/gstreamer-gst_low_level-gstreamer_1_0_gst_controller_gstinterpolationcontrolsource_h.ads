@@ -1,11 +1,14 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
+with glib;
+with glib.Values;
+with System;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_controller_gsttimedvaluecontrolsource_h;
 with System;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;
+with glib;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcontrolsource_h;
 
 package GStreamer.GST_Low_Level.gstreamer_1_0_gst_controller_gstinterpolationcontrolsource_h is
@@ -45,11 +48,11 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_controller_gstinterpolationcon
   --  
 
    type GstInterpolationControlSource;
-   type u_GstInterpolationControlSource_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstInterpolationControlSource_u_gst_reserved_array is array (0 .. 3) of System.Address;
    --subtype GstInterpolationControlSource is u_GstInterpolationControlSource;  -- gst/controller/gstinterpolationcontrolsource.h:48
 
    type GstInterpolationControlSourceClass;
-   type u_GstInterpolationControlSourceClass_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstInterpolationControlSourceClass_u_gst_reserved_array is array (0 .. 3) of System.Address;
    --subtype GstInterpolationControlSourceClass is u_GstInterpolationControlSourceClass;  -- gst/controller/gstinterpolationcontrolsource.h:49
 
    --  skipped empty struct u_GstInterpolationControlSourcePrivate
@@ -97,7 +100,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_controller_gstinterpolationcon
    pragma Convention (C_Pass_By_Copy, GstInterpolationControlSourceClass);  -- gst/controller/gstinterpolationcontrolsource.h:85
 
   --< private > 
-   function gst_interpolation_control_source_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/controller/gstinterpolationcontrolsource.h:92
+   function gst_interpolation_control_source_get_type return GLIB.GType;  -- gst/controller/gstinterpolationcontrolsource.h:92
    pragma Import (C, gst_interpolation_control_source_get_type, "gst_interpolation_control_source_get_type");
 
   -- Functions  

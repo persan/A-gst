@@ -1,12 +1,15 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
+with glib;
+with glib.Values;
+with System;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbin_h;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h;
 with System;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;
+with glib;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbus_h;
 
@@ -48,11 +51,11 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpipeline_h is
   --  
 
    type GstPipeline;
-   type u_GstPipeline_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstPipeline_u_gst_reserved_array is array (0 .. 3) of System.Address;
    --subtype GstPipeline is u_GstPipeline;  -- gst/gstpipeline.h:39
 
    type GstPipelineClass;
-   type u_GstPipelineClass_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstPipelineClass_u_gst_reserved_array is array (0 .. 3) of System.Address;
    --subtype GstPipelineClass is u_GstPipelineClass;  -- gst/gstpipeline.h:40
 
    --  skipped empty struct u_GstPipelinePrivate
@@ -89,8 +92,8 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpipeline_h is
    type GstPipeline is record
       bin : aliased GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbin_h.GstBin;  -- gst/gstpipeline.h:70
       fixed_clock : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClock;  -- gst/gstpipeline.h:73
-      stream_time : aliased GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime;  -- gst/gstpipeline.h:75
-      c_delay : aliased GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime;  -- gst/gstpipeline.h:76
+      stream_time : aliased GLIB.guint64;  -- gst/gstpipeline.h:75
+      c_delay : aliased GLIB.guint64;  -- gst/gstpipeline.h:76
       priv : System.Address;  -- gst/gstpipeline.h:79
       u_gst_reserved : u_GstPipeline_u_gst_reserved_array;  -- gst/gstpipeline.h:81
    end record;
@@ -106,10 +109,10 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpipeline_h is
    pragma Convention (C_Pass_By_Copy, GstPipelineClass);  -- gst/gstpipeline.h:84
 
   --< private > 
-   function gst_pipeline_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gstpipeline.h:91
+   function gst_pipeline_get_type return GLIB.GType;  -- gst/gstpipeline.h:91
    pragma Import (C, gst_pipeline_get_type, "gst_pipeline_get_type");
 
-   function gst_pipeline_new (name : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h.GstElement;  -- gst/gstpipeline.h:92
+   function gst_pipeline_new (name : access GLIB.gchar) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h.GstElement;  -- gst/gstpipeline.h:92
    pragma Import (C, gst_pipeline_new, "gst_pipeline_new");
 
    function gst_pipeline_get_bus (pipeline : access GstPipeline) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbus_h.GstBus;  -- gst/gstpipeline.h:94
@@ -118,7 +121,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpipeline_h is
    procedure gst_pipeline_use_clock (pipeline : access GstPipeline; clock : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClock);  -- gst/gstpipeline.h:96
    pragma Import (C, gst_pipeline_use_clock, "gst_pipeline_use_clock");
 
-   function gst_pipeline_set_clock (pipeline : access GstPipeline; clock : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClock) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstpipeline.h:97
+   function gst_pipeline_set_clock (pipeline : access GstPipeline; clock : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClock) return GLIB.gboolean;  -- gst/gstpipeline.h:97
    pragma Import (C, gst_pipeline_set_clock, "gst_pipeline_set_clock");
 
    function gst_pipeline_get_clock (pipeline : access GstPipeline) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClock;  -- gst/gstpipeline.h:98
@@ -130,22 +133,22 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpipeline_h is
    procedure gst_pipeline_auto_clock (pipeline : access GstPipeline);  -- gst/gstpipeline.h:100
    pragma Import (C, gst_pipeline_auto_clock, "gst_pipeline_auto_clock");
 
-   procedure gst_pipeline_set_delay (pipeline : access GstPipeline; c_delay : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime);  -- gst/gstpipeline.h:102
+   procedure gst_pipeline_set_delay (pipeline : access GstPipeline; c_delay : GLIB.guint64);  -- gst/gstpipeline.h:102
    pragma Import (C, gst_pipeline_set_delay, "gst_pipeline_set_delay");
 
-   function gst_pipeline_get_delay (pipeline : access GstPipeline) return GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime;  -- gst/gstpipeline.h:103
+   function gst_pipeline_get_delay (pipeline : access GstPipeline) return GLIB.guint64;  -- gst/gstpipeline.h:103
    pragma Import (C, gst_pipeline_get_delay, "gst_pipeline_get_delay");
 
-   procedure gst_pipeline_set_latency (pipeline : access GstPipeline; latency : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime);  -- gst/gstpipeline.h:105
+   procedure gst_pipeline_set_latency (pipeline : access GstPipeline; latency : GLIB.guint64);  -- gst/gstpipeline.h:105
    pragma Import (C, gst_pipeline_set_latency, "gst_pipeline_set_latency");
 
-   function gst_pipeline_get_latency (pipeline : access GstPipeline) return GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime;  -- gst/gstpipeline.h:106
+   function gst_pipeline_get_latency (pipeline : access GstPipeline) return GLIB.guint64;  -- gst/gstpipeline.h:106
    pragma Import (C, gst_pipeline_get_latency, "gst_pipeline_get_latency");
 
-   procedure gst_pipeline_set_auto_flush_bus (pipeline : access GstPipeline; auto_flush : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean);  -- gst/gstpipeline.h:108
+   procedure gst_pipeline_set_auto_flush_bus (pipeline : access GstPipeline; auto_flush : GLIB.gboolean);  -- gst/gstpipeline.h:108
    pragma Import (C, gst_pipeline_set_auto_flush_bus, "gst_pipeline_set_auto_flush_bus");
 
-   function gst_pipeline_get_auto_flush_bus (pipeline : access GstPipeline) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstpipeline.h:109
+   function gst_pipeline_get_auto_flush_bus (pipeline : access GstPipeline) return GLIB.gboolean;  -- gst/gstpipeline.h:109
    pragma Import (C, gst_pipeline_get_auto_flush_bus, "gst_pipeline_get_auto_flush_bus");
 
    procedure glib_autoptr_cleanup_GstPipeline (u_ptr : System.Address);  -- gst/gstpipeline.h:112

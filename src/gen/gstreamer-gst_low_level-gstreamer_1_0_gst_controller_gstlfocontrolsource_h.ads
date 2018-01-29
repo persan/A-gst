@@ -1,12 +1,15 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
+with glib;
+with glib.Values;
+with System;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcontrolsource_h;
 with System;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gthread_h;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;
+--  with GStreamer.GST_Low_Level.glib_2_0_glib_gthread_h;
+with glib;
 
 package GStreamer.GST_Low_Level.gstreamer_1_0_gst_controller_gstlfocontrolsource_h is
 
@@ -45,11 +48,11 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_controller_gstlfocontrolsource
   --  
 
    type GstLFOControlSource;
-   type u_GstLFOControlSource_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstLFOControlSource_u_gst_reserved_array is array (0 .. 3) of System.Address;
    --subtype GstLFOControlSource is u_GstLFOControlSource;  -- gst/controller/gstlfocontrolsource.h:46
 
    type GstLFOControlSourceClass;
-   type u_GstLFOControlSourceClass_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstLFOControlSourceClass_u_gst_reserved_array is array (0 .. 3) of System.Address;
    --subtype GstLFOControlSourceClass is u_GstLFOControlSourceClass;  -- gst/controller/gstlfocontrolsource.h:47
 
    --  skipped empty struct u_GstLFOControlSourcePrivate
@@ -97,7 +100,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_controller_gstlfocontrolsource
    pragma Convention (C_Pass_By_Copy, GstLFOControlSourceClass);  -- gst/controller/gstlfocontrolsource.h:83
 
   --< private > 
-   function gst_lfo_control_source_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/controller/gstlfocontrolsource.h:90
+   function gst_lfo_control_source_get_type return GLIB.GType;  -- gst/controller/gstlfocontrolsource.h:90
    pragma Import (C, gst_lfo_control_source_get_type, "gst_lfo_control_source_get_type");
 
   -- Functions  

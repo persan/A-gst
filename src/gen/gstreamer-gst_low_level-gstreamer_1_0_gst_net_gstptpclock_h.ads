@@ -1,12 +1,15 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
+with glib;
+with glib.Values;
+with System;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstsystemclock_h;
 with System;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;
-with GStreamer.GST_Low_Level.glibconfig_h;
+with glib;
+with GLIB; --  with GStreamer.GST_Low_Level.glibconfig_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststructure_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h;
 
@@ -48,11 +51,11 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_net_gstptpclock_h is
   --  
 
    type GstPtpClock;
-   type u_GstPtpClock_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstPtpClock_u_gst_reserved_array is array (0 .. 3) of System.Address;
    --subtype GstPtpClock is u_GstPtpClock;  -- gst/net/gstptpclock.h:40
 
    type GstPtpClockClass;
-   type u_GstPtpClockClass_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstPtpClockClass_u_gst_reserved_array is array (0 .. 3) of System.Address;
    --subtype GstPtpClockClass is u_GstPtpClockClass;  -- gst/net/gstptpclock.h:41
 
    --  skipped empty struct u_GstPtpClockPrivate
@@ -93,16 +96,16 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_net_gstptpclock_h is
   -- * automatically select one based on the MAC address of interfaces
   --  
 
-   function gst_ptp_clock_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/net/gstptpclock.h:78
+   function gst_ptp_clock_get_type return GLIB.GType;  -- gst/net/gstptpclock.h:78
    pragma Import (C, gst_ptp_clock_get_type, "gst_ptp_clock_get_type");
 
-   function gst_ptp_is_supported return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/net/gstptpclock.h:80
+   function gst_ptp_is_supported return GLIB.gboolean;  -- gst/net/gstptpclock.h:80
    pragma Import (C, gst_ptp_is_supported, "gst_ptp_is_supported");
 
-   function gst_ptp_is_initialized return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/net/gstptpclock.h:81
+   function gst_ptp_is_initialized return GLIB.gboolean;  -- gst/net/gstptpclock.h:81
    pragma Import (C, gst_ptp_is_initialized, "gst_ptp_is_initialized");
 
-   function gst_ptp_init (clock_id : GStreamer.GST_Low_Level.glibconfig_h.guint64; interfaces : System.Address) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/net/gstptpclock.h:82
+   function gst_ptp_init (clock_id : GLIB.guint64; interfaces : System.Address) return GLIB.gboolean;  -- gst/net/gstptpclock.h:82
    pragma Import (C, gst_ptp_init, "gst_ptp_init");
 
    procedure gst_ptp_deinit;  -- gst/net/gstptpclock.h:84
@@ -154,21 +157,21 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_net_gstptpclock_h is
   --  
 
    type GstPtpStatisticsCallback is access function 
-        (arg1 : GStreamer.GST_Low_Level.glibconfig_h.guint8;
+        (arg1 : GLIB.guint8;
          arg2 : access constant GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststructure_h.GstStructure;
-         arg3 : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;
+         arg3 : System.Address) return GLIB.gboolean;
    pragma Convention (C, GstPtpStatisticsCallback);  -- gst/net/gstptpclock.h:135
 
    function gst_ptp_statistics_callback_add
      (callback : GstPtpStatisticsCallback;
-      user_data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
-      destroy_data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.GDestroyNotify) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gulong;  -- gst/net/gstptpclock.h:138
+      user_data : System.Address;
+      destroy_data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.GDestroyNotify) return GLIB.gulong;  -- gst/net/gstptpclock.h:138
    pragma Import (C, gst_ptp_statistics_callback_add, "gst_ptp_statistics_callback_add");
 
-   procedure gst_ptp_statistics_callback_remove (id : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gulong);  -- gst/net/gstptpclock.h:140
+   procedure gst_ptp_statistics_callback_remove (id : GLIB.gulong);  -- gst/net/gstptpclock.h:140
    pragma Import (C, gst_ptp_statistics_callback_remove, "gst_ptp_statistics_callback_remove");
 
-   function gst_ptp_clock_new (name : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar; domain : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClock;  -- gst/net/gstptpclock.h:142
+   function gst_ptp_clock_new (name : access GLIB.gchar; domain : GLIB.guint) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClock;  -- gst/net/gstptpclock.h:142
    pragma Import (C, gst_ptp_clock_new, "gst_ptp_clock_new");
 
    procedure glib_autoptr_cleanup_GstPtpClock (u_ptr : System.Address);  -- gst/net/gstptpclock.h:146

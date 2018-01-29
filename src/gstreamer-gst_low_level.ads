@@ -50,6 +50,10 @@ private package GStreamer.GST_Low_Level is
 
    package Glib_2_0_Gobject_Gobject_H is
       type GObjectClass is new Interfaces.C.Extensions.Void;
+      type GInitiallyUnowned is new Interfaces.C.Extensions.Void;
+      type GInitiallyUnownedClass is new Interfaces.C.Extensions.Void;
+
+
    end  Glib_2_0_Gobject_Gobject_H;
 
    package Glib_2_0_Gobject_Gparam_H is
@@ -162,5 +166,10 @@ private package GStreamer.GST_Low_Level is
       pragma Pack (GDate);  -- /usr/include/glib-2.0/glib/gdate.h:99
    end Glib_2_0_Glib_Gdate_H;
 
+   package Glibconfig_H is
+      subtype Gssize is Interfaces.C.Size_T;
+   end  Glibconfig_H;
 
+   package Glib_2_0_Glib_Ghook_H is
+   end Glib_2_0_Glib_Ghook_H;
 end GStreamer.GST_Low_Level;

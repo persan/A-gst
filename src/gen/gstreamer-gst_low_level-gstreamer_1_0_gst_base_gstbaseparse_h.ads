@@ -1,10 +1,13 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
+with glib;
+with glib.Values;
+with System;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h;
-with GStreamer.GST_Low_Level.glibconfig_h;
+with GLIB; --  with GStreamer.GST_Low_Level.glibconfig_h;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstsegment_h;
@@ -13,7 +16,7 @@ limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstformat_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstevent_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;
+with glib;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsttaglist_h;
 
@@ -156,18 +159,18 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstbaseparse_h is
   -- * of each frame's processing, i.e. parsing virtual method invocation sequence.
   --  
 
-   type GstBaseParseFrame_u_gst_reserved_i_array is array (0 .. 1) of aliased GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;
-   type GstBaseParseFrame_u_gst_reserved_p_array is array (0 .. 1) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type GstBaseParseFrame_u_gst_reserved_i_array is array (0 .. 1) of aliased GLIB.guint;
+   type GstBaseParseFrame_u_gst_reserved_p_array is array (0 .. 1) of System.Address;
    type GstBaseParseFrame is record
       buffer : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBuffer;  -- gst/base/gstbaseparse.h:136
       out_buffer : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBuffer;  -- gst/base/gstbaseparse.h:137
-      flags : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;  -- gst/base/gstbaseparse.h:138
-      offset : aliased GStreamer.GST_Low_Level.glibconfig_h.guint64;  -- gst/base/gstbaseparse.h:139
-      overhead : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;  -- gst/base/gstbaseparse.h:140
-      size : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;  -- gst/base/gstbaseparse.h:142
+      flags : aliased GLIB.guint;  -- gst/base/gstbaseparse.h:138
+      offset : aliased GLIB.guint64;  -- gst/base/gstbaseparse.h:139
+      overhead : aliased GLIB.gint;  -- gst/base/gstbaseparse.h:140
+      size : aliased GLIB.gint;  -- gst/base/gstbaseparse.h:142
       u_gst_reserved_i : aliased GstBaseParseFrame_u_gst_reserved_i_array;  -- gst/base/gstbaseparse.h:143
       u_gst_reserved_p : GstBaseParseFrame_u_gst_reserved_p_array;  -- gst/base/gstbaseparse.h:144
-      u_private_flags : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;  -- gst/base/gstbaseparse.h:145
+      u_private_flags : aliased GLIB.guint;  -- gst/base/gstbaseparse.h:145
    end record;
    pragma Convention (C_Pass_By_Copy, GstBaseParseFrame);  -- gst/base/gstbaseparse.h:146
 
@@ -175,11 +178,11 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstbaseparse_h is
 
   --< private > 
    type GstBaseParse;
-   type u_GstBaseParse_u_gst_reserved_array is array (0 .. 19) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstBaseParse_u_gst_reserved_array is array (0 .. 19) of System.Address;
    --subtype GstBaseParse is u_GstBaseParse;  -- gst/base/gstbaseparse.h:148
 
    type GstBaseParseClass;
-   type u_GstBaseParseClass_u_gst_reserved_array is array (0 .. 17) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstBaseParseClass_u_gst_reserved_array is array (0 .. 17) of System.Address;
    --subtype GstBaseParseClass is u_GstBaseParseClass;  -- gst/base/gstbaseparse.h:149
 
    --  skipped empty struct u_GstBaseParsePrivate
@@ -198,7 +201,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstbaseparse_h is
       element : aliased GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h.GstElement;  -- gst/base/gstbaseparse.h:160
       sinkpad : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstPad;  -- gst/base/gstbaseparse.h:164
       srcpad : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstPad;  -- gst/base/gstbaseparse.h:165
-      flags : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;  -- gst/base/gstbaseparse.h:167
+      flags : aliased GLIB.guint;  -- gst/base/gstbaseparse.h:167
       segment : aliased GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstsegment_h.GstSegment;  -- gst/base/gstbaseparse.h:170
       u_gst_reserved : u_GstBaseParse_u_gst_reserved_array;  -- gst/base/gstbaseparse.h:173
       priv : System.Address;  -- gst/base/gstbaseparse.h:174
@@ -265,26 +268,26 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstbaseparse_h is
 
    type GstBaseParseClass is record
       parent_class : aliased GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h.GstElementClass;  -- gst/base/gstbaseparse.h:231
-      start : access function  (arg1 : access GstBaseParse) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/base/gstbaseparse.h:236
-      stop : access function  (arg1 : access GstBaseParse) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/base/gstbaseparse.h:238
-      set_sink_caps : access function  (arg1 : access GstBaseParse; arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h.GstCaps) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/base/gstbaseparse.h:241
+      start : access function  (arg1 : access GstBaseParse) return GLIB.gboolean;  -- gst/base/gstbaseparse.h:236
+      stop : access function  (arg1 : access GstBaseParse) return GLIB.gboolean;  -- gst/base/gstbaseparse.h:238
+      set_sink_caps : access function  (arg1 : access GstBaseParse; arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h.GstCaps) return GLIB.gboolean;  -- gst/base/gstbaseparse.h:241
       handle_frame : access function 
            (arg1 : access GstBaseParse;
             arg2 : access GstBaseParseFrame;
-            arg3 : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint) return GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstFlowReturn;  -- gst/base/gstbaseparse.h:245
+            arg3 : access GLIB.gint) return GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstFlowReturn;  -- gst/base/gstbaseparse.h:245
       pre_push_frame : access function  (arg1 : access GstBaseParse; arg2 : access GstBaseParseFrame) return GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstFlowReturn;  -- gst/base/gstbaseparse.h:248
       convert : access function 
            (arg1 : access GstBaseParse;
             arg2 : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstformat_h.GstFormat;
-            arg3 : GStreamer.GST_Low_Level.glibconfig_h.gint64;
+            arg3 : GLIB.gint64;
             arg4 : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstformat_h.GstFormat;
-            arg5 : access GStreamer.GST_Low_Level.glibconfig_h.gint64) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/base/gstbaseparse.h:254
-      sink_event : access function  (arg1 : access GstBaseParse; arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstevent_h.GstEvent) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/base/gstbaseparse.h:257
-      src_event : access function  (arg1 : access GstBaseParse; arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstevent_h.GstEvent) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/base/gstbaseparse.h:260
+            arg5 : access GLIB.gint64) return GLIB.gboolean;  -- gst/base/gstbaseparse.h:254
+      sink_event : access function  (arg1 : access GstBaseParse; arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstevent_h.GstEvent) return GLIB.gboolean;  -- gst/base/gstbaseparse.h:257
+      src_event : access function  (arg1 : access GstBaseParse; arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstevent_h.GstEvent) return GLIB.gboolean;  -- gst/base/gstbaseparse.h:260
       get_sink_caps : access function  (arg1 : access GstBaseParse; arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h.GstCaps) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h.GstCaps;  -- gst/base/gstbaseparse.h:263
       detect : access function  (arg1 : access GstBaseParse; arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBuffer) return GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstFlowReturn;  -- gst/base/gstbaseparse.h:266
-      sink_query : access function  (arg1 : access GstBaseParse; arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h.GstQuery) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/base/gstbaseparse.h:269
-      src_query : access function  (arg1 : access GstBaseParse; arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h.GstQuery) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/base/gstbaseparse.h:272
+      sink_query : access function  (arg1 : access GstBaseParse; arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h.GstQuery) return GLIB.gboolean;  -- gst/base/gstbaseparse.h:269
+      src_query : access function  (arg1 : access GstBaseParse; arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h.GstQuery) return GLIB.gboolean;  -- gst/base/gstbaseparse.h:272
       u_gst_reserved : u_GstBaseParseClass_u_gst_reserved_array;  -- gst/base/gstbaseparse.h:275
    end record;
    pragma Convention (C_Pass_By_Copy, GstBaseParseClass);  -- gst/base/gstbaseparse.h:230
@@ -292,16 +295,16 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstbaseparse_h is
   --< public > 
   -- virtual methods for subclasses  
   --< private > 
-   function gst_base_parse_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/base/gstbaseparse.h:278
+   function gst_base_parse_get_type return GLIB.GType;  -- gst/base/gstbaseparse.h:278
    pragma Import (C, gst_base_parse_get_type, "gst_base_parse_get_type");
 
-   function gst_base_parse_frame_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/base/gstbaseparse.h:280
+   function gst_base_parse_frame_get_type return GLIB.GType;  -- gst/base/gstbaseparse.h:280
    pragma Import (C, gst_base_parse_frame_get_type, "gst_base_parse_frame_get_type");
 
    function gst_base_parse_frame_new
      (buffer : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBuffer;
       flags : GstBaseParseFrameFlags;
-      overhead : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint) return access GstBaseParseFrame;  -- gst/base/gstbaseparse.h:282
+      overhead : GLIB.gint) return access GstBaseParseFrame;  -- gst/base/gstbaseparse.h:282
    pragma Import (C, gst_base_parse_frame_new, "gst_base_parse_frame_new");
 
    procedure gst_base_parse_frame_init (frame : access GstBaseParseFrame);  -- gst/base/gstbaseparse.h:286
@@ -319,71 +322,71 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstbaseparse_h is
    function gst_base_parse_finish_frame
      (parse : access GstBaseParse;
       frame : access GstBaseParseFrame;
-      size : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint) return GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstFlowReturn;  -- gst/base/gstbaseparse.h:294
+      size : GLIB.gint) return GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstFlowReturn;  -- gst/base/gstbaseparse.h:294
    pragma Import (C, gst_base_parse_finish_frame, "gst_base_parse_finish_frame");
 
    procedure gst_base_parse_set_duration
      (parse : access GstBaseParse;
       fmt : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstformat_h.GstFormat;
-      duration : GStreamer.GST_Low_Level.glibconfig_h.gint64;
-      interval : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint);  -- gst/base/gstbaseparse.h:298
+      duration : GLIB.gint64;
+      interval : GLIB.gint);  -- gst/base/gstbaseparse.h:298
    pragma Import (C, gst_base_parse_set_duration, "gst_base_parse_set_duration");
 
-   procedure gst_base_parse_set_average_bitrate (parse : access GstBaseParse; bitrate : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint);  -- gst/base/gstbaseparse.h:303
+   procedure gst_base_parse_set_average_bitrate (parse : access GstBaseParse; bitrate : GLIB.guint);  -- gst/base/gstbaseparse.h:303
    pragma Import (C, gst_base_parse_set_average_bitrate, "gst_base_parse_set_average_bitrate");
 
-   procedure gst_base_parse_set_min_frame_size (parse : access GstBaseParse; min_size : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint);  -- gst/base/gstbaseparse.h:306
+   procedure gst_base_parse_set_min_frame_size (parse : access GstBaseParse; min_size : GLIB.guint);  -- gst/base/gstbaseparse.h:306
    pragma Import (C, gst_base_parse_set_min_frame_size, "gst_base_parse_set_min_frame_size");
 
-   procedure gst_base_parse_set_has_timing_info (parse : access GstBaseParse; has_timing : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean);  -- gst/base/gstbaseparse.h:309
+   procedure gst_base_parse_set_has_timing_info (parse : access GstBaseParse; has_timing : GLIB.gboolean);  -- gst/base/gstbaseparse.h:309
    pragma Import (C, gst_base_parse_set_has_timing_info, "gst_base_parse_set_has_timing_info");
 
    procedure gst_base_parse_drain (parse : access GstBaseParse);  -- gst/base/gstbaseparse.h:312
    pragma Import (C, gst_base_parse_drain, "gst_base_parse_drain");
 
-   procedure gst_base_parse_set_syncable (parse : access GstBaseParse; syncable : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean);  -- gst/base/gstbaseparse.h:314
+   procedure gst_base_parse_set_syncable (parse : access GstBaseParse; syncable : GLIB.gboolean);  -- gst/base/gstbaseparse.h:314
    pragma Import (C, gst_base_parse_set_syncable, "gst_base_parse_set_syncable");
 
-   procedure gst_base_parse_set_passthrough (parse : access GstBaseParse; passthrough : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean);  -- gst/base/gstbaseparse.h:317
+   procedure gst_base_parse_set_passthrough (parse : access GstBaseParse; passthrough : GLIB.gboolean);  -- gst/base/gstbaseparse.h:317
    pragma Import (C, gst_base_parse_set_passthrough, "gst_base_parse_set_passthrough");
 
-   procedure gst_base_parse_set_pts_interpolation (parse : access GstBaseParse; pts_interpolate : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean);  -- gst/base/gstbaseparse.h:320
+   procedure gst_base_parse_set_pts_interpolation (parse : access GstBaseParse; pts_interpolate : GLIB.gboolean);  -- gst/base/gstbaseparse.h:320
    pragma Import (C, gst_base_parse_set_pts_interpolation, "gst_base_parse_set_pts_interpolation");
 
-   procedure gst_base_parse_set_infer_ts (parse : access GstBaseParse; infer_ts : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean);  -- gst/base/gstbaseparse.h:323
+   procedure gst_base_parse_set_infer_ts (parse : access GstBaseParse; infer_ts : GLIB.gboolean);  -- gst/base/gstbaseparse.h:323
    pragma Import (C, gst_base_parse_set_infer_ts, "gst_base_parse_set_infer_ts");
 
    procedure gst_base_parse_set_frame_rate
      (parse : access GstBaseParse;
-      fps_num : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;
-      fps_den : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;
-      lead_in : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;
-      lead_out : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint);  -- gst/base/gstbaseparse.h:326
+      fps_num : GLIB.guint;
+      fps_den : GLIB.guint;
+      lead_in : GLIB.guint;
+      lead_out : GLIB.guint);  -- gst/base/gstbaseparse.h:326
    pragma Import (C, gst_base_parse_set_frame_rate, "gst_base_parse_set_frame_rate");
 
    procedure gst_base_parse_set_latency
      (parse : access GstBaseParse;
-      min_latency : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime;
-      max_latency : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime);  -- gst/base/gstbaseparse.h:332
+      min_latency : GLIB.guint64;
+      max_latency : GLIB.guint64);  -- gst/base/gstbaseparse.h:332
    pragma Import (C, gst_base_parse_set_latency, "gst_base_parse_set_latency");
 
    function gst_base_parse_convert_default
      (parse : access GstBaseParse;
       src_format : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstformat_h.GstFormat;
-      src_value : GStreamer.GST_Low_Level.glibconfig_h.gint64;
+      src_value : GLIB.gint64;
       dest_format : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstformat_h.GstFormat;
-      dest_value : access GStreamer.GST_Low_Level.glibconfig_h.gint64) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/base/gstbaseparse.h:336
+      dest_value : access GLIB.gint64) return GLIB.gboolean;  -- gst/base/gstbaseparse.h:336
    pragma Import (C, gst_base_parse_convert_default, "gst_base_parse_convert_default");
 
    function gst_base_parse_add_index_entry
      (parse : access GstBaseParse;
-      offset : GStreamer.GST_Low_Level.glibconfig_h.guint64;
-      ts : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime;
-      key : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;
-      force : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/base/gstbaseparse.h:342
+      offset : GLIB.guint64;
+      ts : GLIB.guint64;
+      key : GLIB.gboolean;
+      force : GLIB.gboolean) return GLIB.gboolean;  -- gst/base/gstbaseparse.h:342
    pragma Import (C, gst_base_parse_add_index_entry, "gst_base_parse_add_index_entry");
 
-   procedure gst_base_parse_set_ts_at_offset (parse : access GstBaseParse; offset : GStreamer.GST_Low_Level.glibconfig_h.gsize);  -- gst/base/gstbaseparse.h:348
+   procedure gst_base_parse_set_ts_at_offset (parse : access GstBaseParse; offset : GLIB.gsize);  -- gst/base/gstbaseparse.h:348
    pragma Import (C, gst_base_parse_set_ts_at_offset, "gst_base_parse_set_ts_at_offset");
 
    procedure gst_base_parse_merge_tags

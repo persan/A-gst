@@ -1,9 +1,10 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;
-limited with GStreamer.GST_Low_Level.glib_2_0_glib_glist_h;
+with glib;
+--  limited with GStreamer.GST_Low_Level.glib_2_0_glib_glist_h;
 with System;
 
 package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsttracerfactory_h is
@@ -59,7 +60,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsttracerfactory_h is
    --  skipped empty struct GstTracerFactoryClass
 
   -- tracering interface  
-   function gst_tracer_factory_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gsttracerfactory.h:51
+   function gst_tracer_factory_get_type return GLIB.GType;  -- gst/gsttracerfactory.h:51
    pragma Import (C, gst_tracer_factory_get_type, "gst_tracer_factory_get_type");
 
    function gst_tracer_factory_get_list return access GStreamer.GST_Low_Level.glib_2_0_glib_glist_h.GList;  -- gst/gsttracerfactory.h:52

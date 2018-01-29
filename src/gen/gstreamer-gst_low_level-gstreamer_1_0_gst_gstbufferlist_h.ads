@@ -1,10 +1,13 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
 with System;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;
+with glib;
+with glib.Values;
+with System;
+with glib;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h;
 
 package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbufferlist_h is
@@ -70,8 +73,8 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbufferlist_h is
 
    type GstBufferListFunc is access function 
         (arg1 : System.Address;
-         arg2 : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;
-         arg3 : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;
+         arg2 : GLIB.guint;
+         arg3 : System.Address) return GLIB.gboolean;
    pragma Convention (C, GstBufferListFunc);  -- gst/gstbufferlist.h:58
 
   -- refcounting  
@@ -137,38 +140,38 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbufferlist_h is
   -- *     same as @list
   --  
 
-   function gst_buffer_list_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gstbufferlist.h:134
+   function gst_buffer_list_get_type return GLIB.GType;  -- gst/gstbufferlist.h:134
    pragma Import (C, gst_buffer_list_get_type, "gst_buffer_list_get_type");
 
   -- allocation  
    function gst_buffer_list_new return System.Address;  -- gst/gstbufferlist.h:137
    pragma Import (C, gst_buffer_list_new, "gst_buffer_list_new");
 
-   function gst_buffer_list_new_sized (size : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint) return System.Address;  -- gst/gstbufferlist.h:138
+   function gst_buffer_list_new_sized (size : GLIB.guint) return System.Address;  -- gst/gstbufferlist.h:138
    pragma Import (C, gst_buffer_list_new_sized, "gst_buffer_list_new_sized");
 
-   function gst_buffer_list_length (list : System.Address) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;  -- gst/gstbufferlist.h:140
+   function gst_buffer_list_length (list : System.Address) return GLIB.guint;  -- gst/gstbufferlist.h:140
    pragma Import (C, gst_buffer_list_length, "gst_buffer_list_length");
 
-   function gst_buffer_list_get (list : System.Address; idx : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBuffer;  -- gst/gstbufferlist.h:142
+   function gst_buffer_list_get (list : System.Address; idx : GLIB.guint) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBuffer;  -- gst/gstbufferlist.h:142
    pragma Import (C, gst_buffer_list_get, "gst_buffer_list_get");
 
    procedure gst_buffer_list_insert
      (list : System.Address;
-      idx : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;
+      idx : GLIB.gint;
       buffer : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBuffer);  -- gst/gstbufferlist.h:143
    pragma Import (C, gst_buffer_list_insert, "gst_buffer_list_insert");
 
    procedure gst_buffer_list_remove
      (list : System.Address;
-      idx : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;
-      length : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint);  -- gst/gstbufferlist.h:144
+      idx : GLIB.guint;
+      length : GLIB.guint);  -- gst/gstbufferlist.h:144
    pragma Import (C, gst_buffer_list_remove, "gst_buffer_list_remove");
 
    function gst_buffer_list_foreach
      (list : System.Address;
       func : GstBufferListFunc;
-      user_data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstbufferlist.h:146
+      user_data : System.Address) return GLIB.gboolean;  -- gst/gstbufferlist.h:146
    pragma Import (C, gst_buffer_list_foreach, "gst_buffer_list_foreach");
 
    function gst_buffer_list_copy_deep (list : System.Address) return System.Address;  -- gst/gstbufferlist.h:149

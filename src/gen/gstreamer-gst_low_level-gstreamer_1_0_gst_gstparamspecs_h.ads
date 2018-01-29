@@ -1,10 +1,13 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gparam_h;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
+with glib;
+--  with GStreamer.GST_Low_Level.glib_2_0_gobject_gparam_h;
+with glib;
+with glib.Values;
+with System;
 
 package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstparamspecs_h is
 
@@ -81,10 +84,10 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstparamspecs_h is
 
   -- --- type macros ---  
   -- --- get_type functions ---  
-   function gst_param_spec_fraction_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gstparamspecs.h:85
+   function gst_param_spec_fraction_get_type return GLIB.GType;  -- gst/gstparamspecs.h:85
    pragma Import (C, gst_param_spec_fraction_get_type, "gst_param_spec_fraction_get_type");
 
-   function gst_param_spec_array_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gstparamspecs.h:87
+   function gst_param_spec_array_get_type return GLIB.GType;  -- gst/gstparamspecs.h:87
    pragma Import (C, gst_param_spec_array_get_type, "gst_param_spec_array_get_type");
 
   -- --- typedefs & structures ---  
@@ -110,12 +113,12 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstparamspecs_h is
 
    type GstParamSpecFraction is record
       parent_instance : aliased GStreamer.GST_Low_Level.glib_2_0_gobject_gparam_h.GParamSpec;  -- gst/gstparamspecs.h:109
-      min_num : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;  -- gst/gstparamspecs.h:111
-      min_den : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;  -- gst/gstparamspecs.h:111
-      max_num : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;  -- gst/gstparamspecs.h:112
-      max_den : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;  -- gst/gstparamspecs.h:112
-      def_num : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;  -- gst/gstparamspecs.h:113
-      def_den : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;  -- gst/gstparamspecs.h:113
+      min_num : aliased GLIB.gint;  -- gst/gstparamspecs.h:111
+      min_den : aliased GLIB.gint;  -- gst/gstparamspecs.h:111
+      max_num : aliased GLIB.gint;  -- gst/gstparamspecs.h:112
+      max_den : aliased GLIB.gint;  -- gst/gstparamspecs.h:112
+      def_num : aliased GLIB.gint;  -- gst/gstparamspecs.h:113
+      def_den : aliased GLIB.gint;  -- gst/gstparamspecs.h:113
    end record;
    pragma Convention (C_Pass_By_Copy, GstParamSpecFraction);  -- gst/gstparamspecs.h:108
 
@@ -136,22 +139,22 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstparamspecs_h is
 
   -- --- GParamSpec prototypes ---  
    function gst_param_spec_fraction
-     (name : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      nick : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      blurb : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      min_num : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;
-      min_denom : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;
-      max_num : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;
-      max_denom : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;
-      default_num : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;
-      default_denom : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;
+     (name : access GLIB.gchar;
+      nick : access GLIB.gchar;
+      blurb : access GLIB.gchar;
+      min_num : GLIB.gint;
+      min_denom : GLIB.gint;
+      max_num : GLIB.gint;
+      max_denom : GLIB.gint;
+      default_num : GLIB.gint;
+      default_denom : GLIB.gint;
       flags : GStreamer.GST_Low_Level.glib_2_0_gobject_gparam_h.GParamFlags) return access GStreamer.GST_Low_Level.glib_2_0_gobject_gparam_h.GParamSpec;  -- gst/gstparamspecs.h:133
    pragma Import (C, gst_param_spec_fraction, "gst_param_spec_fraction");
 
    function gst_param_spec_array
-     (name : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      nick : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      blurb : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
+     (name : access GLIB.gchar;
+      nick : access GLIB.gchar;
+      blurb : access GLIB.gchar;
       element_spec : access GStreamer.GST_Low_Level.glib_2_0_gobject_gparam_h.GParamSpec;
       flags : GStreamer.GST_Low_Level.glib_2_0_gobject_gparam_h.GParamFlags) return access GStreamer.GST_Low_Level.glib_2_0_gobject_gparam_h.GParamSpec;  -- gst/gstparamspecs.h:141
    pragma Import (C, gst_param_spec_array, "gst_param_spec_array");

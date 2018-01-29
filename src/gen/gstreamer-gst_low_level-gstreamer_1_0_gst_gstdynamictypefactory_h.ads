@@ -1,9 +1,12 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
+with glib;
+with glib;
+with glib.Values;
+with System;
 with System;
 
 package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstdynamictypefactory_h is
@@ -54,13 +57,13 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstdynamictypefactory_h is
 
    --  skipped empty struct GstDynamicTypeFactoryClass
 
-   function gst_dynamic_type_factory_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gstdynamictypefactory.h:48
+   function gst_dynamic_type_factory_get_type return GLIB.GType;  -- gst/gstdynamictypefactory.h:48
    pragma Import (C, gst_dynamic_type_factory_get_type, "gst_dynamic_type_factory_get_type");
 
-   function gst_dynamic_type_factory_load (factoryname : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gstdynamictypefactory.h:50
+   function gst_dynamic_type_factory_load (factoryname : access GLIB.gchar) return GLIB.GType;  -- gst/gstdynamictypefactory.h:50
    pragma Import (C, gst_dynamic_type_factory_load, "gst_dynamic_type_factory_load");
 
-   function gst_dynamic_type_register (plugin : System.Address; c_type : GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstdynamictypefactory.h:52
+   function gst_dynamic_type_register (plugin : System.Address; c_type : GLIB.GType) return GLIB.gboolean;  -- gst/gstdynamictypefactory.h:52
    pragma Import (C, gst_dynamic_type_register, "gst_dynamic_type_register");
 
 end GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstdynamictypefactory_h;

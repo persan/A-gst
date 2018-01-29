@@ -1,13 +1,16 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gquark_h;
+with glib;
+with glib.Values;
 with System;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;
+--  with GStreamer.GST_Low_Level.glib_2_0_glib_gquark_h;
+with System;
+with glib;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststructure_h;
-limited with GStreamer.GST_Low_Level.glib_2_0_glib_glist_h;
+--  limited with GStreamer.GST_Low_Level.glib_2_0_glib_glist_h;
 
 package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstplugin_h is
 
@@ -70,7 +73,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstplugin_h is
    --  skipped empty struct GstPluginClass
 
    type GstPluginDesc;
-   type u_GstPluginDesc_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstPluginDesc_u_gst_reserved_array is array (0 .. 3) of System.Address;
    --subtype GstPluginDesc is u_GstPluginDesc;  -- gst/gstplugin.h:42
 
   --*
@@ -81,7 +84,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstplugin_h is
   -- * Returns: The error quark used in GError messages
   --  
 
-   function gst_plugin_error_quark return GStreamer.GST_Low_Level.glib_2_0_glib_gquark_h.GQuark;  -- gst/gstplugin.h:51
+   function gst_plugin_error_quark return Glib.GQuark;  -- gst/gstplugin.h:51
    pragma Import (C, gst_plugin_error_quark, "gst_plugin_error_quark");
 
   --*
@@ -153,7 +156,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstplugin_h is
   --  
 
   -- FIXME 0.11: Make return void  
-   type GstPluginInitFunc is access function  (arg1 : System.Address) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;
+   type GstPluginInitFunc is access function  (arg1 : System.Address) return GLIB.gboolean;
    pragma Convention (C, GstPluginInitFunc);  -- gst/gstplugin.h:122
 
   --*
@@ -171,7 +174,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstplugin_h is
   --  
 
   -- FIXME 0.11: Merge with GstPluginInitFunc  
-   type GstPluginInitFullFunc is access function  (arg1 : System.Address; arg2 : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;
+   type GstPluginInitFullFunc is access function  (arg1 : System.Address; arg2 : System.Address) return GLIB.gboolean;
    pragma Convention (C, GstPluginInitFullFunc);  -- gst/gstplugin.h:138
 
   --*
@@ -201,17 +204,17 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstplugin_h is
   --  
 
    type GstPluginDesc is record
-      major_version : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;  -- gst/gstplugin.h:166
-      minor_version : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;  -- gst/gstplugin.h:167
-      name : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gstplugin.h:168
-      description : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gstplugin.h:169
+      major_version : aliased GLIB.gint;  -- gst/gstplugin.h:166
+      minor_version : aliased GLIB.gint;  -- gst/gstplugin.h:167
+      name : access GLIB.gchar;  -- gst/gstplugin.h:168
+      description : access GLIB.gchar;  -- gst/gstplugin.h:169
       plugin_init : GstPluginInitFunc;  -- gst/gstplugin.h:170
-      version : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gstplugin.h:171
-      license : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gstplugin.h:172
-      source : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gstplugin.h:173
-      c_package : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gstplugin.h:174
-      origin : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gstplugin.h:175
-      release_datetime : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gstplugin.h:176
+      version : access GLIB.gchar;  -- gst/gstplugin.h:171
+      license : access GLIB.gchar;  -- gst/gstplugin.h:172
+      source : access GLIB.gchar;  -- gst/gstplugin.h:173
+      c_package : access GLIB.gchar;  -- gst/gstplugin.h:174
+      origin : access GLIB.gchar;  -- gst/gstplugin.h:175
+      release_datetime : access GLIB.gchar;  -- gst/gstplugin.h:176
       u_gst_reserved : u_GstPluginDesc_u_gst_reserved_array;  -- gst/gstplugin.h:178
    end record;
    pragma Convention (C_Pass_By_Copy, GstPluginDesc);  -- gst/gstplugin.h:165
@@ -286,64 +289,64 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstplugin_h is
   -- * Returns: %TRUE for a positive match, %FALSE otherwise
   --  
 
-   type GstPluginFilter is access function  (arg1 : System.Address; arg2 : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;
+   type GstPluginFilter is access function  (arg1 : System.Address; arg2 : System.Address) return GLIB.gboolean;
    pragma Convention (C, GstPluginFilter);  -- gst/gstplugin.h:301
 
-   function gst_plugin_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gstplugin.h:304
+   function gst_plugin_get_type return GLIB.GType;  -- gst/gstplugin.h:304
    pragma Import (C, gst_plugin_get_type, "gst_plugin_get_type");
 
    function gst_plugin_register_static
-     (major_version : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;
-      minor_version : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;
-      name : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      description : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
+     (major_version : GLIB.gint;
+      minor_version : GLIB.gint;
+      name : access GLIB.gchar;
+      description : access GLIB.gchar;
       init_func : GstPluginInitFunc;
-      version : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      license : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      source : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      c_package : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      origin : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstplugin.h:306
+      version : access GLIB.gchar;
+      license : access GLIB.gchar;
+      source : access GLIB.gchar;
+      c_package : access GLIB.gchar;
+      origin : access GLIB.gchar) return GLIB.gboolean;  -- gst/gstplugin.h:306
    pragma Import (C, gst_plugin_register_static, "gst_plugin_register_static");
 
    function gst_plugin_register_static_full
-     (major_version : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;
-      minor_version : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;
-      name : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      description : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
+     (major_version : GLIB.gint;
+      minor_version : GLIB.gint;
+      name : access GLIB.gchar;
+      description : access GLIB.gchar;
       init_full_func : GstPluginInitFullFunc;
-      version : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      license : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      source : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      c_package : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      origin : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      user_data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstplugin.h:317
+      version : access GLIB.gchar;
+      license : access GLIB.gchar;
+      source : access GLIB.gchar;
+      c_package : access GLIB.gchar;
+      origin : access GLIB.gchar;
+      user_data : System.Address) return GLIB.gboolean;  -- gst/gstplugin.h:317
    pragma Import (C, gst_plugin_register_static_full, "gst_plugin_register_static_full");
 
-   function gst_plugin_get_name (plugin : System.Address) return access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gstplugin.h:329
+   function gst_plugin_get_name (plugin : System.Address) return access GLIB.gchar;  -- gst/gstplugin.h:329
    pragma Import (C, gst_plugin_get_name, "gst_plugin_get_name");
 
-   function gst_plugin_get_description (plugin : System.Address) return access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gstplugin.h:330
+   function gst_plugin_get_description (plugin : System.Address) return access GLIB.gchar;  -- gst/gstplugin.h:330
    pragma Import (C, gst_plugin_get_description, "gst_plugin_get_description");
 
-   function gst_plugin_get_filename (plugin : System.Address) return access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gstplugin.h:331
+   function gst_plugin_get_filename (plugin : System.Address) return access GLIB.gchar;  -- gst/gstplugin.h:331
    pragma Import (C, gst_plugin_get_filename, "gst_plugin_get_filename");
 
-   function gst_plugin_get_version (plugin : System.Address) return access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gstplugin.h:332
+   function gst_plugin_get_version (plugin : System.Address) return access GLIB.gchar;  -- gst/gstplugin.h:332
    pragma Import (C, gst_plugin_get_version, "gst_plugin_get_version");
 
-   function gst_plugin_get_license (plugin : System.Address) return access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gstplugin.h:333
+   function gst_plugin_get_license (plugin : System.Address) return access GLIB.gchar;  -- gst/gstplugin.h:333
    pragma Import (C, gst_plugin_get_license, "gst_plugin_get_license");
 
-   function gst_plugin_get_source (plugin : System.Address) return access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gstplugin.h:334
+   function gst_plugin_get_source (plugin : System.Address) return access GLIB.gchar;  -- gst/gstplugin.h:334
    pragma Import (C, gst_plugin_get_source, "gst_plugin_get_source");
 
-   function gst_plugin_get_package (plugin : System.Address) return access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gstplugin.h:335
+   function gst_plugin_get_package (plugin : System.Address) return access GLIB.gchar;  -- gst/gstplugin.h:335
    pragma Import (C, gst_plugin_get_package, "gst_plugin_get_package");
 
-   function gst_plugin_get_origin (plugin : System.Address) return access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gstplugin.h:336
+   function gst_plugin_get_origin (plugin : System.Address) return access GLIB.gchar;  -- gst/gstplugin.h:336
    pragma Import (C, gst_plugin_get_origin, "gst_plugin_get_origin");
 
-   function gst_plugin_get_release_date_string (plugin : System.Address) return access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gstplugin.h:337
+   function gst_plugin_get_release_date_string (plugin : System.Address) return access GLIB.gchar;  -- gst/gstplugin.h:337
    pragma Import (C, gst_plugin_get_release_date_string, "gst_plugin_get_release_date_string");
 
    function gst_plugin_get_cache_data (plugin : System.Address) return access constant GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststructure_h.GstStructure;  -- gst/gstplugin.h:338
@@ -352,16 +355,16 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstplugin_h is
    procedure gst_plugin_set_cache_data (plugin : System.Address; cache_data : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststructure_h.GstStructure);  -- gst/gstplugin.h:339
    pragma Import (C, gst_plugin_set_cache_data, "gst_plugin_set_cache_data");
 
-   function gst_plugin_is_loaded (plugin : System.Address) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstplugin.h:341
+   function gst_plugin_is_loaded (plugin : System.Address) return GLIB.gboolean;  -- gst/gstplugin.h:341
    pragma Import (C, gst_plugin_is_loaded, "gst_plugin_is_loaded");
 
-   function gst_plugin_load_file (filename : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar; error : System.Address) return System.Address;  -- gst/gstplugin.h:343
+   function gst_plugin_load_file (filename : access GLIB.gchar; error : System.Address) return System.Address;  -- gst/gstplugin.h:343
    pragma Import (C, gst_plugin_load_file, "gst_plugin_load_file");
 
    function gst_plugin_load (plugin : System.Address) return System.Address;  -- gst/gstplugin.h:345
    pragma Import (C, gst_plugin_load, "gst_plugin_load");
 
-   function gst_plugin_load_by_name (name : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return System.Address;  -- gst/gstplugin.h:346
+   function gst_plugin_load_by_name (name : access GLIB.gchar) return System.Address;  -- gst/gstplugin.h:346
    pragma Import (C, gst_plugin_load_by_name, "gst_plugin_load_by_name");
 
    procedure gst_plugin_add_dependency
@@ -374,9 +377,9 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstplugin_h is
 
    procedure gst_plugin_add_dependency_simple
      (plugin : System.Address;
-      env_vars : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      paths : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      names : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
+      env_vars : access GLIB.gchar;
+      paths : access GLIB.gchar;
+      names : access GLIB.gchar;
       flags : GstPluginDependencyFlags);  -- gst/gstplugin.h:353
    pragma Import (C, gst_plugin_add_dependency_simple, "gst_plugin_add_dependency_simple");
 

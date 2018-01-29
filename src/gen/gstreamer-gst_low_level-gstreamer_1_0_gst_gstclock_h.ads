@@ -1,12 +1,15 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
-with GStreamer.GST_Low_Level.glibconfig_h;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
+with GLIB; --  with GStreamer.GST_Low_Level.glibconfig_h;
+with glib;
+with glib.Values;
+with System;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h;
 with System;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;
+with glib;
 
 package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h is
 
@@ -101,7 +104,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h is
   -- * A datatype to hold a time, measured in nanoseconds.
   --  
 
-   subtype GstClockTime is GStreamer.GST_Low_Level.glibconfig_h.guint64;  -- gst/gstclock.h:46
+   subtype GstClockTime is GLIB.guint64;  -- gst/gstclock.h:46
 
   --*
   -- * GST_TYPE_CLOCK_TIME:
@@ -115,7 +118,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h is
   -- * A datatype to hold a time difference, measured in nanoseconds.
   --  
 
-   subtype GstClockTimeDiff is GStreamer.GST_Low_Level.glibconfig_h.gint64;  -- gst/gstclock.h:60
+   subtype GstClockTimeDiff is GLIB.gint64;  -- gst/gstclock.h:60
 
   --*
   -- * GstClockID:
@@ -123,7 +126,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h is
   -- * A datatype to hold the handle to an outstanding sync or async clock callback.
   --  
 
-   subtype GstClockID is GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;  -- gst/gstclock.h:66
+   subtype GstClockID is System.Address;  -- gst/gstclock.h:66
 
   --*
   -- * GST_CLOCK_TIME_NONE: (value 18446744073709551615) (type GstClockTime)
@@ -296,15 +299,15 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h is
   --  
 
    type GstClockEntry;
-   type u_GstClockEntry_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstClockEntry_u_gst_reserved_array is array (0 .. 3) of System.Address;
    --subtype GstClockEntry is u_GstClockEntry;  -- gst/gstclock.h:279
 
    type GstClock;
-   type u_GstClock_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstClock_u_gst_reserved_array is array (0 .. 3) of System.Address;
    --subtype GstClock is u_GstClock;  -- gst/gstclock.h:280
 
    type GstClockClass;
-   type u_GstClockClass_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstClockClass_u_gst_reserved_array is array (0 .. 3) of System.Address;
    --subtype GstClockClass is u_GstClockClass;  -- gst/gstclock.h:281
 
    --  skipped empty struct u_GstClockPrivate
@@ -328,7 +331,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h is
         (arg1 : access GstClock;
          arg2 : GstClockTime;
          arg3 : GstClockID;
-         arg4 : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;
+         arg4 : System.Address) return GLIB.gboolean;
    pragma Convention (C, GstClockCallback);  -- gst/gstclock.h:296
 
   --*
@@ -422,17 +425,17 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h is
   --  
 
    type GstClockEntry is record
-      refcount : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;  -- gst/gstclock.h:388
+      refcount : aliased GLIB.gint;  -- gst/gstclock.h:388
       clock : access GstClock;  -- gst/gstclock.h:390
       c_type : aliased GstClockEntryType;  -- gst/gstclock.h:391
       time : aliased GstClockTime;  -- gst/gstclock.h:392
       interval : aliased GstClockTime;  -- gst/gstclock.h:393
       status : aliased GstClockReturn;  -- gst/gstclock.h:394
       func : GstClockCallback;  -- gst/gstclock.h:395
-      user_data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;  -- gst/gstclock.h:396
+      user_data : System.Address;  -- gst/gstclock.h:396
       destroy_data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.GDestroyNotify;  -- gst/gstclock.h:397
-      unscheduled : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstclock.h:398
-      woken_up : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstclock.h:399
+      unscheduled : aliased GLIB.gboolean;  -- gst/gstclock.h:398
+      woken_up : aliased GLIB.gboolean;  -- gst/gstclock.h:399
       u_gst_reserved : u_GstClockEntry_u_gst_reserved_array;  -- gst/gstclock.h:402
    end record;
    pragma Convention (C_Pass_By_Copy, GstClockEntry);  -- gst/gstclock.h:387
@@ -526,7 +529,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h is
   -- vtable  
   -- waiting on an ID  
   --< private > 
-   function gst_clock_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gstclock.h:494
+   function gst_clock_get_type return GLIB.GType;  -- gst/gstclock.h:494
    pragma Import (C, gst_clock_get_type, "gst_clock_get_type");
 
    function gst_clock_set_resolution (clock : access GstClock; resolution : GstClockTime) return GstClockTime;  -- gst/gstclock.h:496
@@ -555,7 +558,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h is
    pragma Import (C, gst_clock_get_calibration, "gst_clock_get_calibration");
 
   -- master/slave clocks  
-   function gst_clock_set_master (clock : access GstClock; master : access GstClock) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstclock.h:511
+   function gst_clock_set_master (clock : access GstClock; master : access GstClock) return GLIB.gboolean;  -- gst/gstclock.h:511
    pragma Import (C, gst_clock_set_master, "gst_clock_set_master");
 
    function gst_clock_get_master (clock : access GstClock) return access GstClock;  -- gst/gstclock.h:512
@@ -571,18 +574,18 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h is
      (clock : access GstClock;
       slave : GstClockTime;
       master : GstClockTime;
-      r_squared : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gdouble) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstclock.h:518
+      r_squared : access GLIB.gdouble) return GLIB.gboolean;  -- gst/gstclock.h:518
    pragma Import (C, gst_clock_add_observation, "gst_clock_add_observation");
 
    function gst_clock_add_observation_unapplied
      (clock : access GstClock;
       slave : GstClockTime;
       master : GstClockTime;
-      r_squared : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gdouble;
+      r_squared : access GLIB.gdouble;
       internal : access GstClockTime;
       external : access GstClockTime;
       rate_num : access GstClockTime;
-      rate_denom : access GstClockTime) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstclock.h:521
+      rate_denom : access GstClockTime) return GLIB.gboolean;  -- gst/gstclock.h:521
    pragma Import (C, gst_clock_add_observation_unapplied, "gst_clock_add_observation_unapplied");
 
   -- getting and adjusting internal/external time  
@@ -614,14 +617,14 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h is
    pragma Import (C, gst_clock_unadjust_unlocked, "gst_clock_unadjust_unlocked");
 
   -- waiting for, signalling and checking for synchronization  
-   function gst_clock_wait_for_sync (clock : access GstClock; timeout : GstClockTime) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstclock.h:546
+   function gst_clock_wait_for_sync (clock : access GstClock; timeout : GstClockTime) return GLIB.gboolean;  -- gst/gstclock.h:546
    pragma Import (C, gst_clock_wait_for_sync, "gst_clock_wait_for_sync");
 
-   function gst_clock_is_synced (clock : access GstClock) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstclock.h:547
+   function gst_clock_is_synced (clock : access GstClock) return GLIB.gboolean;  -- gst/gstclock.h:547
    pragma Import (C, gst_clock_is_synced, "gst_clock_is_synced");
 
   -- to be used by subclasses only  
-   procedure gst_clock_set_synced (clock : access GstClock; synced : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean);  -- gst/gstclock.h:550
+   procedure gst_clock_set_synced (clock : access GstClock; synced : GLIB.gboolean);  -- gst/gstclock.h:550
    pragma Import (C, gst_clock_set_synced, "gst_clock_set_synced");
 
   -- creating IDs that can be used to get notifications  
@@ -642,7 +645,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h is
    pragma Import (C, gst_clock_id_unref, "gst_clock_id_unref");
 
   -- operations on IDs  
-   function gst_clock_id_compare_func (id1 : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gconstpointer; id2 : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gconstpointer) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;  -- gst/gstclock.h:564
+   function gst_clock_id_compare_func (id1 : Interfaces.C.Extensions.void_ptr; id2 : Interfaces.C.Extensions.void_ptr) return GLIB.gint;  -- gst/gstclock.h:564
    pragma Import (C, gst_clock_id_compare_func, "gst_clock_id_compare_func");
 
    function gst_clock_id_get_time (id : GstClockID) return GstClockTime;  -- gst/gstclock.h:566
@@ -654,7 +657,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h is
    function gst_clock_id_wait_async
      (id : GstClockID;
       func : GstClockCallback;
-      user_data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+      user_data : System.Address;
       destroy_data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.GDestroyNotify) return GstClockReturn;  -- gst/gstclock.h:569
    pragma Import (C, gst_clock_id_wait_async, "gst_clock_id_wait_async");
 
@@ -664,14 +667,14 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h is
    function gst_clock_single_shot_id_reinit
      (clock : access GstClock;
       id : GstClockID;
-      time : GstClockTime) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstclock.h:575
+      time : GstClockTime) return GLIB.gboolean;  -- gst/gstclock.h:575
    pragma Import (C, gst_clock_single_shot_id_reinit, "gst_clock_single_shot_id_reinit");
 
    function gst_clock_periodic_id_reinit
      (clock : access GstClock;
       id : GstClockID;
       start_time : GstClockTime;
-      interval : GstClockTime) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstclock.h:578
+      interval : GstClockTime) return GLIB.gboolean;  -- gst/gstclock.h:578
    pragma Import (C, gst_clock_periodic_id_reinit, "gst_clock_periodic_id_reinit");
 
    procedure glib_autoptr_cleanup_GstClock (u_ptr : System.Address);  -- gst/gstclock.h:584

@@ -1,12 +1,15 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstminiobject_h;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;
+with glib;
+with glib.Values;
 with System;
-with GStreamer.GST_Low_Level.glibconfig_h;
+with glib;
+with System;
+with GLIB; --  with GStreamer.GST_Low_Level.glibconfig_h;
 
 package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsttaglist_h is
 
@@ -352,8 +355,8 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsttaglist_h is
 
    type GstTagForeachFunc is access procedure 
         (arg1 : access constant GstTagList;
-         arg2 : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-         arg3 : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer);
+         arg2 : access GLIB.gchar;
+         arg3 : System.Address);
    pragma Convention (C, GstTagForeachFunc);  -- gst/gsttaglist.h:172
 
   --*
@@ -365,55 +368,55 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsttaglist_h is
   -- * tags.
   --  
 
-   type GstTagMergeFunc is access procedure  (arg1 : access GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue; arg2 : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue);
+   type GstTagMergeFunc is access procedure  (arg1 : access Glib.Values.GValue; arg2 : access constant Glib.Values.GValue);
    pragma Convention (C, GstTagMergeFunc);  -- gst/gsttaglist.h:184
 
-   function gst_tag_list_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gsttaglist.h:186
+   function gst_tag_list_get_type return GLIB.GType;  -- gst/gsttaglist.h:186
    pragma Import (C, gst_tag_list_get_type, "gst_tag_list_get_type");
 
   -- tag registration  
    procedure gst_tag_register
-     (name : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
+     (name : access GLIB.gchar;
       flag : GstTagFlag;
-      c_type : GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;
-      nick : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      blurb : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
+      c_type : GLIB.GType;
+      nick : access GLIB.gchar;
+      blurb : access GLIB.gchar;
       func : GstTagMergeFunc);  -- gst/gsttaglist.h:189
    pragma Import (C, gst_tag_register, "gst_tag_register");
 
    procedure gst_tag_register_static
-     (name : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
+     (name : access GLIB.gchar;
       flag : GstTagFlag;
-      c_type : GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;
-      nick : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      blurb : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
+      c_type : GLIB.GType;
+      nick : access GLIB.gchar;
+      blurb : access GLIB.gchar;
       func : GstTagMergeFunc);  -- gst/gsttaglist.h:196
    pragma Import (C, gst_tag_register_static, "gst_tag_register_static");
 
   -- some default merging functions  
-   procedure gst_tag_merge_use_first (dest : access GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue; src : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue);  -- gst/gsttaglist.h:204
+   procedure gst_tag_merge_use_first (dest : access Glib.Values.GValue; src : access constant Glib.Values.GValue);  -- gst/gsttaglist.h:204
    pragma Import (C, gst_tag_merge_use_first, "gst_tag_merge_use_first");
 
-   procedure gst_tag_merge_strings_with_comma (dest : access GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue; src : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue);  -- gst/gsttaglist.h:205
+   procedure gst_tag_merge_strings_with_comma (dest : access Glib.Values.GValue; src : access constant Glib.Values.GValue);  -- gst/gsttaglist.h:205
    pragma Import (C, gst_tag_merge_strings_with_comma, "gst_tag_merge_strings_with_comma");
 
   -- basic tag support  
-   function gst_tag_exists (tag : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gsttaglist.h:208
+   function gst_tag_exists (tag : access GLIB.gchar) return GLIB.gboolean;  -- gst/gsttaglist.h:208
    pragma Import (C, gst_tag_exists, "gst_tag_exists");
 
-   function gst_tag_get_type (tag : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gsttaglist.h:209
+   function gst_tag_get_type (tag : access GLIB.gchar) return GLIB.GType;  -- gst/gsttaglist.h:209
    pragma Import (C, gst_tag_get_type, "gst_tag_get_type");
 
-   function gst_tag_get_nick (tag : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gsttaglist.h:210
+   function gst_tag_get_nick (tag : access GLIB.gchar) return access GLIB.gchar;  -- gst/gsttaglist.h:210
    pragma Import (C, gst_tag_get_nick, "gst_tag_get_nick");
 
-   function gst_tag_get_description (tag : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gsttaglist.h:211
+   function gst_tag_get_description (tag : access GLIB.gchar) return access GLIB.gchar;  -- gst/gsttaglist.h:211
    pragma Import (C, gst_tag_get_description, "gst_tag_get_description");
 
-   function gst_tag_get_flag (tag : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return GstTagFlag;  -- gst/gsttaglist.h:212
+   function gst_tag_get_flag (tag : access GLIB.gchar) return GstTagFlag;  -- gst/gsttaglist.h:212
    pragma Import (C, gst_tag_get_flag, "gst_tag_get_flag");
 
-   function gst_tag_is_fixed (tag : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gsttaglist.h:213
+   function gst_tag_is_fixed (tag : access GLIB.gchar) return GLIB.gboolean;  -- gst/gsttaglist.h:213
    pragma Import (C, gst_tag_is_fixed, "gst_tag_is_fixed");
 
   -- tag lists  
@@ -434,7 +437,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsttaglist_h is
    function gst_tag_list_new_empty return access GstTagList;  -- gst/gsttaglist.h:230
    pragma Import (C, gst_tag_list_new_empty, "gst_tag_list_new_empty");
 
-   function gst_tag_list_new (tag : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar  -- , ...
+   function gst_tag_list_new (tag : access GLIB.gchar  -- , ...
       ) return access GstTagList;  -- gst/gsttaglist.h:231
    pragma Import (C, gst_tag_list_new, "gst_tag_list_new");
 
@@ -447,22 +450,22 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsttaglist_h is
    function gst_tag_list_get_scope (list : access constant GstTagList) return GstTagScope;  -- gst/gsttaglist.h:235
    pragma Import (C, gst_tag_list_get_scope, "gst_tag_list_get_scope");
 
-   function gst_tag_list_to_string (list : access constant GstTagList) return access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gsttaglist.h:237
+   function gst_tag_list_to_string (list : access constant GstTagList) return access GLIB.gchar;  -- gst/gsttaglist.h:237
    pragma Import (C, gst_tag_list_to_string, "gst_tag_list_to_string");
 
-   function gst_tag_list_new_from_string (str : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return access GstTagList;  -- gst/gsttaglist.h:238
+   function gst_tag_list_new_from_string (str : access GLIB.gchar) return access GstTagList;  -- gst/gsttaglist.h:238
    pragma Import (C, gst_tag_list_new_from_string, "gst_tag_list_new_from_string");
 
-   function gst_tag_list_n_tags (list : access constant GstTagList) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;  -- gst/gsttaglist.h:240
+   function gst_tag_list_n_tags (list : access constant GstTagList) return GLIB.gint;  -- gst/gsttaglist.h:240
    pragma Import (C, gst_tag_list_n_tags, "gst_tag_list_n_tags");
 
-   function gst_tag_list_nth_tag_name (list : access constant GstTagList; index : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint) return access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gsttaglist.h:241
+   function gst_tag_list_nth_tag_name (list : access constant GstTagList; index : GLIB.guint) return access GLIB.gchar;  -- gst/gsttaglist.h:241
    pragma Import (C, gst_tag_list_nth_tag_name, "gst_tag_list_nth_tag_name");
 
-   function gst_tag_list_is_empty (list : access constant GstTagList) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gsttaglist.h:242
+   function gst_tag_list_is_empty (list : access constant GstTagList) return GLIB.gboolean;  -- gst/gsttaglist.h:242
    pragma Import (C, gst_tag_list_is_empty, "gst_tag_list_is_empty");
 
-   function gst_tag_list_is_equal (list1 : access constant GstTagList; list2 : access constant GstTagList) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gsttaglist.h:243
+   function gst_tag_list_is_equal (list1 : access constant GstTagList; list2 : access constant GstTagList) return GLIB.gboolean;  -- gst/gsttaglist.h:243
    pragma Import (C, gst_tag_list_is_equal, "gst_tag_list_is_equal");
 
    procedure gst_tag_list_insert
@@ -477,227 +480,227 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsttaglist_h is
       mode : GstTagMergeMode) return access GstTagList;  -- gst/gsttaglist.h:248
    pragma Import (C, gst_tag_list_merge, "gst_tag_list_merge");
 
-   function gst_tag_list_get_tag_size (list : access constant GstTagList; tag : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;  -- gst/gsttaglist.h:251
+   function gst_tag_list_get_tag_size (list : access constant GstTagList; tag : access GLIB.gchar) return GLIB.guint;  -- gst/gsttaglist.h:251
    pragma Import (C, gst_tag_list_get_tag_size, "gst_tag_list_get_tag_size");
 
    procedure gst_tag_list_add
      (list : access GstTagList;
       mode : GstTagMergeMode;
-      tag : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar  -- , ...
+      tag : access GLIB.gchar  -- , ...
       );  -- gst/gsttaglist.h:253
    pragma Import (C, gst_tag_list_add, "gst_tag_list_add");
 
    procedure gst_tag_list_add_values
      (list : access GstTagList;
       mode : GstTagMergeMode;
-      tag : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar  -- , ...
+      tag : access GLIB.gchar  -- , ...
       );  -- gst/gsttaglist.h:257
    pragma Import (C, gst_tag_list_add_values, "gst_tag_list_add_values");
 
    procedure gst_tag_list_add_valist
      (list : access GstTagList;
       mode : GstTagMergeMode;
-      tag : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
+      tag : access GLIB.gchar;
       var_args : access System.Address);  -- gst/gsttaglist.h:261
    pragma Import (C, gst_tag_list_add_valist, "gst_tag_list_add_valist");
 
    procedure gst_tag_list_add_valist_values
      (list : access GstTagList;
       mode : GstTagMergeMode;
-      tag : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
+      tag : access GLIB.gchar;
       var_args : access System.Address);  -- gst/gsttaglist.h:265
    pragma Import (C, gst_tag_list_add_valist_values, "gst_tag_list_add_valist_values");
 
    procedure gst_tag_list_add_value
      (list : access GstTagList;
       mode : GstTagMergeMode;
-      tag : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      value : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue);  -- gst/gsttaglist.h:269
+      tag : access GLIB.gchar;
+      value : access constant Glib.Values.GValue);  -- gst/gsttaglist.h:269
    pragma Import (C, gst_tag_list_add_value, "gst_tag_list_add_value");
 
-   procedure gst_tag_list_remove_tag (list : access GstTagList; tag : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar);  -- gst/gsttaglist.h:273
+   procedure gst_tag_list_remove_tag (list : access GstTagList; tag : access GLIB.gchar);  -- gst/gsttaglist.h:273
    pragma Import (C, gst_tag_list_remove_tag, "gst_tag_list_remove_tag");
 
    procedure gst_tag_list_foreach
      (list : access constant GstTagList;
       func : GstTagForeachFunc;
-      user_data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer);  -- gst/gsttaglist.h:275
+      user_data : System.Address);  -- gst/gsttaglist.h:275
    pragma Import (C, gst_tag_list_foreach, "gst_tag_list_foreach");
 
    function gst_tag_list_get_value_index
      (list : access constant GstTagList;
-      tag : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      index : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint) return access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue;  -- gst/gsttaglist.h:280
+      tag : access GLIB.gchar;
+      index : GLIB.guint) return access constant Glib.Values.GValue;  -- gst/gsttaglist.h:280
    pragma Import (C, gst_tag_list_get_value_index, "gst_tag_list_get_value_index");
 
    function gst_tag_list_copy_value
-     (dest : access GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue;
+     (dest : access Glib.Values.GValue;
       list : access constant GstTagList;
-      tag : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gsttaglist.h:283
+      tag : access GLIB.gchar) return GLIB.gboolean;  -- gst/gsttaglist.h:283
    pragma Import (C, gst_tag_list_copy_value, "gst_tag_list_copy_value");
 
   -- simplifications (FIXME: do we want them?)  
    function gst_tag_list_get_boolean
      (list : access constant GstTagList;
-      tag : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      value : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gsttaglist.h:288
+      tag : access GLIB.gchar;
+      value : access GLIB.gboolean) return GLIB.gboolean;  -- gst/gsttaglist.h:288
    pragma Import (C, gst_tag_list_get_boolean, "gst_tag_list_get_boolean");
 
    function gst_tag_list_get_boolean_index
      (list : access constant GstTagList;
-      tag : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      index : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;
-      value : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gsttaglist.h:291
+      tag : access GLIB.gchar;
+      index : GLIB.guint;
+      value : access GLIB.gboolean) return GLIB.gboolean;  -- gst/gsttaglist.h:291
    pragma Import (C, gst_tag_list_get_boolean_index, "gst_tag_list_get_boolean_index");
 
    function gst_tag_list_get_int
      (list : access constant GstTagList;
-      tag : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      value : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gsttaglist.h:295
+      tag : access GLIB.gchar;
+      value : access GLIB.gint) return GLIB.gboolean;  -- gst/gsttaglist.h:295
    pragma Import (C, gst_tag_list_get_int, "gst_tag_list_get_int");
 
    function gst_tag_list_get_int_index
      (list : access constant GstTagList;
-      tag : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      index : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;
-      value : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gsttaglist.h:298
+      tag : access GLIB.gchar;
+      index : GLIB.guint;
+      value : access GLIB.gint) return GLIB.gboolean;  -- gst/gsttaglist.h:298
    pragma Import (C, gst_tag_list_get_int_index, "gst_tag_list_get_int_index");
 
    function gst_tag_list_get_uint
      (list : access constant GstTagList;
-      tag : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      value : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gsttaglist.h:302
+      tag : access GLIB.gchar;
+      value : access GLIB.guint) return GLIB.gboolean;  -- gst/gsttaglist.h:302
    pragma Import (C, gst_tag_list_get_uint, "gst_tag_list_get_uint");
 
    function gst_tag_list_get_uint_index
      (list : access constant GstTagList;
-      tag : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      index : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;
-      value : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gsttaglist.h:305
+      tag : access GLIB.gchar;
+      index : GLIB.guint;
+      value : access GLIB.guint) return GLIB.gboolean;  -- gst/gsttaglist.h:305
    pragma Import (C, gst_tag_list_get_uint_index, "gst_tag_list_get_uint_index");
 
    function gst_tag_list_get_int64
      (list : access constant GstTagList;
-      tag : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      value : access GStreamer.GST_Low_Level.glibconfig_h.gint64) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gsttaglist.h:309
+      tag : access GLIB.gchar;
+      value : access GLIB.gint64) return GLIB.gboolean;  -- gst/gsttaglist.h:309
    pragma Import (C, gst_tag_list_get_int64, "gst_tag_list_get_int64");
 
    function gst_tag_list_get_int64_index
      (list : access constant GstTagList;
-      tag : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      index : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;
-      value : access GStreamer.GST_Low_Level.glibconfig_h.gint64) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gsttaglist.h:312
+      tag : access GLIB.gchar;
+      index : GLIB.guint;
+      value : access GLIB.gint64) return GLIB.gboolean;  -- gst/gsttaglist.h:312
    pragma Import (C, gst_tag_list_get_int64_index, "gst_tag_list_get_int64_index");
 
    function gst_tag_list_get_uint64
      (list : access constant GstTagList;
-      tag : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      value : access GStreamer.GST_Low_Level.glibconfig_h.guint64) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gsttaglist.h:316
+      tag : access GLIB.gchar;
+      value : access GLIB.guint64) return GLIB.gboolean;  -- gst/gsttaglist.h:316
    pragma Import (C, gst_tag_list_get_uint64, "gst_tag_list_get_uint64");
 
    function gst_tag_list_get_uint64_index
      (list : access constant GstTagList;
-      tag : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      index : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;
-      value : access GStreamer.GST_Low_Level.glibconfig_h.guint64) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gsttaglist.h:319
+      tag : access GLIB.gchar;
+      index : GLIB.guint;
+      value : access GLIB.guint64) return GLIB.gboolean;  -- gst/gsttaglist.h:319
    pragma Import (C, gst_tag_list_get_uint64_index, "gst_tag_list_get_uint64_index");
 
    function gst_tag_list_get_float
      (list : access constant GstTagList;
-      tag : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      value : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gfloat) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gsttaglist.h:323
+      tag : access GLIB.gchar;
+      value : access GLIB.gfloat) return GLIB.gboolean;  -- gst/gsttaglist.h:323
    pragma Import (C, gst_tag_list_get_float, "gst_tag_list_get_float");
 
    function gst_tag_list_get_float_index
      (list : access constant GstTagList;
-      tag : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      index : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;
-      value : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gfloat) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gsttaglist.h:326
+      tag : access GLIB.gchar;
+      index : GLIB.guint;
+      value : access GLIB.gfloat) return GLIB.gboolean;  -- gst/gsttaglist.h:326
    pragma Import (C, gst_tag_list_get_float_index, "gst_tag_list_get_float_index");
 
    function gst_tag_list_get_double
      (list : access constant GstTagList;
-      tag : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      value : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gdouble) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gsttaglist.h:330
+      tag : access GLIB.gchar;
+      value : access GLIB.gdouble) return GLIB.gboolean;  -- gst/gsttaglist.h:330
    pragma Import (C, gst_tag_list_get_double, "gst_tag_list_get_double");
 
    function gst_tag_list_get_double_index
      (list : access constant GstTagList;
-      tag : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      index : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;
-      value : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gdouble) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gsttaglist.h:333
+      tag : access GLIB.gchar;
+      index : GLIB.guint;
+      value : access GLIB.gdouble) return GLIB.gboolean;  -- gst/gsttaglist.h:333
    pragma Import (C, gst_tag_list_get_double_index, "gst_tag_list_get_double_index");
 
    function gst_tag_list_get_string
      (list : access constant GstTagList;
-      tag : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      value : System.Address) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gsttaglist.h:337
+      tag : access GLIB.gchar;
+      value : System.Address) return GLIB.gboolean;  -- gst/gsttaglist.h:337
    pragma Import (C, gst_tag_list_get_string, "gst_tag_list_get_string");
 
    function gst_tag_list_get_string_index
      (list : access constant GstTagList;
-      tag : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      index : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;
-      value : System.Address) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gsttaglist.h:340
+      tag : access GLIB.gchar;
+      index : GLIB.guint;
+      value : System.Address) return GLIB.gboolean;  -- gst/gsttaglist.h:340
    pragma Import (C, gst_tag_list_get_string_index, "gst_tag_list_get_string_index");
 
    function gst_tag_list_peek_string_index
      (list : access constant GstTagList;
-      tag : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      index : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;
-      value : System.Address) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gsttaglist.h:344
+      tag : access GLIB.gchar;
+      index : GLIB.guint;
+      value : System.Address) return GLIB.gboolean;  -- gst/gsttaglist.h:344
    pragma Import (C, gst_tag_list_peek_string_index, "gst_tag_list_peek_string_index");
 
    function gst_tag_list_get_pointer
      (list : access constant GstTagList;
-      tag : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      value : System.Address) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gsttaglist.h:348
+      tag : access GLIB.gchar;
+      value : System.Address) return GLIB.gboolean;  -- gst/gsttaglist.h:348
    pragma Import (C, gst_tag_list_get_pointer, "gst_tag_list_get_pointer");
 
    function gst_tag_list_get_pointer_index
      (list : access constant GstTagList;
-      tag : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      index : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;
-      value : System.Address) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gsttaglist.h:351
+      tag : access GLIB.gchar;
+      index : GLIB.guint;
+      value : System.Address) return GLIB.gboolean;  -- gst/gsttaglist.h:351
    pragma Import (C, gst_tag_list_get_pointer_index, "gst_tag_list_get_pointer_index");
 
    function gst_tag_list_get_date
      (list : access constant GstTagList;
-      tag : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      value : System.Address) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gsttaglist.h:355
+      tag : access GLIB.gchar;
+      value : System.Address) return GLIB.gboolean;  -- gst/gsttaglist.h:355
    pragma Import (C, gst_tag_list_get_date, "gst_tag_list_get_date");
 
    function gst_tag_list_get_date_index
      (list : access constant GstTagList;
-      tag : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      index : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;
-      value : System.Address) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gsttaglist.h:358
+      tag : access GLIB.gchar;
+      index : GLIB.guint;
+      value : System.Address) return GLIB.gboolean;  -- gst/gsttaglist.h:358
    pragma Import (C, gst_tag_list_get_date_index, "gst_tag_list_get_date_index");
 
    function gst_tag_list_get_date_time
      (list : access constant GstTagList;
-      tag : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      value : System.Address) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gsttaglist.h:362
+      tag : access GLIB.gchar;
+      value : System.Address) return GLIB.gboolean;  -- gst/gsttaglist.h:362
    pragma Import (C, gst_tag_list_get_date_time, "gst_tag_list_get_date_time");
 
    function gst_tag_list_get_date_time_index
      (list : access constant GstTagList;
-      tag : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      index : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;
-      value : System.Address) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gsttaglist.h:365
+      tag : access GLIB.gchar;
+      index : GLIB.guint;
+      value : System.Address) return GLIB.gboolean;  -- gst/gsttaglist.h:365
    pragma Import (C, gst_tag_list_get_date_time_index, "gst_tag_list_get_date_time_index");
 
    function gst_tag_list_get_sample
      (list : access constant GstTagList;
-      tag : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      sample : System.Address) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gsttaglist.h:369
+      tag : access GLIB.gchar;
+      sample : System.Address) return GLIB.gboolean;  -- gst/gsttaglist.h:369
    pragma Import (C, gst_tag_list_get_sample, "gst_tag_list_get_sample");
 
    function gst_tag_list_get_sample_index
      (list : access constant GstTagList;
-      tag : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      index : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;
-      sample : System.Address) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gsttaglist.h:372
+      tag : access GLIB.gchar;
+      index : GLIB.guint;
+      sample : System.Address) return GLIB.gboolean;  -- gst/gsttaglist.h:372
    pragma Import (C, gst_tag_list_get_sample_index, "gst_tag_list_get_sample_index");
 
   -- refcounting  

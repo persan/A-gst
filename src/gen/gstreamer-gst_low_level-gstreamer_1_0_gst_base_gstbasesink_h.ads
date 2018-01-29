@@ -1,12 +1,15 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
+with glib;
+with glib.Values;
+with System;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h;
-with GStreamer.GST_Low_Level.glibconfig_h;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gthread_h;
+with GLIB; --  with GStreamer.GST_Low_Level.glibconfig_h;
+--  with GStreamer.GST_Low_Level.glib_2_0_glib_gthread_h;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstsegment_h;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h;
 with System;
@@ -14,7 +17,7 @@ limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstevent_h;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;
+with glib;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstminiobject_h;
 
 package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstbasesink_h is
@@ -82,11 +85,11 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstbasesink_h is
   --  
 
    type GstBaseSink;
-   type u_GstBaseSink_u_gst_reserved_array is array (0 .. 19) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstBaseSink_u_gst_reserved_array is array (0 .. 19) of System.Address;
    --subtype GstBaseSink is u_GstBaseSink;  -- gst/base/gstbasesink.h:60
 
    type GstBaseSinkClass;
-   type u_GstBaseSinkClass_u_gst_reserved_array is array (0 .. 19) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstBaseSinkClass_u_gst_reserved_array is array (0 .. 19) of System.Address;
    --subtype GstBaseSinkClass is u_GstBaseSinkClass;  -- gst/base/gstbasesink.h:61
 
    --  skipped empty struct u_GstBaseSinkPrivate
@@ -103,22 +106,22 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstbasesink_h is
       element : aliased GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h.GstElement;  -- gst/base/gstbasesink.h:70
       sinkpad : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstPad;  -- gst/base/gstbasesink.h:73
       pad_mode : aliased GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstPadMode;  -- gst/base/gstbasesink.h:74
-      offset : aliased GStreamer.GST_Low_Level.glibconfig_h.guint64;  -- gst/base/gstbasesink.h:77
-      can_activate_pull : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/base/gstbasesink.h:78
-      can_activate_push : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/base/gstbasesink.h:79
+      offset : aliased GLIB.guint64;  -- gst/base/gstbasesink.h:77
+      can_activate_pull : aliased GLIB.gboolean;  -- gst/base/gstbasesink.h:78
+      can_activate_push : aliased GLIB.gboolean;  -- gst/base/gstbasesink.h:79
       preroll_lock : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gthread_h.GMutex;  -- gst/base/gstbasesink.h:82
       preroll_cond : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gthread_h.GCond;  -- gst/base/gstbasesink.h:83
-      eos : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/base/gstbasesink.h:84
-      need_preroll : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/base/gstbasesink.h:85
-      have_preroll : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/base/gstbasesink.h:86
-      playing_async : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/base/gstbasesink.h:87
-      have_newsegment : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/base/gstbasesink.h:90
+      eos : aliased GLIB.gboolean;  -- gst/base/gstbasesink.h:84
+      need_preroll : aliased GLIB.gboolean;  -- gst/base/gstbasesink.h:85
+      have_preroll : aliased GLIB.gboolean;  -- gst/base/gstbasesink.h:86
+      playing_async : aliased GLIB.gboolean;  -- gst/base/gstbasesink.h:87
+      have_newsegment : aliased GLIB.gboolean;  -- gst/base/gstbasesink.h:90
       segment : aliased GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstsegment_h.GstSegment;  -- gst/base/gstbasesink.h:91
       clock_id : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockID;  -- gst/base/gstbasesink.h:94
-      sync : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/base/gstbasesink.h:95
-      flushing : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/base/gstbasesink.h:96
-      running : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/base/gstbasesink.h:97
-      max_lateness : aliased GStreamer.GST_Low_Level.glibconfig_h.gint64;  -- gst/base/gstbasesink.h:99
+      sync : aliased GLIB.gboolean;  -- gst/base/gstbasesink.h:95
+      flushing : aliased GLIB.gboolean;  -- gst/base/gstbasesink.h:96
+      running : aliased GLIB.gboolean;  -- gst/base/gstbasesink.h:97
+      max_lateness : aliased GLIB.gint64;  -- gst/base/gstbasesink.h:99
       priv : System.Address;  -- gst/base/gstbasesink.h:102
       u_gst_reserved : u_GstBaseSink_u_gst_reserved_array;  -- gst/base/gstbasesink.h:104
    end record;
@@ -181,21 +184,21 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstbasesink_h is
    type GstBaseSinkClass is record
       parent_class : aliased GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h.GstElementClass;  -- gst/base/gstbasesink.h:151
       get_caps : access function  (arg1 : access GstBaseSink; arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h.GstCaps) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h.GstCaps;  -- gst/base/gstbasesink.h:154
-      set_caps : access function  (arg1 : access GstBaseSink; arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h.GstCaps) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/base/gstbasesink.h:156
+      set_caps : access function  (arg1 : access GstBaseSink; arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h.GstCaps) return GLIB.gboolean;  -- gst/base/gstbasesink.h:156
       fixate : access function  (arg1 : access GstBaseSink; arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h.GstCaps) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h.GstCaps;  -- gst/base/gstbasesink.h:159
-      activate_pull : access function  (arg1 : access GstBaseSink; arg2 : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/base/gstbasesink.h:161
+      activate_pull : access function  (arg1 : access GstBaseSink; arg2 : GLIB.gboolean) return GLIB.gboolean;  -- gst/base/gstbasesink.h:161
       get_times : access procedure 
            (arg1 : access GstBaseSink;
             arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBuffer;
-            arg3 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime;
-            arg4 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime);  -- gst/base/gstbasesink.h:165
-      propose_allocation : access function  (arg1 : access GstBaseSink; arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h.GstQuery) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/base/gstbasesink.h:168
-      start : access function  (arg1 : access GstBaseSink) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/base/gstbasesink.h:171
-      stop : access function  (arg1 : access GstBaseSink) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/base/gstbasesink.h:172
-      unlock : access function  (arg1 : access GstBaseSink) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/base/gstbasesink.h:176
-      unlock_stop : access function  (arg1 : access GstBaseSink) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/base/gstbasesink.h:180
-      query : access function  (arg1 : access GstBaseSink; arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h.GstQuery) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/base/gstbasesink.h:183
-      event : access function  (arg1 : access GstBaseSink; arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstevent_h.GstEvent) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/base/gstbasesink.h:186
+            arg3 : access GLIB.guint64;
+            arg4 : access GLIB.guint64);  -- gst/base/gstbasesink.h:165
+      propose_allocation : access function  (arg1 : access GstBaseSink; arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h.GstQuery) return GLIB.gboolean;  -- gst/base/gstbasesink.h:168
+      start : access function  (arg1 : access GstBaseSink) return GLIB.gboolean;  -- gst/base/gstbasesink.h:171
+      stop : access function  (arg1 : access GstBaseSink) return GLIB.gboolean;  -- gst/base/gstbasesink.h:172
+      unlock : access function  (arg1 : access GstBaseSink) return GLIB.gboolean;  -- gst/base/gstbasesink.h:176
+      unlock_stop : access function  (arg1 : access GstBaseSink) return GLIB.gboolean;  -- gst/base/gstbasesink.h:180
+      query : access function  (arg1 : access GstBaseSink; arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h.GstQuery) return GLIB.gboolean;  -- gst/base/gstbasesink.h:183
+      event : access function  (arg1 : access GstBaseSink; arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstevent_h.GstEvent) return GLIB.gboolean;  -- gst/base/gstbasesink.h:186
       wait_event : access function  (arg1 : access GstBaseSink; arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstevent_h.GstEvent) return GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstFlowReturn;  -- gst/base/gstbasesink.h:188
       prepare : access function  (arg1 : access GstBaseSink; arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBuffer) return GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstFlowReturn;  -- gst/base/gstbasesink.h:191
       prepare_list : access function  (arg1 : access GstBaseSink; arg2 : System.Address) return GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstFlowReturn;  -- gst/base/gstbasesink.h:192
@@ -227,7 +230,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstbasesink_h is
   -- notify subclass of preroll buffer or real buffer  
   -- Render a BufferList  
   --< private > 
-   function gst_base_sink_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/base/gstbasesink.h:204
+   function gst_base_sink_get_type return GLIB.GType;  -- gst/base/gstbasesink.h:204
    pragma Import (C, gst_base_sink_get_type, "gst_base_sink_get_type");
 
    function gst_base_sink_do_preroll (sink : access GstBaseSink; obj : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstminiobject_h.GstMiniObject) return GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstFlowReturn;  -- gst/base/gstbasesink.h:206
@@ -237,107 +240,107 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstbasesink_h is
    pragma Import (C, gst_base_sink_wait_preroll, "gst_base_sink_wait_preroll");
 
   -- synchronizing against the clock  
-   procedure gst_base_sink_set_sync (sink : access GstBaseSink; sync : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean);  -- gst/base/gstbasesink.h:210
+   procedure gst_base_sink_set_sync (sink : access GstBaseSink; sync : GLIB.gboolean);  -- gst/base/gstbasesink.h:210
    pragma Import (C, gst_base_sink_set_sync, "gst_base_sink_set_sync");
 
-   function gst_base_sink_get_sync (sink : access GstBaseSink) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/base/gstbasesink.h:211
+   function gst_base_sink_get_sync (sink : access GstBaseSink) return GLIB.gboolean;  -- gst/base/gstbasesink.h:211
    pragma Import (C, gst_base_sink_get_sync, "gst_base_sink_get_sync");
 
   -- Drop buffers which are out of segment  
-   procedure gst_base_sink_set_drop_out_of_segment (sink : access GstBaseSink; drop_out_of_segment : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean);  -- gst/base/gstbasesink.h:214
+   procedure gst_base_sink_set_drop_out_of_segment (sink : access GstBaseSink; drop_out_of_segment : GLIB.gboolean);  -- gst/base/gstbasesink.h:214
    pragma Import (C, gst_base_sink_set_drop_out_of_segment, "gst_base_sink_set_drop_out_of_segment");
 
-   function gst_base_sink_get_drop_out_of_segment (sink : access GstBaseSink) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/base/gstbasesink.h:215
+   function gst_base_sink_get_drop_out_of_segment (sink : access GstBaseSink) return GLIB.gboolean;  -- gst/base/gstbasesink.h:215
    pragma Import (C, gst_base_sink_get_drop_out_of_segment, "gst_base_sink_get_drop_out_of_segment");
 
   -- dropping late buffers  
-   procedure gst_base_sink_set_max_lateness (sink : access GstBaseSink; max_lateness : GStreamer.GST_Low_Level.glibconfig_h.gint64);  -- gst/base/gstbasesink.h:218
+   procedure gst_base_sink_set_max_lateness (sink : access GstBaseSink; max_lateness : GLIB.gint64);  -- gst/base/gstbasesink.h:218
    pragma Import (C, gst_base_sink_set_max_lateness, "gst_base_sink_set_max_lateness");
 
-   function gst_base_sink_get_max_lateness (sink : access GstBaseSink) return GStreamer.GST_Low_Level.glibconfig_h.gint64;  -- gst/base/gstbasesink.h:219
+   function gst_base_sink_get_max_lateness (sink : access GstBaseSink) return GLIB.gint64;  -- gst/base/gstbasesink.h:219
    pragma Import (C, gst_base_sink_get_max_lateness, "gst_base_sink_get_max_lateness");
 
   -- performing QoS  
-   procedure gst_base_sink_set_qos_enabled (sink : access GstBaseSink; enabled : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean);  -- gst/base/gstbasesink.h:222
+   procedure gst_base_sink_set_qos_enabled (sink : access GstBaseSink; enabled : GLIB.gboolean);  -- gst/base/gstbasesink.h:222
    pragma Import (C, gst_base_sink_set_qos_enabled, "gst_base_sink_set_qos_enabled");
 
-   function gst_base_sink_is_qos_enabled (sink : access GstBaseSink) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/base/gstbasesink.h:223
+   function gst_base_sink_is_qos_enabled (sink : access GstBaseSink) return GLIB.gboolean;  -- gst/base/gstbasesink.h:223
    pragma Import (C, gst_base_sink_is_qos_enabled, "gst_base_sink_is_qos_enabled");
 
   -- doing async state changes  
-   procedure gst_base_sink_set_async_enabled (sink : access GstBaseSink; enabled : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean);  -- gst/base/gstbasesink.h:226
+   procedure gst_base_sink_set_async_enabled (sink : access GstBaseSink; enabled : GLIB.gboolean);  -- gst/base/gstbasesink.h:226
    pragma Import (C, gst_base_sink_set_async_enabled, "gst_base_sink_set_async_enabled");
 
-   function gst_base_sink_is_async_enabled (sink : access GstBaseSink) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/base/gstbasesink.h:227
+   function gst_base_sink_is_async_enabled (sink : access GstBaseSink) return GLIB.gboolean;  -- gst/base/gstbasesink.h:227
    pragma Import (C, gst_base_sink_is_async_enabled, "gst_base_sink_is_async_enabled");
 
   -- tuning synchronisation  
-   procedure gst_base_sink_set_ts_offset (sink : access GstBaseSink; offset : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTimeDiff);  -- gst/base/gstbasesink.h:230
+   procedure gst_base_sink_set_ts_offset (sink : access GstBaseSink; offset : GLIB.guint64Diff);  -- gst/base/gstbasesink.h:230
    pragma Import (C, gst_base_sink_set_ts_offset, "gst_base_sink_set_ts_offset");
 
-   function gst_base_sink_get_ts_offset (sink : access GstBaseSink) return GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTimeDiff;  -- gst/base/gstbasesink.h:231
+   function gst_base_sink_get_ts_offset (sink : access GstBaseSink) return GLIB.guint64Diff;  -- gst/base/gstbasesink.h:231
    pragma Import (C, gst_base_sink_get_ts_offset, "gst_base_sink_get_ts_offset");
 
   -- last sample  
    function gst_base_sink_get_last_sample (sink : access GstBaseSink) return System.Address;  -- gst/base/gstbasesink.h:234
    pragma Import (C, gst_base_sink_get_last_sample, "gst_base_sink_get_last_sample");
 
-   procedure gst_base_sink_set_last_sample_enabled (sink : access GstBaseSink; enabled : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean);  -- gst/base/gstbasesink.h:235
+   procedure gst_base_sink_set_last_sample_enabled (sink : access GstBaseSink; enabled : GLIB.gboolean);  -- gst/base/gstbasesink.h:235
    pragma Import (C, gst_base_sink_set_last_sample_enabled, "gst_base_sink_set_last_sample_enabled");
 
-   function gst_base_sink_is_last_sample_enabled (sink : access GstBaseSink) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/base/gstbasesink.h:236
+   function gst_base_sink_is_last_sample_enabled (sink : access GstBaseSink) return GLIB.gboolean;  -- gst/base/gstbasesink.h:236
    pragma Import (C, gst_base_sink_is_last_sample_enabled, "gst_base_sink_is_last_sample_enabled");
 
   -- latency  
    function gst_base_sink_query_latency
      (sink : access GstBaseSink;
-      live : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;
-      upstream_live : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;
-      min_latency : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime;
-      max_latency : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/base/gstbasesink.h:239
+      live : access GLIB.gboolean;
+      upstream_live : access GLIB.gboolean;
+      min_latency : access GLIB.guint64;
+      max_latency : access GLIB.guint64) return GLIB.gboolean;  -- gst/base/gstbasesink.h:239
    pragma Import (C, gst_base_sink_query_latency, "gst_base_sink_query_latency");
 
-   function gst_base_sink_get_latency (sink : access GstBaseSink) return GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime;  -- gst/base/gstbasesink.h:241
+   function gst_base_sink_get_latency (sink : access GstBaseSink) return GLIB.guint64;  -- gst/base/gstbasesink.h:241
    pragma Import (C, gst_base_sink_get_latency, "gst_base_sink_get_latency");
 
   -- render delay  
-   procedure gst_base_sink_set_render_delay (sink : access GstBaseSink; c_delay : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime);  -- gst/base/gstbasesink.h:244
+   procedure gst_base_sink_set_render_delay (sink : access GstBaseSink; c_delay : GLIB.guint64);  -- gst/base/gstbasesink.h:244
    pragma Import (C, gst_base_sink_set_render_delay, "gst_base_sink_set_render_delay");
 
-   function gst_base_sink_get_render_delay (sink : access GstBaseSink) return GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime;  -- gst/base/gstbasesink.h:245
+   function gst_base_sink_get_render_delay (sink : access GstBaseSink) return GLIB.guint64;  -- gst/base/gstbasesink.h:245
    pragma Import (C, gst_base_sink_get_render_delay, "gst_base_sink_get_render_delay");
 
   -- blocksize  
-   procedure gst_base_sink_set_blocksize (sink : access GstBaseSink; blocksize : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint);  -- gst/base/gstbasesink.h:248
+   procedure gst_base_sink_set_blocksize (sink : access GstBaseSink; blocksize : GLIB.guint);  -- gst/base/gstbasesink.h:248
    pragma Import (C, gst_base_sink_set_blocksize, "gst_base_sink_set_blocksize");
 
-   function gst_base_sink_get_blocksize (sink : access GstBaseSink) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;  -- gst/base/gstbasesink.h:249
+   function gst_base_sink_get_blocksize (sink : access GstBaseSink) return GLIB.guint;  -- gst/base/gstbasesink.h:249
    pragma Import (C, gst_base_sink_get_blocksize, "gst_base_sink_get_blocksize");
 
   -- throttle-time  
-   procedure gst_base_sink_set_throttle_time (sink : access GstBaseSink; throttle : GStreamer.GST_Low_Level.glibconfig_h.guint64);  -- gst/base/gstbasesink.h:252
+   procedure gst_base_sink_set_throttle_time (sink : access GstBaseSink; throttle : GLIB.guint64);  -- gst/base/gstbasesink.h:252
    pragma Import (C, gst_base_sink_set_throttle_time, "gst_base_sink_set_throttle_time");
 
-   function gst_base_sink_get_throttle_time (sink : access GstBaseSink) return GStreamer.GST_Low_Level.glibconfig_h.guint64;  -- gst/base/gstbasesink.h:253
+   function gst_base_sink_get_throttle_time (sink : access GstBaseSink) return GLIB.guint64;  -- gst/base/gstbasesink.h:253
    pragma Import (C, gst_base_sink_get_throttle_time, "gst_base_sink_get_throttle_time");
 
   -- max-bitrate  
-   procedure gst_base_sink_set_max_bitrate (sink : access GstBaseSink; max_bitrate : GStreamer.GST_Low_Level.glibconfig_h.guint64);  -- gst/base/gstbasesink.h:256
+   procedure gst_base_sink_set_max_bitrate (sink : access GstBaseSink; max_bitrate : GLIB.guint64);  -- gst/base/gstbasesink.h:256
    pragma Import (C, gst_base_sink_set_max_bitrate, "gst_base_sink_set_max_bitrate");
 
-   function gst_base_sink_get_max_bitrate (sink : access GstBaseSink) return GStreamer.GST_Low_Level.glibconfig_h.guint64;  -- gst/base/gstbasesink.h:257
+   function gst_base_sink_get_max_bitrate (sink : access GstBaseSink) return GLIB.guint64;  -- gst/base/gstbasesink.h:257
    pragma Import (C, gst_base_sink_get_max_bitrate, "gst_base_sink_get_max_bitrate");
 
    function gst_base_sink_wait_clock
      (sink : access GstBaseSink;
-      time : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime;
-      jitter : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTimeDiff) return GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockReturn;  -- gst/base/gstbasesink.h:259
+      time : GLIB.guint64;
+      jitter : access GLIB.guint64Diff) return GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockReturn;  -- gst/base/gstbasesink.h:259
    pragma Import (C, gst_base_sink_wait_clock, "gst_base_sink_wait_clock");
 
    function gst_base_sink_wait
      (sink : access GstBaseSink;
-      time : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime;
-      jitter : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTimeDiff) return GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstFlowReturn;  -- gst/base/gstbasesink.h:261
+      time : GLIB.guint64;
+      jitter : access GLIB.guint64Diff) return GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstFlowReturn;  -- gst/base/gstbasesink.h:261
    pragma Import (C, gst_base_sink_wait, "gst_base_sink_wait");
 
    procedure glib_autoptr_cleanup_GstBaseSink (u_ptr : System.Address);  -- gst/base/gstbasesink.h:265

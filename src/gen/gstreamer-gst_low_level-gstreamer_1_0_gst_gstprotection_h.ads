@@ -1,13 +1,16 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmeta_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststructure_h;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;
+with glib;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h;
 with System;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
+with glib;
+with glib.Values;
+with System;
 
 package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstprotection_h is
 
@@ -65,7 +68,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstprotection_h is
    end record;
    pragma Convention (C_Pass_By_Copy, GstProtectionMeta);  -- gst/gstprotection.h:48
 
-   function gst_protection_meta_api_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gstprotection.h:55
+   function gst_protection_meta_api_get_type return GLIB.GType;  -- gst/gstprotection.h:55
    pragma Import (C, gst_protection_meta_api_get_type, "gst_protection_meta_api_get_type");
 
    function gst_protection_meta_get_info return access constant GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmeta_h.GstMetaInfo;  -- gst/gstprotection.h:63
@@ -74,7 +77,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstprotection_h is
    function gst_buffer_add_protection_meta (buffer : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBuffer; info : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststructure_h.GstStructure) return access GstProtectionMeta;  -- gst/gstprotection.h:65
    pragma Import (C, gst_buffer_add_protection_meta, "gst_buffer_add_protection_meta");
 
-   function gst_protection_select_system (system_identifiers : System.Address) return access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gstprotection.h:68
+   function gst_protection_select_system (system_identifiers : System.Address) return access GLIB.gchar;  -- gst/gstprotection.h:68
    pragma Import (C, gst_protection_select_system, "gst_protection_select_system");
 
 end GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstprotection_h;

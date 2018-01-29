@@ -1,11 +1,14 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
-with GStreamer.GST_Low_Level.glibconfig_h;
+with glib;
+with glib.Values;
+with System;
+with GLIB; --  with GStreamer.GST_Low_Level.glibconfig_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;
+with glib;
 with Interfaces.C.Strings;
 with System;
 
@@ -34,7 +37,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsttypefind_h is
   --  
 
    type GstTypeFind;
-   type u_GstTypeFind_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstTypeFind_u_gst_reserved_array is array (0 .. 3) of System.Address;
    --subtype GstTypeFind is u_GstTypeFind;  -- gst/gsttypefind.h:34
 
   --*
@@ -45,7 +48,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsttypefind_h is
   -- * A function that will be called by typefinding.
   --  
 
-   type GstTypeFindFunction is access procedure  (arg1 : access GstTypeFind; arg2 : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer);
+   type GstTypeFindFunction is access procedure  (arg1 : access GstTypeFind; arg2 : System.Address);
    pragma Convention (C, GstTypeFindFunction);  -- gst/gsttypefind.h:43
 
   --*
@@ -82,58 +85,58 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsttypefind_h is
   -- private to the caller of the typefind function  
    type GstTypeFind is record
       peek : access function 
-           (arg1 : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
-            arg2 : GStreamer.GST_Low_Level.glibconfig_h.gint64;
-            arg3 : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint) return access GStreamer.GST_Low_Level.glibconfig_h.guint8;  -- gst/gsttypefind.h:79
+           (arg1 : System.Address;
+            arg2 : GLIB.gint64;
+            arg3 : GLIB.guint) return access GLIB.guint8;  -- gst/gsttypefind.h:79
       suggest : access procedure 
-           (arg1 : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
-            arg2 : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;
+           (arg1 : System.Address;
+            arg2 : GLIB.guint;
             arg3 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h.GstCaps);  -- gst/gsttypefind.h:83
-      data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;  -- gst/gsttypefind.h:85
-      get_length : access function  (arg1 : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer) return GStreamer.GST_Low_Level.glibconfig_h.guint64;  -- gst/gsttypefind.h:88
+      data : System.Address;  -- gst/gsttypefind.h:85
+      get_length : access function  (arg1 : System.Address) return GLIB.guint64;  -- gst/gsttypefind.h:88
       u_gst_reserved : u_GstTypeFind_u_gst_reserved_array;  -- gst/gsttypefind.h:91
    end record;
    pragma Convention (C_Pass_By_Copy, GstTypeFind);  -- gst/gsttypefind.h:75
 
   -- optional  
   -- <private>  
-   function gst_type_find_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gsttypefind.h:94
+   function gst_type_find_get_type return GLIB.GType;  -- gst/gsttypefind.h:94
    pragma Import (C, gst_type_find_get_type, "gst_type_find_get_type");
 
   -- typefind function interface  
    function gst_type_find_peek
      (find : access GstTypeFind;
-      offset : GStreamer.GST_Low_Level.glibconfig_h.gint64;
-      size : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint) return access GStreamer.GST_Low_Level.glibconfig_h.guint8;  -- gst/gsttypefind.h:97
+      offset : GLIB.gint64;
+      size : GLIB.guint) return access GLIB.guint8;  -- gst/gsttypefind.h:97
    pragma Import (C, gst_type_find_peek, "gst_type_find_peek");
 
    procedure gst_type_find_suggest
      (find : access GstTypeFind;
-      probability : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;
+      probability : GLIB.guint;
       caps : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h.GstCaps);  -- gst/gsttypefind.h:101
    pragma Import (C, gst_type_find_suggest, "gst_type_find_suggest");
 
    procedure gst_type_find_suggest_simple
      (find : access GstTypeFind;
-      probability : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;
+      probability : GLIB.guint;
       media_type : Interfaces.C.Strings.chars_ptr;
       fieldname : Interfaces.C.Strings.chars_ptr  -- , ...
       );  -- gst/gsttypefind.h:105
    pragma Import (C, gst_type_find_suggest_simple, "gst_type_find_suggest_simple");
 
-   function gst_type_find_get_length (find : access GstTypeFind) return GStreamer.GST_Low_Level.glibconfig_h.guint64;  -- gst/gsttypefind.h:110
+   function gst_type_find_get_length (find : access GstTypeFind) return GLIB.guint64;  -- gst/gsttypefind.h:110
    pragma Import (C, gst_type_find_get_length, "gst_type_find_get_length");
 
   -- registration interface  
    function gst_type_find_register
      (plugin : System.Address;
-      name : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      rank : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;
+      name : access GLIB.gchar;
+      rank : GLIB.guint;
       func : GstTypeFindFunction;
-      extensions : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
+      extensions : access GLIB.gchar;
       possible_caps : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h.GstCaps;
-      data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
-      data_notify : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.GDestroyNotify) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gsttypefind.h:113
+      data : System.Address;
+      data_notify : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.GDestroyNotify) return GLIB.gboolean;  -- gst/gsttypefind.h:113
    pragma Import (C, gst_type_find_register, "gst_type_find_register");
 
 end GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsttypefind_h;

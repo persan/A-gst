@@ -1,12 +1,15 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
+with glib;
+with glib.Values;
+with System;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h;
 with System;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;
+with glib;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststructure_h;
 
@@ -47,11 +50,11 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstdevice_h is
   --  
 
    type GstDevice;
-   type u_GstDevice_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstDevice_u_gst_reserved_array is array (0 .. 3) of System.Address;
    --subtype GstDevice is u_GstDevice;  -- gst/gstdevice.h:26
 
    type GstDeviceClass;
-   type u_GstDeviceClass_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstDeviceClass_u_gst_reserved_array is array (0 .. 3) of System.Address;
    --subtype GstDeviceClass is u_GstDeviceClass;  -- gst/gstdevice.h:27
 
    --  skipped empty struct u_GstDevicePrivate
@@ -91,38 +94,38 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstdevice_h is
 
    type GstDeviceClass is record
       parent_class : aliased GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObjectClass;  -- gst/gstdevice.h:78
-      create_element : access function  (arg1 : access GstDevice; arg2 : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h.GstElement;  -- gst/gstdevice.h:80
-      reconfigure_element : access function  (arg1 : access GstDevice; arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h.GstElement) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstdevice.h:81
+      create_element : access function  (arg1 : access GstDevice; arg2 : access GLIB.gchar) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h.GstElement;  -- gst/gstdevice.h:80
+      reconfigure_element : access function  (arg1 : access GstDevice; arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h.GstElement) return GLIB.gboolean;  -- gst/gstdevice.h:81
       u_gst_reserved : u_GstDeviceClass_u_gst_reserved_array;  -- gst/gstdevice.h:84
    end record;
    pragma Convention (C_Pass_By_Copy, GstDeviceClass);  -- gst/gstdevice.h:77
 
   --< private > 
-   function gst_device_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gstdevice.h:87
+   function gst_device_get_type return GLIB.GType;  -- gst/gstdevice.h:87
    pragma Import (C, gst_device_get_type, "gst_device_get_type");
 
-   function gst_device_create_element (device : access GstDevice; name : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h.GstElement;  -- gst/gstdevice.h:89
+   function gst_device_create_element (device : access GstDevice; name : access GLIB.gchar) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h.GstElement;  -- gst/gstdevice.h:89
    pragma Import (C, gst_device_create_element, "gst_device_create_element");
 
    function gst_device_get_caps (device : access GstDevice) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h.GstCaps;  -- gst/gstdevice.h:91
    pragma Import (C, gst_device_get_caps, "gst_device_get_caps");
 
-   function gst_device_get_display_name (device : access GstDevice) return access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gstdevice.h:92
+   function gst_device_get_display_name (device : access GstDevice) return access GLIB.gchar;  -- gst/gstdevice.h:92
    pragma Import (C, gst_device_get_display_name, "gst_device_get_display_name");
 
-   function gst_device_get_device_class (device : access GstDevice) return access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gstdevice.h:93
+   function gst_device_get_device_class (device : access GstDevice) return access GLIB.gchar;  -- gst/gstdevice.h:93
    pragma Import (C, gst_device_get_device_class, "gst_device_get_device_class");
 
    function gst_device_get_properties (device : access GstDevice) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststructure_h.GstStructure;  -- gst/gstdevice.h:94
    pragma Import (C, gst_device_get_properties, "gst_device_get_properties");
 
-   function gst_device_reconfigure_element (device : access GstDevice; element : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h.GstElement) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstdevice.h:95
+   function gst_device_reconfigure_element (device : access GstDevice; element : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h.GstElement) return GLIB.gboolean;  -- gst/gstdevice.h:95
    pragma Import (C, gst_device_reconfigure_element, "gst_device_reconfigure_element");
 
-   function gst_device_has_classesv (device : access GstDevice; classes : System.Address) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstdevice.h:98
+   function gst_device_has_classesv (device : access GstDevice; classes : System.Address) return GLIB.gboolean;  -- gst/gstdevice.h:98
    pragma Import (C, gst_device_has_classesv, "gst_device_has_classesv");
 
-   function gst_device_has_classes (device : access GstDevice; classes : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstdevice.h:101
+   function gst_device_has_classes (device : access GstDevice; classes : access GLIB.gchar) return GLIB.gboolean;  -- gst/gstdevice.h:101
    pragma Import (C, gst_device_has_classes, "gst_device_has_classes");
 
    procedure glib_autoptr_cleanup_GstDevice (u_ptr : System.Address);  -- gst/gstdevice.h:106

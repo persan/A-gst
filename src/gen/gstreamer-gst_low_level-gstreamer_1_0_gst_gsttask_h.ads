@@ -1,13 +1,16 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gthread_h;
+with glib;
+with glib.Values;
+with System;
+--  with GStreamer.GST_Low_Level.glib_2_0_glib_gthread_h;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h;
 with System;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsttaskpool_h;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;
+with glib;
 
 package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsttask_h is
 
@@ -66,16 +69,16 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsttask_h is
   -- * a #GstTask.
   --  
 
-   type GstTaskFunction is access procedure  (arg1 : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer);
+   type GstTaskFunction is access procedure  (arg1 : System.Address);
    pragma Convention (C, GstTaskFunction);  -- gst/gsttask.h:38
 
   -- --- standard type macros ---  
    type GstTask;
-   type u_GstTask_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstTask_u_gst_reserved_array is array (0 .. 3) of System.Address;
    --subtype GstTask is u_GstTask;  -- gst/gsttask.h:49
 
    type GstTaskClass;
-   type u_GstTaskClass_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstTaskClass_u_gst_reserved_array is array (0 .. 3) of System.Address;
    --subtype GstTaskClass is u_GstTaskClass;  -- gst/gsttask.h:50
 
    --  skipped empty struct u_GstTaskPrivate
@@ -151,7 +154,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsttask_h is
    type GstTaskThreadFunc is access procedure 
         (arg1 : access GstTask;
          arg2 : access GStreamer.GST_Low_Level.glib_2_0_glib_gthread_h.GThread;
-         arg3 : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer);
+         arg3 : System.Address);
    pragma Convention (C, GstTaskThreadFunc);  -- gst/gsttask.h:120
 
   --*
@@ -173,9 +176,9 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsttask_h is
       cond : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gthread_h.GCond;  -- gst/gsttask.h:139
       lock : access GStreamer.GST_Low_Level.glib_2_0_glib_gthread_h.GRecMutex;  -- gst/gsttask.h:141
       func : GstTaskFunction;  -- gst/gsttask.h:143
-      user_data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;  -- gst/gsttask.h:144
+      user_data : System.Address;  -- gst/gsttask.h:144
       notify : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.GDestroyNotify;  -- gst/gsttask.h:145
-      running : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gsttask.h:147
+      running : aliased GLIB.gboolean;  -- gst/gsttask.h:147
       thread : access GStreamer.GST_Low_Level.glib_2_0_glib_gthread_h.GThread;  -- gst/gsttask.h:150
       priv : System.Address;  -- gst/gsttask.h:152
       u_gst_reserved : u_GstTask_u_gst_reserved_array;  -- gst/gsttask.h:154
@@ -197,12 +200,12 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsttask_h is
    procedure gst_task_cleanup_all;  -- gst/gsttask.h:167
    pragma Import (C, gst_task_cleanup_all, "gst_task_cleanup_all");
 
-   function gst_task_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gsttask.h:169
+   function gst_task_get_type return GLIB.GType;  -- gst/gsttask.h:169
    pragma Import (C, gst_task_get_type, "gst_task_get_type");
 
    function gst_task_new
      (func : GstTaskFunction;
-      user_data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+      user_data : System.Address;
       notify : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.GDestroyNotify) return access GstTask;  -- gst/gsttask.h:171
    pragma Import (C, gst_task_new, "gst_task_new");
 
@@ -218,33 +221,33 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsttask_h is
    procedure gst_task_set_enter_callback
      (c_task : access GstTask;
       enter_func : GstTaskThreadFunc;
-      user_data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+      user_data : System.Address;
       notify : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.GDestroyNotify);  -- gst/gsttask.h:179
    pragma Import (C, gst_task_set_enter_callback, "gst_task_set_enter_callback");
 
    procedure gst_task_set_leave_callback
      (c_task : access GstTask;
       leave_func : GstTaskThreadFunc;
-      user_data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+      user_data : System.Address;
       notify : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.GDestroyNotify);  -- gst/gsttask.h:183
    pragma Import (C, gst_task_set_leave_callback, "gst_task_set_leave_callback");
 
    function gst_task_get_state (c_task : access GstTask) return GstTaskState;  -- gst/gsttask.h:188
    pragma Import (C, gst_task_get_state, "gst_task_get_state");
 
-   function gst_task_set_state (c_task : access GstTask; state : GstTaskState) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gsttask.h:189
+   function gst_task_set_state (c_task : access GstTask; state : GstTaskState) return GLIB.gboolean;  -- gst/gsttask.h:189
    pragma Import (C, gst_task_set_state, "gst_task_set_state");
 
-   function gst_task_start (c_task : access GstTask) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gsttask.h:191
+   function gst_task_start (c_task : access GstTask) return GLIB.gboolean;  -- gst/gsttask.h:191
    pragma Import (C, gst_task_start, "gst_task_start");
 
-   function gst_task_stop (c_task : access GstTask) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gsttask.h:192
+   function gst_task_stop (c_task : access GstTask) return GLIB.gboolean;  -- gst/gsttask.h:192
    pragma Import (C, gst_task_stop, "gst_task_stop");
 
-   function gst_task_pause (c_task : access GstTask) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gsttask.h:193
+   function gst_task_pause (c_task : access GstTask) return GLIB.gboolean;  -- gst/gsttask.h:193
    pragma Import (C, gst_task_pause, "gst_task_pause");
 
-   function gst_task_join (c_task : access GstTask) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gsttask.h:195
+   function gst_task_join (c_task : access GstTask) return GLIB.gboolean;  -- gst/gsttask.h:195
    pragma Import (C, gst_task_join, "gst_task_join");
 
    procedure glib_autoptr_cleanup_GstTask (u_ptr : System.Address);  -- gst/gsttask.h:198

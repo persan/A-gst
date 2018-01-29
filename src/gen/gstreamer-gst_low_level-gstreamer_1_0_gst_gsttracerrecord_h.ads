@@ -1,10 +1,13 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;
+with glib;
 with System;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
+with glib;
+with glib.Values;
+with System;
 
 package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsttracerrecord_h is
 
@@ -50,7 +53,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsttracerrecord_h is
 
    --  skipped empty struct GstTracerRecordClass
 
-   function gst_tracer_record_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gsttracerrecord.h:40
+   function gst_tracer_record_get_type return GLIB.GType;  -- gst/gsttracerrecord.h:40
    pragma Import (C, gst_tracer_record_get_type, "gst_tracer_record_get_type");
 
    procedure glib_autoptr_cleanup_GstTracerRecord (u_ptr : System.Address);  -- gst/gsttracerrecord.h:43
@@ -100,7 +103,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsttracerrecord_h is
       GST_TRACER_VALUE_FLAGS_AGGREGATED);
    pragma Convention (C, GstTracerValueFlags);  -- gst/gsttracerrecord.h:86
 
-   function gst_tracer_record_new (name : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar; firstfield : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar  -- , ...
+   function gst_tracer_record_new (name : access GLIB.gchar; firstfield : access GLIB.gchar  -- , ...
       ) return System.Address;  -- gst/gsttracerrecord.h:90
    pragma Import (C, gst_tracer_record_new, "gst_tracer_record_new");
 

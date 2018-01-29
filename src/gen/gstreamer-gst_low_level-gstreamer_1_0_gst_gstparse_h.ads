@@ -1,11 +1,14 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gquark_h;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;
+--  with GStreamer.GST_Low_Level.glib_2_0_glib_gquark_h;
+with glib;
 with System;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
+with glib;
+with glib.Values;
+with System;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h;
 
 package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstparse_h is
@@ -34,7 +37,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstparse_h is
   -- * Boston, MA 02110-1301, USA.
   --  
 
-   function gst_parse_error_quark return GStreamer.GST_Low_Level.glib_2_0_glib_gquark_h.GQuark;  -- gst/gstparse.h:30
+   function gst_parse_error_quark return Glib.GQuark;  -- gst/gstparse.h:30
    pragma Import (C, gst_parse_error_quark, "gst_parse_error_quark");
 
   --*
@@ -103,7 +106,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstparse_h is
    --  skipped empty struct GstParseContext
 
   -- create, process and free a parse context  
-   function gst_parse_context_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gstparse.h:98
+   function gst_parse_context_get_type return GLIB.GType;  -- gst/gstparse.h:98
    pragma Import (C, gst_parse_context_get_type, "gst_parse_context_get_type");
 
    function gst_parse_context_new return System.Address;  -- gst/gstparse.h:99
@@ -119,14 +122,14 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstparse_h is
    pragma Import (C, gst_parse_context_copy, "gst_parse_context_copy");
 
   -- parse functions  
-   function gst_parse_launch (pipeline_description : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar; error : System.Address) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h.GstElement;  -- gst/gstparse.h:111
+   function gst_parse_launch (pipeline_description : access GLIB.gchar; error : System.Address) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h.GstElement;  -- gst/gstparse.h:111
    pragma Import (C, gst_parse_launch, "gst_parse_launch");
 
    function gst_parse_launchv (argv : System.Address; error : System.Address) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h.GstElement;  -- gst/gstparse.h:114
    pragma Import (C, gst_parse_launchv, "gst_parse_launchv");
 
    function gst_parse_launch_full
-     (pipeline_description : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
+     (pipeline_description : access GLIB.gchar;
       context : System.Address;
       flags : GstParseFlags;
       error : System.Address) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h.GstElement;  -- gst/gstparse.h:117

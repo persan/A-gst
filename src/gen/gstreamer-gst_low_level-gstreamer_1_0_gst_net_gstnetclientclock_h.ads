@@ -1,11 +1,14 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
+with glib;
+with glib.Values;
+with System;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstsystemclock_h;
 with System;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;
+with glib;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h;
 
 package GStreamer.GST_Low_Level.gstreamer_1_0_gst_net_gstnetclientclock_h is
@@ -54,11 +57,11 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_net_gstnetclientclock_h is
   --  
 
    type GstNetClientClock;
-   type u_GstNetClientClock_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstNetClientClock_u_gst_reserved_array is array (0 .. 3) of System.Address;
    --subtype GstNetClientClock is u_GstNetClientClock;  -- gst/net/gstnetclientclock.h:46
 
    type GstNetClientClockClass;
-   type u_GstNetClientClockClass_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstNetClientClockClass_u_gst_reserved_array is array (0 .. 3) of System.Address;
    --subtype GstNetClientClockClass is u_GstNetClientClockClass;  -- gst/net/gstnetclientclock.h:47
 
    --  skipped empty struct u_GstNetClientClockPrivate
@@ -86,28 +89,28 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_net_gstnetclientclock_h is
    pragma Convention (C_Pass_By_Copy, GstNetClientClockClass);  -- gst/net/gstnetclientclock.h:64
 
   --< private > 
-   function gst_net_client_clock_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/net/gstnetclientclock.h:71
+   function gst_net_client_clock_get_type return GLIB.GType;  -- gst/net/gstnetclientclock.h:71
    pragma Import (C, gst_net_client_clock_get_type, "gst_net_client_clock_get_type");
 
    function gst_net_client_clock_new
-     (name : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      remote_address : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      remote_port : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;
-      base_time : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClock;  -- gst/net/gstnetclientclock.h:73
+     (name : access GLIB.gchar;
+      remote_address : access GLIB.gchar;
+      remote_port : GLIB.gint;
+      base_time : GLIB.guint64) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClock;  -- gst/net/gstnetclientclock.h:73
    pragma Import (C, gst_net_client_clock_new, "gst_net_client_clock_new");
 
    subtype GstNtpClock is u_GstNetClientClock;  -- gst/net/gstnetclientclock.h:87
 
    subtype GstNtpClockClass is u_GstNetClientClockClass;  -- gst/net/gstnetclientclock.h:88
 
-   function gst_ntp_clock_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/net/gstnetclientclock.h:90
+   function gst_ntp_clock_get_type return GLIB.GType;  -- gst/net/gstnetclientclock.h:90
    pragma Import (C, gst_ntp_clock_get_type, "gst_ntp_clock_get_type");
 
    function gst_ntp_clock_new
-     (name : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      remote_address : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      remote_port : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;
-      base_time : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClock;  -- gst/net/gstnetclientclock.h:91
+     (name : access GLIB.gchar;
+      remote_address : access GLIB.gchar;
+      remote_port : GLIB.gint;
+      base_time : GLIB.guint64) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClock;  -- gst/net/gstnetclientclock.h:91
    pragma Import (C, gst_ntp_clock_new, "gst_ntp_clock_new");
 
    procedure glib_autoptr_cleanup_GstNetClientClock (u_ptr : System.Address);  -- gst/net/gstnetclientclock.h:95

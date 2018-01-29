@@ -1,11 +1,14 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
+with glib;
+with glib;
+with glib.Values;
+with System;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcontrolbinding_h;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gobject_h;
+--  with GStreamer.GST_Low_Level.glib_2_0_gobject_gobject_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h;
 with System;
 
@@ -41,15 +44,15 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_controller_gstproxycontrolbind
   -- * Boston, MA 02110-1301, USA.
   --  
 
-   function gst_proxy_control_binding_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/controller/gstproxycontrolbinding.h:28
+   function gst_proxy_control_binding_get_type return GLIB.GType;  -- gst/controller/gstproxycontrolbinding.h:28
    pragma Import (C, gst_proxy_control_binding_get_type, "gst_proxy_control_binding_get_type");
 
    type GstProxyControlBinding;
-   type u_GstProxyControlBinding_u_padding_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstProxyControlBinding_u_padding_array is array (0 .. 3) of System.Address;
    --subtype GstProxyControlBinding is u_GstProxyControlBinding;  -- gst/controller/gstproxycontrolbinding.h:41
 
    type GstProxyControlBindingClass;
-   type u_GstProxyControlBindingClass_u_padding_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstProxyControlBindingClass_u_padding_array is array (0 .. 3) of System.Address;
    --subtype GstProxyControlBindingClass is u_GstProxyControlBindingClass;  -- gst/controller/gstproxycontrolbinding.h:42
 
   --*
@@ -62,7 +65,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_controller_gstproxycontrolbind
    type GstProxyControlBinding is record
       parent : aliased GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcontrolbinding_h.GstControlBinding;  -- gst/controller/gstproxycontrolbinding.h:52
       ref_object : aliased GStreamer.GST_Low_Level.glib_2_0_gobject_gobject_h.GWeakRef;  -- gst/controller/gstproxycontrolbinding.h:54
-      property_name : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/controller/gstproxycontrolbinding.h:55
+      property_name : access GLIB.gchar;  -- gst/controller/gstproxycontrolbinding.h:55
       u_padding : u_GstProxyControlBinding_u_padding_array;  -- gst/controller/gstproxycontrolbinding.h:57
    end record;
    pragma Convention (C_Pass_By_Copy, GstProxyControlBinding);  -- gst/controller/gstproxycontrolbinding.h:49
@@ -82,9 +85,9 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_controller_gstproxycontrolbind
 
    function gst_proxy_control_binding_new
      (object : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject;
-      property_name : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
+      property_name : access GLIB.gchar;
       ref_object : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject;
-      ref_property_name : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcontrolbinding_h.GstControlBinding;  -- gst/controller/gstproxycontrolbinding.h:73
+      ref_property_name : access GLIB.gchar) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcontrolbinding_h.GstControlBinding;  -- gst/controller/gstproxycontrolbinding.h:73
    pragma Import (C, gst_proxy_control_binding_new, "gst_proxy_control_binding_new");
 
    procedure glib_autoptr_cleanup_GstProxyControlBinding (u_ptr : System.Address);  -- gst/controller/gstproxycontrolbinding.h:79

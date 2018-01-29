@@ -1,17 +1,20 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
+with glib;
+with glib.Values;
+with System;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h;
-limited with GStreamer.GST_Low_Level.glib_2_0_glib_glist_h;
-with GStreamer.GST_Low_Level.glibconfig_h;
+--  limited with GStreamer.GST_Low_Level.glib_2_0_glib_glist_h;
+with GLIB; --  with GStreamer.GST_Low_Level.glibconfig_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbus_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h;
 with System;
-limited with GStreamer.GST_Low_Level.glib_2_0_glib_gthreadpool_h;
+--  limited with GStreamer.GST_Low_Level.glib_2_0_glib_gthreadpool_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmessage_h;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;
+with glib;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstiterator_h;
 
 package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbin_h is
@@ -91,11 +94,11 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbin_h is
   --  
 
    type GstBin;
-   type u_GstBin_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstBin_u_gst_reserved_array is array (0 .. 3) of System.Address;
    --subtype GstBin is u_GstBin;  -- gst/gstbin.h:73
 
    type GstBinClass;
-   type u_GstBinClass_u_gst_reserved_array is array (0 .. 1) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstBinClass_u_gst_reserved_array is array (0 .. 1) of System.Address;
    --subtype GstBinClass is u_GstBinClass;  -- gst/gstbin.h:74
 
    --  skipped empty struct u_GstBinPrivate
@@ -142,14 +145,14 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbin_h is
 
    type GstBin is record
       element : aliased GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h.GstElement;  -- gst/gstbin.h:116
-      numchildren : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;  -- gst/gstbin.h:121
+      numchildren : aliased GLIB.gint;  -- gst/gstbin.h:121
       children : access GStreamer.GST_Low_Level.glib_2_0_glib_glist_h.GList;  -- gst/gstbin.h:122
-      children_cookie : aliased GStreamer.GST_Low_Level.glibconfig_h.guint32;  -- gst/gstbin.h:123
+      children_cookie : aliased GLIB.guint32;  -- gst/gstbin.h:123
       child_bus : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbus_h.GstBus;  -- gst/gstbin.h:125
       messages : access GStreamer.GST_Low_Level.glib_2_0_glib_glist_h.GList;  -- gst/gstbin.h:126
-      polling : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstbin.h:128
-      state_dirty : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstbin.h:129
-      clock_dirty : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstbin.h:131
+      polling : aliased GLIB.gboolean;  -- gst/gstbin.h:128
+      state_dirty : aliased GLIB.gboolean;  -- gst/gstbin.h:129
+      clock_dirty : aliased GLIB.gboolean;  -- gst/gstbin.h:131
       provided_clock : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClock;  -- gst/gstbin.h:132
       clock_provider : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h.GstElement;  -- gst/gstbin.h:133
       priv : System.Address;  -- gst/gstbin.h:136
@@ -193,10 +196,10 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbin_h is
       pool : access GStreamer.GST_Low_Level.glib_2_0_glib_gthreadpool_h.GThreadPool;  -- gst/gstbin.h:169
       element_added : access procedure  (arg1 : access GstBin; arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h.GstElement);  -- gst/gstbin.h:172
       element_removed : access procedure  (arg1 : access GstBin; arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h.GstElement);  -- gst/gstbin.h:173
-      add_element : access function  (arg1 : access GstBin; arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h.GstElement) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstbin.h:177
-      remove_element : access function  (arg1 : access GstBin; arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h.GstElement) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstbin.h:178
+      add_element : access function  (arg1 : access GstBin; arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h.GstElement) return GLIB.gboolean;  -- gst/gstbin.h:177
+      remove_element : access function  (arg1 : access GstBin; arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h.GstElement) return GLIB.gboolean;  -- gst/gstbin.h:178
       handle_message : access procedure  (arg1 : access GstBin; arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmessage_h.GstMessage);  -- gst/gstbin.h:180
-      do_latency : access function  (arg1 : access GstBin) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstbin.h:184
+      do_latency : access function  (arg1 : access GstBin) return GLIB.gboolean;  -- gst/gstbin.h:184
       deep_element_added : access procedure 
            (arg1 : access GstBin;
             arg2 : access GstBin;
@@ -219,27 +222,27 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbin_h is
   --< public > 
   -- signal  
   --< private > 
-   function gst_bin_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gstbin.h:195
+   function gst_bin_get_type return GLIB.GType;  -- gst/gstbin.h:195
    pragma Import (C, gst_bin_get_type, "gst_bin_get_type");
 
-   function gst_bin_new (name : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h.GstElement;  -- gst/gstbin.h:196
+   function gst_bin_new (name : access GLIB.gchar) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h.GstElement;  -- gst/gstbin.h:196
    pragma Import (C, gst_bin_new, "gst_bin_new");
 
   -- add and remove elements from the bin  
-   function gst_bin_add (bin : access GstBin; element : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h.GstElement) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstbin.h:199
+   function gst_bin_add (bin : access GstBin; element : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h.GstElement) return GLIB.gboolean;  -- gst/gstbin.h:199
    pragma Import (C, gst_bin_add, "gst_bin_add");
 
-   function gst_bin_remove (bin : access GstBin; element : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h.GstElement) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstbin.h:200
+   function gst_bin_remove (bin : access GstBin; element : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h.GstElement) return GLIB.gboolean;  -- gst/gstbin.h:200
    pragma Import (C, gst_bin_remove, "gst_bin_remove");
 
   -- retrieve a single child  
-   function gst_bin_get_by_name (bin : access GstBin; name : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h.GstElement;  -- gst/gstbin.h:203
+   function gst_bin_get_by_name (bin : access GstBin; name : access GLIB.gchar) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h.GstElement;  -- gst/gstbin.h:203
    pragma Import (C, gst_bin_get_by_name, "gst_bin_get_by_name");
 
-   function gst_bin_get_by_name_recurse_up (bin : access GstBin; name : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h.GstElement;  -- gst/gstbin.h:204
+   function gst_bin_get_by_name_recurse_up (bin : access GstBin; name : access GLIB.gchar) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h.GstElement;  -- gst/gstbin.h:204
    pragma Import (C, gst_bin_get_by_name_recurse_up, "gst_bin_get_by_name_recurse_up");
 
-   function gst_bin_get_by_interface (bin : access GstBin; iface : GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h.GstElement;  -- gst/gstbin.h:205
+   function gst_bin_get_by_interface (bin : access GstBin; iface : GLIB.GType) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h.GstElement;  -- gst/gstbin.h:205
    pragma Import (C, gst_bin_get_by_interface, "gst_bin_get_by_interface");
 
   -- retrieve multiple children  
@@ -258,11 +261,11 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbin_h is
    function gst_bin_iterate_sources (bin : access GstBin) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstiterator_h.GstIterator;  -- gst/gstbin.h:213
    pragma Import (C, gst_bin_iterate_sources, "gst_bin_iterate_sources");
 
-   function gst_bin_iterate_all_by_interface (bin : access GstBin; iface : GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstiterator_h.GstIterator;  -- gst/gstbin.h:214
+   function gst_bin_iterate_all_by_interface (bin : access GstBin; iface : GLIB.GType) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstiterator_h.GstIterator;  -- gst/gstbin.h:214
    pragma Import (C, gst_bin_iterate_all_by_interface, "gst_bin_iterate_all_by_interface");
 
   -- latency  
-   function gst_bin_recalculate_latency (bin : access GstBin) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstbin.h:217
+   function gst_bin_recalculate_latency (bin : access GstBin) return GLIB.gboolean;  -- gst/gstbin.h:217
    pragma Import (C, gst_bin_recalculate_latency, "gst_bin_recalculate_latency");
 
   -- set and get suppressed flags  

@@ -1,10 +1,11 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
 with System;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;
+with glib;
 
 package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstflowcombiner_h is
 
@@ -77,7 +78,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstflowcombiner_h is
    procedure gst_flow_combiner_reset (combiner : System.Address);  -- gst/base/gstflowcombiner.h:63
    pragma Import (C, gst_flow_combiner_reset, "gst_flow_combiner_reset");
 
-   function gst_flow_combiner_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/base/gstflowcombiner.h:65
+   function gst_flow_combiner_get_type return GLIB.GType;  -- gst/base/gstflowcombiner.h:65
    pragma Import (C, gst_flow_combiner_get_type, "gst_flow_combiner_get_type");
 
    procedure glib_autoptr_cleanup_GstFlowCombiner (u_ptr : System.Address);  -- gst/base/gstflowcombiner.h:68

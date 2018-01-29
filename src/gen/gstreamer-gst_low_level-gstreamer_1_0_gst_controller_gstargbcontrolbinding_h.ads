@@ -1,12 +1,15 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
+with glib;
+with glib.Values;
+with System;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcontrolbinding_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcontrolsource_h;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;
-with GStreamer.GST_Low_Level.glibconfig_h;
+with glib;
+with GLIB; --  with GStreamer.GST_Low_Level.glibconfig_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h;
 with System;
 
@@ -47,11 +50,11 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_controller_gstargbcontrolbindi
   --  
 
    type GstARGBControlBinding;
-   type u_GstARGBControlBinding_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstARGBControlBinding_u_gst_reserved_array is array (0 .. 3) of System.Address;
    --subtype GstARGBControlBinding is u_GstARGBControlBinding;  -- gst/controller/gstargbcontrolbinding.h:48
 
    type GstARGBControlBindingClass;
-   type u_GstARGBControlBindingClass_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstARGBControlBindingClass_u_gst_reserved_array is array (0 .. 3) of System.Address;
    --subtype GstARGBControlBindingClass is u_GstARGBControlBindingClass;  -- gst/controller/gstargbcontrolbinding.h:49
 
   --*
@@ -67,8 +70,8 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_controller_gstargbcontrolbindi
       cs_r : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcontrolsource_h.GstControlSource;  -- gst/controller/gstargbcontrolbinding.h:62
       cs_g : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcontrolsource_h.GstControlSource;  -- gst/controller/gstargbcontrolbinding.h:63
       cs_b : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcontrolsource_h.GstControlSource;  -- gst/controller/gstargbcontrolbinding.h:64
-      cur_value : aliased GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue;  -- gst/controller/gstargbcontrolbinding.h:66
-      last_value : aliased GStreamer.GST_Low_Level.glibconfig_h.guint32;  -- gst/controller/gstargbcontrolbinding.h:67
+      cur_value : aliased Glib.Values.GValue;  -- gst/controller/gstargbcontrolbinding.h:66
+      last_value : aliased GLIB.guint32;  -- gst/controller/gstargbcontrolbinding.h:67
       u_gst_reserved : u_GstARGBControlBinding_u_gst_reserved_array;  -- gst/controller/gstargbcontrolbinding.h:69
    end record;
    pragma Convention (C_Pass_By_Copy, GstARGBControlBinding);  -- gst/controller/gstargbcontrolbinding.h:57
@@ -90,13 +93,13 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_controller_gstargbcontrolbindi
    pragma Convention (C_Pass_By_Copy, GstARGBControlBindingClass);  -- gst/controller/gstargbcontrolbinding.h:80
 
   --< private > 
-   function gst_argb_control_binding_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/controller/gstargbcontrolbinding.h:88
+   function gst_argb_control_binding_get_type return GLIB.GType;  -- gst/controller/gstargbcontrolbinding.h:88
    pragma Import (C, gst_argb_control_binding_get_type, "gst_argb_control_binding_get_type");
 
   -- Functions  
    function gst_argb_control_binding_new
      (object : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject;
-      property_name : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
+      property_name : access GLIB.gchar;
       cs_a : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcontrolsource_h.GstControlSource;
       cs_r : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcontrolsource_h.GstControlSource;
       cs_g : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcontrolsource_h.GstControlSource;

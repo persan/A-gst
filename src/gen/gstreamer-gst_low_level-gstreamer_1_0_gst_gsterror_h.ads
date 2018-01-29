@@ -1,9 +1,12 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gquark_h;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
+--  with GStreamer.GST_Low_Level.glib_2_0_glib_gquark_h;
+with glib;
+with glib.Values;
+with System;
 
 package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsterror_h is
 
@@ -243,19 +246,19 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsterror_h is
   -- * call.  To be used as the debug argument in #GST_ELEMENT_ERROR.
   --  
 
-   function gst_error_get_message (domain : GStreamer.GST_Low_Level.glib_2_0_glib_gquark_h.GQuark; code : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint) return access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gsterror.h:245
+   function gst_error_get_message (domain : Glib.GQuark; code : GLIB.gint) return access GLIB.gchar;  -- gst/gsterror.h:245
    pragma Import (C, gst_error_get_message, "gst_error_get_message");
 
-   function gst_stream_error_quark return GStreamer.GST_Low_Level.glib_2_0_glib_gquark_h.GQuark;  -- gst/gsterror.h:246
+   function gst_stream_error_quark return Glib.GQuark;  -- gst/gsterror.h:246
    pragma Import (C, gst_stream_error_quark, "gst_stream_error_quark");
 
-   function gst_core_error_quark return GStreamer.GST_Low_Level.glib_2_0_glib_gquark_h.GQuark;  -- gst/gsterror.h:247
+   function gst_core_error_quark return Glib.GQuark;  -- gst/gsterror.h:247
    pragma Import (C, gst_core_error_quark, "gst_core_error_quark");
 
-   function gst_resource_error_quark return GStreamer.GST_Low_Level.glib_2_0_glib_gquark_h.GQuark;  -- gst/gsterror.h:248
+   function gst_resource_error_quark return Glib.GQuark;  -- gst/gsterror.h:248
    pragma Import (C, gst_resource_error_quark, "gst_resource_error_quark");
 
-   function gst_library_error_quark return GStreamer.GST_Low_Level.glib_2_0_glib_gquark_h.GQuark;  -- gst/gsterror.h:249
+   function gst_library_error_quark return Glib.GQuark;  -- gst/gsterror.h:249
    pragma Import (C, gst_library_error_quark, "gst_library_error_quark");
 
 end GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsterror_h;

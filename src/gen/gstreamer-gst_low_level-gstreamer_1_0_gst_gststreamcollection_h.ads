@@ -1,13 +1,16 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
+with glib;
+with glib.Values;
+with System;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h;
 with System;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststreams_h;
-limited with GStreamer.GST_Low_Level.glib_2_0_gobject_gparam_h;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;
+--  limited --  with GStreamer.GST_Low_Level.glib_2_0_gobject_gparam_h;
+with glib;
 
 package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststreamcollection_h is
 
@@ -48,11 +51,11 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststreamcollection_h is
   --  
 
    type GstStreamCollection;
-   type u_GstStreamCollection_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstStreamCollection_u_gst_reserved_array is array (0 .. 3) of System.Address;
    --subtype GstStreamCollection is u_GstStreamCollection;  -- gst/gststreamcollection.h:40
 
    type GstStreamCollectionClass;
-   type u_GstStreamCollectionClass_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstStreamCollectionClass_u_gst_reserved_array is array (0 .. 3) of System.Address;
    --subtype GstStreamCollectionClass is u_GstStreamCollectionClass;  -- gst/gststreamcollection.h:41
 
    --  skipped empty struct u_GstStreamCollectionPrivate
@@ -84,7 +87,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststreamcollection_h is
 
    type GstStreamCollection is record
       object : aliased GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject;  -- gst/gststreamcollection.h:70
-      upstream_id : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gststreamcollection.h:73
+      upstream_id : access GLIB.gchar;  -- gst/gststreamcollection.h:73
       priv : System.Address;  -- gst/gststreamcollection.h:74
       u_gst_reserved : u_GstStreamCollection_u_gst_reserved_array;  -- gst/gststreamcollection.h:76
    end record;
@@ -111,22 +114,22 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststreamcollection_h is
 
   -- signals  
   --< private > 
-   function gst_stream_collection_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gststreamcollection.h:96
+   function gst_stream_collection_get_type return GLIB.GType;  -- gst/gststreamcollection.h:96
    pragma Import (C, gst_stream_collection_get_type, "gst_stream_collection_get_type");
 
-   function gst_stream_collection_new (upstream_id : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return access GstStreamCollection;  -- gst/gststreamcollection.h:98
+   function gst_stream_collection_new (upstream_id : access GLIB.gchar) return access GstStreamCollection;  -- gst/gststreamcollection.h:98
    pragma Import (C, gst_stream_collection_new, "gst_stream_collection_new");
 
-   function gst_stream_collection_get_upstream_id (collection : access GstStreamCollection) return access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gststreamcollection.h:100
+   function gst_stream_collection_get_upstream_id (collection : access GstStreamCollection) return access GLIB.gchar;  -- gst/gststreamcollection.h:100
    pragma Import (C, gst_stream_collection_get_upstream_id, "gst_stream_collection_get_upstream_id");
 
-   function gst_stream_collection_get_size (collection : access GstStreamCollection) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;  -- gst/gststreamcollection.h:102
+   function gst_stream_collection_get_size (collection : access GstStreamCollection) return GLIB.guint;  -- gst/gststreamcollection.h:102
    pragma Import (C, gst_stream_collection_get_size, "gst_stream_collection_get_size");
 
-   function gst_stream_collection_get_stream (collection : access GstStreamCollection; index : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststreams_h.GstStream;  -- gst/gststreamcollection.h:103
+   function gst_stream_collection_get_stream (collection : access GstStreamCollection; index : GLIB.guint) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststreams_h.GstStream;  -- gst/gststreamcollection.h:103
    pragma Import (C, gst_stream_collection_get_stream, "gst_stream_collection_get_stream");
 
-   function gst_stream_collection_add_stream (collection : access GstStreamCollection; stream : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststreams_h.GstStream) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gststreamcollection.h:105
+   function gst_stream_collection_add_stream (collection : access GstStreamCollection; stream : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststreams_h.GstStream) return GLIB.gboolean;  -- gst/gststreamcollection.h:105
    pragma Import (C, gst_stream_collection_add_stream, "gst_stream_collection_add_stream");
 
    procedure glib_autoptr_cleanup_GstStreamCollection (u_ptr : System.Address);  -- gst/gststreamcollection.h:109

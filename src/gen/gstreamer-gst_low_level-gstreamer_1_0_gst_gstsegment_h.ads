@@ -1,11 +1,14 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
+with glib;
+with glib.Values;
+with System;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstformat_h;
-with GStreamer.GST_Low_Level.glibconfig_h;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;
+with GLIB; --  with GStreamer.GST_Low_Level.glibconfig_h;
+with glib;
 with System;
 
 package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstsegment_h is
@@ -33,7 +36,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstsegment_h is
   --  
 
    type GstSegment;
-   type u_GstSegment_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstSegment_u_gst_reserved_array is array (0 .. 3) of System.Address;
    --subtype GstSegment is u_GstSegment;  -- gst/gstsegment.h:32
 
   --*
@@ -201,22 +204,22 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstsegment_h is
   --< public > 
    type GstSegment is record
       flags : aliased GstSegmentFlags;  -- gst/gstsegment.h:193
-      rate : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gdouble;  -- gst/gstsegment.h:195
-      applied_rate : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gdouble;  -- gst/gstsegment.h:196
+      rate : aliased GLIB.gdouble;  -- gst/gstsegment.h:195
+      applied_rate : aliased GLIB.gdouble;  -- gst/gstsegment.h:196
       format : aliased GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstformat_h.GstFormat;  -- gst/gstsegment.h:198
-      base : aliased GStreamer.GST_Low_Level.glibconfig_h.guint64;  -- gst/gstsegment.h:199
-      offset : aliased GStreamer.GST_Low_Level.glibconfig_h.guint64;  -- gst/gstsegment.h:200
-      start : aliased GStreamer.GST_Low_Level.glibconfig_h.guint64;  -- gst/gstsegment.h:201
-      stop : aliased GStreamer.GST_Low_Level.glibconfig_h.guint64;  -- gst/gstsegment.h:202
-      time : aliased GStreamer.GST_Low_Level.glibconfig_h.guint64;  -- gst/gstsegment.h:203
-      position : aliased GStreamer.GST_Low_Level.glibconfig_h.guint64;  -- gst/gstsegment.h:205
-      duration : aliased GStreamer.GST_Low_Level.glibconfig_h.guint64;  -- gst/gstsegment.h:206
+      base : aliased GLIB.guint64;  -- gst/gstsegment.h:199
+      offset : aliased GLIB.guint64;  -- gst/gstsegment.h:200
+      start : aliased GLIB.guint64;  -- gst/gstsegment.h:201
+      stop : aliased GLIB.guint64;  -- gst/gstsegment.h:202
+      time : aliased GLIB.guint64;  -- gst/gstsegment.h:203
+      position : aliased GLIB.guint64;  -- gst/gstsegment.h:205
+      duration : aliased GLIB.guint64;  -- gst/gstsegment.h:206
       u_gst_reserved : u_GstSegment_u_gst_reserved_array;  -- gst/gstsegment.h:209
    end record;
    pragma Convention (C_Pass_By_Copy, GstSegment);  -- gst/gstsegment.h:191
 
   -- < private >  
-   function gst_segment_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gstsegment.h:212
+   function gst_segment_get_type return GLIB.GType;  -- gst/gstsegment.h:212
    pragma Import (C, gst_segment_get_type, "gst_segment_get_type");
 
    function gst_segment_new return access GstSegment;  -- gst/gstsegment.h:214
@@ -237,95 +240,95 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstsegment_h is
    function gst_segment_to_stream_time_full
      (segment : access constant GstSegment;
       format : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstformat_h.GstFormat;
-      position : GStreamer.GST_Low_Level.glibconfig_h.guint64;
-      stream_time : access GStreamer.GST_Low_Level.glibconfig_h.guint64) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;  -- gst/gstsegment.h:221
+      position : GLIB.guint64;
+      stream_time : access GLIB.guint64) return GLIB.gint;  -- gst/gstsegment.h:221
    pragma Import (C, gst_segment_to_stream_time_full, "gst_segment_to_stream_time_full");
 
    function gst_segment_to_stream_time
      (segment : access constant GstSegment;
       format : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstformat_h.GstFormat;
-      position : GStreamer.GST_Low_Level.glibconfig_h.guint64) return GStreamer.GST_Low_Level.glibconfig_h.guint64;  -- gst/gstsegment.h:222
+      position : GLIB.guint64) return GLIB.guint64;  -- gst/gstsegment.h:222
    pragma Import (C, gst_segment_to_stream_time, "gst_segment_to_stream_time");
 
    function gst_segment_position_from_stream_time_full
      (segment : access constant GstSegment;
       format : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstformat_h.GstFormat;
-      stream_time : GStreamer.GST_Low_Level.glibconfig_h.guint64;
-      position : access GStreamer.GST_Low_Level.glibconfig_h.guint64) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;  -- gst/gstsegment.h:223
+      stream_time : GLIB.guint64;
+      position : access GLIB.guint64) return GLIB.gint;  -- gst/gstsegment.h:223
    pragma Import (C, gst_segment_position_from_stream_time_full, "gst_segment_position_from_stream_time_full");
 
    function gst_segment_position_from_stream_time
      (segment : access constant GstSegment;
       format : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstformat_h.GstFormat;
-      stream_time : GStreamer.GST_Low_Level.glibconfig_h.guint64) return GStreamer.GST_Low_Level.glibconfig_h.guint64;  -- gst/gstsegment.h:224
+      stream_time : GLIB.guint64) return GLIB.guint64;  -- gst/gstsegment.h:224
    pragma Import (C, gst_segment_position_from_stream_time, "gst_segment_position_from_stream_time");
 
    function gst_segment_to_running_time
      (segment : access constant GstSegment;
       format : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstformat_h.GstFormat;
-      position : GStreamer.GST_Low_Level.glibconfig_h.guint64) return GStreamer.GST_Low_Level.glibconfig_h.guint64;  -- gst/gstsegment.h:225
+      position : GLIB.guint64) return GLIB.guint64;  -- gst/gstsegment.h:225
    pragma Import (C, gst_segment_to_running_time, "gst_segment_to_running_time");
 
    function gst_segment_to_running_time_full
      (segment : access constant GstSegment;
       format : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstformat_h.GstFormat;
-      position : GStreamer.GST_Low_Level.glibconfig_h.guint64;
-      running_time : access GStreamer.GST_Low_Level.glibconfig_h.guint64) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;  -- gst/gstsegment.h:227
+      position : GLIB.guint64;
+      running_time : access GLIB.guint64) return GLIB.gint;  -- gst/gstsegment.h:227
    pragma Import (C, gst_segment_to_running_time_full, "gst_segment_to_running_time_full");
 
    function gst_segment_to_position
      (segment : access constant GstSegment;
       format : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstformat_h.GstFormat;
-      running_time : GStreamer.GST_Low_Level.glibconfig_h.guint64) return GStreamer.GST_Low_Level.glibconfig_h.guint64;  -- gst/gstsegment.h:230
+      running_time : GLIB.guint64) return GLIB.guint64;  -- gst/gstsegment.h:230
    pragma Import (C, gst_segment_to_position, "gst_segment_to_position");
 
    function gst_segment_position_from_running_time_full
      (segment : access constant GstSegment;
       format : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstformat_h.GstFormat;
-      running_time : GStreamer.GST_Low_Level.glibconfig_h.guint64;
-      position : access GStreamer.GST_Low_Level.glibconfig_h.guint64) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;  -- gst/gstsegment.h:232
+      running_time : GLIB.guint64;
+      position : access GLIB.guint64) return GLIB.gint;  -- gst/gstsegment.h:232
    pragma Import (C, gst_segment_position_from_running_time_full, "gst_segment_position_from_running_time_full");
 
    function gst_segment_position_from_running_time
      (segment : access constant GstSegment;
       format : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstformat_h.GstFormat;
-      running_time : GStreamer.GST_Low_Level.glibconfig_h.guint64) return GStreamer.GST_Low_Level.glibconfig_h.guint64;  -- gst/gstsegment.h:233
+      running_time : GLIB.guint64) return GLIB.guint64;  -- gst/gstsegment.h:233
    pragma Import (C, gst_segment_position_from_running_time, "gst_segment_position_from_running_time");
 
    function gst_segment_set_running_time
      (segment : access GstSegment;
       format : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstformat_h.GstFormat;
-      running_time : GStreamer.GST_Low_Level.glibconfig_h.guint64) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstsegment.h:235
+      running_time : GLIB.guint64) return GLIB.gboolean;  -- gst/gstsegment.h:235
    pragma Import (C, gst_segment_set_running_time, "gst_segment_set_running_time");
 
    function gst_segment_offset_running_time
      (segment : access GstSegment;
       format : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstformat_h.GstFormat;
-      offset : GStreamer.GST_Low_Level.glibconfig_h.gint64) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstsegment.h:237
+      offset : GLIB.gint64) return GLIB.gboolean;  -- gst/gstsegment.h:237
    pragma Import (C, gst_segment_offset_running_time, "gst_segment_offset_running_time");
 
    function gst_segment_clip
      (segment : access constant GstSegment;
       format : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstformat_h.GstFormat;
-      start : GStreamer.GST_Low_Level.glibconfig_h.guint64;
-      stop : GStreamer.GST_Low_Level.glibconfig_h.guint64;
-      clip_start : access GStreamer.GST_Low_Level.glibconfig_h.guint64;
-      clip_stop : access GStreamer.GST_Low_Level.glibconfig_h.guint64) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstsegment.h:239
+      start : GLIB.guint64;
+      stop : GLIB.guint64;
+      clip_start : access GLIB.guint64;
+      clip_stop : access GLIB.guint64) return GLIB.gboolean;  -- gst/gstsegment.h:239
    pragma Import (C, gst_segment_clip, "gst_segment_clip");
 
    function gst_segment_do_seek
      (segment : access GstSegment;
-      rate : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gdouble;
+      rate : GLIB.gdouble;
       format : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstformat_h.GstFormat;
       flags : GstSeekFlags;
       start_type : GstSeekType;
-      start : GStreamer.GST_Low_Level.glibconfig_h.guint64;
+      start : GLIB.guint64;
       stop_type : GstSeekType;
-      stop : GStreamer.GST_Low_Level.glibconfig_h.guint64;
-      update : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstsegment.h:243
+      stop : GLIB.guint64;
+      update : access GLIB.gboolean) return GLIB.gboolean;  -- gst/gstsegment.h:243
    pragma Import (C, gst_segment_do_seek, "gst_segment_do_seek");
 
-   function gst_segment_is_equal (s0 : access constant GstSegment; s1 : access constant GstSegment) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstsegment.h:247
+   function gst_segment_is_equal (s0 : access constant GstSegment; s1 : access constant GstSegment) return GLIB.gboolean;  -- gst/gstsegment.h:247
    pragma Import (C, gst_segment_is_equal, "gst_segment_is_equal");
 
    procedure glib_autoptr_cleanup_GstSegment (u_ptr : System.Address);  -- gst/gstsegment.h:250

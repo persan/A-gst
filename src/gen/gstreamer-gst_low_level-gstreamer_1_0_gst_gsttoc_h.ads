@@ -1,13 +1,16 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;
+with glib;
 with System;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsttaglist_h;
-limited with GStreamer.GST_Low_Level.glib_2_0_glib_glist_h;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
-with GStreamer.GST_Low_Level.glibconfig_h;
+--  limited with GStreamer.GST_Low_Level.glib_2_0_glib_glist_h;
+with glib;
+with glib.Values;
+with System;
+with GLIB; --  with GStreamer.GST_Low_Level.glibconfig_h;
 
 package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsttoc_h is
 
@@ -150,10 +153,10 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsttoc_h is
   --  
 
   -- functions to return type structures  
-   function gst_toc_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gsttoc.h:130
+   function gst_toc_get_type return GLIB.GType;  -- gst/gsttoc.h:130
    pragma Import (C, gst_toc_get_type, "gst_toc_get_type");
 
-   function gst_toc_entry_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gsttoc.h:131
+   function gst_toc_entry_get_type return GLIB.GType;  -- gst/gsttoc.h:131
    pragma Import (C, gst_toc_entry_get_type, "gst_toc_entry_get_type");
 
   -- functions to create, ref and unref/free TOCs  
@@ -185,16 +188,16 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsttoc_h is
    pragma Import (C, gst_toc_dump, "gst_toc_dump");
 
   -- functions to create, ref and unref/free TOC entries  
-   function gst_toc_entry_new (c_type : GstTocEntryType; uid : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return System.Address;  -- gst/gsttoc.h:153
+   function gst_toc_entry_new (c_type : GstTocEntryType; uid : access GLIB.gchar) return System.Address;  -- gst/gsttoc.h:153
    pragma Import (C, gst_toc_entry_new, "gst_toc_entry_new");
 
-   function gst_toc_find_entry (toc : System.Address; uid : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return System.Address;  -- gst/gsttoc.h:160
+   function gst_toc_find_entry (toc : System.Address; uid : access GLIB.gchar) return System.Address;  -- gst/gsttoc.h:160
    pragma Import (C, gst_toc_find_entry, "gst_toc_find_entry");
 
    function gst_toc_entry_get_entry_type (c_entry : System.Address) return GstTocEntryType;  -- gst/gsttoc.h:162
    pragma Import (C, gst_toc_entry_get_entry_type, "gst_toc_entry_get_entry_type");
 
-   function gst_toc_entry_get_uid (c_entry : System.Address) return access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gsttoc.h:163
+   function gst_toc_entry_get_uid (c_entry : System.Address) return access GLIB.gchar;  -- gst/gsttoc.h:163
    pragma Import (C, gst_toc_entry_get_uid, "gst_toc_entry_get_uid");
 
    procedure gst_toc_entry_append_sub_entry (c_entry : System.Address; subentry : System.Address);  -- gst/gsttoc.h:165
@@ -215,34 +218,34 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsttoc_h is
    function gst_toc_entry_get_tags (c_entry : System.Address) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsttaglist_h.GstTagList;  -- gst/gsttoc.h:170
    pragma Import (C, gst_toc_entry_get_tags, "gst_toc_entry_get_tags");
 
-   function gst_toc_entry_is_alternative (c_entry : System.Address) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gsttoc.h:172
+   function gst_toc_entry_is_alternative (c_entry : System.Address) return GLIB.gboolean;  -- gst/gsttoc.h:172
    pragma Import (C, gst_toc_entry_is_alternative, "gst_toc_entry_is_alternative");
 
-   function gst_toc_entry_is_sequence (c_entry : System.Address) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gsttoc.h:173
+   function gst_toc_entry_is_sequence (c_entry : System.Address) return GLIB.gboolean;  -- gst/gsttoc.h:173
    pragma Import (C, gst_toc_entry_is_sequence, "gst_toc_entry_is_sequence");
 
    procedure gst_toc_entry_set_start_stop_times
      (c_entry : System.Address;
-      start : GStreamer.GST_Low_Level.glibconfig_h.gint64;
-      stop : GStreamer.GST_Low_Level.glibconfig_h.gint64);  -- gst/gsttoc.h:175
+      start : GLIB.gint64;
+      stop : GLIB.gint64);  -- gst/gsttoc.h:175
    pragma Import (C, gst_toc_entry_set_start_stop_times, "gst_toc_entry_set_start_stop_times");
 
    function gst_toc_entry_get_start_stop_times
      (c_entry : System.Address;
-      start : access GStreamer.GST_Low_Level.glibconfig_h.gint64;
-      stop : access GStreamer.GST_Low_Level.glibconfig_h.gint64) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gsttoc.h:176
+      start : access GLIB.gint64;
+      stop : access GLIB.gint64) return GLIB.gboolean;  -- gst/gsttoc.h:176
    pragma Import (C, gst_toc_entry_get_start_stop_times, "gst_toc_entry_get_start_stop_times");
 
    procedure gst_toc_entry_set_loop
      (c_entry : System.Address;
       loop_type : GstTocLoopType;
-      repeat_count : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint);  -- gst/gsttoc.h:178
+      repeat_count : GLIB.gint);  -- gst/gsttoc.h:178
    pragma Import (C, gst_toc_entry_set_loop, "gst_toc_entry_set_loop");
 
    function gst_toc_entry_get_loop
      (c_entry : System.Address;
       loop_type : access GstTocLoopType;
-      repeat_count : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gsttoc.h:179
+      repeat_count : access GLIB.gint) return GLIB.gboolean;  -- gst/gsttoc.h:179
    pragma Import (C, gst_toc_entry_get_loop, "gst_toc_entry_get_loop");
 
    function gst_toc_entry_get_toc (c_entry : System.Address) return System.Address;  -- gst/gsttoc.h:181
@@ -251,7 +254,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsttoc_h is
    function gst_toc_entry_get_parent (c_entry : System.Address) return System.Address;  -- gst/gsttoc.h:182
    pragma Import (C, gst_toc_entry_get_parent, "gst_toc_entry_get_parent");
 
-   function gst_toc_entry_type_get_nick (c_type : GstTocEntryType) return access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gsttoc.h:185
+   function gst_toc_entry_type_get_nick (c_type : GstTocEntryType) return access GLIB.gchar;  -- gst/gsttoc.h:185
    pragma Import (C, gst_toc_entry_type_get_nick, "gst_toc_entry_type_get_nick");
 
    --  skipped func _gst_autoptr_toc_unref

@@ -1,10 +1,13 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
+with glib;
+with glib.Values;
+with System;
 
 package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcompat_h is
 
@@ -70,7 +73,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcompat_h is
   -- * This can be done in CFLAGS for compiling old code.
   --  
 
-   function gst_pad_set_caps (pad : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstPad; caps : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h.GstCaps) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstcompat.h:48
+   function gst_pad_set_caps (pad : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstPad; caps : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h.GstCaps) return GLIB.gboolean;  -- gst/gstcompat.h:48
    pragma Import (C, gst_pad_set_caps, "gst_pad_set_caps");
 
   -- added to ease the transition to 0.11  

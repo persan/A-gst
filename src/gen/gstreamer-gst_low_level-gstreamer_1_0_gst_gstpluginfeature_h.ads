@@ -1,11 +1,14 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
 with System;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;
-limited with GStreamer.GST_Low_Level.glib_2_0_glib_glist_h;
+with glib;
+with glib.Values;
+with System;
+with glib;
+--  limited with GStreamer.GST_Low_Level.glib_2_0_glib_glist_h;
 
 package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpluginfeature_h is
 
@@ -117,26 +120,26 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpluginfeature_h is
   -- * Returns: %TRUE for a positive match, %FALSE otherwise
   --  
 
-   type GstPluginFeatureFilter is access function  (arg1 : System.Address; arg2 : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;
+   type GstPluginFeatureFilter is access function  (arg1 : System.Address; arg2 : System.Address) return GLIB.gboolean;
    pragma Convention (C, GstPluginFeatureFilter);  -- gst/gstpluginfeature.h:103
 
   -- normal GObject stuff  
-   function gst_plugin_feature_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gstpluginfeature.h:107
+   function gst_plugin_feature_get_type return GLIB.GType;  -- gst/gstpluginfeature.h:107
    pragma Import (C, gst_plugin_feature_get_type, "gst_plugin_feature_get_type");
 
    function gst_plugin_feature_load (feature : System.Address) return System.Address;  -- gst/gstpluginfeature.h:110
    pragma Import (C, gst_plugin_feature_load, "gst_plugin_feature_load");
 
-   procedure gst_plugin_feature_set_rank (feature : System.Address; rank : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint);  -- gst/gstpluginfeature.h:112
+   procedure gst_plugin_feature_set_rank (feature : System.Address; rank : GLIB.guint);  -- gst/gstpluginfeature.h:112
    pragma Import (C, gst_plugin_feature_set_rank, "gst_plugin_feature_set_rank");
 
-   function gst_plugin_feature_get_rank (feature : System.Address) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;  -- gst/gstpluginfeature.h:113
+   function gst_plugin_feature_get_rank (feature : System.Address) return GLIB.guint;  -- gst/gstpluginfeature.h:113
    pragma Import (C, gst_plugin_feature_get_rank, "gst_plugin_feature_get_rank");
 
    function gst_plugin_feature_get_plugin (feature : System.Address) return System.Address;  -- gst/gstpluginfeature.h:115
    pragma Import (C, gst_plugin_feature_get_plugin, "gst_plugin_feature_get_plugin");
 
-   function gst_plugin_feature_get_plugin_name (feature : System.Address) return access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gstpluginfeature.h:116
+   function gst_plugin_feature_get_plugin_name (feature : System.Address) return access GLIB.gchar;  -- gst/gstpluginfeature.h:116
    pragma Import (C, gst_plugin_feature_get_plugin_name, "gst_plugin_feature_get_plugin_name");
 
    procedure gst_plugin_feature_list_free (list : access GStreamer.GST_Low_Level.glib_2_0_glib_glist_h.GList);  -- gst/gstpluginfeature.h:118
@@ -158,12 +161,12 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpluginfeature_h is
 
    function gst_plugin_feature_check_version
      (feature : System.Address;
-      min_major : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;
-      min_minor : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;
-      min_micro : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstpluginfeature.h:135
+      min_major : GLIB.guint;
+      min_minor : GLIB.guint;
+      min_micro : GLIB.guint) return GLIB.gboolean;  -- gst/gstpluginfeature.h:135
    pragma Import (C, gst_plugin_feature_check_version, "gst_plugin_feature_check_version");
 
-   function gst_plugin_feature_rank_compare_func (p1 : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gconstpointer; p2 : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gconstpointer) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;  -- gst/gstpluginfeature.h:139
+   function gst_plugin_feature_rank_compare_func (p1 : Interfaces.C.Extensions.void_ptr; p2 : Interfaces.C.Extensions.void_ptr) return GLIB.gint;  -- gst/gstpluginfeature.h:139
    pragma Import (C, gst_plugin_feature_rank_compare_func, "gst_plugin_feature_rank_compare_func");
 
    procedure glib_autoptr_cleanup_GstPluginFeature (u_ptr : System.Address);  -- gst/gstpluginfeature.h:143

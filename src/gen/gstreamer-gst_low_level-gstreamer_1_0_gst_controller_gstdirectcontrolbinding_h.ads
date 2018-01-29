@@ -1,9 +1,12 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;
+with glib;
+with glib.Values;
+with System;
+with glib;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcontrolbinding_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcontrolsource_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h;
@@ -47,10 +50,10 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_controller_gstdirectcontrolbin
    type GstDirectControlBinding;
    type anon_368;
    type anon_369 is record
-      want_absolute : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/controller/gstdirectcontrolbinding.h:91
+      want_absolute : aliased GLIB.gboolean;  -- gst/controller/gstdirectcontrolbinding.h:91
    end record;
    pragma Convention (C_Pass_By_Copy, anon_369);
-   type u_GstDirectControlBinding_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstDirectControlBinding_u_gst_reserved_array is array (0 .. 3) of System.Address;
    type anon_368 (discr : unsigned := 0) is record
       case discr is
          when 0 =>
@@ -63,7 +66,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_controller_gstdirectcontrolbin
    pragma Unchecked_Union (anon_368);--subtype GstDirectControlBinding is u_GstDirectControlBinding;  -- gst/controller/gstdirectcontrolbinding.h:47
 
    type GstDirectControlBindingClass;
-   type u_GstDirectControlBindingClass_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstDirectControlBindingClass_u_gst_reserved_array is array (0 .. 3) of System.Address;
    --subtype GstDirectControlBindingClass is u_GstDirectControlBindingClass;  -- gst/controller/gstdirectcontrolbinding.h:48
 
   --*
@@ -77,8 +80,8 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_controller_gstdirectcontrolbin
 
    type GstDirectControlBindingConvertValue is access procedure 
         (arg1 : access GstDirectControlBinding;
-         arg2 : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gdouble;
-         arg3 : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer);
+         arg2 : GLIB.gdouble;
+         arg3 : System.Address);
    pragma Convention (C, GstDirectControlBindingConvertValue);  -- gst/controller/gstdirectcontrolbinding.h:58
 
   --*
@@ -92,8 +95,8 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_controller_gstdirectcontrolbin
 
    type GstDirectControlBindingConvertGValue is access procedure 
         (arg1 : access GstDirectControlBinding;
-         arg2 : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gdouble;
-         arg3 : access GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue);
+         arg2 : GLIB.gdouble;
+         arg3 : access Glib.Values.GValue);
    pragma Convention (C, GstDirectControlBindingConvertGValue);  -- gst/controller/gstdirectcontrolbinding.h:68
 
   --*
@@ -106,9 +109,9 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_controller_gstdirectcontrolbin
    type GstDirectControlBinding is record
       parent : aliased GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcontrolbinding_h.GstControlBinding;  -- gst/controller/gstdirectcontrolbinding.h:77
       cs : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcontrolsource_h.GstControlSource;  -- gst/controller/gstdirectcontrolbinding.h:80
-      cur_value : aliased GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue;  -- gst/controller/gstdirectcontrolbinding.h:81
-      last_value : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gdouble;  -- gst/controller/gstdirectcontrolbinding.h:82
-      byte_size : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;  -- gst/controller/gstdirectcontrolbinding.h:83
+      cur_value : aliased Glib.Values.GValue;  -- gst/controller/gstdirectcontrolbinding.h:81
+      last_value : aliased GLIB.gdouble;  -- gst/controller/gstdirectcontrolbinding.h:82
+      byte_size : aliased GLIB.gint;  -- gst/controller/gstdirectcontrolbinding.h:83
       convert_value : GstDirectControlBindingConvertValue;  -- gst/controller/gstdirectcontrolbinding.h:85
       convert_g_value : GstDirectControlBindingConvertGValue;  -- gst/controller/gstdirectcontrolbinding.h:86
       ABI : aliased anon_368;  -- gst/controller/gstdirectcontrolbinding.h:93
@@ -132,19 +135,19 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_controller_gstdirectcontrolbin
    pragma Convention (C_Pass_By_Copy, GstDirectControlBindingClass);  -- gst/controller/gstdirectcontrolbinding.h:104
 
   --< private > 
-   function gst_direct_control_binding_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/controller/gstdirectcontrolbinding.h:112
+   function gst_direct_control_binding_get_type return GLIB.GType;  -- gst/controller/gstdirectcontrolbinding.h:112
    pragma Import (C, gst_direct_control_binding_get_type, "gst_direct_control_binding_get_type");
 
   -- Functions  
    function gst_direct_control_binding_new
      (object : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject;
-      property_name : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
+      property_name : access GLIB.gchar;
       cs : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcontrolsource_h.GstControlSource) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcontrolbinding_h.GstControlBinding;  -- gst/controller/gstdirectcontrolbinding.h:116
    pragma Import (C, gst_direct_control_binding_new, "gst_direct_control_binding_new");
 
    function gst_direct_control_binding_new_absolute
      (object : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject;
-      property_name : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
+      property_name : access GLIB.gchar;
       cs : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcontrolsource_h.GstControlSource) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcontrolbinding_h.GstControlBinding;  -- gst/controller/gstdirectcontrolbinding.h:119
    pragma Import (C, gst_direct_control_binding_new_absolute, "gst_direct_control_binding_new_absolute");
 

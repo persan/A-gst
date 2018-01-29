@@ -1,13 +1,16 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
+with glib;
+with glib;
+with glib.Values;
+with System;
 with System;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstdeviceprovider_h;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpluginfeature_h;
-limited with GStreamer.GST_Low_Level.glib_2_0_glib_glist_h;
+--  limited with GStreamer.GST_Low_Level.glib_2_0_glib_glist_h;
 
 package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstdeviceproviderfactory_h is
 
@@ -69,16 +72,16 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstdeviceproviderfactory_h is
 
    --  skipped empty struct GstDeviceProviderFactoryClass
 
-   function gst_device_provider_factory_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gstdeviceproviderfactory.h:63
+   function gst_device_provider_factory_get_type return GLIB.GType;  -- gst/gstdeviceproviderfactory.h:63
    pragma Import (C, gst_device_provider_factory_get_type, "gst_device_provider_factory_get_type");
 
-   function gst_device_provider_factory_find (name : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return System.Address;  -- gst/gstdeviceproviderfactory.h:65
+   function gst_device_provider_factory_find (name : access GLIB.gchar) return System.Address;  -- gst/gstdeviceproviderfactory.h:65
    pragma Import (C, gst_device_provider_factory_find, "gst_device_provider_factory_find");
 
-   function gst_device_provider_factory_get_device_provider_type (factory : System.Address) return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gstdeviceproviderfactory.h:67
+   function gst_device_provider_factory_get_device_provider_type (factory : System.Address) return GLIB.GType;  -- gst/gstdeviceproviderfactory.h:67
    pragma Import (C, gst_device_provider_factory_get_device_provider_type, "gst_device_provider_factory_get_device_provider_type");
 
-   function gst_device_provider_factory_get_metadata (factory : System.Address; key : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gstdeviceproviderfactory.h:69
+   function gst_device_provider_factory_get_metadata (factory : System.Address; key : access GLIB.gchar) return access GLIB.gchar;  -- gst/gstdeviceproviderfactory.h:69
    pragma Import (C, gst_device_provider_factory_get_metadata, "gst_device_provider_factory_get_metadata");
 
    function gst_device_provider_factory_get_metadata_keys (factory : System.Address) return System.Address;  -- gst/gstdeviceproviderfactory.h:70
@@ -87,20 +90,20 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstdeviceproviderfactory_h is
    function gst_device_provider_factory_get (factory : System.Address) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstdeviceprovider_h.GstDeviceProvider;  -- gst/gstdeviceproviderfactory.h:72
    pragma Import (C, gst_device_provider_factory_get, "gst_device_provider_factory_get");
 
-   function gst_device_provider_factory_get_by_name (factoryname : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstdeviceprovider_h.GstDeviceProvider;  -- gst/gstdeviceproviderfactory.h:73
+   function gst_device_provider_factory_get_by_name (factoryname : access GLIB.gchar) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstdeviceprovider_h.GstDeviceProvider;  -- gst/gstdeviceproviderfactory.h:73
    pragma Import (C, gst_device_provider_factory_get_by_name, "gst_device_provider_factory_get_by_name");
 
    function gst_device_provider_register
      (plugin : System.Address;
-      name : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      rank : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;
-      c_type : GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstdeviceproviderfactory.h:75
+      name : access GLIB.gchar;
+      rank : GLIB.guint;
+      c_type : GLIB.GType) return GLIB.gboolean;  -- gst/gstdeviceproviderfactory.h:75
    pragma Import (C, gst_device_provider_register, "gst_device_provider_register");
 
-   function gst_device_provider_factory_has_classesv (factory : System.Address; classes : System.Address) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstdeviceproviderfactory.h:79
+   function gst_device_provider_factory_has_classesv (factory : System.Address; classes : System.Address) return GLIB.gboolean;  -- gst/gstdeviceproviderfactory.h:79
    pragma Import (C, gst_device_provider_factory_has_classesv, "gst_device_provider_factory_has_classesv");
 
-   function gst_device_provider_factory_has_classes (factory : System.Address; classes : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstdeviceproviderfactory.h:82
+   function gst_device_provider_factory_has_classes (factory : System.Address; classes : access GLIB.gchar) return GLIB.gboolean;  -- gst/gstdeviceproviderfactory.h:82
    pragma Import (C, gst_device_provider_factory_has_classes, "gst_device_provider_factory_has_classes");
 
    function gst_device_provider_factory_list_get_device_providers (minrank : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpluginfeature_h.GstRank) return access GStreamer.GST_Low_Level.glib_2_0_glib_glist_h.GList;  -- gst/gstdeviceproviderfactory.h:85

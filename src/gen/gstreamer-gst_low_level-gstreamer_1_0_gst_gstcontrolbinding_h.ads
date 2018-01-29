@@ -1,12 +1,15 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
 with System;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;
+with glib;
+with glib.Values;
+with System;
+with glib;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h;
-limited with GStreamer.GST_Low_Level.glib_2_0_gobject_gparam_h;
+--  limited --  with GStreamer.GST_Low_Level.glib_2_0_gobject_gparam_h;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h;
 
 package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcontrolbinding_h is
@@ -52,7 +55,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcontrolbinding_h is
       priv : System.Address;  -- gst/gstcontrolbinding.h:79
    end record;
    pragma Convention (C_Pass_By_Copy, anon_142);
-   type u_GstControlBinding_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstControlBinding_u_gst_reserved_array is array (0 .. 3) of System.Address;
    type anon_141 (discr : unsigned := 0) is record
       case discr is
          when 0 =>
@@ -65,7 +68,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcontrolbinding_h is
    pragma Unchecked_Union (anon_141);--subtype GstControlBinding is u_GstControlBinding;  -- gst/gstcontrolbinding.h:45
 
    type GstControlBindingClass;
-   type u_GstControlBindingClass_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstControlBindingClass_u_gst_reserved_array is array (0 .. 3) of System.Address;
    --subtype GstControlBindingClass is u_GstControlBindingClass;  -- gst/gstcontrolbinding.h:46
 
    --  skipped empty struct u_GstControlBindingPrivate
@@ -75,8 +78,8 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcontrolbinding_h is
   -- FIXME(2.0): remove, this is unused  
    type GstControlBindingConvert is access procedure 
         (arg1 : access GstControlBinding;
-         arg2 : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gdouble;
-         arg3 : access GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue);
+         arg2 : GLIB.gdouble;
+         arg3 : access Glib.Values.GValue);
    pragma Convention (C, GstControlBindingConvert);  -- gst/gstcontrolbinding.h:52
 
   --*
@@ -89,10 +92,10 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcontrolbinding_h is
 
    type GstControlBinding is record
       parent : aliased GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject;  -- gst/gstcontrolbinding.h:62
-      name : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gstcontrolbinding.h:65
+      name : access GLIB.gchar;  -- gst/gstcontrolbinding.h:65
       pspec : access GStreamer.GST_Low_Level.glib_2_0_gobject_gparam_h.GParamSpec;  -- gst/gstcontrolbinding.h:66
       object : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject;  -- gst/gstcontrolbinding.h:70
-      disabled : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstcontrolbinding.h:75
+      disabled : aliased GLIB.gboolean;  -- gst/gstcontrolbinding.h:75
       ABI : aliased anon_141;  -- gst/gstcontrolbinding.h:82
    end record;
    pragma Convention (C_Pass_By_Copy, GstControlBinding);  -- gst/gstcontrolbinding.h:61
@@ -119,61 +122,61 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcontrolbinding_h is
       sync_values : access function 
            (arg1 : access GstControlBinding;
             arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject;
-            arg3 : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime;
-            arg4 : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstcontrolbinding.h:102
-      get_value : access function  (arg1 : access GstControlBinding; arg2 : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime) return access GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue;  -- gst/gstcontrolbinding.h:103
+            arg3 : GLIB.guint64;
+            arg4 : GLIB.guint64) return GLIB.gboolean;  -- gst/gstcontrolbinding.h:102
+      get_value : access function  (arg1 : access GstControlBinding; arg2 : GLIB.guint64) return access Glib.Values.GValue;  -- gst/gstcontrolbinding.h:103
       get_value_array : access function 
            (arg1 : access GstControlBinding;
-            arg2 : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime;
-            arg3 : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime;
-            arg4 : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;
-            arg5 : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstcontrolbinding.h:104
+            arg2 : GLIB.guint64;
+            arg3 : GLIB.guint64;
+            arg4 : GLIB.guint;
+            arg5 : System.Address) return GLIB.gboolean;  -- gst/gstcontrolbinding.h:104
       get_g_value_array : access function 
            (arg1 : access GstControlBinding;
-            arg2 : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime;
-            arg3 : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime;
-            arg4 : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;
-            arg5 : access GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstcontrolbinding.h:105
+            arg2 : GLIB.guint64;
+            arg3 : GLIB.guint64;
+            arg4 : GLIB.guint;
+            arg5 : access Glib.Values.GValue) return GLIB.gboolean;  -- gst/gstcontrolbinding.h:105
       u_gst_reserved : u_GstControlBindingClass_u_gst_reserved_array;  -- gst/gstcontrolbinding.h:108
    end record;
    pragma Convention (C_Pass_By_Copy, GstControlBindingClass);  -- gst/gstcontrolbinding.h:97
 
   --< public > 
   --< private > 
-   function gst_control_binding_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gstcontrolbinding.h:113
+   function gst_control_binding_get_type return GLIB.GType;  -- gst/gstcontrolbinding.h:113
    pragma Import (C, gst_control_binding_get_type, "gst_control_binding_get_type");
 
   -- Functions  
    function gst_control_binding_sync_values
      (binding : access GstControlBinding;
       object : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject;
-      timestamp : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime;
-      last_sync : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstcontrolbinding.h:117
+      timestamp : GLIB.guint64;
+      last_sync : GLIB.guint64) return GLIB.gboolean;  -- gst/gstcontrolbinding.h:117
    pragma Import (C, gst_control_binding_sync_values, "gst_control_binding_sync_values");
 
-   function gst_control_binding_get_value (binding : access GstControlBinding; timestamp : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime) return access GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue;  -- gst/gstcontrolbinding.h:119
+   function gst_control_binding_get_value (binding : access GstControlBinding; timestamp : GLIB.guint64) return access Glib.Values.GValue;  -- gst/gstcontrolbinding.h:119
    pragma Import (C, gst_control_binding_get_value, "gst_control_binding_get_value");
 
    function gst_control_binding_get_value_array
      (binding : access GstControlBinding;
-      timestamp : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime;
-      interval : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime;
-      n_values : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;
-      values : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstcontrolbinding.h:121
+      timestamp : GLIB.guint64;
+      interval : GLIB.guint64;
+      n_values : GLIB.guint;
+      values : System.Address) return GLIB.gboolean;  -- gst/gstcontrolbinding.h:121
    pragma Import (C, gst_control_binding_get_value_array, "gst_control_binding_get_value_array");
 
    function gst_control_binding_get_g_value_array
      (binding : access GstControlBinding;
-      timestamp : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime;
-      interval : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime;
-      n_values : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;
-      values : access GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstcontrolbinding.h:123
+      timestamp : GLIB.guint64;
+      interval : GLIB.guint64;
+      n_values : GLIB.guint;
+      values : access Glib.Values.GValue) return GLIB.gboolean;  -- gst/gstcontrolbinding.h:123
    pragma Import (C, gst_control_binding_get_g_value_array, "gst_control_binding_get_g_value_array");
 
-   procedure gst_control_binding_set_disabled (binding : access GstControlBinding; disabled : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean);  -- gst/gstcontrolbinding.h:126
+   procedure gst_control_binding_set_disabled (binding : access GstControlBinding; disabled : GLIB.gboolean);  -- gst/gstcontrolbinding.h:126
    pragma Import (C, gst_control_binding_set_disabled, "gst_control_binding_set_disabled");
 
-   function gst_control_binding_is_disabled (binding : access GstControlBinding) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstcontrolbinding.h:127
+   function gst_control_binding_is_disabled (binding : access GstControlBinding) return GLIB.gboolean;  -- gst/gstcontrolbinding.h:127
    pragma Import (C, gst_control_binding_is_disabled, "gst_control_binding_is_disabled");
 
    procedure glib_autoptr_cleanup_GstControlBinding (u_ptr : System.Address);  -- gst/gstcontrolbinding.h:129

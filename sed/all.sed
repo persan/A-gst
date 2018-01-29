@@ -7,10 +7,14 @@ s!with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;!with glib;!
 s!limited with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;!!
 s!with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;!!
 
-s!^limited with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h!!
-s!^with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h!!
+s!limited with GStreamer.GST_Low_Level.glib_2_0_glib_ghook_h;!!
+s!with GStreamer.GST_Low_Level.glib_2_0_glib_ghook_h;!!
+
+
 s!pragma Style_Checks (Off);!pragma Style_Checks (Off);\
 pragma Warnings (Off);!
+
+
 
 s!limited with GStreamer.GST_Low_Level.bits_types_FILE_h;!--  limited with GStreamer.GST_Low_Level.bits_types_FILE_h;!
 s!limited with GStreamer.GST_Low_Level.glib_2_0_glib_deprecated_gthread_h;!--  limited with GStreamer.GST_Low_Level.glib_2_0_glib_deprecated_gthread_h;!
@@ -83,5 +87,4 @@ s!GLIB.Object.GObjectClass!GLIB.Object.GObject_Class!
 s!GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstPadTemplate!GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpadtemplate_h.GstPadTemplate!g
 s!GStreamer.GST_Low_Level.glib_2_0_glib_gerror_h.GError!Glib.Error.GError!g
 
-
-s!GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime!GLIB.guint64!-
+s!GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime!GLIB.guint64!

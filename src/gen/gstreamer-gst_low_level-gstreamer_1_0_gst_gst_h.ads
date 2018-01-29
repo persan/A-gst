@@ -1,9 +1,12 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
 with System;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
+with glib;
+with glib.Values;
+with System;
 
 package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gst_h is
 
@@ -36,10 +39,10 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gst_h is
    function gst_init_check
      (argc : access int;
       argv : System.Address;
-      err : System.Address) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gst.h:100
+      err : System.Address) return GLIB.gboolean;  -- gst/gst.h:100
    pragma Import (C, gst_init_check, "gst_init_check");
 
-   function gst_is_initialized return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gst.h:102
+   function gst_is_initialized return GLIB.gboolean;  -- gst/gst.h:102
    pragma Import (C, gst_is_initialized, "gst_is_initialized");
 
    function gst_init_get_option_group return System.Address;  -- gst/gst.h:103
@@ -49,28 +52,28 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gst_h is
    pragma Import (C, gst_deinit, "gst_deinit");
 
    procedure gst_version
-     (major : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;
-      minor : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;
-      micro : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;
-      nano : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint);  -- gst/gst.h:106
+     (major : access GLIB.guint;
+      minor : access GLIB.guint;
+      micro : access GLIB.guint;
+      nano : access GLIB.guint);  -- gst/gst.h:106
    pragma Import (C, gst_version, "gst_version");
 
-   function gst_version_string return access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gst.h:108
+   function gst_version_string return access GLIB.gchar;  -- gst/gst.h:108
    pragma Import (C, gst_version_string, "gst_version_string");
 
-   function gst_segtrap_is_enabled return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gst.h:110
+   function gst_segtrap_is_enabled return GLIB.gboolean;  -- gst/gst.h:110
    pragma Import (C, gst_segtrap_is_enabled, "gst_segtrap_is_enabled");
 
-   procedure gst_segtrap_set_enabled (enabled : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean);  -- gst/gst.h:111
+   procedure gst_segtrap_set_enabled (enabled : GLIB.gboolean);  -- gst/gst.h:111
    pragma Import (C, gst_segtrap_set_enabled, "gst_segtrap_set_enabled");
 
-   function gst_registry_fork_is_enabled return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gst.h:113
+   function gst_registry_fork_is_enabled return GLIB.gboolean;  -- gst/gst.h:113
    pragma Import (C, gst_registry_fork_is_enabled, "gst_registry_fork_is_enabled");
 
-   procedure gst_registry_fork_set_enabled (enabled : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean);  -- gst/gst.h:114
+   procedure gst_registry_fork_set_enabled (enabled : GLIB.gboolean);  -- gst/gst.h:114
    pragma Import (C, gst_registry_fork_set_enabled, "gst_registry_fork_set_enabled");
 
-   function gst_update_registry return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gst.h:116
+   function gst_update_registry return GLIB.gboolean;  -- gst/gst.h:116
    pragma Import (C, gst_update_registry, "gst_update_registry");
 
 end GStreamer.GST_Low_Level.gstreamer_1_0_gst_gst_h;

@@ -1,21 +1,24 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gquark_h;
+with glib;
+with glib.Values;
+with System;
+--  with GStreamer.GST_Low_Level.glib_2_0_glib_gquark_h;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h;
 with System;
-with GStreamer.GST_Low_Level.glibconfig_h;
+with GLIB; --  with GStreamer.GST_Low_Level.glibconfig_h;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstevent_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstiterator_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpadtemplate_h;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gthread_h;
+--  with GStreamer.GST_Low_Level.glib_2_0_glib_gthread_h;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsttask_h;
-with GStreamer.GST_Low_Level.glib_2_0_glib_ghook_h;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;
+
+with glib;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h;
 
 package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
@@ -224,7 +227,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
       eventfullfunc : GstPadEventFullFunction;  -- gst/gstpad.h:787
    end record;
    pragma Convention (C_Pass_By_Copy, anon_194);
-   type u_GstPad_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstPad_u_gst_reserved_array is array (0 .. 3) of System.Address;
    type anon_193 (discr : unsigned := 0) is record
       case discr is
          when 0 =>
@@ -241,7 +244,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
    --  skipped empty struct GstPadPrivate
 
    type GstPadClass;
-   type u_GstPadClass_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstPadClass_u_gst_reserved_array is array (0 .. 3) of System.Address;
    --subtype GstPadClass is u_GstPadClass;  -- gst/gstpad.h:31
 
    type GstPadProbeInfo;
@@ -250,7 +253,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
       flow_ret : aliased GstFlowReturn;  -- gst/gstpad.h:591
    end record;
    pragma Convention (C_Pass_By_Copy, anon_191);
-   type u_GstPadProbeInfo_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstPadProbeInfo_u_gst_reserved_array is array (0 .. 3) of System.Address;
    type anon_190 (discr : unsigned := 0) is record
       case discr is
          when 0 =>
@@ -294,7 +297,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
       GST_PAD_MODE_PULL);
    pragma Convention (C, GstPadMode);  -- gst/gstpad.h:62
 
-   function gst_pad_mode_get_name (mode : GstPadMode) return access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gstpad.h:66
+   function gst_pad_mode_get_name (mode : GstPadMode) return access GLIB.gchar;  -- gst/gstpad.h:66
    pragma Import (C, gst_pad_mode_get_name, "gst_pad_mode_get_name");
 
   -- * Pad base class
@@ -389,13 +392,13 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
    GST_FLOW_CUSTOM_ERROR_1 : constant GstFlowReturn := -101;
    GST_FLOW_CUSTOM_ERROR_2 : constant GstFlowReturn := -102;  -- gst/gstpad.h:182
 
-   function gst_flow_get_name (ret : GstFlowReturn) return access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gstpad.h:184
+   function gst_flow_get_name (ret : GstFlowReturn) return access GLIB.gchar;  -- gst/gstpad.h:184
    pragma Import (C, gst_flow_get_name, "gst_flow_get_name");
 
-   function gst_flow_to_quark (ret : GstFlowReturn) return GStreamer.GST_Low_Level.glib_2_0_glib_gquark_h.GQuark;  -- gst/gstpad.h:185
+   function gst_flow_to_quark (ret : GstFlowReturn) return Glib.GQuark;  -- gst/gstpad.h:185
    pragma Import (C, gst_flow_to_quark, "gst_flow_to_quark");
 
-   function gst_pad_link_get_name (ret : GstPadLinkReturn) return access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gstpad.h:186
+   function gst_pad_link_get_name (ret : GstPadLinkReturn) return access GLIB.gchar;  -- gst/gstpad.h:186
    pragma Import (C, gst_pad_link_get_name, "gst_pad_link_get_name");
 
   --*
@@ -449,7 +452,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
   -- * Returns: %TRUE if the pad could be activated.
   --  
 
-   type GstPadActivateFunction is access function  (arg1 : access GstPad; arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;
+   type GstPadActivateFunction is access function  (arg1 : access GstPad; arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject) return GLIB.gboolean;
    pragma Convention (C, GstPadActivateFunction);  -- gst/gstpad.h:241
 
   --*
@@ -468,7 +471,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
         (arg1 : access GstPad;
          arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject;
          arg3 : GstPadMode;
-         arg4 : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;
+         arg4 : GLIB.gboolean) return GLIB.gboolean;
    pragma Convention (C, GstPadActivateModeFunction);  -- gst/gstpad.h:253
 
   -- data passing  
@@ -577,8 +580,8 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
    type GstPadGetRangeFunction is access function 
         (arg1 : access GstPad;
          arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject;
-         arg3 : GStreamer.GST_Low_Level.glibconfig_h.guint64;
-         arg4 : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;
+         arg3 : GLIB.guint64;
+         arg4 : GLIB.guint;
          arg5 : System.Address) return GstFlowReturn;
    pragma Convention (C, GstPadGetRangeFunction);  -- gst/gstpad.h:351
 
@@ -598,7 +601,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
    type GstPadEventFunction is access function 
         (arg1 : access GstPad;
          arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject;
-         arg3 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstevent_h.GstEvent) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;
+         arg3 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstevent_h.GstEvent) return GLIB.gboolean;
    pragma Convention (C, GstPadEventFunction);  -- gst/gstpad.h:367
 
   --*
@@ -663,7 +666,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
    type GstPadQueryFunction is access function 
         (arg1 : access GstPad;
          arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject;
-         arg3 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h.GstQuery) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;
+         arg3 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h.GstQuery) return GLIB.gboolean;
    pragma Convention (C, GstPadQueryFunction);  -- gst/gstpad.h:423
 
   -- linking  
@@ -711,7 +714,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
   -- * Returns: %TRUE if the dispatching procedure has to be stopped.
   --  
 
-   type GstPadForwardFunction is access function  (arg1 : access GstPad; arg2 : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;
+   type GstPadForwardFunction is access function  (arg1 : access GstPad; arg2 : System.Address) return GLIB.gboolean;
    pragma Convention (C, GstPadForwardFunction);  -- gst/gstpad.h:464
 
   --*
@@ -826,10 +829,10 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
 
    type GstPadProbeInfo is record
       c_type : aliased GstPadProbeType;  -- gst/gstpad.h:581
-      id : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gulong;  -- gst/gstpad.h:582
-      data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;  -- gst/gstpad.h:583
-      offset : aliased GStreamer.GST_Low_Level.glibconfig_h.guint64;  -- gst/gstpad.h:584
-      size : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;  -- gst/gstpad.h:585
+      id : aliased GLIB.gulong;  -- gst/gstpad.h:582
+      data : System.Address;  -- gst/gstpad.h:583
+      offset : aliased GLIB.guint64;  -- gst/gstpad.h:584
+      size : aliased GLIB.guint;  -- gst/gstpad.h:585
       ABI : aliased anon_190;  -- gst/gstpad.h:593
    end record;
    pragma Convention (C_Pass_By_Copy, GstPadProbeInfo);  -- gst/gstpad.h:579
@@ -864,7 +867,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
    type GstPadProbeCallback is access function 
         (arg1 : access GstPad;
          arg2 : access GstPadProbeInfo;
-         arg3 : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer) return GstPadProbeReturn;
+         arg3 : System.Address) return GstPadProbeReturn;
    pragma Convention (C, GstPadProbeCallback);  -- gst/gstpad.h:627
 
   --*
@@ -889,7 +892,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
    type GstPadStickyEventsForeachFunction is access function 
         (arg1 : access GstPad;
          arg2 : System.Address;
-         arg3 : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;
+         arg3 : System.Address) return GLIB.gboolean;
    pragma Convention (C, GstPadStickyEventsForeachFunction);  -- gst/gstpad.h:648
 
   --*
@@ -958,7 +961,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
 
    type GstPad is record
       object : aliased GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject;  -- gst/gstpad.h:715
-      element_private : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;  -- gst/gstpad.h:718
+      element_private : System.Address;  -- gst/gstpad.h:718
       padtemplate : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpadtemplate_h.GstPadTemplate;  -- gst/gstpad.h:720
       direction : aliased GstPadDirection;  -- gst/gstpad.h:722
       stream_rec_lock : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gthread_h.GRecMutex;  -- gst/gstpad.h:726
@@ -967,39 +970,39 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
       probes : aliased GStreamer.GST_Low_Level.glib_2_0_glib_ghook_h.GHookList;  -- gst/gstpad.h:731
       mode : aliased GstPadMode;  -- gst/gstpad.h:733
       activatefunc : GstPadActivateFunction;  -- gst/gstpad.h:734
-      activatedata : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;  -- gst/gstpad.h:735
+      activatedata : System.Address;  -- gst/gstpad.h:735
       activatenotify : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.GDestroyNotify;  -- gst/gstpad.h:736
       activatemodefunc : GstPadActivateModeFunction;  -- gst/gstpad.h:737
-      activatemodedata : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;  -- gst/gstpad.h:738
+      activatemodedata : System.Address;  -- gst/gstpad.h:738
       activatemodenotify : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.GDestroyNotify;  -- gst/gstpad.h:739
       peer : access GstPad;  -- gst/gstpad.h:742
       linkfunc : GstPadLinkFunction;  -- gst/gstpad.h:743
-      linkdata : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;  -- gst/gstpad.h:744
+      linkdata : System.Address;  -- gst/gstpad.h:744
       linknotify : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.GDestroyNotify;  -- gst/gstpad.h:745
       unlinkfunc : GstPadUnlinkFunction;  -- gst/gstpad.h:746
-      unlinkdata : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;  -- gst/gstpad.h:747
+      unlinkdata : System.Address;  -- gst/gstpad.h:747
       unlinknotify : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.GDestroyNotify;  -- gst/gstpad.h:748
       chainfunc : GstPadChainFunction;  -- gst/gstpad.h:751
-      chaindata : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;  -- gst/gstpad.h:752
+      chaindata : System.Address;  -- gst/gstpad.h:752
       chainnotify : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.GDestroyNotify;  -- gst/gstpad.h:753
       chainlistfunc : GstPadChainListFunction;  -- gst/gstpad.h:754
-      chainlistdata : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;  -- gst/gstpad.h:755
+      chainlistdata : System.Address;  -- gst/gstpad.h:755
       chainlistnotify : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.GDestroyNotify;  -- gst/gstpad.h:756
       getrangefunc : GstPadGetRangeFunction;  -- gst/gstpad.h:757
-      getrangedata : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;  -- gst/gstpad.h:758
+      getrangedata : System.Address;  -- gst/gstpad.h:758
       getrangenotify : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.GDestroyNotify;  -- gst/gstpad.h:759
       eventfunc : GstPadEventFunction;  -- gst/gstpad.h:760
-      eventdata : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;  -- gst/gstpad.h:761
+      eventdata : System.Address;  -- gst/gstpad.h:761
       eventnotify : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.GDestroyNotify;  -- gst/gstpad.h:762
-      offset : aliased GStreamer.GST_Low_Level.glibconfig_h.gint64;  -- gst/gstpad.h:765
+      offset : aliased GLIB.gint64;  -- gst/gstpad.h:765
       queryfunc : GstPadQueryFunction;  -- gst/gstpad.h:768
-      querydata : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;  -- gst/gstpad.h:769
+      querydata : System.Address;  -- gst/gstpad.h:769
       querynotify : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.GDestroyNotify;  -- gst/gstpad.h:770
       iterintlinkfunc : GstPadIterIntLinkFunction;  -- gst/gstpad.h:773
-      iterintlinkdata : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;  -- gst/gstpad.h:774
+      iterintlinkdata : System.Address;  -- gst/gstpad.h:774
       iterintlinknotify : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.GDestroyNotify;  -- gst/gstpad.h:775
-      num_probes : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;  -- gst/gstpad.h:778
-      num_blocked : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;  -- gst/gstpad.h:779
+      num_probes : aliased GLIB.gint;  -- gst/gstpad.h:778
+      num_blocked : aliased GLIB.gint;  -- gst/gstpad.h:779
       priv : System.Address;  -- gst/gstpad.h:781
       ABI : aliased anon_193;  -- gst/gstpad.h:789
    end record;
@@ -1477,17 +1480,17 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
   -- * Since: 1.4
   --  
 
-   function gst_pad_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gstpad.h:1263
+   function gst_pad_get_type return GLIB.GType;  -- gst/gstpad.h:1263
    pragma Import (C, gst_pad_get_type, "gst_pad_get_type");
 
   -- creating pads  
-   function gst_pad_new (name : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar; direction : GstPadDirection) return access GstPad;  -- gst/gstpad.h:1266
+   function gst_pad_new (name : access GLIB.gchar; direction : GstPadDirection) return access GstPad;  -- gst/gstpad.h:1266
    pragma Import (C, gst_pad_new, "gst_pad_new");
 
-   function gst_pad_new_from_template (templ : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpadtemplate_h.GstPadTemplate; name : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return access GstPad;  -- gst/gstpad.h:1267
+   function gst_pad_new_from_template (templ : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpadtemplate_h.GstPadTemplate; name : access GLIB.gchar) return access GstPad;  -- gst/gstpad.h:1267
    pragma Import (C, gst_pad_new_from_template, "gst_pad_new_from_template");
 
-   function gst_pad_new_from_static_template (templ : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpadtemplate_h.GstStaticPadTemplate; name : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return access GstPad;  -- gst/gstpad.h:1268
+   function gst_pad_new_from_static_template (templ : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpadtemplate_h.GstStaticPadTemplate; name : access GLIB.gchar) return access GstPad;  -- gst/gstpad.h:1268
    pragma Import (C, gst_pad_new_from_static_template, "gst_pad_new_from_static_template");
 
   --*
@@ -1515,48 +1518,48 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
    function gst_pad_get_direction (pad : access GstPad) return GstPadDirection;  -- gst/gstpad.h:1294
    pragma Import (C, gst_pad_get_direction, "gst_pad_get_direction");
 
-   function gst_pad_set_active (pad : access GstPad; active : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstpad.h:1296
+   function gst_pad_set_active (pad : access GstPad; active : GLIB.gboolean) return GLIB.gboolean;  -- gst/gstpad.h:1296
    pragma Import (C, gst_pad_set_active, "gst_pad_set_active");
 
-   function gst_pad_is_active (pad : access GstPad) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstpad.h:1297
+   function gst_pad_is_active (pad : access GstPad) return GLIB.gboolean;  -- gst/gstpad.h:1297
    pragma Import (C, gst_pad_is_active, "gst_pad_is_active");
 
    function gst_pad_activate_mode
      (pad : access GstPad;
       mode : GstPadMode;
-      active : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstpad.h:1298
+      active : GLIB.gboolean) return GLIB.gboolean;  -- gst/gstpad.h:1298
    pragma Import (C, gst_pad_activate_mode, "gst_pad_activate_mode");
 
    function gst_pad_add_probe
      (pad : access GstPad;
       mask : GstPadProbeType;
       callback : GstPadProbeCallback;
-      user_data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
-      destroy_data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.GDestroyNotify) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gulong;  -- gst/gstpad.h:1301
+      user_data : System.Address;
+      destroy_data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.GDestroyNotify) return GLIB.gulong;  -- gst/gstpad.h:1301
    pragma Import (C, gst_pad_add_probe, "gst_pad_add_probe");
 
-   procedure gst_pad_remove_probe (pad : access GstPad; id : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gulong);  -- gst/gstpad.h:1306
+   procedure gst_pad_remove_probe (pad : access GstPad; id : GLIB.gulong);  -- gst/gstpad.h:1306
    pragma Import (C, gst_pad_remove_probe, "gst_pad_remove_probe");
 
-   function gst_pad_is_blocked (pad : access GstPad) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstpad.h:1308
+   function gst_pad_is_blocked (pad : access GstPad) return GLIB.gboolean;  -- gst/gstpad.h:1308
    pragma Import (C, gst_pad_is_blocked, "gst_pad_is_blocked");
 
-   function gst_pad_is_blocking (pad : access GstPad) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstpad.h:1309
+   function gst_pad_is_blocking (pad : access GstPad) return GLIB.gboolean;  -- gst/gstpad.h:1309
    pragma Import (C, gst_pad_is_blocking, "gst_pad_is_blocking");
 
    procedure gst_pad_mark_reconfigure (pad : access GstPad);  -- gst/gstpad.h:1311
    pragma Import (C, gst_pad_mark_reconfigure, "gst_pad_mark_reconfigure");
 
-   function gst_pad_needs_reconfigure (pad : access GstPad) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstpad.h:1312
+   function gst_pad_needs_reconfigure (pad : access GstPad) return GLIB.gboolean;  -- gst/gstpad.h:1312
    pragma Import (C, gst_pad_needs_reconfigure, "gst_pad_needs_reconfigure");
 
-   function gst_pad_check_reconfigure (pad : access GstPad) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstpad.h:1313
+   function gst_pad_check_reconfigure (pad : access GstPad) return GLIB.gboolean;  -- gst/gstpad.h:1313
    pragma Import (C, gst_pad_check_reconfigure, "gst_pad_check_reconfigure");
 
-   procedure gst_pad_set_element_private (pad : access GstPad; priv : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer);  -- gst/gstpad.h:1315
+   procedure gst_pad_set_element_private (pad : access GstPad; priv : System.Address);  -- gst/gstpad.h:1315
    pragma Import (C, gst_pad_set_element_private, "gst_pad_set_element_private");
 
-   function gst_pad_get_element_private (pad : access GstPad) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;  -- gst/gstpad.h:1316
+   function gst_pad_get_element_private (pad : access GstPad) return System.Address;  -- gst/gstpad.h:1316
    pragma Import (C, gst_pad_get_element_private, "gst_pad_get_element_private");
 
    function gst_pad_get_pad_template (pad : access GstPad) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpadtemplate_h.GstPadTemplate;  -- gst/gstpad.h:1318
@@ -1568,27 +1571,27 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
    function gst_pad_get_sticky_event
      (pad : access GstPad;
       event_type : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstevent_h.GstEventType;
-      idx : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstevent_h.GstEvent;  -- gst/gstpad.h:1321
+      idx : GLIB.guint) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstevent_h.GstEvent;  -- gst/gstpad.h:1321
    pragma Import (C, gst_pad_get_sticky_event, "gst_pad_get_sticky_event");
 
    procedure gst_pad_sticky_events_foreach
      (pad : access GstPad;
       foreach_func : GstPadStickyEventsForeachFunction;
-      user_data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer);  -- gst/gstpad.h:1323
+      user_data : System.Address);  -- gst/gstpad.h:1323
    pragma Import (C, gst_pad_sticky_events_foreach, "gst_pad_sticky_events_foreach");
 
   -- data passing setup functions  
    procedure gst_pad_set_activate_function_full
      (pad : access GstPad;
       activate : GstPadActivateFunction;
-      user_data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+      user_data : System.Address;
       notify : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.GDestroyNotify);  -- gst/gstpad.h:1326
    pragma Import (C, gst_pad_set_activate_function_full, "gst_pad_set_activate_function_full");
 
    procedure gst_pad_set_activatemode_function_full
      (pad : access GstPad;
       activatemode : GstPadActivateModeFunction;
-      user_data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+      user_data : System.Address;
       notify : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.GDestroyNotify);  -- gst/gstpad.h:1330
    pragma Import (C, gst_pad_set_activatemode_function_full, "gst_pad_set_activatemode_function_full");
 
@@ -1596,35 +1599,35 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
    procedure gst_pad_set_chain_function_full
      (pad : access GstPad;
       chain : GstPadChainFunction;
-      user_data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+      user_data : System.Address;
       notify : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.GDestroyNotify);  -- gst/gstpad.h:1335
    pragma Import (C, gst_pad_set_chain_function_full, "gst_pad_set_chain_function_full");
 
    procedure gst_pad_set_chain_list_function_full
      (pad : access GstPad;
       chainlist : GstPadChainListFunction;
-      user_data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+      user_data : System.Address;
       notify : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.GDestroyNotify);  -- gst/gstpad.h:1339
    pragma Import (C, gst_pad_set_chain_list_function_full, "gst_pad_set_chain_list_function_full");
 
    procedure gst_pad_set_getrange_function_full
      (pad : access GstPad;
       get : GstPadGetRangeFunction;
-      user_data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+      user_data : System.Address;
       notify : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.GDestroyNotify);  -- gst/gstpad.h:1343
    pragma Import (C, gst_pad_set_getrange_function_full, "gst_pad_set_getrange_function_full");
 
    procedure gst_pad_set_event_function_full
      (pad : access GstPad;
       event : GstPadEventFunction;
-      user_data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+      user_data : System.Address;
       notify : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.GDestroyNotify);  -- gst/gstpad.h:1347
    pragma Import (C, gst_pad_set_event_function_full, "gst_pad_set_event_function_full");
 
    procedure gst_pad_set_event_full_function_full
      (pad : access GstPad;
       event : GstPadEventFullFunction;
-      user_data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+      user_data : System.Address;
       notify : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.GDestroyNotify);  -- gst/gstpad.h:1351
    pragma Import (C, gst_pad_set_event_full_function_full, "gst_pad_set_event_full_function_full");
 
@@ -1632,18 +1635,18 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
    procedure gst_pad_set_link_function_full
      (pad : access GstPad;
       link : GstPadLinkFunction;
-      user_data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+      user_data : System.Address;
       notify : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.GDestroyNotify);  -- gst/gstpad.h:1365
    pragma Import (C, gst_pad_set_link_function_full, "gst_pad_set_link_function_full");
 
    procedure gst_pad_set_unlink_function_full
      (pad : access GstPad;
       unlink : GstPadUnlinkFunction;
-      user_data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+      user_data : System.Address;
       notify : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.GDestroyNotify);  -- gst/gstpad.h:1369
    pragma Import (C, gst_pad_set_unlink_function_full, "gst_pad_set_unlink_function_full");
 
-   function gst_pad_can_link (srcpad : access GstPad; sinkpad : access GstPad) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstpad.h:1377
+   function gst_pad_can_link (srcpad : access GstPad; sinkpad : access GstPad) return GLIB.gboolean;  -- gst/gstpad.h:1377
    pragma Import (C, gst_pad_can_link, "gst_pad_can_link");
 
    function gst_pad_link (srcpad : access GstPad; sinkpad : access GstPad) return GstPadLinkReturn;  -- gst/gstpad.h:1378
@@ -1655,10 +1658,10 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
       flags : GstPadLinkCheck) return GstPadLinkReturn;  -- gst/gstpad.h:1379
    pragma Import (C, gst_pad_link_full, "gst_pad_link_full");
 
-   function gst_pad_unlink (srcpad : access GstPad; sinkpad : access GstPad) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstpad.h:1380
+   function gst_pad_unlink (srcpad : access GstPad; sinkpad : access GstPad) return GLIB.gboolean;  -- gst/gstpad.h:1380
    pragma Import (C, gst_pad_unlink, "gst_pad_unlink");
 
-   function gst_pad_is_linked (pad : access GstPad) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstpad.h:1381
+   function gst_pad_is_linked (pad : access GstPad) return GLIB.gboolean;  -- gst/gstpad.h:1381
    pragma Import (C, gst_pad_is_linked, "gst_pad_is_linked");
 
    function gst_pad_get_peer (pad : access GstPad) return access GstPad;  -- gst/gstpad.h:1383
@@ -1671,7 +1674,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
    function gst_pad_get_current_caps (pad : access GstPad) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h.GstCaps;  -- gst/gstpad.h:1388
    pragma Import (C, gst_pad_get_current_caps, "gst_pad_get_current_caps");
 
-   function gst_pad_has_current_caps (pad : access GstPad) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstpad.h:1389
+   function gst_pad_has_current_caps (pad : access GstPad) return GLIB.gboolean;  -- gst/gstpad.h:1389
    pragma Import (C, gst_pad_has_current_caps, "gst_pad_has_current_caps");
 
   -- capsnego for linked pads  
@@ -1679,10 +1682,10 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
    pragma Import (C, gst_pad_get_allowed_caps, "gst_pad_get_allowed_caps");
 
   -- pad offsets  
-   function gst_pad_get_offset (pad : access GstPad) return GStreamer.GST_Low_Level.glibconfig_h.gint64;  -- gst/gstpad.h:1395
+   function gst_pad_get_offset (pad : access GstPad) return GLIB.gint64;  -- gst/gstpad.h:1395
    pragma Import (C, gst_pad_get_offset, "gst_pad_get_offset");
 
-   procedure gst_pad_set_offset (pad : access GstPad; offset : GStreamer.GST_Low_Level.glibconfig_h.gint64);  -- gst/gstpad.h:1396
+   procedure gst_pad_set_offset (pad : access GstPad; offset : GLIB.gint64);  -- gst/gstpad.h:1396
    pragma Import (C, gst_pad_set_offset, "gst_pad_set_offset");
 
   -- data passing functions to peer  
@@ -1694,18 +1697,18 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
 
    function gst_pad_pull_range
      (pad : access GstPad;
-      offset : GStreamer.GST_Low_Level.glibconfig_h.guint64;
-      size : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;
+      offset : GLIB.guint64;
+      size : GLIB.guint;
       buffer : System.Address) return GstFlowReturn;  -- gst/gstpad.h:1401
    pragma Import (C, gst_pad_pull_range, "gst_pad_pull_range");
 
-   function gst_pad_push_event (pad : access GstPad; event : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstevent_h.GstEvent) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstpad.h:1403
+   function gst_pad_push_event (pad : access GstPad; event : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstevent_h.GstEvent) return GLIB.gboolean;  -- gst/gstpad.h:1403
    pragma Import (C, gst_pad_push_event, "gst_pad_push_event");
 
    function gst_pad_event_default
      (pad : access GstPad;
       parent : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject;
-      event : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstevent_h.GstEvent) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstpad.h:1404
+      event : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstevent_h.GstEvent) return GLIB.gboolean;  -- gst/gstpad.h:1404
    pragma Import (C, gst_pad_event_default, "gst_pad_event_default");
 
    function gst_pad_get_last_flow_return (pad : access GstPad) return GstFlowReturn;  -- gst/gstpad.h:1406
@@ -1720,26 +1723,26 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
 
    function gst_pad_get_range
      (pad : access GstPad;
-      offset : GStreamer.GST_Low_Level.glibconfig_h.guint64;
-      size : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;
+      offset : GLIB.guint64;
+      size : GLIB.guint;
       buffer : System.Address) return GstFlowReturn;  -- gst/gstpad.h:1411
    pragma Import (C, gst_pad_get_range, "gst_pad_get_range");
 
-   function gst_pad_send_event (pad : access GstPad; event : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstevent_h.GstEvent) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstpad.h:1413
+   function gst_pad_send_event (pad : access GstPad; event : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstevent_h.GstEvent) return GLIB.gboolean;  -- gst/gstpad.h:1413
    pragma Import (C, gst_pad_send_event, "gst_pad_send_event");
 
   -- pad tasks  
    function gst_pad_start_task
      (pad : access GstPad;
       func : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsttask_h.GstTaskFunction;
-      user_data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
-      notify : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.GDestroyNotify) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstpad.h:1416
+      user_data : System.Address;
+      notify : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.GDestroyNotify) return GLIB.gboolean;  -- gst/gstpad.h:1416
    pragma Import (C, gst_pad_start_task, "gst_pad_start_task");
 
-   function gst_pad_pause_task (pad : access GstPad) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstpad.h:1418
+   function gst_pad_pause_task (pad : access GstPad) return GLIB.gboolean;  -- gst/gstpad.h:1418
    pragma Import (C, gst_pad_pause_task, "gst_pad_pause_task");
 
-   function gst_pad_stop_task (pad : access GstPad) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstpad.h:1419
+   function gst_pad_stop_task (pad : access GstPad) return GLIB.gboolean;  -- gst/gstpad.h:1419
    pragma Import (C, gst_pad_stop_task, "gst_pad_stop_task");
 
    function gst_pad_get_task_state (pad : access GstPad) return GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsttask_h.GstTaskState;  -- gst/gstpad.h:1420
@@ -1749,7 +1752,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
    procedure gst_pad_set_iterate_internal_links_function_full
      (pad : access GstPad;
       iterintlink : GstPadIterIntLinkFunction;
-      user_data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+      user_data : System.Address;
       notify : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.GDestroyNotify);  -- gst/gstpad.h:1423
    pragma Import (C, gst_pad_set_iterate_internal_links_function_full, "gst_pad_set_iterate_internal_links_function_full");
 
@@ -1760,30 +1763,30 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
    pragma Import (C, gst_pad_iterate_internal_links_default, "gst_pad_iterate_internal_links_default");
 
   -- generic query function  
-   function gst_pad_query (pad : access GstPad; query : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h.GstQuery) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstpad.h:1433
+   function gst_pad_query (pad : access GstPad; query : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h.GstQuery) return GLIB.gboolean;  -- gst/gstpad.h:1433
    pragma Import (C, gst_pad_query, "gst_pad_query");
 
-   function gst_pad_peer_query (pad : access GstPad; query : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h.GstQuery) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstpad.h:1434
+   function gst_pad_peer_query (pad : access GstPad; query : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h.GstQuery) return GLIB.gboolean;  -- gst/gstpad.h:1434
    pragma Import (C, gst_pad_peer_query, "gst_pad_peer_query");
 
    procedure gst_pad_set_query_function_full
      (pad : access GstPad;
       query : GstPadQueryFunction;
-      user_data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+      user_data : System.Address;
       notify : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.GDestroyNotify);  -- gst/gstpad.h:1435
    pragma Import (C, gst_pad_set_query_function_full, "gst_pad_set_query_function_full");
 
    function gst_pad_query_default
      (pad : access GstPad;
       parent : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject;
-      query : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h.GstQuery) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstpad.h:1438
+      query : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h.GstQuery) return GLIB.gboolean;  -- gst/gstpad.h:1438
    pragma Import (C, gst_pad_query_default, "gst_pad_query_default");
 
   -- misc helper functions  
    function gst_pad_forward
      (pad : access GstPad;
       forward : GstPadForwardFunction;
-      user_data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstpad.h:1444
+      user_data : System.Address) return GLIB.gboolean;  -- gst/gstpad.h:1444
    pragma Import (C, gst_pad_forward, "gst_pad_forward");
 
    procedure glib_autoptr_cleanup_GstPad (u_ptr : System.Address);  -- gst/gstpad.h:1448

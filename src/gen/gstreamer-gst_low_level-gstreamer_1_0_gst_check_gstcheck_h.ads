@@ -1,23 +1,26 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstinfo_h;
-limited with GStreamer.GST_Low_Level.glib_2_0_glib_glist_h;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gthread_h;
+--  limited with GStreamer.GST_Low_Level.glib_2_0_glib_glist_h;
+--  with GStreamer.GST_Low_Level.glib_2_0_glib_gthread_h;
 with Interfaces.C.Strings;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
+with glib;
+with glib.Values;
+with System;
 with GStreamer.GST_Low_Level.glib_2_0_glib_gmessages_h;
 with System;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmessage_h;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gquark_h;
+--  with GStreamer.GST_Low_Level.glib_2_0_glib_gquark_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpadtemplate_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h;
-with GStreamer.GST_Low_Level.glibconfig_h;
+with GLIB; --  with GStreamer.GST_Low_Level.glibconfig_h;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstformat_h;
 
 package GStreamer.GST_Low_Level.gstreamer_1_0_gst_check_gstcheck_h is
@@ -168,21 +171,21 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_check_gstcheck_h is
   --  
 
    type GstCheckLogFilterFunc is access function 
-        (arg1 : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
+        (arg1 : access GLIB.gchar;
          arg2 : GStreamer.GST_Low_Level.glib_2_0_glib_gmessages_h.GLogLevelFlags;
-         arg3 : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-         arg4 : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;
+         arg3 : access GLIB.gchar;
+         arg4 : System.Address) return GLIB.gboolean;
    pragma Convention (C, GstCheckLogFilterFunc);  -- gst/check/gstcheck.h:82
 
    procedure gst_check_init (argc : access int; argv : System.Address);  -- gst/check/gstcheck.h:85
    pragma Import (C, gst_check_init, "gst_check_init");
 
    function gst_check_add_log_filter
-     (log : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
+     (log : access GLIB.gchar;
       log_level : GStreamer.GST_Low_Level.glib_2_0_glib_gmessages_h.GLogLevelFlags;
       regex : System.Address;
       func : GstCheckLogFilterFunc;
-      user_data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+      user_data : System.Address;
       destroy_data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.GDestroyNotify) return System.Address;  -- gst/check/gstcheck.h:87
    pragma Import (C, gst_check_add_log_filter, "gst_check_add_log_filter");
 
@@ -201,11 +204,11 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_check_gstcheck_h is
    procedure gst_check_message_error
      (message : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmessage_h.GstMessage;
       c_type : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmessage_h.GstMessageType;
-      domain : GStreamer.GST_Low_Level.glib_2_0_glib_gquark_h.GQuark;
-      code : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint);  -- gst/check/gstcheck.h:95
+      domain : Glib.GQuark;
+      code : GLIB.gint);  -- gst/check/gstcheck.h:95
    pragma Import (C, gst_check_message_error, "gst_check_message_error");
 
-   function gst_check_setup_element (factory : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h.GstElement;  -- gst/check/gstcheck.h:98
+   function gst_check_setup_element (factory : access GLIB.gchar) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h.GstElement;  -- gst/check/gstcheck.h:98
    pragma Import (C, gst_check_setup_element, "gst_check_setup_element");
 
    procedure gst_check_teardown_element (element : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h.GstElement);  -- gst/check/gstcheck.h:99
@@ -220,13 +223,13 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_check_gstcheck_h is
    function gst_check_setup_src_pad_by_name
      (element : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h.GstElement;
       tmpl : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpadtemplate_h.GstStaticPadTemplate;
-      name : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstPad;  -- gst/check/gstcheck.h:104
+      name : access GLIB.gchar) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstPad;  -- gst/check/gstcheck.h:104
    pragma Import (C, gst_check_setup_src_pad_by_name, "gst_check_setup_src_pad_by_name");
 
    function gst_check_setup_src_pad_by_name_from_template
      (element : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h.GstElement;
       tmpl : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpadtemplate_h.GstPadTemplate;
-      name : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstPad;  -- gst/check/gstcheck.h:106
+      name : access GLIB.gchar) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstPad;  -- gst/check/gstcheck.h:106
    pragma Import (C, gst_check_setup_src_pad_by_name_from_template, "gst_check_setup_src_pad_by_name_from_template");
 
    function gst_check_setup_sink_pad (element : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h.GstElement; tmpl : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpadtemplate_h.GstStaticPadTemplate) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstPad;  -- gst/check/gstcheck.h:108
@@ -238,16 +241,16 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_check_gstcheck_h is
    function gst_check_setup_sink_pad_by_name
      (element : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h.GstElement;
       tmpl : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpadtemplate_h.GstStaticPadTemplate;
-      name : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstPad;  -- gst/check/gstcheck.h:112
+      name : access GLIB.gchar) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstPad;  -- gst/check/gstcheck.h:112
    pragma Import (C, gst_check_setup_sink_pad_by_name, "gst_check_setup_sink_pad_by_name");
 
    function gst_check_setup_sink_pad_by_name_from_template
      (element : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h.GstElement;
       tmpl : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpadtemplate_h.GstPadTemplate;
-      name : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstPad;  -- gst/check/gstcheck.h:114
+      name : access GLIB.gchar) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstPad;  -- gst/check/gstcheck.h:114
    pragma Import (C, gst_check_setup_sink_pad_by_name_from_template, "gst_check_setup_sink_pad_by_name_from_template");
 
-   procedure gst_check_teardown_pad_by_name (element : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h.GstElement; name : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar);  -- gst/check/gstcheck.h:116
+   procedure gst_check_teardown_pad_by_name (element : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h.GstElement; name : access GLIB.gchar);  -- gst/check/gstcheck.h:116
    pragma Import (C, gst_check_teardown_pad_by_name, "gst_check_teardown_pad_by_name");
 
    procedure gst_check_teardown_src_pad (element : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h.GstElement);  -- gst/check/gstcheck.h:117
@@ -261,12 +264,12 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_check_gstcheck_h is
 
    procedure gst_check_buffer_data
      (buffer : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBuffer;
-      data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gconstpointer;
-      size : GStreamer.GST_Low_Level.glibconfig_h.gsize);  -- gst/check/gstcheck.h:120
+      data : Interfaces.C.Extensions.void_ptr;
+      size : GLIB.gsize);  -- gst/check/gstcheck.h:120
    pragma Import (C, gst_check_buffer_data, "gst_check_buffer_data");
 
    procedure gst_check_element_push_buffer_list
-     (element_name : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
+     (element_name : access GLIB.gchar;
       buffer_in : access GStreamer.GST_Low_Level.glib_2_0_glib_glist_h.GList;
       caps_in : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h.GstCaps;
       buffer_out : access GStreamer.GST_Low_Level.glib_2_0_glib_glist_h.GList;
@@ -275,7 +278,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_check_gstcheck_h is
    pragma Import (C, gst_check_element_push_buffer_list, "gst_check_element_push_buffer_list");
 
    procedure gst_check_element_push_buffer
-     (element_name : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
+     (element_name : access GLIB.gchar;
       buffer_in : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBuffer;
       caps_in : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h.GstCaps;
       buffer_out : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBuffer;
@@ -285,13 +288,13 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_check_gstcheck_h is
    procedure gst_check_teardown_sink_pad (element : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h.GstElement);  -- gst/check/gstcheck.h:127
    pragma Import (C, gst_check_teardown_sink_pad, "gst_check_teardown_sink_pad");
 
-   procedure gst_check_abi_list (list : access GstCheckABIStruct; have_abi_sizes : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean);  -- gst/check/gstcheck.h:128
+   procedure gst_check_abi_list (list : access GstCheckABIStruct; have_abi_sizes : GLIB.gboolean);  -- gst/check/gstcheck.h:128
    pragma Import (C, gst_check_abi_list, "gst_check_abi_list");
 
    function gst_check_run_suite
      (the_suite : System.Address;
-      name : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      fname : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gint;  -- gst/check/gstcheck.h:129
+      name : access GLIB.gchar;
+      fname : access GLIB.gchar) return GLIB.gint;  -- gst/check/gstcheck.h:129
    pragma Import (C, gst_check_run_suite, "gst_check_run_suite");
 
    procedure gst_check_setup_events
@@ -306,14 +309,14 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_check_gstcheck_h is
       element : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h.GstElement;
       caps : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h.GstCaps;
       format : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstformat_h.GstFormat;
-      stream_id : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar);  -- gst/check/gstcheck.h:133
+      stream_id : access GLIB.gchar);  -- gst/check/gstcheck.h:133
    pragma Import (C, gst_check_setup_events_with_stream_id, "gst_check_setup_events_with_stream_id");
 
-   procedure gst_check_objects_destroyed_on_unref (object_to_unref : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer; first_object : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer  -- , ...
+   procedure gst_check_objects_destroyed_on_unref (object_to_unref : System.Address; first_object : System.Address  -- , ...
       );  -- gst/check/gstcheck.h:136
    pragma Import (C, gst_check_objects_destroyed_on_unref, "gst_check_objects_destroyed_on_unref");
 
-   procedure gst_check_object_destroyed_on_unref (object_to_unref : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer);  -- gst/check/gstcheck.h:138
+   procedure gst_check_object_destroyed_on_unref (object_to_unref : System.Address);  -- gst/check/gstcheck.h:138
    pragma Import (C, gst_check_object_destroyed_on_unref, "gst_check_object_destroyed_on_unref");
 
   --*

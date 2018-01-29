@@ -1,14 +1,17 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gobject_h;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gthread_h;
-with GStreamer.GST_Low_Level.glibconfig_h;
-limited with GStreamer.GST_Low_Level.glib_2_0_glib_glist_h;
-limited with GStreamer.GST_Low_Level.glib_2_0_gobject_gparam_h;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;
+with glib;
+with glib.Values;
+with System;
+--  with GStreamer.GST_Low_Level.glib_2_0_gobject_gobject_h;
+--  with GStreamer.GST_Low_Level.glib_2_0_glib_gthread_h;
+with GLIB; --  with GStreamer.GST_Low_Level.glibconfig_h;
+--  limited with GStreamer.GST_Low_Level.glib_2_0_glib_glist_h;
+--  limited --  with GStreamer.GST_Low_Level.glib_2_0_gobject_gparam_h;
+with glib;
 with System;
 --  with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcontrolbinding_h;
@@ -192,7 +195,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h is
    --subtype GstObject is u_GstObject;  -- gst/gstobject.h:160
 
    type GstObjectClass;
-   type u_GstObjectClass_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstObjectClass_u_gst_reserved_array is array (0 .. 3) of System.Address;
    --subtype GstObjectClass is u_GstObjectClass;  -- gst/gstobject.h:161
 
   --*
@@ -208,13 +211,13 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h is
    type GstObject is record
       object : aliased GStreamer.GST_Low_Level.glib_2_0_gobject_gobject_h.GInitiallyUnowned;  -- gst/gstobject.h:173
       lock : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gthread_h.GMutex;  -- gst/gstobject.h:176
-      name : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gstobject.h:177
+      name : access GLIB.gchar;  -- gst/gstobject.h:177
       parent : access GstObject;  -- gst/gstobject.h:178
-      flags : aliased GStreamer.GST_Low_Level.glibconfig_h.guint32;  -- gst/gstobject.h:179
+      flags : aliased GLIB.guint32;  -- gst/gstobject.h:179
       control_bindings : access GStreamer.GST_Low_Level.glib_2_0_glib_glist_h.GList;  -- gst/gstobject.h:182
-      control_rate : aliased GStreamer.GST_Low_Level.glibconfig_h.guint64;  -- gst/gstobject.h:183
-      last_sync : aliased GStreamer.GST_Low_Level.glibconfig_h.guint64;  -- gst/gstobject.h:184
-      u_gst_reserved : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;  -- gst/gstobject.h:186
+      control_rate : aliased GLIB.guint64;  -- gst/gstobject.h:183
+      last_sync : aliased GLIB.guint64;  -- gst/gstobject.h:184
+      u_gst_reserved : System.Address;  -- gst/gstobject.h:186
    end record;
    pragma Convention (C_Pass_By_Copy, GstObject);  -- gst/gstobject.h:172
 
@@ -236,7 +239,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h is
 
    type GstObjectClass is record
       parent_class : aliased GStreamer.GST_Low_Level.glib_2_0_gobject_gobject_h.GInitiallyUnownedClass;  -- gst/gstobject.h:198
-      path_string_separator : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gstobject.h:200
+      path_string_separator : access GLIB.gchar;  -- gst/gstobject.h:200
       deep_notify : access procedure 
            (arg1 : access GstObject;
             arg2 : access GstObject;
@@ -250,18 +253,18 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h is
   -- virtual methods for subclasses  
   --< private > 
   -- normal GObject stuff  
-   function gst_object_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gstobject.h:213
+   function gst_object_get_type return GLIB.GType;  -- gst/gstobject.h:213
    pragma Import (C, gst_object_get_type, "gst_object_get_type");
 
   -- name routines  
-   function gst_object_set_name (object : access GstObject; name : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstobject.h:216
+   function gst_object_set_name (object : access GstObject; name : access GLIB.gchar) return GLIB.gboolean;  -- gst/gstobject.h:216
    pragma Import (C, gst_object_set_name, "gst_object_set_name");
 
-   function gst_object_get_name (object : access GstObject) return access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gstobject.h:217
+   function gst_object_get_name (object : access GstObject) return access GLIB.gchar;  -- gst/gstobject.h:217
    pragma Import (C, gst_object_get_name, "gst_object_get_name");
 
   -- parentage routines  
-   function gst_object_set_parent (object : access GstObject; parent : access GstObject) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstobject.h:220
+   function gst_object_set_parent (object : access GstObject; parent : access GstObject) return GLIB.gboolean;  -- gst/gstobject.h:220
    pragma Import (C, gst_object_set_parent, "gst_object_set_parent");
 
    function gst_object_get_parent (object : access GstObject) return access GstObject;  -- gst/gstobject.h:221
@@ -270,100 +273,100 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h is
    procedure gst_object_unparent (object : access GstObject);  -- gst/gstobject.h:222
    pragma Import (C, gst_object_unparent, "gst_object_unparent");
 
-   function gst_object_has_as_parent (object : access GstObject; parent : access GstObject) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstobject.h:223
+   function gst_object_has_as_parent (object : access GstObject; parent : access GstObject) return GLIB.gboolean;  -- gst/gstobject.h:223
    pragma Import (C, gst_object_has_as_parent, "gst_object_has_as_parent");
 
-   function gst_object_has_as_ancestor (object : access GstObject; ancestor : access GstObject) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstobject.h:224
+   function gst_object_has_as_ancestor (object : access GstObject; ancestor : access GstObject) return GLIB.gboolean;  -- gst/gstobject.h:224
    pragma Import (C, gst_object_has_as_ancestor, "gst_object_has_as_ancestor");
 
-   function gst_object_has_ancestor (object : access GstObject; ancestor : access GstObject) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstobject.h:226
+   function gst_object_has_ancestor (object : access GstObject; ancestor : access GstObject) return GLIB.gboolean;  -- gst/gstobject.h:226
    pragma Import (C, gst_object_has_ancestor, "gst_object_has_ancestor");
 
    procedure gst_object_default_deep_notify
-     (object : access GStreamer.GST_Low_Level.glib_2_0_gobject_gobject_h.GObject;
+     (object : access GLIB.Object.GObject;
       orig : access GstObject;
       pspec : access GStreamer.GST_Low_Level.glib_2_0_gobject_gparam_h.GParamSpec;
       excluded_props : System.Address);  -- gst/gstobject.h:229
    pragma Import (C, gst_object_default_deep_notify, "gst_object_default_deep_notify");
 
   -- refcounting + life cycle  
-   function gst_object_ref (object : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;  -- gst/gstobject.h:233
+   function gst_object_ref (object : System.Address) return System.Address;  -- gst/gstobject.h:233
    pragma Import (C, gst_object_ref, "gst_object_ref");
 
-   procedure gst_object_unref (object : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer);  -- gst/gstobject.h:234
+   procedure gst_object_unref (object : System.Address);  -- gst/gstobject.h:234
    pragma Import (C, gst_object_unref, "gst_object_unref");
 
-   function gst_object_ref_sink (object : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;  -- gst/gstobject.h:235
+   function gst_object_ref_sink (object : System.Address) return System.Address;  -- gst/gstobject.h:235
    pragma Import (C, gst_object_ref_sink, "gst_object_ref_sink");
 
   -- replace object pointer  
-   function gst_object_replace (oldobj : System.Address; newobj : access GstObject) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstobject.h:238
+   function gst_object_replace (oldobj : System.Address; newobj : access GstObject) return GLIB.gboolean;  -- gst/gstobject.h:238
    pragma Import (C, gst_object_replace, "gst_object_replace");
 
   -- printing out the 'path' of the object  
-   function gst_object_get_path_string (object : access GstObject) return access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;  -- gst/gstobject.h:241
+   function gst_object_get_path_string (object : access GstObject) return access GLIB.gchar;  -- gst/gstobject.h:241
    pragma Import (C, gst_object_get_path_string, "gst_object_get_path_string");
 
   -- misc utils  
-   function gst_object_check_uniqueness (list : access GStreamer.GST_Low_Level.glib_2_0_glib_glist_h.GList; name : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstobject.h:244
+   function gst_object_check_uniqueness (list : access GStreamer.GST_Low_Level.glib_2_0_glib_glist_h.GList; name : access GLIB.gchar) return GLIB.gboolean;  -- gst/gstobject.h:244
    pragma Import (C, gst_object_check_uniqueness, "gst_object_check_uniqueness");
 
   -- controller functions  
-   function gst_object_suggest_next_sync (object : access GstObject) return GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime;  -- gst/gstobject.h:250
+   function gst_object_suggest_next_sync (object : access GstObject) return GLIB.guint64;  -- gst/gstobject.h:250
    pragma Import (C, gst_object_suggest_next_sync, "gst_object_suggest_next_sync");
 
-   function gst_object_sync_values (object : access GstObject; timestamp : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstobject.h:251
+   function gst_object_sync_values (object : access GstObject; timestamp : GLIB.guint64) return GLIB.gboolean;  -- gst/gstobject.h:251
    pragma Import (C, gst_object_sync_values, "gst_object_sync_values");
 
-   function gst_object_has_active_control_bindings (object : access GstObject) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstobject.h:253
+   function gst_object_has_active_control_bindings (object : access GstObject) return GLIB.gboolean;  -- gst/gstobject.h:253
    pragma Import (C, gst_object_has_active_control_bindings, "gst_object_has_active_control_bindings");
 
-   procedure gst_object_set_control_bindings_disabled (object : access GstObject; disabled : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean);  -- gst/gstobject.h:254
+   procedure gst_object_set_control_bindings_disabled (object : access GstObject; disabled : GLIB.gboolean);  -- gst/gstobject.h:254
    pragma Import (C, gst_object_set_control_bindings_disabled, "gst_object_set_control_bindings_disabled");
 
    procedure gst_object_set_control_binding_disabled
      (object : access GstObject;
-      property_name : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      disabled : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean);  -- gst/gstobject.h:255
+      property_name : access GLIB.gchar;
+      disabled : GLIB.gboolean);  -- gst/gstobject.h:255
    pragma Import (C, gst_object_set_control_binding_disabled, "gst_object_set_control_binding_disabled");
 
-   function gst_object_add_control_binding (object : access GstObject; binding : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcontrolbinding_h.GstControlBinding) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstobject.h:259
+   function gst_object_add_control_binding (object : access GstObject; binding : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcontrolbinding_h.GstControlBinding) return GLIB.gboolean;  -- gst/gstobject.h:259
    pragma Import (C, gst_object_add_control_binding, "gst_object_add_control_binding");
 
-   function gst_object_get_control_binding (object : access GstObject; property_name : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcontrolbinding_h.GstControlBinding;  -- gst/gstobject.h:261
+   function gst_object_get_control_binding (object : access GstObject; property_name : access GLIB.gchar) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcontrolbinding_h.GstControlBinding;  -- gst/gstobject.h:261
    pragma Import (C, gst_object_get_control_binding, "gst_object_get_control_binding");
 
-   function gst_object_remove_control_binding (object : access GstObject; binding : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcontrolbinding_h.GstControlBinding) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstobject.h:262
+   function gst_object_remove_control_binding (object : access GstObject; binding : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcontrolbinding_h.GstControlBinding) return GLIB.gboolean;  -- gst/gstobject.h:262
    pragma Import (C, gst_object_remove_control_binding, "gst_object_remove_control_binding");
 
    function gst_object_get_value
      (object : access GstObject;
-      property_name : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      timestamp : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime) return access GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue;  -- gst/gstobject.h:264
+      property_name : access GLIB.gchar;
+      timestamp : GLIB.guint64) return access Glib.Values.GValue;  -- gst/gstobject.h:264
    pragma Import (C, gst_object_get_value, "gst_object_get_value");
 
    function gst_object_get_value_array
      (object : access GstObject;
-      property_name : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      timestamp : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime;
-      interval : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime;
-      n_values : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;
-      values : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstobject.h:266
+      property_name : access GLIB.gchar;
+      timestamp : GLIB.guint64;
+      interval : GLIB.guint64;
+      n_values : GLIB.guint;
+      values : System.Address) return GLIB.gboolean;  -- gst/gstobject.h:266
    pragma Import (C, gst_object_get_value_array, "gst_object_get_value_array");
 
    function gst_object_get_g_value_array
      (object : access GstObject;
-      property_name : access GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gchar;
-      timestamp : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime;
-      interval : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime;
-      n_values : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;
-      values : access GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstobject.h:269
+      property_name : access GLIB.gchar;
+      timestamp : GLIB.guint64;
+      interval : GLIB.guint64;
+      n_values : GLIB.guint;
+      values : access Glib.Values.GValue) return GLIB.gboolean;  -- gst/gstobject.h:269
    pragma Import (C, gst_object_get_g_value_array, "gst_object_get_g_value_array");
 
-   function gst_object_get_control_rate (object : access GstObject) return GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime;  -- gst/gstobject.h:273
+   function gst_object_get_control_rate (object : access GstObject) return GLIB.guint64;  -- gst/gstobject.h:273
    pragma Import (C, gst_object_get_control_rate, "gst_object_get_control_rate");
 
-   procedure gst_object_set_control_rate (object : access GstObject; control_rate : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockTime);  -- gst/gstobject.h:274
+   procedure gst_object_set_control_rate (object : access GstObject; control_rate : GLIB.guint64);  -- gst/gstobject.h:274
    pragma Import (C, gst_object_set_control_rate, "gst_object_set_control_rate");
 
    procedure glib_autoptr_cleanup_GstObject (u_ptr : System.Address);  -- gst/gstobject.h:277

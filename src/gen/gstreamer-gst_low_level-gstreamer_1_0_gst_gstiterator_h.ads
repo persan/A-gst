@@ -1,13 +1,16 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
+pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h;
-with GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h;
-limited with GStreamer.GST_Low_Level.glib_2_0_glib_gthread_h;
-with GStreamer.GST_Low_Level.glibconfig_h;
+with glib;
+with glib.Values;
 with System;
-limited with GStreamer.GST_Low_Level.glib_2_0_gobject_gobject_h;
+with glib;
+--  limited --  with GStreamer.GST_Low_Level.glib_2_0_glib_gthread_h;
+with GLIB; --  with GStreamer.GST_Low_Level.glibconfig_h;
+with System;
+--  limited --  with GStreamer.GST_Low_Level.glib_2_0_gobject_gobject_h;
 
 package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstiterator_h is
 
@@ -61,7 +64,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstiterator_h is
    pragma Convention (C, GstIteratorResult);  -- gst/gstiterator.h:47
 
    type GstIterator;
-   type u_GstIterator_u_gst_reserved_array is array (0 .. 3) of GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer;
+   type u_GstIterator_u_gst_reserved_array is array (0 .. 3) of System.Address;
    --subtype GstIterator is u_GstIterator;  -- gst/gstiterator.h:49
 
   --*
@@ -106,7 +109,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstiterator_h is
   -- * Returns: the result of the operation.
   --  
 
-   type GstIteratorItemFunction is access function  (arg1 : access GstIterator; arg2 : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue) return GstIteratorItem;
+   type GstIteratorItemFunction is access function  (arg1 : access GstIterator; arg2 : access constant Glib.Values.GValue) return GstIteratorItem;
    pragma Convention (C, GstIteratorItemFunction);  -- gst/gstiterator.h:89
 
   --*
@@ -124,7 +127,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstiterator_h is
   -- * Returns: the result of the operation.
   --  
 
-   type GstIteratorNextFunction is access function  (arg1 : access GstIterator; arg2 : access GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue) return GstIteratorResult;
+   type GstIteratorNextFunction is access function  (arg1 : access GstIterator; arg2 : access Glib.Values.GValue) return GstIteratorResult;
    pragma Convention (C, GstIteratorNextFunction);  -- gst/gstiterator.h:105
 
   --*
@@ -166,7 +169,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstiterator_h is
   -- * A function that is called by gst_iterator_foreach() for every element.
   --  
 
-   type GstIteratorForeachFunction is access procedure  (arg1 : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue; arg2 : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer);
+   type GstIteratorForeachFunction is access procedure  (arg1 : access constant Glib.Values.GValue; arg2 : System.Address);
    pragma Convention (C, GstIteratorForeachFunction);  -- gst/gstiterator.h:139
 
   --*
@@ -181,9 +184,9 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstiterator_h is
   --  
 
    type GstIteratorFoldFunction is access function 
-        (arg1 : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue;
-         arg2 : access GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue;
-         arg3 : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;
+        (arg1 : access constant Glib.Values.GValue;
+         arg2 : access Glib.Values.GValue;
+         arg3 : System.Address) return GLIB.gboolean;
    pragma Convention (C, GstIteratorFoldFunction);  -- gst/gstiterator.h:151
 
   --*
@@ -248,11 +251,11 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstiterator_h is
       resync : GstIteratorResyncFunction;  -- gst/gstiterator.h:212
       free : GstIteratorFreeFunction;  -- gst/gstiterator.h:213
       pushed : access GstIterator;  -- gst/gstiterator.h:215
-      c_type : aliased GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gstiterator.h:217
+      c_type : aliased GLIB.GType;  -- gst/gstiterator.h:217
       lock : access GStreamer.GST_Low_Level.glib_2_0_glib_gthread_h.GMutex;  -- gst/gstiterator.h:218
-      cookie : aliased GStreamer.GST_Low_Level.glibconfig_h.guint32;  -- gst/gstiterator.h:219
-      master_cookie : access GStreamer.GST_Low_Level.glibconfig_h.guint32;  -- gst/gstiterator.h:220
-      size : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;  -- gst/gstiterator.h:222
+      cookie : aliased GLIB.guint32;  -- gst/gstiterator.h:219
+      master_cookie : access GLIB.guint32;  -- gst/gstiterator.h:220
+      size : aliased GLIB.guint;  -- gst/gstiterator.h:222
       u_gst_reserved : u_GstIterator_u_gst_reserved_array;  -- gst/gstiterator.h:225
    end record;
    pragma Convention (C_Pass_By_Copy, GstIterator);  -- gst/gstiterator.h:207
@@ -263,15 +266,15 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstiterator_h is
   --                                   iterator was created  
 
   --< private > 
-   function gst_iterator_get_type return GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;  -- gst/gstiterator.h:228
+   function gst_iterator_get_type return GLIB.GType;  -- gst/gstiterator.h:228
    pragma Import (C, gst_iterator_get_type, "gst_iterator_get_type");
 
   -- creating iterators  
    function gst_iterator_new
-     (size : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.guint;
-      c_type : GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;
+     (size : GLIB.guint;
+      c_type : GLIB.GType;
       lock : access GStreamer.GST_Low_Level.glib_2_0_glib_gthread_h.GMutex;
-      master_cookie : access GStreamer.GST_Low_Level.glibconfig_h.guint32;
+      master_cookie : access GLIB.guint32;
       copy : GstIteratorCopyFunction;
       next : GstIteratorNextFunction;
       item : GstIteratorItemFunction;
@@ -280,22 +283,22 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstiterator_h is
    pragma Import (C, gst_iterator_new, "gst_iterator_new");
 
    function gst_iterator_new_list
-     (c_type : GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType;
+     (c_type : GLIB.GType;
       lock : access GStreamer.GST_Low_Level.glib_2_0_glib_gthread_h.GMutex;
-      master_cookie : access GStreamer.GST_Low_Level.glibconfig_h.guint32;
+      master_cookie : access GLIB.guint32;
       list : System.Address;
-      owner : access GStreamer.GST_Low_Level.glib_2_0_gobject_gobject_h.GObject;
+      owner : access GLIB.Object.GObject;
       item : GstIteratorItemFunction) return access GstIterator;  -- gst/gstiterator.h:241
    pragma Import (C, gst_iterator_new_list, "gst_iterator_new_list");
 
-   function gst_iterator_new_single (c_type : GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GType; object : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue) return access GstIterator;  -- gst/gstiterator.h:248
+   function gst_iterator_new_single (c_type : GLIB.GType; object : access constant Glib.Values.GValue) return access GstIterator;  -- gst/gstiterator.h:248
    pragma Import (C, gst_iterator_new_single, "gst_iterator_new_single");
 
    function gst_iterator_copy (it : access constant GstIterator) return access GstIterator;  -- gst/gstiterator.h:251
    pragma Import (C, gst_iterator_copy, "gst_iterator_copy");
 
   -- using iterators  
-   function gst_iterator_next (it : access GstIterator; elem : access GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue) return GstIteratorResult;  -- gst/gstiterator.h:254
+   function gst_iterator_next (it : access GstIterator; elem : access Glib.Values.GValue) return GstIteratorResult;  -- gst/gstiterator.h:254
    pragma Import (C, gst_iterator_next, "gst_iterator_next");
 
    procedure gst_iterator_resync (it : access GstIterator);  -- gst/gstiterator.h:255
@@ -311,27 +314,27 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstiterator_h is
    function gst_iterator_filter
      (it : access GstIterator;
       func : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.GCompareFunc;
-      user_data : access constant GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue) return access GstIterator;  -- gst/gstiterator.h:261
+      user_data : access constant Glib.Values.GValue) return access GstIterator;  -- gst/gstiterator.h:261
    pragma Import (C, gst_iterator_filter, "gst_iterator_filter");
 
    function gst_iterator_fold
      (it : access GstIterator;
       func : GstIteratorFoldFunction;
-      ret : access GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue;
-      user_data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer) return GstIteratorResult;  -- gst/gstiterator.h:263
+      ret : access Glib.Values.GValue;
+      user_data : System.Address) return GstIteratorResult;  -- gst/gstiterator.h:263
    pragma Import (C, gst_iterator_fold, "gst_iterator_fold");
 
    function gst_iterator_foreach
      (it : access GstIterator;
       func : GstIteratorForeachFunction;
-      user_data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer) return GstIteratorResult;  -- gst/gstiterator.h:266
+      user_data : System.Address) return GstIteratorResult;  -- gst/gstiterator.h:266
    pragma Import (C, gst_iterator_foreach, "gst_iterator_foreach");
 
    function gst_iterator_find_custom
      (it : access GstIterator;
       func : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.GCompareFunc;
-      elem : access GStreamer.GST_Low_Level.glib_2_0_gobject_gtype_h.GValue;
-      user_data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gpointer) return GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.gboolean;  -- gst/gstiterator.h:268
+      elem : access Glib.Values.GValue;
+      user_data : System.Address) return GLIB.gboolean;  -- gst/gstiterator.h:268
    pragma Import (C, gst_iterator_find_custom, "gst_iterator_find_custom");
 
    procedure glib_autoptr_cleanup_GstIterator (u_ptr : System.Address);  -- gst/gstiterator.h:272
