@@ -15,3 +15,5 @@ for i in glob("sed/*.sed"):
         subprocess.call(["sed", "-f", i, "-i", tgt])
     elif basename(i) != "all.sed":
         print "%s Does not exist." % tgt
+        print "removing %s " % i
+        subprocess.call(["rm", i])

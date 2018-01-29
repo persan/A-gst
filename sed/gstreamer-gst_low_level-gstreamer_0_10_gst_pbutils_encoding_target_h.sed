@@ -1,1 +1,0 @@
-s!subtype GstEncodingTargetClass is GStreamer.GST_Low_Level.gstreamer_0_10_gst_gstminiobject_h.u_GstMiniObjectClass!type GstEncodingTargetClass is new GStreamer.GST_Low_Level.gstreamer_0_10_gst_gstminiobject_h.GstMiniObjectClass!
