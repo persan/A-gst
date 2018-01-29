@@ -1,7 +1,7 @@
 pragma Ada_2005;
 pragma Style_Checks (Off);
 pragma Warnings (Off);
-
+with Glib.Main;
 with Interfaces.C; use Interfaces.C;
 with glib;
 with glib.Values;
@@ -47,7 +47,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbus_h is
   -- * License along with this library; if not, write to the
   -- * Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
   -- * Boston, MA 02110-1301, USA.
-  --  
+  --
 
    type GstBus;
    type u_GstBus_u_gst_reserved_array is array (0 .. 3) of System.Address;
@@ -61,16 +61,16 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbus_h is
    type u_GstBusClass_u_gst_reserved_array is array (0 .. 3) of System.Address;
    --subtype GstBusClass is u_GstBusClass;  -- gst/gstbus.h:27
 
-  -- --- standard type macros ---  
+  -- --- standard type macros ---
   --*
   -- * GstBusFlags:
   -- * @GST_BUS_FLUSHING: The bus is currently dropping all messages
   -- * @GST_BUS_FLAG_LAST: offset to define more flags
   -- *
   -- * The standard flags that a bus may have.
-  --  
+  --
 
-  -- padding  
+  -- padding
    subtype GstBusFlags is unsigned;
    GST_BUS_FLUSHING : constant GstBusFlags := 16;
    GST_BUS_FLAG_LAST : constant GstBusFlags := 32;  -- gst/gstbus.h:54
@@ -82,9 +82,9 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbus_h is
   -- * @GST_BUS_ASYNC: pass message to async queue, continue if message is handled
   -- *
   -- * The result values for a GstBusSyncHandler.
-  --  
+  --
 
-   type GstBusSyncReply is 
+   type GstBusSyncReply is
      (GST_BUS_DROP,
       GST_BUS_PASS,
       GST_BUS_ASYNC);
@@ -104,9 +104,9 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbus_h is
   -- * message should not be unreffed by the sync handler.
   -- *
   -- * Returns: #GstBusSyncReply stating what to do with the message
-  --  
+  --
 
-   type GstBusSyncHandler is access function 
+   type GstBusSyncHandler is access function
         (arg1 : access GstBus;
          arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmessage_h.GstMessage;
          arg3 : System.Address) return GstBusSyncReply;
@@ -129,9 +129,9 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbus_h is
   -- * %FALSE will remove the GSource from the mainloop.
   -- *
   -- * Returns: %FALSE if the event source should be removed.
-  --  
+  --
 
-   type GstBusFunc is access function 
+   type GstBusFunc is access function
         (arg1 : access GstBus;
          arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmessage_h.GstMessage;
          arg3 : System.Address) return GLIB.gboolean;
@@ -141,7 +141,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbus_h is
   -- * GstBus:
   -- *
   -- * The opaque #GstBus data structure.
-  --  
+  --
 
    type GstBus is record
       object : aliased GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject;  -- gst/gstbus.h:115
@@ -150,7 +150,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbus_h is
    end record;
    pragma Convention (C_Pass_By_Copy, GstBus);  -- gst/gstbus.h:113
 
-  --< private > 
+  --< private >
    type GstBusClass is record
       parent_class : aliased GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObjectClass;  -- gst/gstbus.h:125
       message : access procedure  (arg1 : access GstBus; arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmessage_h.GstMessage);  -- gst/gstbus.h:128
@@ -159,8 +159,8 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbus_h is
    end record;
    pragma Convention (C_Pass_By_Copy, GstBusClass);  -- gst/gstbus.h:123
 
-  -- signals  
-  --< private > 
+  -- signals
+  --< private >
    function gst_bus_get_type return GLIB.GType;  -- gst/gstbus.h:135
    pragma Import (C, gst_bus_get_type, "gst_bus_get_type");
 
@@ -194,7 +194,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbus_h is
    procedure gst_bus_set_flushing (bus : access GstBus; flushing : GLIB.gboolean);  -- gst/gstbus.h:147
    pragma Import (C, gst_bus_set_flushing, "gst_bus_set_flushing");
 
-  -- synchronous dispatching  
+  -- synchronous dispatching
    procedure gst_bus_set_sync_handler
      (bus : access GstBus;
       func : GstBusSyncHandler;
@@ -202,8 +202,8 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbus_h is
       notify : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.GDestroyNotify);  -- gst/gstbus.h:150
    pragma Import (C, gst_bus_set_sync_handler, "gst_bus_set_sync_handler");
 
-  -- GSource based dispatching  
-   function gst_bus_create_watch (bus : access GstBus) return access GStreamer.GST_Low_Level.glib_2_0_glib_gmain_h.GSource;  -- gst/gstbus.h:153
+  -- GSource based dispatching
+   function gst_bus_create_watch (bus : access GstBus) return access Glib.Main.G_Source;  -- gst/gstbus.h:153
    pragma Import (C, gst_bus_create_watch, "gst_bus_create_watch");
 
    function gst_bus_add_watch_full
@@ -223,14 +223,14 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbus_h is
    function gst_bus_remove_watch (bus : access GstBus) return GLIB.gboolean;  -- gst/gstbus.h:162
    pragma Import (C, gst_bus_remove_watch, "gst_bus_remove_watch");
 
-  -- polling the bus  
+  -- polling the bus
    function gst_bus_poll
      (bus : access GstBus;
       events : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmessage_h.GstMessageType;
       timeout : GLIB.guint64) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmessage_h.GstMessage;  -- gst/gstbus.h:165
    pragma Import (C, gst_bus_poll, "gst_bus_poll");
 
-  -- signal based dispatching helper functions.  
+  -- signal based dispatching helper functions.
    function gst_bus_async_signal_func
      (bus : access GstBus;
       message : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmessage_h.GstMessage;
@@ -243,7 +243,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbus_h is
       data : System.Address) return GstBusSyncReply;  -- gst/gstbus.h:171
    pragma Import (C, gst_bus_sync_signal_handler, "gst_bus_sync_signal_handler");
 
-  -- convenience api to add/remove a gsource that emits the async signals  
+  -- convenience api to add/remove a gsource that emits the async signals
    procedure gst_bus_add_signal_watch (bus : access GstBus);  -- gst/gstbus.h:175
    pragma Import (C, gst_bus_add_signal_watch, "gst_bus_add_signal_watch");
 

@@ -19,8 +19,8 @@ tag:
 
 
 CFLAGS=$(shell /usr/bin/pkg-config gstreamer-1.0 --cflags) -DGST_USE_UNSTABLE_API
-CFLAGS+=-Wno-literal-suffix 
-CFLAGS+=-fdump-ada-spec -C -fada-spec-parent=GStreamer.GST_Low_Level 
+CFLAGS+=-Wno-literal-suffix
+CFLAGS+=-fdump-ada-spec -C -fada-spec-parent=GStreamer.GST_Low_Level
 Initial_Code_Generation:
 	rm -rf .gen; mkdir .gen
 	echo "extern \"C\" {" >.gen/gen.cc
