@@ -15,7 +15,9 @@ limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstevent_h;
 with System;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h;
-limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h;
+limited with GStreamer.GST_Low_Level.Gstreamer_1_0_Gst_Gstbuffer_H;
+with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbufferpool_h;
+
 with GLIB; --  with GStreamer.GST_Low_Level.glibconfig_h;
 with glib;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstformat_h;
@@ -63,7 +65,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstbasesrc_h is
   -- * License along with this library; if not, write to the
   -- * Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
   -- * Boston, MA 02110-1301, USA.
-  --  
+  --
 
   --*
   -- * GstBaseSrcFlags:
@@ -72,9 +74,9 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstbasesrc_h is
   -- * @GST_BASE_SRC_FLAG_LAST: offset to define more flags
   -- *
   -- * The #GstElement flags that a basesrc element may have.
-  --  
+  --
 
-  -- padding  
+  -- padding
    subtype GstBaseSrcFlags is unsigned;
    GST_BASE_SRC_FLAG_STARTING : constant GstBaseSrcFlags := 16384;
    GST_BASE_SRC_FLAG_STARTED : constant GstBaseSrcFlags := 32768;
@@ -97,13 +99,13 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstbasesrc_h is
   -- * @obj: base source instance
   -- *
   -- * Gives the pointer to the #GstPad object of the element.
-  --  
+  --
 
   --*
   -- * GstBaseSrc:
   -- *
   -- * The opaque #GstBaseSrc data structure.
-  --  
+  --
 
    type GstBaseSrc is record
       element : aliased GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h.GstElement;  -- gst/base/gstbasesrc.h:76
@@ -128,16 +130,16 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstbasesrc_h is
    end record;
    pragma Convention (C_Pass_By_Copy, GstBaseSrc);  -- gst/base/gstbasesrc.h:75
 
-  --< protected > 
-  -- available to subclass implementations  
-  -- MT-protected (with LIVE_LOCK)  
-  -- MT-protected (with LOCK)  
-  -- size of buffers when operating push based  
-  -- some scheduling properties  
-  -- for syncing  
-  -- MT-protected (with STREAM_LOCK *and* OBJECT_LOCK)  
-  -- MT-protected (with STREAM_LOCK)  
-  --< private > 
+  --< protected >
+  -- available to subclass implementations
+  -- MT-protected (with LIVE_LOCK)
+  -- MT-protected (with LOCK)
+  -- size of buffers when operating push based
+  -- some scheduling properties
+  -- for syncing
+  -- MT-protected (with STREAM_LOCK *and* OBJECT_LOCK)
+  -- MT-protected (with STREAM_LOCK)
+  --< private >
   --*
   -- * GstBaseSrcClass:
   -- * @parent_class: Element parent class
@@ -191,7 +193,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstbasesrc_h is
   -- * Subclasses can override any of the available virtual methods or not, as
   -- * needed. At the minimum, the @create method should be overridden to produce
   -- * buffers.
-  --  
+  --
 
    type GstBaseSrcClass is record
       parent_class : aliased GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h.GstElementClass;  -- gst/base/gstbasesrc.h:168
@@ -202,14 +204,14 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstbasesrc_h is
       decide_allocation : access function  (arg1 : access GstBaseSrc; arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h.GstQuery) return GLIB.gboolean;  -- gst/base/gstbasesrc.h:183
       start : access function  (arg1 : access GstBaseSrc) return GLIB.gboolean;  -- gst/base/gstbasesrc.h:186
       stop : access function  (arg1 : access GstBaseSrc) return GLIB.gboolean;  -- gst/base/gstbasesrc.h:187
-      get_times : access procedure 
+      get_times : access procedure
            (arg1 : access GstBaseSrc;
             arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBuffer;
             arg3 : access GLIB.guint64;
             arg4 : access GLIB.guint64);  -- gst/base/gstbasesrc.h:192
       get_size : access function  (arg1 : access GstBaseSrc; arg2 : access GLIB.guint64) return GLIB.gboolean;  -- gst/base/gstbasesrc.h:196
       is_seekable : access function  (arg1 : access GstBaseSrc) return GLIB.gboolean;  -- gst/base/gstbasesrc.h:199
-      prepare_seek_segment : access function 
+      prepare_seek_segment : access function
            (arg1 : access GstBaseSrc;
             arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstevent_h.GstEvent;
             arg3 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstsegment_h.GstSegment) return GLIB.gboolean;  -- gst/base/gstbasesrc.h:204
@@ -218,17 +220,17 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstbasesrc_h is
       unlock_stop : access function  (arg1 : access GstBaseSrc) return GLIB.gboolean;  -- gst/base/gstbasesrc.h:212
       query : access function  (arg1 : access GstBaseSrc; arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h.GstQuery) return GLIB.gboolean;  -- gst/base/gstbasesrc.h:215
       event : access function  (arg1 : access GstBaseSrc; arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstevent_h.GstEvent) return GLIB.gboolean;  -- gst/base/gstbasesrc.h:218
-      create : access function 
+      create : access function
            (arg1 : access GstBaseSrc;
             arg2 : GLIB.guint64;
             arg3 : GLIB.guint;
             arg4 : System.Address) return GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstFlowReturn;  -- gst/base/gstbasesrc.h:223
-      alloc : access function 
+      alloc : access function
            (arg1 : access GstBaseSrc;
             arg2 : GLIB.guint64;
             arg3 : GLIB.guint;
             arg4 : System.Address) return GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstFlowReturn;  -- gst/base/gstbasesrc.h:227
-      fill : access function 
+      fill : access function
            (arg1 : access GstBaseSrc;
             arg2 : GLIB.guint64;
             arg3 : GLIB.guint;
@@ -237,39 +239,39 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstbasesrc_h is
    end record;
    pragma Convention (C_Pass_By_Copy, GstBaseSrcClass);  -- gst/base/gstbasesrc.h:167
 
-  --< public > 
-  -- virtual methods for subclasses  
-  -- get caps from subclass  
-  -- decide on caps  
-  -- called if, in negotiation, caps need fixating  
-  -- notify the subclass of new caps  
-  -- setup allocation query  
-  -- start and stop processing, ideal for opening/closing the resource  
+  --< public >
+  -- virtual methods for subclasses
+  -- get caps from subclass
+  -- decide on caps
+  -- called if, in negotiation, caps need fixating
+  -- notify the subclass of new caps
+  -- setup allocation query
+  -- start and stop processing, ideal for opening/closing the resource
   -- given a buffer, return start and stop time when it should be pushed
-  --   * out. The base class will sync on the clock using these times.  
+  --   * out. The base class will sync on the clock using these times.
 
   -- get the total size of the resource in the format set by
-  --   * gst_base_src_set_format()  
+  --   * gst_base_src_set_format()
 
-  -- check if the resource is seekable  
+  -- check if the resource is seekable
   -- Prepare the segment on which to perform do_seek(), converting to the
-  --   * current basesrc format.  
+  --   * current basesrc format.
 
-  -- notify subclasses of a seek  
+  -- notify subclasses of a seek
   -- unlock any pending access to the resource. subclasses should unlock
-  --   * any function ASAP.  
+  --   * any function ASAP.
 
-  -- Clear any pending unlock request, as we succeeded in unlocking  
-  -- notify subclasses of a query  
-  -- notify subclasses of an event  
+  -- Clear any pending unlock request, as we succeeded in unlocking
+  -- notify subclasses of a query
+  -- notify subclasses of an event
   -- ask the subclass to create a buffer with offset and size, the default
-  --   * implementation will call alloc and fill.  
+  --   * implementation will call alloc and fill.
 
   -- ask the subclass to allocate an output buffer. The default implementation
-  --   * will use the negotiated allocator.  
+  --   * will use the negotiated allocator.
 
-  -- ask the subclass to fill the buffer with data from offset and size  
-  --< private > 
+  -- ask the subclass to fill the buffer with data from offset and size
+  --< private >
    function gst_base_src_get_type return GLIB.GType;  -- gst/base/gstbasesrc.h:236
    pragma Import (C, gst_base_src_get_type, "gst_base_src_get_type");
 
@@ -332,7 +334,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstbasesrc_h is
    function gst_base_src_set_caps (src : access GstBaseSrc; caps : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h.GstCaps) return GLIB.gboolean;  -- gst/base/gstbasesrc.h:267
    pragma Import (C, gst_base_src_set_caps, "gst_base_src_set_caps");
 
-   function gst_base_src_get_buffer_pool (src : access GstBaseSrc) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBufferPool;  -- gst/base/gstbasesrc.h:269
+   function gst_base_src_get_buffer_pool (src : access GstBaseSrc) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbufferpool_h.GstBufferPool;  -- gst/base/gstbasesrc.h:269
    pragma Import (C, gst_base_src_get_buffer_pool, "gst_base_src_get_buffer_pool");
 
    procedure gst_base_src_get_allocator

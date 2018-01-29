@@ -14,7 +14,6 @@ limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstiterator_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h;
 with GLIB; --  with GStreamer.GST_Low_Level.glibconfig_h;
-limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpadtemplate_h;
 
 package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstghostpad_h is
 
@@ -59,7 +58,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstghostpad_h is
   -- * License along with this library; if not, write to the
   -- * Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
   -- * Boston, MA 02110-1301, USA.
-  --  
+  --
 
    type GstProxyPad;
    --subtype GstProxyPad is u_GstProxyPad;  -- gst/gstghostpad.h:40
@@ -78,14 +77,14 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstghostpad_h is
    end record;
    pragma Convention (C_Pass_By_Copy, GstProxyPad);  -- gst/gstghostpad.h:44
 
-  --< private > 
+  --< private >
    type GstProxyPadClass is record
       parent_class : aliased GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstPadClass;  -- gst/gstghostpad.h:54
       u_gst_reserved : u_GstProxyPadClass_u_gst_reserved_array;  -- gst/gstghostpad.h:57
    end record;
    pragma Convention (C_Pass_By_Copy, GstProxyPadClass);  -- gst/gstghostpad.h:52
 
-  --< private > 
+  --< private >
    function gst_proxy_pad_get_type return GLIB.GType;  -- gst/gstghostpad.h:60
    pragma Import (C, gst_proxy_pad_get_type, "gst_proxy_pad_get_type");
 
@@ -119,7 +118,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstghostpad_h is
   -- * GstGhostPad:
   -- *
   -- * Opaque #GstGhostPad structure.
-  --  
+  --
 
    type GstGhostPad;
    --subtype GstGhostPad is u_GstGhostPad;  -- gst/gstghostpad.h:86
@@ -138,14 +137,14 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstghostpad_h is
    end record;
    pragma Convention (C_Pass_By_Copy, GstGhostPad);  -- gst/gstghostpad.h:90
 
-  --< private > 
+  --< private >
    type GstGhostPadClass is record
       parent_class : aliased GstProxyPadClass;  -- gst/gstghostpad.h:100
       u_gst_reserved : u_GstGhostPadClass_u_gst_reserved_array;  -- gst/gstghostpad.h:103
    end record;
    pragma Convention (C_Pass_By_Copy, GstGhostPadClass);  -- gst/gstghostpad.h:98
 
-  --< private > 
+  --< private >
    function gst_ghost_pad_get_type return GLIB.GType;  -- gst/gstghostpad.h:107
    pragma Import (C, gst_ghost_pad_get_type, "gst_ghost_pad_get_type");
 

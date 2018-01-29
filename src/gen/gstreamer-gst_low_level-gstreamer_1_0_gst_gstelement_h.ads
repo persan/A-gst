@@ -130,9 +130,9 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h is
   -- * License along with this library; if not, write to the
   -- * Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
   -- * Boston, MA 02110-1301, USA.
-  --  
+  --
 
-  -- gstelement.h and gstelementfactory.h include eachother  
+  -- gstelement.h and gstelementfactory.h include eachother
    type GstElement;
    type u_GstElement_u_gst_reserved_array is array (0 .. 2) of System.Address;
    --subtype GstElement is u_GstElement;  -- gst/gstelement.h:32
@@ -141,7 +141,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h is
    type u_GstElementClass_u_gst_reserved_array is array (0 .. 17) of System.Address;
    --subtype GstElementClass is u_GstElementClass;  -- gst/gstelement.h:33
 
-  -- gstmessage.h needs State  
+  -- gstmessage.h needs State
   --*
   -- * GstState:
   -- * @GST_STATE_VOID_PENDING: no pending state.
@@ -155,9 +155,9 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h is
   -- *
   -- * The possible states an element can be in. States can be changed using
   -- * gst_element_set_state() and checked using gst_element_get_state().
-  --  
+  --
 
-   type GstState is 
+   type GstState is
      (GST_STATE_VOID_PENDING,
       GST_STATE_NULL,
       GST_STATE_READY,
@@ -176,9 +176,9 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h is
   -- *
   -- * The possible return values from a state change function such as
   -- * gst_element_set_state(). Only @GST_STATE_CHANGE_FAILURE is a real failure.
-  --  
+  --
 
-   type GstStateChangeReturn is 
+   type GstStateChangeReturn is
      (GST_STATE_CHANGE_FAILURE,
       GST_STATE_CHANGE_SUCCESS,
       GST_STATE_CHANGE_ASYNC,
@@ -187,42 +187,42 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h is
 
   -- NOTE: this probably should be done with an #ifdef to decide
   -- * whether to safe-cast or to just do the non-checking cast.
-  --  
+  --
 
   --*
   -- * GST_STATE:
   -- * @elem: a #GstElement to return state for.
   -- *
   -- * This macro returns the current #GstState of the element.
-  --  
+  --
 
   --*
   -- * GST_STATE_NEXT:
   -- * @elem: a #GstElement to return the next state for.
   -- *
   -- * This macro returns the next #GstState of the element.
-  --  
+  --
 
   --*
   -- * GST_STATE_PENDING:
   -- * @elem: a #GstElement to return the pending state for.
   -- *
   -- * This macro returns the currently pending #GstState of the element.
-  --  
+  --
 
   --*
   -- * GST_STATE_TARGET:
   -- * @elem: a #GstElement to return the target state for.
   -- *
   -- * This macro returns the target #GstState of the element.
-  --  
+  --
 
   --*
   -- * GST_STATE_RETURN:
   -- * @elem: a #GstElement to return the last state result for.
   -- *
   -- * This macro returns the last #GstStateChangeReturn value.
-  --  
+  --
 
   --*
   -- * GST_STATE_GET_NEXT:
@@ -231,7 +231,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h is
   -- *
   -- * Given a current state @cur and a target state @pending, calculate the next (intermediate)
   -- * #GstState.
-  --  
+  --
 
   --*
   -- * GST_STATE_TRANSITION:
@@ -240,21 +240,21 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h is
   -- *
   -- * Given a current state @cur and a next state @next, calculate the associated
   -- * #GstStateChange transition.
-  --  
+  --
 
   --*
   -- * GST_STATE_TRANSITION_CURRENT:
   -- * @trans: A #GstStateChange
   -- *
   -- * Given a state transition @trans, extract the current #GstState.
-  --  
+  --
 
   --*
   -- * GST_STATE_TRANSITION_NEXT:
   -- * @trans: A #GstStateChange
   -- *
   -- * Given a state transition @trans, extract the next #GstState.
-  --  
+  --
 
   --*
   -- * GstStateChange:
@@ -316,9 +316,9 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h is
   -- * These are the different state changes an element goes through.
   -- * %GST_STATE_NULL &rArr; %GST_STATE_PLAYING is called an upwards state change
   -- * and %GST_STATE_PLAYING &rArr; %GST_STATE_NULL a downwards state change.
-  --  
+  --
 
-  --< flags=0 > 
+  --< flags=0 >
    subtype GstStateChange is unsigned;
    GST_STATE_CHANGE_NULL_TO_READY : constant GstStateChange := 10;
    GST_STATE_CHANGE_READY_TO_PAUSED : constant GstStateChange := 19;
@@ -338,9 +338,9 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h is
   -- * @GST_ELEMENT_FLAG_LAST: offset to define more flags
   -- *
   -- * The standard flags that an element may have.
-  --  
+  --
 
-  -- padding  
+  -- padding
    subtype GstElementFlags is unsigned;
    GST_ELEMENT_FLAG_LOCKED_STATE : constant GstElementFlags := 16;
    GST_ELEMENT_FLAG_SINK : constant GstElementFlags := 32;
@@ -356,7 +356,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h is
   -- *
   -- * Check if the element is in the locked state and therefore will ignore state
   -- * changes from its parent object.
-  --  
+  --
 
   --*
   -- * GST_ELEMENT_NAME:
@@ -365,7 +365,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h is
   -- * Gets the name of this element. This is not thread-safe by default
   -- * (i.e. you will have to make sure the object lock is taken yourself).
   -- * If in doubt use gst_element_get_name() instead.
-  --  
+  --
 
   --*
   -- * GST_ELEMENT_PARENT:
@@ -374,7 +374,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h is
   -- * Get the parent object of this element. This is not thread-safe by default
   -- * (i.e. you will have to make sure the object lock is taken yourself).
   -- * If in doubt use gst_object_get_parent() instead.
-  --  
+  --
 
   --*
   -- * GST_ELEMENT_BUS:
@@ -383,7 +383,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h is
   -- * Get the message bus of this element. This is not thread-safe by default
   -- * (i.e. you will have to make sure the object lock is taken yourself).
   -- * If in doubt use gst_element_get_bus() instead.
-  --  
+  --
 
   --*
   -- * GST_ELEMENT_CLOCK:
@@ -392,14 +392,14 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h is
   -- * Get the clock of this element.This is not thread-safe by default
   -- * (i.e. you will have to make sure it is safe yourself).
   -- * If in doubt use gst_element_get_clock() instead.
-  --  
+  --
 
   --*
   -- * GST_ELEMENT_PADS:
   -- * @elem: A #GstElement to query
   -- *
   -- * Get the pads of this elements.
-  --  
+  --
 
   --*
   -- * GST_ELEMENT_START_TIME:
@@ -407,7 +407,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h is
   -- *
   -- * This macro returns the start_time of the @elem. The start_time is the
   -- * running_time of the pipeline when the element went to PAUSED.
-  --  
+  --
 
    function gst_make_element_message_details (name : Interfaces.C.Strings.chars_ptr  -- , ...
       ) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststructure_h.GstStructure;  -- gst/gstelement.h:338
@@ -422,7 +422,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h is
   -- * data processing error due to wrong flow processing.
   -- *
   -- * Since: 1.10
-  --  
+  --
 
   --*
   -- * GST_ELEMENT_ERROR_WITH_DETAILS:
@@ -442,7 +442,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h is
   -- * application will be requested to stop further media processing.
   -- *
   -- * Since: 1.10
-  --  
+  --
 
   --*
   -- * GST_ELEMENT_ERROR:
@@ -457,7 +457,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h is
   -- * Utility function that elements can use in case they encountered a fatal
   -- * data processing error. The pipeline will post an error message and the
   -- * application will be requested to stop further media processing.
-  --  
+  --
 
   --*
   -- * GST_ELEMENT_WARNING_WITH_DETAILS:
@@ -477,7 +477,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h is
   -- * application will be informed.
   -- *
   -- * Since: 1.10
-  --  
+  --
 
   --*
   -- * GST_ELEMENT_WARNING:
@@ -492,7 +492,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h is
   -- * Utility function that elements can use in case they encountered a non-fatal
   -- * data processing problem. The pipeline will post a warning message and the
   -- * application will be informed.
-  --  
+  --
 
   --*
   -- * GST_ELEMENT_INFO_WITH_DETAILS:
@@ -515,7 +515,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h is
   -- * in the associated GstStructure. NULL terminator required.
   -- *
   -- * Since: 1.10
-  --  
+  --
 
   --*
   -- * GST_ELEMENT_INFO:
@@ -531,9 +531,9 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h is
   -- * the application of something noteworthy that is not an error.
   -- * The pipeline will post a info message and the
   -- * application will be informed.
-  --  
+  --
 
-  -- the state change mutexes and conds  
+  -- the state change mutexes and conds
   --*
   -- * GST_STATE_GET_LOCK:
   -- * @elem:   a #GstElement
@@ -541,14 +541,14 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h is
   -- * Get a reference to the state lock of @elem.
   -- * This lock is used by the core.  It is taken while getting or setting
   -- * the state, during state changes, and while finalizing.
-  --  
+  --
 
   --*
   -- * GST_STATE_GET_COND:
   -- * @elem: a #GstElement
   -- *
   -- * Get the conditional used to signal the completion of a state change.
-  --  
+  --
 
   --*
   -- * GstElement:
@@ -581,7 +581,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h is
   -- * @contexts: (element-type Gst.Context): list of contexts
   -- *
   -- * GStreamer element abstract base class.
-  --  
+  --
 
    type GstElement is record
       object : aliased GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject;  -- gst/gstelement.h:608
@@ -595,7 +595,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h is
       last_return : aliased GstStateChangeReturn;  -- gst/gstelement.h:620
       bus : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbus_h.GstBus;  -- gst/gstelement.h:622
       clock : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClock;  -- gst/gstelement.h:625
-      base_time : aliased GLIB.guint64Diff;  -- gst/gstelement.h:626
+      base_time : aliased GLIB.guint64;  -- gst/gstelement.h:626
       start_time : aliased GLIB.guint64;  -- gst/gstelement.h:627
       numpads : aliased GLIB.guint16;  -- gst/gstelement.h:631
       pads : access GStreamer.GST_Low_Level.glib_2_0_glib_glist_h.GList;  -- gst/gstelement.h:632
@@ -609,16 +609,16 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h is
    end record;
    pragma Convention (C_Pass_By_Copy, GstElement);  -- gst/gstelement.h:606
 
-  --< public > 
-  -- with LOCK  
-  -- element state  
-  -- allocated clock  
-  -- NULL/READY: 0 - PAUSED: current time - PLAYING: difference to clock  
+  --< public >
+  -- with LOCK
+  -- element state
+  -- allocated clock
+  -- NULL/READY: 0 - PAUSED: current time - PLAYING: difference to clock
   -- element pads, these lists can only be iterated while holding
-  --   * the LOCK or checking the cookie after each LOCK.  
+  --   * the LOCK or checking the cookie after each LOCK.
 
-  -- with object LOCK  
-  --< private > 
+  -- with object LOCK
+  --< private >
   --*
   -- * GstElementClass:
   -- * @parent_class: the parent class structure
@@ -644,7 +644,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h is
   -- *
   -- * GStreamer element class. Override the vmethods to implement the element
   -- * functionality.
-  --  
+  --
 
    type GstElementClass is record
       parent_class : aliased GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObjectClass;  -- gst/gstelement.h:674
@@ -656,20 +656,20 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h is
       pad_added : access procedure  (arg1 : access GstElement; arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstPad);  -- gst/gstelement.h:690
       pad_removed : access procedure  (arg1 : access GstElement; arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstPad);  -- gst/gstelement.h:691
       no_more_pads : access procedure  (arg1 : access GstElement);  -- gst/gstelement.h:692
-      request_new_pad : access function 
+      request_new_pad : access function
            (arg1 : access GstElement;
             arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpadtemplate_h.GstPadTemplate;
             arg3 : access GLIB.gchar;
             arg4 : access constant GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h.GstCaps) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstPad;  -- gst/gstelement.h:700
       release_pad : access procedure  (arg1 : access GstElement; arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstPad);  -- gst/gstelement.h:702
-      get_state : access function 
+      get_state : access function
            (arg1 : access GstElement;
             arg2 : access GstState;
             arg3 : access GstState;
             arg4 : GLIB.guint64) return GstStateChangeReturn;  -- gst/gstelement.h:706
       set_state : access function  (arg1 : access GstElement; arg2 : GstState) return GstStateChangeReturn;  -- gst/gstelement.h:707
       change_state : access function  (arg1 : access GstElement; arg2 : GstStateChange) return GstStateChangeReturn;  -- gst/gstelement.h:708
-      state_changed : access procedure 
+      state_changed : access procedure
            (arg1 : access GstElement;
             arg2 : GstState;
             arg3 : GstState;
@@ -685,22 +685,22 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h is
    end record;
    pragma Convention (C_Pass_By_Copy, GstElementClass);  -- gst/gstelement.h:672
 
-  --< public > 
-  -- the element metadata  
-  -- factory that the element was created from  
-  -- templates for our pads  
-  --< private > 
-  -- signal callbacks  
-  --< public > 
-  -- virtual methods for subclasses  
-  -- request/release pads  
-  -- FIXME 2.0 harmonize naming with gst_element_request_pad  
-  -- state changes  
-  -- bus  
-  -- set/get clocks  
-  -- query functions  
-  --< private > 
-  -- element class pad templates  
+  --< public >
+  -- the element metadata
+  -- factory that the element was created from
+  -- templates for our pads
+  --< private >
+  -- signal callbacks
+  --< public >
+  -- virtual methods for subclasses
+  -- request/release pads
+  -- FIXME 2.0 harmonize naming with gst_element_request_pad
+  -- state changes
+  -- bus
+  -- set/get clocks
+  -- query functions
+  --< private >
+  -- element class pad templates
    procedure gst_element_class_add_pad_template (klass : access GstElementClass; templ : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpadtemplate_h.GstPadTemplate);  -- gst/gstelement.h:733
    pragma Import (C, gst_element_class_add_pad_template, "gst_element_class_add_pad_template");
 
@@ -713,7 +713,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h is
    function gst_element_class_get_pad_template_list (element_class : access GstElementClass) return access GStreamer.GST_Low_Level.glib_2_0_glib_glist_h.GList;  -- gst/gstelement.h:738
    pragma Import (C, gst_element_class_get_pad_template_list, "gst_element_class_get_pad_template_list");
 
-  -- element class meta data  
+  -- element class meta data
    procedure gst_element_class_set_metadata
      (klass : access GstElementClass;
       longname : access GLIB.gchar;
@@ -745,11 +745,11 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h is
    function gst_element_class_get_metadata (klass : access GstElementClass; key : access GLIB.gchar) return access GLIB.gchar;  -- gst/gstelement.h:755
    pragma Import (C, gst_element_class_get_metadata, "gst_element_class_get_metadata");
 
-  -- element instance  
+  -- element instance
    function gst_element_get_type return GLIB.GType;  -- gst/gstelement.h:760
    pragma Import (C, gst_element_get_type, "gst_element_get_type");
 
-  -- basic name and parentage stuff from GstObject  
+  -- basic name and parentage stuff from GstObject
   --*
   -- * gst_element_get_name:
   -- * @elem: a #GstElement to get the name of @elem.
@@ -762,7 +762,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h is
   -- * Returns: (transfer full) (nullable): the name of @elem. g_free()
   -- * after usage. MT safe.
   -- *
-  --  
+  --
 
   --*
   -- * gst_element_set_name:
@@ -770,7 +770,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h is
   -- * @name: the new name
   -- *
   -- * Sets the name of the element, getting rid of the old name if there was one.
-  --  
+  --
 
   --*
   -- * gst_element_get_parent:
@@ -779,7 +779,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h is
   -- * Get the parent of an element.
   -- *
   -- * Returns: (transfer full): the parent of an element.
-  --  
+  --
 
   --*
   -- * gst_element_set_parent:
@@ -787,9 +787,9 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h is
   -- * @parent: the new parent #GstObject of the element.
   -- *
   -- * Sets the parent of an element.
-  --  
+  --
 
-  -- clocking  
+  -- clocking
    function gst_element_provide_clock (element : access GstElement) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClock;  -- gst/gstelement.h:808
    pragma Import (C, gst_element_provide_clock, "gst_element_provide_clock");
 
@@ -811,14 +811,14 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h is
    function gst_element_get_start_time (element : access GstElement) return GLIB.guint64;  -- gst/gstelement.h:814
    pragma Import (C, gst_element_get_start_time, "gst_element_get_start_time");
 
-  -- bus  
+  -- bus
    procedure gst_element_set_bus (element : access GstElement; bus : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbus_h.GstBus);  -- gst/gstelement.h:817
    pragma Import (C, gst_element_set_bus, "gst_element_set_bus");
 
    function gst_element_get_bus (element : access GstElement) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbus_h.GstBus;  -- gst/gstelement.h:818
    pragma Import (C, gst_element_get_bus, "gst_element_get_bus");
 
-  -- context  
+  -- context
    procedure gst_element_set_context (element : access GstElement; context : System.Address);  -- gst/gstelement.h:821
    pragma Import (C, gst_element_set_context, "gst_element_set_context");
 
@@ -831,7 +831,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h is
    function gst_element_get_context_unlocked (element : access GstElement; context_type : access GLIB.gchar) return System.Address;  -- gst/gstelement.h:824
    pragma Import (C, gst_element_get_context_unlocked, "gst_element_get_context_unlocked");
 
-  -- pad management  
+  -- pad management
    function gst_element_add_pad (element : access GstElement; pad : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstPad) return GLIB.gboolean;  -- gst/gstelement.h:827
    pragma Import (C, gst_element_add_pad, "gst_element_add_pad");
 
@@ -866,7 +866,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h is
    function gst_element_iterate_sink_pads (element : access GstElement) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstiterator_h.GstIterator;  -- gst/gstelement.h:839
    pragma Import (C, gst_element_iterate_sink_pads, "gst_element_iterate_sink_pads");
 
-  -- event/query/format stuff  
+  -- event/query/format stuff
    function gst_element_send_event (element : access GstElement; event : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstevent_h.GstEvent) return GLIB.gboolean;  -- gst/gstelement.h:842
    pragma Import (C, gst_element_send_event, "gst_element_send_event");
 
@@ -884,12 +884,12 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h is
    function gst_element_query (element : access GstElement; query : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h.GstQuery) return GLIB.gboolean;  -- gst/gstelement.h:847
    pragma Import (C, gst_element_query, "gst_element_query");
 
-  -- messages  
+  -- messages
    function gst_element_post_message (element : access GstElement; message : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmessage_h.GstMessage) return GLIB.gboolean;  -- gst/gstelement.h:850
    pragma Import (C, gst_element_post_message, "gst_element_post_message");
 
-  -- error handling  
-  -- gcc versions < 3.3 warn about NULL being passed as format to printf  
+  -- error handling
+  -- gcc versions < 3.3 warn about NULL being passed as format to printf
    --  skipped func _gst_element_error_printf
 
    procedure gst_element_message_full
@@ -917,7 +917,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h is
       structure : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststructure_h.GstStructure);  -- gst/gstelement.h:864
    pragma Import (C, gst_element_message_full_with_details, "gst_element_message_full_with_details");
 
-  -- state management  
+  -- state management
    function gst_element_is_locked_state (element : access GstElement) return GLIB.gboolean;  -- gst/gstelement.h:871
    pragma Import (C, gst_element_is_locked_state, "gst_element_is_locked_state");
 
@@ -959,11 +959,11 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h is
       destroy_notify : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.GDestroyNotify);  -- gst/gstelement.h:891
    pragma Import (C, gst_element_call_async, "gst_element_call_async");
 
-  -- factory management  
+  -- factory management
    function gst_element_get_factory (element : access GstElement) return System.Address;  -- gst/gstelement.h:896
    pragma Import (C, gst_element_get_factory, "gst_element_get_factory");
 
-  -- utility functions  
+  -- utility functions
    function gst_element_add_property_notify_watch
      (element : access GstElement;
       property_name : access GLIB.gchar;

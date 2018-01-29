@@ -54,7 +54,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_net_gstnetclientclock_h is
   -- * License along with this library; if not, write to the
   -- * Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
   -- * Boston, MA 02110-1301, USA.
-  --  
+  --
 
    type GstNetClientClock;
    type u_GstNetClientClock_u_gst_reserved_array is array (0 .. 3) of System.Address;
@@ -72,7 +72,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_net_gstnetclientclock_h is
   -- * GstNetClientClock:
   -- *
   -- * Opaque #GstNetClientClock structure.
-  --  
+  --
 
    type GstNetClientClock is record
       clock : aliased GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstsystemclock_h.GstSystemClock;  -- gst/net/gstnetclientclock.h:56
@@ -81,14 +81,14 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_net_gstnetclientclock_h is
    end record;
    pragma Convention (C_Pass_By_Copy, GstNetClientClock);  -- gst/net/gstnetclientclock.h:55
 
-  --< private > 
+  --< private >
    type GstNetClientClockClass is record
       parent_class : aliased GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstsystemclock_h.GstSystemClockClass;  -- gst/net/gstnetclientclock.h:65
       u_gst_reserved : u_GstNetClientClockClass_u_gst_reserved_array;  -- gst/net/gstnetclientclock.h:68
    end record;
    pragma Convention (C_Pass_By_Copy, GstNetClientClockClass);  -- gst/net/gstnetclientclock.h:64
 
-  --< private > 
+  --< private >
    function gst_net_client_clock_get_type return GLIB.GType;  -- gst/net/gstnetclientclock.h:71
    pragma Import (C, gst_net_client_clock_get_type, "gst_net_client_clock_get_type");
 
@@ -99,9 +99,9 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_net_gstnetclientclock_h is
       base_time : GLIB.guint64) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClock;  -- gst/net/gstnetclientclock.h:73
    pragma Import (C, gst_net_client_clock_new, "gst_net_client_clock_new");
 
-   subtype GstNtpClock is u_GstNetClientClock;  -- gst/net/gstnetclientclock.h:87
+   type GstNtpClock is new gstreamer_1_0_gst_net_gstnetclientclock_h.GstNetClientClock;  -- gst/net/gstnetclientclock.h:87
 
-   subtype GstNtpClockClass is u_GstNetClientClockClass;  -- gst/net/gstnetclientclock.h:88
+   type GstNtpClockClass is new gstreamer_1_0_gst_net_gstnetclientclock_h.GstNetClientClockClass;  -- gst/net/gstnetclientclock.h:88
 
    function gst_ntp_clock_get_type return GLIB.GType;  -- gst/net/gstnetclientclock.h:90
    pragma Import (C, gst_ntp_clock_get_type, "gst_ntp_clock_get_type");

@@ -31,8 +31,16 @@ private package GStreamer.GST_Low_Level is
       type GThread is new Interfaces.C.Extensions.Void;
       type GThreadPriority is new Interfaces.C.Extensions.Void;
       type GThreadFunc is new Interfaces.C.Extensions.Void;
+      type GRecMutex is new Interfaces.C.Extensions.Void;
+
    end  Glib_2_0_Glib_Gthread_H;
 
+   package Glib_2_0_Gio_Giotypes_H is
+      type GSocketAddress is new Interfaces.C.Extensions.Void;
+      type GSocketControlMessage is new Interfaces.C.Extensions.Void;
+      type GSocket is new Interfaces.C.Extensions.Void;
+
+   end  Glib_2_0_Gio_Giotypes_H;
 
    package glib_2_0_glib_gthreadpool_h is
       type GThreadPool is new Interfaces.C.Extensions.Void;
@@ -52,6 +60,7 @@ private package GStreamer.GST_Low_Level is
       type GObjectClass is new Interfaces.C.Extensions.Void;
       type GInitiallyUnowned is new Interfaces.C.Extensions.Void;
       type GInitiallyUnownedClass is new Interfaces.C.Extensions.Void;
+      type GWeakRef is new Interfaces.C.Extensions.Void;
 
 
    end  Glib_2_0_Gobject_Gobject_H;
@@ -170,6 +179,11 @@ private package GStreamer.GST_Low_Level is
       subtype Gssize is Interfaces.C.Size_T;
    end  Glibconfig_H;
 
+   package glib_2_0_glib_gmessages_h is
+      subtype GLogLevelFlags is Interfaces.C.Size_T;
+   end  glib_2_0_glib_gmessages_h;
+
    package Glib_2_0_Glib_Ghook_H is
+      type GHookList  is new Interfaces.C.Extensions.Void;
    end Glib_2_0_Glib_Ghook_H;
 end GStreamer.GST_Low_Level;

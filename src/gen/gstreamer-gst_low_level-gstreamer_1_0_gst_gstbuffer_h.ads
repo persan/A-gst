@@ -95,19 +95,18 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h is
   -- * License along with this library; if not, write to the
   -- * Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
   -- * Boston, MA 02110-1301, USA.
-  --  
+  --
 
    type GstBuffer;
    --subtype GstBuffer is u_GstBuffer;  -- gst/gstbuffer.h:35
 
-   subtype GstBufferPool is GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbufferpool_h.u_GstBufferPool;  -- gst/gstbuffer.h:36
 
   --*
   -- * GST_BUFFER_FLAGS:
   -- * @buf: a #GstBuffer.
   -- *
   -- * A flags word containing #GstBufferFlags flags set on this buffer.
-  --  
+  --
 
   --*
   -- * GST_BUFFER_FLAG_IS_SET:
@@ -115,7 +114,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h is
   -- * @flag: the #GstBufferFlags flag to check.
   -- *
   -- * Gives the status of a specific flag on a buffer.
-  --  
+  --
 
   --*
   -- * GST_BUFFER_FLAG_SET:
@@ -123,7 +122,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h is
   -- * @flag: the #GstBufferFlags flag to set.
   -- *
   -- * Sets a buffer flag on a buffer.
-  --  
+  --
 
   --*
   -- * GST_BUFFER_FLAG_UNSET:
@@ -131,7 +130,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h is
   -- * @flag: the #GstBufferFlags flag to clear.
   -- *
   -- * Clears a buffer flag.
-  --  
+  --
 
   --*
   -- * GST_BUFFER_PTS:
@@ -141,7 +140,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h is
   -- * of the data in the buffer. This is the timestamp when the media should be
   -- * presented to the user.
   -- * Value will be %GST_CLOCK_TIME_NONE if the pts is unknown.
-  --  
+  --
 
   --*
   -- * GST_BUFFER_DTS:
@@ -151,7 +150,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h is
   -- * of the data in the buffer. This is the timestamp when the media should be
   -- * decoded or processed otherwise.
   -- * Value will be %GST_CLOCK_TIME_NONE if the dts is unknown.
-  --  
+  --
 
   --*
   -- * GST_BUFFER_DTS_OR_PTS:
@@ -161,7 +160,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h is
   -- * presentation time (pts)
   -- *
   -- * Since: 1.8
-  --  
+  --
 
   --*
   -- * GST_BUFFER_DURATION:
@@ -169,69 +168,69 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h is
   -- *
   -- * The duration in nanoseconds (as a #GstClockTime) of the data in the buffer.
   -- * Value will be %GST_CLOCK_TIME_NONE if the duration is unknown.
-  --  
+  --
 
   --*
   -- * GST_BUFFER_OFFSET:
   -- * @buf: a #GstBuffer.
   -- *
   -- * The offset in the source file of the beginning of this buffer.
-  --  
+  --
 
   --*
   -- * GST_BUFFER_OFFSET_END:
   -- * @buf: a #GstBuffer.
   -- *
   -- * The offset in the source file of the end of this buffer.
-  --  
+  --
 
   --*
   -- * GST_BUFFER_OFFSET_NONE:
   -- *
   -- * Constant for no-offset return results.
-  --  
+  --
 
   --*
   -- * GST_BUFFER_DURATION_IS_VALID:
   -- * @buffer: a #GstBuffer
   -- *
   -- * Tests if the duration is known.
-  --  
+  --
 
   --*
   -- * GST_BUFFER_PTS_IS_VALID:
   -- * @buffer: a #GstBuffer
   -- *
   -- * Tests if the pts is known.
-  --  
+  --
 
   --*
   -- * GST_BUFFER_DTS_IS_VALID:
   -- * @buffer: a #GstBuffer
   -- *
   -- * Tests if the dts is known.
-  --  
+  --
 
   --*
   -- * GST_BUFFER_OFFSET_IS_VALID:
   -- * @buffer: a #GstBuffer
   -- *
   -- * Tests if the start offset is known.
-  --  
+  --
 
   --*
   -- * GST_BUFFER_OFFSET_END_IS_VALID:
   -- * @buffer: a #GstBuffer
   -- *
   -- * Tests if the end offset is known.
-  --  
+  --
 
   --*
   -- * GST_BUFFER_IS_DISCONT:
   -- * @buffer: a #GstBuffer
   -- *
   -- * Tests if the buffer marks a discontinuity in the stream.
-  --  
+  --
 
   --*
   -- * GstBufferFlags:
@@ -268,7 +267,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h is
   -- *                               this flag.
   -- *
   -- * A set of buffer flags used to describe properties of a #GstBuffer.
-  --  
+  --
 
    subtype GstBufferFlags is unsigned;
    GST_BUFFER_FLAG_LIVE : constant GstBufferFlags := 16;
@@ -307,11 +306,11 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h is
   -- *
   -- * The structure of a #GstBuffer. Use the associated macros to access the public
   -- * variables.
-  --  
+  --
 
    type GstBuffer is record
       mini_object : aliased GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstminiobject_h.GstMiniObject;  -- gst/gstbuffer.h:258
-      pool : access GstBufferPool;  -- gst/gstbuffer.h:261
+      pool : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbufferpool_h.GstBufferPool;  -- gst/gstbuffer.h:261
       pts : aliased GLIB.guint64;  -- gst/gstbuffer.h:264
       dts : aliased GLIB.guint64;  -- gst/gstbuffer.h:265
       duration : aliased GLIB.guint64;  -- gst/gstbuffer.h:266
@@ -320,22 +319,22 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h is
    end record;
    pragma Convention (C_Pass_By_Copy, GstBuffer);  -- gst/gstbuffer.h:257
 
-  --< public > 
-  -- with COW  
-  -- timestamp  
-  -- media specific offset  
+  --< public >
+  -- with COW
+  -- timestamp
+  -- media specific offset
    function gst_buffer_get_type return GLIB.GType;  -- gst/gstbuffer.h:273
    pragma Import (C, gst_buffer_get_type, "gst_buffer_get_type");
 
    function gst_buffer_get_max_memory return GLIB.guint;  -- gst/gstbuffer.h:275
    pragma Import (C, gst_buffer_get_max_memory, "gst_buffer_get_max_memory");
 
-  -- allocation  
+  -- allocation
    function gst_buffer_new return access GstBuffer;  -- gst/gstbuffer.h:278
    pragma Import (C, gst_buffer_new, "gst_buffer_new");
 
    function gst_buffer_new_allocate
-     (allocator : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h.GstAllocator;
+     (allocator : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstallocator_h.GstAllocator;
       size : GLIB.gsize;
       params : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstallocator_h.GstAllocationParams) return access GstBuffer;  -- gst/gstbuffer.h:279
    pragma Import (C, gst_buffer_new_allocate, "gst_buffer_new_allocate");
@@ -353,7 +352,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h is
    function gst_buffer_new_wrapped (data : System.Address; size : GLIB.gsize) return access GstBuffer;  -- gst/gstbuffer.h:284
    pragma Import (C, gst_buffer_new_wrapped, "gst_buffer_new_wrapped");
 
-  -- memory blocks  
+  -- memory blocks
    function gst_buffer_n_memory (buffer : access GstBuffer) return GLIB.guint;  -- gst/gstbuffer.h:287
    pragma Import (C, gst_buffer_n_memory, "gst_buffer_n_memory");
 
@@ -529,7 +528,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h is
    function gst_buffer_unset_flags (buffer : access GstBuffer; flags : GstBufferFlags) return GLIB.gboolean;  -- gst/gstbuffer.h:340
    pragma Import (C, gst_buffer_unset_flags, "gst_buffer_unset_flags");
 
-  -- refcounting  
+  -- refcounting
   --*
   -- * gst_buffer_ref:
   -- * @buf: a #GstBuffer.
@@ -543,7 +542,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h is
   -- * of memcpy operations in a pipeline.
   -- *
   -- * Returns: (transfer full): @buf
-  --  
+  --
 
    function gst_buffer_ref (buf : access GstBuffer) return access GstBuffer;  -- gst/gstbuffer.h:360
    pragma Import (C, gst_buffer_ref, "gst_buffer_ref");
@@ -554,12 +553,12 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h is
   -- *
   -- * Decreases the refcount of the buffer. If the refcount reaches 0, the buffer
   -- * with the associated metadata and memory will be freed.
-  --  
+  --
 
    procedure gst_buffer_unref (buf : access GstBuffer);  -- gst/gstbuffer.h:373
    pragma Import (C, gst_buffer_unref, "gst_buffer_unref");
 
-  -- copy buffer  
+  -- copy buffer
   --*
   -- * gst_buffer_copy:
   -- * @buf: a #GstBuffer.
@@ -571,7 +570,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h is
   -- * to be copied to newly allocated memory.
   -- *
   -- * Returns: (transfer full): a new copy of @buf.
-  --  
+  --
 
    function gst_buffer_copy (buf : access constant GstBuffer) return access GstBuffer;  -- gst/gstbuffer.h:392
    pragma Import (C, gst_buffer_copy, "gst_buffer_copy");
@@ -598,7 +597,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h is
   -- *
   -- * A set of flags that can be provided to the gst_buffer_copy_into()
   -- * function to specify which items should be copied.
-  --  
+  --
 
    subtype GstBufferCopyFlags is unsigned;
    GST_BUFFER_COPY_NONE : constant GstBufferCopyFlags := 0;
@@ -607,23 +606,23 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h is
    GST_BUFFER_COPY_META : constant GstBufferCopyFlags := 4;
    GST_BUFFER_COPY_MEMORY : constant GstBufferCopyFlags := 8;
    GST_BUFFER_COPY_MERGE : constant GstBufferCopyFlags := 16;
-   GST_BUFFER_COPY_DEEP : constant GstBufferCopyFlags := 32;  -- gst/gstbuffer.h:427
+   GST_BUFFER_COPY_DEEP_C : constant GstBufferCopyFlags := 32;  -- gst/gstbuffer.h:427
 
   --*
   -- * GST_BUFFER_COPY_METADATA: (value 7) (type GstBufferCopyFlags)
   -- *
   -- * Combination of all possible metadata fields that can be copied with
   -- * gst_buffer_copy_into().
-  --  
+  --
 
   --*
   -- * GST_BUFFER_COPY_ALL: (value 15) (type GstBufferCopyFlags)
   -- *
   -- * Combination of all possible fields that can be copied with
   -- * gst_buffer_copy_into().
-  --  
+  --
 
-  -- copies memory or metadata into newly allocated buffer  
+  -- copies memory or metadata into newly allocated buffer
    function gst_buffer_copy_into
      (dest : access GstBuffer;
       src : access GstBuffer;
@@ -639,7 +638,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h is
   -- * Tests if you can safely write to a buffer's metadata or its memory array.
   -- * It is only safe to change buffer metadata when the current reference is
   -- * writable, i.e. nobody can see the modifications you will make.
-  --  
+  --
 
   --*
   -- * gst_buffer_make_writable:
@@ -666,7 +665,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h is
   -- *
   -- * Returns: (transfer full): a writable buffer which may or may not be the
   -- *     same as @buf
-  --  
+  --
 
   --*
   -- * gst_buffer_replace:
@@ -683,12 +682,12 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h is
   -- * Either @nbuf or the #GstBuffer pointed to by @obuf may be %NULL.
   -- *
   -- * Returns: %TRUE when @obuf was different from @nbuf.
-  --  
+  --
 
    function gst_buffer_replace (obuf : System.Address; nbuf : access GstBuffer) return GLIB.gboolean;  -- gst/gstbuffer.h:505
    pragma Import (C, gst_buffer_replace, "gst_buffer_replace");
 
-  -- creating a region  
+  -- creating a region
    function gst_buffer_copy_region
      (parent : access GstBuffer;
       flags : GstBufferCopyFlags;
@@ -696,7 +695,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h is
       size : GLIB.gsize) return access GstBuffer;  -- gst/gstbuffer.h:511
    pragma Import (C, gst_buffer_copy_region, "gst_buffer_copy_region");
 
-  -- append two buffers  
+  -- append two buffers
    function gst_buffer_append_region
      (buf1 : access GstBuffer;
       buf2 : access GstBuffer;
@@ -707,7 +706,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h is
    function gst_buffer_append (buf1 : access GstBuffer; buf2 : access GstBuffer) return access GstBuffer;  -- gst/gstbuffer.h:517
    pragma Import (C, gst_buffer_append, "gst_buffer_append");
 
-  -- metadata  
+  -- metadata
   --*
   -- * GstBufferForeachMetaFunc:
   -- * @buffer: a #GstBuffer
@@ -725,9 +724,9 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h is
   -- * When @meta is set to %NULL, the item will be removed from the buffer.
   -- *
   -- * Returns: %FALSE when gst_buffer_foreach_meta() should stop
-  --  
+  --
 
-   type GstBufferForeachMetaFunc is access function 
+   type GstBufferForeachMetaFunc is access function
         (arg1 : access GstBuffer;
          arg2 : System.Address;
          arg3 : System.Address) return GLIB.gboolean;
@@ -766,7 +765,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h is
   -- * @b: (transfer none): a #GstBuffer to assign to the GstValue
   -- *
   -- * Sets @b as the value of @v.  Caller retains reference to buffer.
-  --  
+  --
 
   --*
   -- * gst_value_take_buffer:
@@ -774,7 +773,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h is
   -- * @b: (transfer full): a #GstBuffer to assign to the GstValue
   -- *
   -- * Sets @b as the value of @v.  Caller gives away reference to buffer.
-  --  
+  --
 
   --*
   -- * gst_value_get_buffer:
@@ -785,7 +784,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h is
   -- * a reference to @v.
   -- *
   -- * Returns: (transfer none): buffer
-  --  
+  --
 
    type GstParentBufferMeta;
    --subtype GstParentBufferMeta is u_GstParentBufferMeta;  -- gst/gstbuffer.h:586
@@ -805,7 +804,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h is
   -- * for re-use.
   -- *
   -- * Since: 1.6
-  --  
+  --
 
    type GstParentBufferMeta is record
       parent : aliased GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmeta_h.GstMeta;  -- gst/gstbuffer.h:606
@@ -813,7 +812,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h is
    end record;
    pragma Convention (C_Pass_By_Copy, GstParentBufferMeta);  -- gst/gstbuffer.h:604
 
-  --< public > 
+  --< public >
    function gst_parent_buffer_meta_api_get_type return GLIB.GType;  -- gst/gstbuffer.h:612
    pragma Import (C, gst_parent_buffer_meta_api_get_type, "gst_parent_buffer_meta_api_get_type");
 
@@ -823,12 +822,12 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h is
   -- *
   -- * Find and return a #GstParentBufferMeta if one exists on the
   -- * buffer
-  --  
+  --
 
    function gst_parent_buffer_meta_get_info return access constant GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmeta_h.GstMetaInfo;  -- gst/gstbuffer.h:628
    pragma Import (C, gst_parent_buffer_meta_get_info, "gst_parent_buffer_meta_get_info");
 
-  -- implementation  
+  -- implementation
    function gst_buffer_add_parent_buffer_meta (buffer : access GstBuffer; ref : access GstBuffer) return access GstParentBufferMeta;  -- gst/gstbuffer.h:632
    pragma Import (C, gst_buffer_add_parent_buffer_meta, "gst_buffer_add_parent_buffer_meta");
 
@@ -840,6 +839,6 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h is
    procedure glib_autoptr_cleanup_GstBufferPool (u_ptr : System.Address);  -- gst/gstbuffer.h:640
    pragma Import (C, glib_autoptr_cleanup_GstBufferPool, "glib_autoptr_cleanup_GstBufferPool");
 
-   type GstBufferPool_autoptr is access all GstBufferPool;  -- gst/gstbuffer.h:640
+   type GstBufferPool_autoptr is access all GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbufferpool_h.GstBufferPool;  -- gst/gstbuffer.h:640
 
 end GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h;

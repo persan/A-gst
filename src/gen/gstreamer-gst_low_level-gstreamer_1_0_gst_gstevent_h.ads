@@ -641,7 +641,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstevent_h is
    function gst_event_new_qos
      (c_type : GstQOSType;
       proportion : GLIB.gdouble;
-      diff : GLIB.guint64Diff;
+      diff : GLIB.guint64;
       timestamp : GLIB.guint64) return access GstEvent;  -- gst/gstevent.h:555
    pragma Import (C, gst_event_new_qos, "gst_event_new_qos");
 
@@ -649,7 +649,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstevent_h is
      (event : access GstEvent;
       c_type : access GstQOSType;
       proportion : access GLIB.gdouble;
-      diff : access GLIB.guint64Diff;
+      diff : access GLIB.guint64;
       timestamp : access GLIB.guint64);  -- gst/gstevent.h:557
    pragma Import (C, gst_event_parse_qos, "gst_event_parse_qos");
 

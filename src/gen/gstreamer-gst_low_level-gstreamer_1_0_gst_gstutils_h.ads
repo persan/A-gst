@@ -17,7 +17,6 @@ with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpadtemplate_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h;
-limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpadtemplate_h;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstformat_h;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstsegment_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h;
@@ -141,7 +140,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstutils_h is
   -- * License along with this library; if not, write to the
   -- * Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
   -- * Boston, MA 02110-1301, USA.
-  --  
+  --
 
    procedure gst_util_set_value_from_string (value : access Glib.Values.GValue; value_str : access GLIB.gchar);  -- gst/gstutils.h:35
    pragma Import (C, gst_util_set_value_from_string, "gst_util_set_value_from_string");
@@ -180,7 +179,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstutils_h is
   -- * Convert @value to a gdouble.
   -- *
   -- * Returns: @value converted to a #gdouble.
-  --  
+  --
 
   --*
   -- * gst_gdouble_to_guint64:
@@ -189,7 +188,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstutils_h is
   -- * Convert @value to a guint64.
   -- *
   -- * Returns: @value converted to a #guint64.
-  --  
+  --
 
    function gst_util_uint64_scale
      (val : GLIB.guint64;
@@ -246,7 +245,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstutils_h is
   -- * named parent_class that points to the (duh!) parent class.  Note that
   -- * this macro is not to be used with things that return something, use
   -- * the _WITH_DEFAULT version for that
-  --  
+  --
 
   --*
   -- * GST_CALL_PARENT_WITH_DEFAULT:
@@ -257,9 +256,9 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstutils_h is
   -- *
   -- * Same as GST_CALL_PARENT(), but in case there is no implementation, it
   -- * evaluates to @def_return.
-  --  
+  --
 
-  -- Define PUT and GET functions for unaligned memory  
+  -- Define PUT and GET functions for unaligned memory
    --  skipped func __gst_fast_read16
 
    --  skipped func __gst_fast_read32
@@ -289,35 +288,35 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstutils_h is
   -- * @data: memory location
   -- *
   -- * Read a 64 bit unsigned integer value in big endian format from the memory buffer.
-  --  
+  --
 
   --*
   -- * GST_READ_UINT64_LE:
   -- * @data: memory location
   -- *
   -- * Read a 64 bit unsigned integer value in little endian format from the memory buffer.
-  --  
+  --
 
   --*
   -- * GST_READ_UINT32_BE:
   -- * @data: memory location
   -- *
   -- * Read a 32 bit unsigned integer value in big endian format from the memory buffer.
-  --  
+  --
 
   --*
   -- * GST_READ_UINT32_LE:
   -- * @data: memory location
   -- *
   -- * Read a 32 bit unsigned integer value in little endian format from the memory buffer.
-  --  
+  --
 
   --*
   -- * GST_READ_UINT24_BE:
   -- * @data: memory location
   -- *
   -- * Read a 24 bit unsigned integer value in big endian format from the memory buffer.
-  --  
+  --
 
    --  skipped func __gst_slow_read24_be
 
@@ -326,7 +325,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstutils_h is
   -- * @data: memory location
   -- *
   -- * Read a 24 bit unsigned integer value in little endian format from the memory buffer.
-  --  
+  --
 
    --  skipped func __gst_slow_read24_le
 
@@ -335,21 +334,21 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstutils_h is
   -- * @data: memory location
   -- *
   -- * Read a 16 bit unsigned integer value in big endian format from the memory buffer.
-  --  
+  --
 
   --*
   -- * GST_READ_UINT16_LE:
   -- * @data: memory location
   -- *
   -- * Read a 16 bit unsigned integer value in little endian format from the memory buffer.
-  --  
+  --
 
   --*
   -- * GST_READ_UINT8:
   -- * @data: memory location
   -- *
   -- * Read an 8 bit unsigned integer value from the memory buffer.
-  --  
+  --
 
   --*
   -- * GST_WRITE_UINT64_BE:
@@ -357,7 +356,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstutils_h is
   -- * @val: value to store
   -- *
   -- * Store a 64 bit unsigned integer value in big endian format into the memory buffer.
-  --  
+  --
 
   --*
   -- * GST_WRITE_UINT64_LE:
@@ -365,7 +364,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstutils_h is
   -- * @val: value to store
   -- *
   -- * Store a 64 bit unsigned integer value in little endian format into the memory buffer.
-  --  
+  --
 
   --*
   -- * GST_WRITE_UINT32_BE:
@@ -373,7 +372,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstutils_h is
   -- * @val: value to store
   -- *
   -- * Store a 32 bit unsigned integer value in big endian format into the memory buffer.
-  --  
+  --
 
   --*
   -- * GST_WRITE_UINT32_LE:
@@ -381,7 +380,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstutils_h is
   -- * @val: value to store
   -- *
   -- * Store a 32 bit unsigned integer value in little endian format into the memory buffer.
-  --  
+  --
 
   --*
   -- * GST_WRITE_UINT24_BE:
@@ -389,7 +388,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstutils_h is
   -- * @num: value to store
   -- *
   -- * Store a 24 bit unsigned integer value in big endian format into the memory buffer.
-  --  
+  --
 
   --*
   -- * GST_WRITE_UINT24_LE:
@@ -397,7 +396,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstutils_h is
   -- * @num: value to store
   -- *
   -- * Store a 24 bit unsigned integer value in little endian format into the memory buffer.
-  --  
+  --
 
   --*
   -- * GST_WRITE_UINT16_BE:
@@ -405,7 +404,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstutils_h is
   -- * @val: value to store
   -- *
   -- * Store a 16 bit unsigned integer value in big endian format into the memory buffer.
-  --  
+  --
 
   --*
   -- * GST_WRITE_UINT16_LE:
@@ -413,7 +412,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstutils_h is
   -- * @val: value to store
   -- *
   -- * Store a 16 bit unsigned integer value in little endian format into the memory buffer.
-  --  
+  --
 
   --*
   -- * GST_WRITE_UINT8:
@@ -421,10 +420,10 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstutils_h is
   -- * @num: value to store
   -- *
   -- * Store an 8 bit unsigned integer value into the memory buffer.
-  --  
+  --
 
-  -- Float endianness conversion macros  
-  -- FIXME: Remove this once we depend on a GLib version with this  
+  -- Float endianness conversion macros
+  -- FIXME: Remove this once we depend on a GLib version with this
   --*
   -- * GFLOAT_SWAP_LE_BE:
   -- * @in: input value
@@ -432,7 +431,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstutils_h is
   -- * Swap byte order of a 32-bit floating point value (float).
   -- *
   -- * Returns: @in byte-swapped.
-  --  
+  --
 
    function GFLOAT_SWAP_LE_BE (c_in : GLIB.gfloat) return GLIB.gfloat;  -- gst/gstutils.h:518
    pragma Import (C, GFLOAT_SWAP_LE_BE, "GFLOAT_SWAP_LE_BE");
@@ -444,7 +443,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstutils_h is
   -- * Swap byte order of a 64-bit floating point value (double).
   -- *
   -- * Returns: @in byte-swapped.
-  --  
+  --
 
    function GDOUBLE_SWAP_LE_BE (c_in : GLIB.gdouble) return GLIB.gdouble;  -- gst/gstutils.h:540
    pragma Import (C, GDOUBLE_SWAP_LE_BE, "GDOUBLE_SWAP_LE_BE");
@@ -455,7 +454,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstutils_h is
   -- *
   -- * Convert 64-bit floating point value (double) from native byte order into
   -- * little endian byte order.
-  --  
+  --
 
   --*
   -- * GDOUBLE_TO_BE:
@@ -463,7 +462,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstutils_h is
   -- *
   -- * Convert 64-bit floating point value (double) from native byte order into
   -- * big endian byte order.
-  --  
+  --
 
   --*
   -- * GDOUBLE_FROM_LE:
@@ -471,7 +470,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstutils_h is
   -- *
   -- * Convert 64-bit floating point value (double) from little endian byte order
   -- * into native byte order.
-  --  
+  --
 
   --*
   -- * GDOUBLE_FROM_BE:
@@ -479,7 +478,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstutils_h is
   -- *
   -- * Convert 64-bit floating point value (double) from big endian byte order
   -- * into native byte order.
-  --  
+  --
 
   --*
   -- * GFLOAT_TO_LE:
@@ -487,7 +486,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstutils_h is
   -- *
   -- * Convert 32-bit floating point value (float) from native byte order into
   -- * little endian byte order.
-  --  
+  --
 
   --*
   -- * GFLOAT_TO_BE:
@@ -495,7 +494,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstutils_h is
   -- *
   -- * Convert 32-bit floating point value (float) from native byte order into
   -- * big endian byte order.
-  --  
+  --
 
   --*
   -- * GFLOAT_FROM_LE:
@@ -503,7 +502,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstutils_h is
   -- *
   -- * Convert 32-bit floating point value (float) from little endian byte order
   -- * into native byte order.
-  --  
+  --
 
   --*
   -- * GFLOAT_FROM_BE:
@@ -511,7 +510,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstutils_h is
   -- *
   -- * Convert 32-bit floating point value (float) from big endian byte order
   -- * into native byte order.
-  --  
+  --
 
   --*
   -- * GST_READ_FLOAT_LE:
@@ -520,7 +519,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstutils_h is
   -- * Read a 32 bit float value in little endian format from the memory buffer.
   -- *
   -- * Returns: The floating point value read from @data
-  --  
+  --
 
    function GST_READ_FLOAT_LE (data : access GLIB.guint8) return GLIB.gfloat;  -- gst/gstutils.h:643
    pragma Import (C, GST_READ_FLOAT_LE, "GST_READ_FLOAT_LE");
@@ -532,7 +531,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstutils_h is
   -- * Read a 32 bit float value in big endian format from the memory buffer.
   -- *
   -- * Returns: The floating point value read from @data
-  --  
+  --
 
    function GST_READ_FLOAT_BE (data : access GLIB.guint8) return GLIB.gfloat;  -- gst/gstutils.h:664
    pragma Import (C, GST_READ_FLOAT_BE, "GST_READ_FLOAT_BE");
@@ -544,7 +543,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstutils_h is
   -- * Read a 64 bit double value in little endian format from the memory buffer.
   -- *
   -- * Returns: The double-precision floating point value read from @data
-  --  
+  --
 
    function GST_READ_DOUBLE_LE (data : access GLIB.guint8) return GLIB.gdouble;  -- gst/gstutils.h:685
    pragma Import (C, GST_READ_DOUBLE_LE, "GST_READ_DOUBLE_LE");
@@ -556,7 +555,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstutils_h is
   -- * Read a 64 bit double value in big endian format from the memory buffer.
   -- *
   -- * Returns: The double-precision floating point value read from @data
-  --  
+  --
 
    function GST_READ_DOUBLE_BE (data : access GLIB.guint8) return GLIB.gdouble;  -- gst/gstutils.h:706
    pragma Import (C, GST_READ_DOUBLE_BE, "GST_READ_DOUBLE_BE");
@@ -567,7 +566,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstutils_h is
   -- * @num: value to store
   -- *
   -- * Store a 32 bit float value in little endian format into the memory buffer.
-  --  
+  --
 
    procedure GST_WRITE_FLOAT_LE (data : access GLIB.guint8; num : GLIB.gfloat);  -- gst/gstutils.h:726
    pragma Import (C, GST_WRITE_FLOAT_LE, "GST_WRITE_FLOAT_LE");
@@ -578,7 +577,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstutils_h is
   -- * @num: value to store
   -- *
   -- * Store a 32 bit float value in big endian format into the memory buffer.
-  --  
+  --
 
    procedure GST_WRITE_FLOAT_BE (data : access GLIB.guint8; num : GLIB.gfloat);  -- gst/gstutils.h:746
    pragma Import (C, GST_WRITE_FLOAT_BE, "GST_WRITE_FLOAT_BE");
@@ -589,7 +588,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstutils_h is
   -- * @num: value to store
   -- *
   -- * Store a 64 bit double value in little endian format into the memory buffer.
-  --  
+  --
 
    procedure GST_WRITE_DOUBLE_LE (data : access GLIB.guint8; num : GLIB.gdouble);  -- gst/gstutils.h:766
    pragma Import (C, GST_WRITE_DOUBLE_LE, "GST_WRITE_DOUBLE_LE");
@@ -600,53 +599,53 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstutils_h is
   -- * @num: value to store
   -- *
   -- * Store a 64 bit double value in big endian format into the memory buffer.
-  --  
+  --
 
    procedure GST_WRITE_DOUBLE_BE (data : access GLIB.guint8; num : GLIB.gdouble);  -- gst/gstutils.h:786
    pragma Import (C, GST_WRITE_DOUBLE_BE, "GST_WRITE_DOUBLE_BE");
 
-  -- Miscellaneous utility macros  
+  -- Miscellaneous utility macros
   --*
   -- * GST_ROUND_UP_2:
   -- * @num: integer value to round up
   -- *
   -- * Rounds an integer value up to the next multiple of 2.
-  --  
+  --
 
   --*
   -- * GST_ROUND_UP_4:
   -- * @num: integer value to round up
   -- *
   -- * Rounds an integer value up to the next multiple of 4.
-  --  
+  --
 
   --*
   -- * GST_ROUND_UP_8:
   -- * @num: integer value to round up
   -- *
   -- * Rounds an integer value up to the next multiple of 8.
-  --  
+  --
 
   --*
   -- * GST_ROUND_UP_16:
   -- * @num: integer value to round up
   -- *
   -- * Rounds an integer value up to the next multiple of 16.
-  --  
+  --
 
   --*
   -- * GST_ROUND_UP_32:
   -- * @num: integer value to round up
   -- *
   -- * Rounds an integer value up to the next multiple of 32.
-  --  
+  --
 
   --*
   -- * GST_ROUND_UP_64:
   -- * @num: integer value to round up
   -- *
   -- * Rounds an integer value up to the next multiple of 64.
-  --  
+  --
 
   --*
   -- * GST_ROUND_UP_128:
@@ -654,7 +653,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstutils_h is
   -- *
   -- * Rounds an integer value up to the next multiple of 128.
   -- * Since: 1.4
-  --  
+  --
 
   --*
   -- * GST_ROUND_UP_N:
@@ -663,49 +662,49 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstutils_h is
   -- *
   -- * Rounds an integer value up to the next multiple of @align. @align MUST be a
   -- * power of two.
-  --  
+  --
 
   --*
   -- * GST_ROUND_DOWN_2:
   -- * @num: integer value to round down
   -- *
   -- * Rounds an integer value down to the next multiple of 2.
-  --  
+  --
 
   --*
   -- * GST_ROUND_DOWN_4:
   -- * @num: integer value to round down
   -- *
   -- * Rounds an integer value down to the next multiple of 4.
-  --  
+  --
 
   --*
   -- * GST_ROUND_DOWN_8:
   -- * @num: integer value to round down
   -- *
   -- * Rounds an integer value down to the next multiple of 8.
-  --  
+  --
 
   --*
   -- * GST_ROUND_DOWN_16:
   -- * @num: integer value to round down
   -- *
   -- * Rounds an integer value down to the next multiple of 16.
-  --  
+  --
 
   --*
   -- * GST_ROUND_DOWN_32:
   -- * @num: integer value to round down
   -- *
   -- * Rounds an integer value down to the next multiple of 32.
-  --  
+  --
 
   --*
   -- * GST_ROUND_DOWN_64:
   -- * @num: integer value to round down
   -- *
   -- * Rounds an integer value down to the next multiple of 64.
-  --  
+  --
 
   --*
   -- * GST_ROUND_DOWN_128:
@@ -713,7 +712,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstutils_h is
   -- *
   -- * Rounds an integer value down to the next multiple of 128.
   -- * Since: 1.4
-  --  
+  --
 
   --*
   -- * GST_ROUND_DOWN_N:
@@ -722,7 +721,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstutils_h is
   -- *
   -- * Rounds an integer value down to the next multiple of @align. @align MUST be a
   -- * power of two.
-  --  
+  --
 
    procedure gst_object_default_error
      (source : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject;
@@ -730,7 +729,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstutils_h is
       debug : access GLIB.gchar);  -- gst/gstutils.h:922
    pragma Import (C, gst_object_default_error, "gst_object_default_error");
 
-  -- element functions  
+  -- element functions
    procedure gst_element_create_all_pads (element : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h.GstElement);  -- gst/gstutils.h:927
    pragma Import (C, gst_element_create_all_pads, "gst_element_create_all_pads");
 
@@ -806,7 +805,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstutils_h is
       seek_pos : GLIB.gint64) return GLIB.gboolean;  -- gst/gstutils.h:958
    pragma Import (C, gst_element_seek_simple, "gst_element_seek_simple");
 
-  -- util elementfactory functions  
+  -- util elementfactory functions
    function gst_element_factory_can_sink_all_caps (factory : System.Address; caps : access constant GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h.GstCaps) return GLIB.gboolean;  -- gst/gstutils.h:964
    pragma Import (C, gst_element_factory_can_sink_all_caps, "gst_element_factory_can_sink_all_caps");
 
@@ -819,7 +818,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstutils_h is
    function gst_element_factory_can_src_any_caps (factory : System.Address; caps : access constant GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h.GstCaps) return GLIB.gboolean;  -- gst/gstutils.h:967
    pragma Import (C, gst_element_factory_can_src_any_caps, "gst_element_factory_can_src_any_caps");
 
-  -- util query functions  
+  -- util query functions
    function gst_element_query_position
      (element : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h.GstElement;
       format : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstformat_h.GstFormat;
@@ -840,14 +839,14 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstutils_h is
       dest_val : access GLIB.gint64) return GLIB.gboolean;  -- gst/gstutils.h:972
    pragma Import (C, gst_element_query_convert, "gst_element_query_convert");
 
-  -- pad functions  
+  -- pad functions
    procedure gst_pad_use_fixed_caps (pad : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstPad);  -- gst/gstutils.h:976
    pragma Import (C, gst_pad_use_fixed_caps, "gst_pad_use_fixed_caps");
 
    function gst_pad_get_parent_element (pad : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstPad) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h.GstElement;  -- gst/gstutils.h:977
    pragma Import (C, gst_pad_get_parent_element, "gst_pad_get_parent_element");
 
-  -- util query functions  
+  -- util query functions
    function gst_pad_proxy_query_accept_caps (pad : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstPad; query : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h.GstQuery) return GLIB.gboolean;  -- gst/gstutils.h:980
    pragma Import (C, gst_pad_proxy_query_accept_caps, "gst_pad_proxy_query_accept_caps");
 
@@ -941,7 +940,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstutils_h is
    function gst_pad_get_stream (pad : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstPad) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststreams_h.GstStream;  -- gst/gstutils.h:1008
    pragma Import (C, gst_pad_get_stream, "gst_pad_get_stream");
 
-  -- bin functions  
+  -- bin functions
    procedure gst_bin_add_many (bin : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbin_h.GstBin; element_1 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h.GstElement  -- , ...
       );  -- gst/gstutils.h:1011
    pragma Import (C, gst_bin_add_many, "gst_bin_add_many");
@@ -956,7 +955,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstutils_h is
    function gst_bin_sync_children_states (bin : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbin_h.GstBin) return GLIB.gboolean;  -- gst/gstutils.h:1015
    pragma Import (C, gst_bin_sync_children_states, "gst_bin_sync_children_states");
 
-  -- parse utility functions  
+  -- parse utility functions
    function gst_parse_bin_from_description
      (bin_description : access GLIB.gchar;
       ghost_unlinked_pads : GLIB.gboolean;
@@ -981,9 +980,9 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstutils_h is
   -- * @GST_SEARCH_MODE_AFTER : Search for an exact match or the element just after.
   -- *
   -- * The different search modes.
-  --  
+  --
 
-   type GstSearchMode is 
+   type GstSearchMode is
      (GST_SEARCH_MODE_EXACT,
       GST_SEARCH_MODE_BEFORE,
       GST_SEARCH_MODE_AFTER);
@@ -999,7 +998,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstutils_h is
       user_data : System.Address) return System.Address;  -- gst/gstutils.h:1044
    pragma Import (C, gst_util_array_binary_search, "gst_util_array_binary_search");
 
-  -- fraction operations  
+  -- fraction operations
    function gst_util_greatest_common_divisor (a : GLIB.gint; b : GLIB.gint) return GLIB.gint;  -- gst/gstutils.h:1050
    pragma Import (C, gst_util_greatest_common_divisor, "gst_util_greatest_common_divisor");
 

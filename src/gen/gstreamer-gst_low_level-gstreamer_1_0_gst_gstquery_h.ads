@@ -16,6 +16,7 @@ with GLIB; --  with GStreamer.GST_Low_Level.glibconfig_h;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h;
+with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbufferpool_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstallocator_h;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h;
@@ -70,7 +71,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h is
   -- * License along with this library; if not, write to the
   -- * Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
   -- * Boston, MA 02110-1301, USA.
-  --  
+  --
 
    type GstQuery;
    --subtype GstQuery is u_GstQuery;  -- gst/gstquery.h:35
@@ -85,7 +86,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h is
   -- * #GstQueryTypeFlags indicate the aspects of the different #GstQueryType
   -- * values. You can get the type flags of a #GstQueryType with the
   -- * gst_query_type_get_flags() function.
-  --  
+  --
 
    subtype GstQueryTypeFlags is unsigned;
    GST_QUERY_TYPE_UPSTREAM : constant GstQueryTypeFlags := 1;
@@ -96,7 +97,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h is
   -- * GST_QUERY_TYPE_BOTH: (value 3) (type GstQueryTypeFlags)
   -- *
   -- * The same thing as #GST_QUERY_TYPE_UPSTREAM | #GST_QUERY_TYPE_DOWNSTREAM.
-  --  
+  --
 
   --*
   -- * GST_QUERY_MAKE_TYPE:
@@ -105,7 +106,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h is
   -- *
   -- * when making custom query types, use this macro with the num and
   -- * the given flags
-  --  
+  --
 
   --*
   -- * GstQueryType:
@@ -131,10 +132,10 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h is
   -- *     downstream or upstream (since 1.2)
   -- *
   -- * Standard predefined Query types
-  --  
+  --
 
   -- NOTE: don't forget to update the table in gstquery.c when changing
-  -- * this enum  
+  -- * this enum
 
    subtype GstQueryType is unsigned;
    GST_QUERY_UNKNOWN : constant GstQueryType := 0;
@@ -162,35 +163,35 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h is
   -- * @query: the query to query
   -- *
   -- * Get the #GstQueryType of the query.
-  --  
+  --
 
   --*
   -- * GST_QUERY_TYPE_NAME:
   -- * @query: the query to query
   -- *
   -- * Get a constant string representation of the #GstQueryType of the query.
-  --  
+  --
 
   --*
   -- * GST_QUERY_IS_UPSTREAM:
   -- * @ev: the query to query
   -- *
   -- * Check if an query can travel upstream.
-  --  
+  --
 
   --*
   -- * GST_QUERY_IS_DOWNSTREAM:
   -- * @ev: the query to query
   -- *
   -- * Check if an query can travel downstream.
-  --  
+  --
 
   --*
   -- * GST_QUERY_IS_SERIALIZED:
   -- * @ev: the query to query
   -- *
   -- * Check if an query is serialized with the data stream.
-  --  
+  --
 
   --*
   -- * GstQuery:
@@ -198,7 +199,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h is
   -- * @type: the #GstQueryType
   -- *
   -- * The #GstQuery structure.
-  --  
+  --
 
    type GstQuery is record
       mini_object : aliased GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstminiobject_h.GstMiniObject;  -- gst/gstquery.h:185
@@ -206,8 +207,8 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h is
    end record;
    pragma Convention (C_Pass_By_Copy, GstQuery);  -- gst/gstquery.h:183
 
-  --< public >  
-  -- with COW  
+  --< public >
+  -- with COW
   --*
   -- * GstBufferingMode:
   -- * @GST_BUFFERING_STREAM: a small amount of data is buffered
@@ -216,9 +217,9 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h is
   -- * @GST_BUFFERING_LIVE: the stream is a live stream
   -- *
   -- * The different types of buffering methods.
-  --  
+  --
 
-   type GstBufferingMode is 
+   type GstBufferingMode is
      (GST_BUFFERING_STREAM,
       GST_BUFFERING_DOWNLOAD,
       GST_BUFFERING_TIMESHIFT,
@@ -237,7 +238,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h is
    function gst_query_get_type return GLIB.GType;  -- gst/gstquery.h:221
    pragma Import (C, gst_query_get_type, "gst_query_get_type");
 
-  -- refcounting  
+  -- refcounting
   --*
   -- * gst_query_ref:
   -- * @q: a #GstQuery to increase the refcount of.
@@ -245,7 +246,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h is
   -- * Increases the refcount of the given query by one.
   -- *
   -- * Returns: @q
-  --  
+  --
 
    function gst_query_ref (q : access GstQuery) return access GstQuery;  -- gst/gstquery.h:233
    pragma Import (C, gst_query_ref, "gst_query_ref");
@@ -256,12 +257,12 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h is
   -- *
   -- * Decreases the refcount of the query. If the refcount reaches 0, the query
   -- * will be freed.
-  --  
+  --
 
    procedure gst_query_unref (q : access GstQuery);  -- gst/gstquery.h:246
    pragma Import (C, gst_query_unref, "gst_query_unref");
 
-  -- copy query  
+  -- copy query
   --*
   -- * gst_query_copy:
   -- * @q: a #GstQuery to copy.
@@ -271,7 +272,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h is
   -- * Free-function: gst_query_unref
   -- *
   -- * Returns: (transfer full): a new copy of @q.
-  --  
+  --
 
    function gst_query_copy (q : access constant GstQuery) return access GstQuery;  -- gst/gstquery.h:263
    pragma Import (C, gst_query_copy, "gst_query_copy");
@@ -281,7 +282,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h is
   -- * @q: a #GstQuery
   -- *
   -- * Tests if you can safely write data into a query's structure.
-  --  
+  --
 
   --*
   -- * gst_query_make_writable:
@@ -290,7 +291,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h is
   -- * Makes a writable query from the given query.
   -- *
   -- * Returns: (transfer full): a new writable query (possibly same as @q)
-  --  
+  --
 
   --*
   -- * gst_query_replace:
@@ -307,12 +308,12 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h is
   -- * Either @new_query or the #GstQuery pointed to by @old_query may be %NULL.
   -- *
   -- * Returns: %TRUE if @new_query was different from @old_query
-  --  
+  --
 
    function gst_query_replace (old_query : System.Address; new_query : access GstQuery) return GLIB.gboolean;  -- gst/gstquery.h:301
    pragma Import (C, gst_query_replace, "gst_query_replace");
 
-  -- application specific query  
+  -- application specific query
    function gst_query_new_custom (c_type : GstQueryType; structure : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststructure_h.GstStructure) return access GstQuery;  -- gst/gstquery.h:307
    pragma Import (C, gst_query_new_custom, "gst_query_new_custom");
 
@@ -322,7 +323,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h is
    function gst_query_writable_structure (query : access GstQuery) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststructure_h.GstStructure;  -- gst/gstquery.h:310
    pragma Import (C, gst_query_writable_structure, "gst_query_writable_structure");
 
-  -- position query  
+  -- position query
    function gst_query_new_position (format : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstformat_h.GstFormat) return access GstQuery;  -- gst/gstquery.h:313
    pragma Import (C, gst_query_new_position, "gst_query_new_position");
 
@@ -338,7 +339,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h is
       cur : access GLIB.gint64);  -- gst/gstquery.h:315
    pragma Import (C, gst_query_parse_position, "gst_query_parse_position");
 
-  -- duration query  
+  -- duration query
    function gst_query_new_duration (format : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstformat_h.GstFormat) return access GstQuery;  -- gst/gstquery.h:318
    pragma Import (C, gst_query_new_duration, "gst_query_new_duration");
 
@@ -354,7 +355,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h is
       duration : access GLIB.gint64);  -- gst/gstquery.h:320
    pragma Import (C, gst_query_parse_duration, "gst_query_parse_duration");
 
-  -- latency query  
+  -- latency query
    function gst_query_new_latency return access GstQuery;  -- gst/gstquery.h:323
    pragma Import (C, gst_query_new_latency, "gst_query_new_latency");
 
@@ -372,7 +373,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h is
       max_latency : access GLIB.guint64);  -- gst/gstquery.h:326
    pragma Import (C, gst_query_parse_latency, "gst_query_parse_latency");
 
-  -- convert query  
+  -- convert query
    function gst_query_new_convert
      (src_format : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstformat_h.GstFormat;
       value : GLIB.gint64;
@@ -395,7 +396,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h is
       dest_value : access GLIB.gint64);  -- gst/gstquery.h:333
    pragma Import (C, gst_query_parse_convert, "gst_query_parse_convert");
 
-  -- segment query  
+  -- segment query
    function gst_query_new_segment (format : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstformat_h.GstFormat) return access GstQuery;  -- gst/gstquery.h:336
    pragma Import (C, gst_query_new_segment, "gst_query_new_segment");
 
@@ -415,7 +416,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h is
       stop_value : access GLIB.gint64);  -- gst/gstquery.h:339
    pragma Import (C, gst_query_parse_segment, "gst_query_parse_segment");
 
-  -- seeking query  
+  -- seeking query
    function gst_query_new_seeking (format : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstformat_h.GstFormat) return access GstQuery;  -- gst/gstquery.h:343
    pragma Import (C, gst_query_new_seeking, "gst_query_new_seeking");
 
@@ -435,7 +436,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h is
       segment_end : access GLIB.gint64);  -- gst/gstquery.h:348
    pragma Import (C, gst_query_parse_seeking, "gst_query_parse_seeking");
 
-  -- formats query  
+  -- formats query
    function gst_query_new_formats return access GstQuery;  -- gst/gstquery.h:353
    pragma Import (C, gst_query_new_formats, "gst_query_new_formats");
 
@@ -458,7 +459,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h is
       format : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstformat_h.GstFormat);  -- gst/gstquery.h:357
    pragma Import (C, gst_query_parse_nth_format, "gst_query_parse_nth_format");
 
-  -- buffering query  
+  -- buffering query
    function gst_query_new_buffering (format : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstformat_h.GstFormat) return access GstQuery;  -- gst/gstquery.h:360
    pragma Import (C, gst_query_new_buffering, "gst_query_new_buffering");
 
@@ -522,7 +523,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h is
       stop : access GLIB.gint64) return GLIB.gboolean;  -- gst/gstquery.h:381
    pragma Import (C, gst_query_parse_nth_buffering_range, "gst_query_parse_nth_buffering_range");
 
-  -- URI query  
+  -- URI query
    function gst_query_new_uri return access GstQuery;  -- gst/gstquery.h:386
    pragma Import (C, gst_query_new_uri, "gst_query_new_uri");
 
@@ -544,7 +545,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h is
    procedure gst_query_set_uri_redirection_permanent (query : access GstQuery; permanent : GLIB.gboolean);  -- gst/gstquery.h:392
    pragma Import (C, gst_query_set_uri_redirection_permanent, "gst_query_set_uri_redirection_permanent");
 
-  -- allocation query  
+  -- allocation query
    function gst_query_new_allocation (caps : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h.GstCaps; need_pool : GLIB.gboolean) return access GstQuery;  -- gst/gstquery.h:395
    pragma Import (C, gst_query_new_allocation, "gst_query_new_allocation");
 
@@ -554,10 +555,10 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h is
       need_pool : access GLIB.gboolean);  -- gst/gstquery.h:396
    pragma Import (C, gst_query_parse_allocation, "gst_query_parse_allocation");
 
-  -- pools  
+  -- pools
    procedure gst_query_add_allocation_pool
      (query : access GstQuery;
-      pool : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBufferPool;
+      pool : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbufferpool_h.GstBufferPool;
       size : GLIB.guint;
       min_buffers : GLIB.guint;
       max_buffers : GLIB.guint);  -- gst/gstquery.h:399
@@ -578,7 +579,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h is
    procedure gst_query_set_nth_allocation_pool
      (query : access GstQuery;
       index : GLIB.guint;
-      pool : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBufferPool;
+      pool : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbufferpool_h.GstBufferPool;
       size : GLIB.guint;
       min_buffers : GLIB.guint;
       max_buffers : GLIB.guint);  -- gst/gstquery.h:407
@@ -587,10 +588,10 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h is
    procedure gst_query_remove_nth_allocation_pool (query : access GstQuery; index : GLIB.guint);  -- gst/gstquery.h:411
    pragma Import (C, gst_query_remove_nth_allocation_pool, "gst_query_remove_nth_allocation_pool");
 
-  -- allocators  
+  -- allocators
    procedure gst_query_add_allocation_param
      (query : access GstQuery;
-      allocator : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h.GstAllocator;
+      allocator : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstallocator_h.GstAllocator;
       params : access constant GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstallocator_h.GstAllocationParams);  -- gst/gstquery.h:414
    pragma Import (C, gst_query_add_allocation_param, "gst_query_add_allocation_param");
 
@@ -607,14 +608,14 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h is
    procedure gst_query_set_nth_allocation_param
      (query : access GstQuery;
       index : GLIB.guint;
-      allocator : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h.GstAllocator;
+      allocator : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstallocator_h.GstAllocator;
       params : access constant GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstallocator_h.GstAllocationParams);  -- gst/gstquery.h:420
    pragma Import (C, gst_query_set_nth_allocation_param, "gst_query_set_nth_allocation_param");
 
    procedure gst_query_remove_nth_allocation_param (query : access GstQuery; index : GLIB.guint);  -- gst/gstquery.h:423
    pragma Import (C, gst_query_remove_nth_allocation_param, "gst_query_remove_nth_allocation_param");
 
-  -- metadata  
+  -- metadata
    procedure gst_query_add_allocation_meta
      (query : access GstQuery;
       api : GLIB.GType;
@@ -639,7 +640,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h is
       index : access GLIB.guint) return GLIB.gboolean;  -- gst/gstquery.h:431
    pragma Import (C, gst_query_find_allocation_meta, "gst_query_find_allocation_meta");
 
-  -- scheduling query  
+  -- scheduling query
   --*
   -- * GstSchedulingFlags:
   -- * @GST_SCHEDULING_FLAG_SEEKABLE: if seeking is possible
@@ -647,7 +648,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h is
   -- * @GST_SCHEDULING_FLAG_BANDWIDTH_LIMITED: if bandwidth is limited and buffering possible (since 1.2)
   -- *
   -- * The different scheduling flags.
-  --  
+  --
 
    subtype GstSchedulingFlags is unsigned;
    GST_SCHEDULING_FLAG_SEEKABLE : constant GstSchedulingFlags := 1;
@@ -691,7 +692,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h is
       flags : GstSchedulingFlags) return GLIB.gboolean;  -- gst/gstquery.h:460
    pragma Import (C, gst_query_has_scheduling_mode_with_flags, "gst_query_has_scheduling_mode_with_flags");
 
-  -- accept-caps query  
+  -- accept-caps query
    function gst_query_new_accept_caps (caps : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h.GstCaps) return access GstQuery;  -- gst/gstquery.h:464
    pragma Import (C, gst_query_new_accept_caps, "gst_query_new_accept_caps");
 
@@ -704,7 +705,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h is
    procedure gst_query_parse_accept_caps_result (query : access GstQuery; result : access GLIB.gboolean);  -- gst/gstquery.h:467
    pragma Import (C, gst_query_parse_accept_caps_result, "gst_query_parse_accept_caps_result");
 
-  -- caps query  
+  -- caps query
    function gst_query_new_caps (filter : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h.GstCaps) return access GstQuery;  -- gst/gstquery.h:470
    pragma Import (C, gst_query_new_caps, "gst_query_new_caps");
 
@@ -717,11 +718,11 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h is
    procedure gst_query_parse_caps_result (query : access GstQuery; caps : System.Address);  -- gst/gstquery.h:474
    pragma Import (C, gst_query_parse_caps_result, "gst_query_parse_caps_result");
 
-  -- drain query  
+  -- drain query
    function gst_query_new_drain return access GstQuery;  -- gst/gstquery.h:477
    pragma Import (C, gst_query_new_drain, "gst_query_new_drain");
 
-  -- context query  
+  -- context query
    function gst_query_new_context (context_type : access GLIB.gchar) return access GstQuery;  -- gst/gstquery.h:480
    pragma Import (C, gst_query_new_context, "gst_query_new_context");
 

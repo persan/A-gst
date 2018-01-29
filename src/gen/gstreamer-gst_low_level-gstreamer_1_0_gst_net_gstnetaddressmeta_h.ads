@@ -4,7 +4,6 @@ pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmeta_h;
-limited with GStreamer.GST_Low_Level.glib_2_0_gio_giotypes_h;
 with glib;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h;
 
@@ -29,7 +28,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_net_gstnetaddressmeta_h is
   -- * License along with this library; if not, write to the
   -- * Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
   -- * Boston, MA 02110-1301, USA.
-  --  
+  --
 
    type GstNetAddressMeta;
    --subtype GstNetAddressMeta is u_GstNetAddressMeta;  -- gst/net/gstnetaddressmeta.h:28
@@ -40,7 +39,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_net_gstnetaddressmeta_h is
   -- * @addr: a #GSocketAddress stored as metadata
   -- *
   -- * Buffer metadata for network addresses.
-  --  
+  --
 
    type GstNetAddressMeta is record
       meta : aliased GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmeta_h.GstMeta;  -- gst/net/gstnetaddressmeta.h:38
@@ -51,7 +50,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_net_gstnetaddressmeta_h is
    function gst_net_address_meta_api_get_type return GLIB.GType;  -- gst/net/gstnetaddressmeta.h:43
    pragma Import (C, gst_net_address_meta_api_get_type, "gst_net_address_meta_api_get_type");
 
-  -- implementation  
+  -- implementation
    function gst_net_address_meta_get_info return access constant GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmeta_h.GstMetaInfo;  -- gst/net/gstnetaddressmeta.h:47
    pragma Import (C, gst_net_address_meta_get_info, "gst_net_address_meta_get_info");
 

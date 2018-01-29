@@ -101,7 +101,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_check_gsttestclock_h is
    procedure gst_test_clock_set_time (test_clock : access GstTestClock; new_time : GLIB.guint64);  -- gst/check/gsttestclock.h:83
    pragma Import (C, gst_test_clock_set_time, "gst_test_clock_set_time");
 
-   procedure gst_test_clock_advance_time (test_clock : access GstTestClock; c_delta : GLIB.guint64Diff);  -- gst/check/gsttestclock.h:86
+   procedure gst_test_clock_advance_time (test_clock : access GstTestClock; c_delta : GLIB.guint64);  -- gst/check/gsttestclock.h:86
    pragma Import (C, gst_test_clock_advance_time, "gst_test_clock_advance_time");
 
    function gst_test_clock_peek_id_count (test_clock : access GstTestClock) return GLIB.guint;  -- gst/check/gsttestclock.h:89

@@ -218,9 +218,36 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
   -- * License along with this library; if not, write to the
   -- * Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
   -- * Boston, MA 02110-1301, USA.
-  --  
-
+  --
+   subtype GstFlowReturn is int;
    type GstPad;
+
+   --*
+  -- * GstPadEventFullFunction:
+  -- * @pad: the #GstPad to handle the event.
+  -- * @parent: (allow-none): the parent of @pad. If the #GST_PAD_FLAG_NEED_PARENT
+  -- *          flag is set, @parent is guaranteed to be not-%NULL and remain valid
+  -- *          during the execution of this function.
+  -- * @event: (transfer full): the #GstEvent to handle.
+  -- *
+  -- * Function signature to handle an event for the pad.
+  -- *
+  -- * This variant is for specific elements that will take into account the
+  -- * last downstream flow return (from a pad push), in which case they can
+  -- * return it.
+  -- *
+  -- * Returns: %GST_FLOW_OK if the event was handled properly, or any other
+  -- * #GstFlowReturn dependent on downstream state.
+  -- *
+  -- * Since: 1.8
+  --
+
+   type GstPadEventFullFunction is access function
+        (arg1 : access GstPad;
+         arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject;
+         arg3 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstevent_h.GstEvent) return GstFlowReturn;
+   pragma Convention (C, GstPadEventFullFunction);  -- gst/gstpad.h:389
+
    type anon_193;
    type anon_194 is record
       last_flowret : aliased GstFlowReturn;  -- gst/gstpad.h:786
@@ -272,9 +299,9 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
   -- * @GST_PAD_SINK: the pad is a sink pad.
   -- *
   -- * The direction of a pad.
-  --  
+  --
 
-   type GstPadDirection is 
+   type GstPadDirection is
      (GST_PAD_UNKNOWN,
       GST_PAD_SRC,
       GST_PAD_SINK);
@@ -289,9 +316,9 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
   -- * The status of a GstPad. After activating a pad, which usually happens when the
   -- * parent element goes from READY to PAUSED, the GstPadMode defines if the
   -- * pad operates in push or pull mode.
-  --  
+  --
 
-   type GstPadMode is 
+   type GstPadMode is
      (GST_PAD_MODE_NONE,
       GST_PAD_MODE_PUSH,
       GST_PAD_MODE_PULL);
@@ -301,7 +328,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
    pragma Import (C, gst_pad_mode_get_name, "gst_pad_mode_get_name");
 
   -- * Pad base class
-  --  
+  --
 
   --*
   -- * GstPadLinkReturn:
@@ -314,7 +341,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
   -- * @GST_PAD_LINK_REFUSED	: refused for some reason
   -- *
   -- * Result values from gst_pad_link and friends.
-  --  
+  --
 
    subtype GstPadLinkReturn is int;
    GST_PAD_LINK_OK : constant GstPadLinkReturn := 0;
@@ -331,7 +358,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
   -- *
   -- * Macro to test if the given #GstPadLinkReturn value indicates a failed
   -- * link step.
-  --  
+  --
 
   --*
   -- * GST_PAD_LINK_SUCCESSFUL:
@@ -339,7 +366,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
   -- *
   -- * Macro to test if the given #GstPadLinkReturn value indicates a successful
   -- * link step.
-  --  
+  --
 
   --*
   -- * GstFlowReturn:
@@ -370,14 +397,13 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
   -- *
   -- * Note that the custom return values should not be exposed outside of the
   -- * element scope.
-  --  
+  --
 
-  -- custom success starts here  
-  -- core predefined  
-  -- expected failures  
-  -- error cases  
-  -- custom error starts here  
-   subtype GstFlowReturn is int;
+  -- custom success starts here
+  -- core predefined
+  -- expected failures
+  -- error cases
+  -- custom error starts here
    GST_FLOW_CUSTOM_SUCCESS_2 : constant GstFlowReturn := 102;
    GST_FLOW_CUSTOM_SUCCESS_1 : constant GstFlowReturn := 101;
    GST_FLOW_CUSTOM_SUCCESS : constant GstFlowReturn := 100;
@@ -425,10 +451,10 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
   -- * > will not fail because of hierarchy/caps compatibility failures. If uncertain,
   -- * > use the default checks (%GST_PAD_LINK_CHECK_DEFAULT) or the regular methods
   -- * > for linking the pads.
-  --  
+  --
 
   -- Not really checks, more like flags
-  --   * Added here to avoid creating a new gst_pad_link_variant  
+  --   * Added here to avoid creating a new gst_pad_link_variant
 
    subtype GstPadLinkCheck is unsigned;
    GST_PAD_LINK_CHECK_NOTHING : constant GstPadLinkCheck := 0;
@@ -438,7 +464,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
    GST_PAD_LINK_CHECK_NO_RECONFIGURE : constant GstPadLinkCheck := 8;
    GST_PAD_LINK_CHECK_DEFAULT : constant GstPadLinkCheck := 5;  -- gst/gstpad.h:226
 
-  -- pad states  
+  -- pad states
   --*
   -- * GstPadActivateFunction:
   -- * @pad: a #GstPad
@@ -450,7 +476,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
   -- * override this function to activate the pad in pull mode if they wish.
   -- *
   -- * Returns: %TRUE if the pad could be activated.
-  --  
+  --
 
    type GstPadActivateFunction is access function  (arg1 : access GstPad; arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject) return GLIB.gboolean;
    pragma Convention (C, GstPadActivateFunction);  -- gst/gstpad.h:241
@@ -465,16 +491,16 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
   -- * The prototype of the push and pull activate functions.
   -- *
   -- * Returns: %TRUE if the pad could be activated or deactivated.
-  --  
+  --
 
-   type GstPadActivateModeFunction is access function 
+   type GstPadActivateModeFunction is access function
         (arg1 : access GstPad;
          arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject;
          arg3 : GstPadMode;
          arg4 : GLIB.gboolean) return GLIB.gboolean;
    pragma Convention (C, GstPadActivateModeFunction);  -- gst/gstpad.h:253
 
-  -- data passing  
+  -- data passing
   --*
   -- * GstPadChainFunction:
   -- * @pad: the sink #GstPad that performed the chain.
@@ -494,9 +520,9 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
   -- * error on the bus and return an appropriate #GstFlowReturn value.
   -- *
   -- * Returns: #GST_FLOW_OK for success
-  --  
+  --
 
-   type GstPadChainFunction is access function 
+   type GstPadChainFunction is access function
         (arg1 : access GstPad;
          arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject;
          arg3 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBuffer) return GstFlowReturn;
@@ -521,9 +547,9 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
   -- * post an error on the bus and return an appropriate #GstFlowReturn value.
   -- *
   -- * Returns: #GST_FLOW_OK for success
-  --  
+  --
 
-   type GstPadChainListFunction is access function 
+   type GstPadChainListFunction is access function
         (arg1 : access GstPad;
          arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject;
          arg3 : System.Address) return GstFlowReturn;
@@ -575,9 +601,9 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
   -- *
   -- * Returns: #GST_FLOW_OK for success and a valid buffer in @buffer. Any other
   -- * return value leaves @buffer undefined.
-  --  
+  --
 
-   type GstPadGetRangeFunction is access function 
+   type GstPadGetRangeFunction is access function
         (arg1 : access GstPad;
          arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject;
          arg3 : GLIB.guint64;
@@ -596,41 +622,17 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
   -- * Function signature to handle an event for the pad.
   -- *
   -- * Returns: %TRUE if the pad could handle the event.
-  --  
+  --
 
-   type GstPadEventFunction is access function 
+   type GstPadEventFunction is access function
         (arg1 : access GstPad;
          arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject;
          arg3 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstevent_h.GstEvent) return GLIB.gboolean;
    pragma Convention (C, GstPadEventFunction);  -- gst/gstpad.h:367
 
-  --*
-  -- * GstPadEventFullFunction:
-  -- * @pad: the #GstPad to handle the event.
-  -- * @parent: (allow-none): the parent of @pad. If the #GST_PAD_FLAG_NEED_PARENT
-  -- *          flag is set, @parent is guaranteed to be not-%NULL and remain valid
-  -- *          during the execution of this function.
-  -- * @event: (transfer full): the #GstEvent to handle.
-  -- *
-  -- * Function signature to handle an event for the pad.
-  -- *
-  -- * This variant is for specific elements that will take into account the
-  -- * last downstream flow return (from a pad push), in which case they can
-  -- * return it.
-  -- *
-  -- * Returns: %GST_FLOW_OK if the event was handled properly, or any other
-  -- * #GstFlowReturn dependent on downstream state.
-  -- *
-  -- * Since: 1.8
-  --  
 
-   type GstPadEventFullFunction is access function 
-        (arg1 : access GstPad;
-         arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject;
-         arg3 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstevent_h.GstEvent) return GstFlowReturn;
-   pragma Convention (C, GstPadEventFullFunction);  -- gst/gstpad.h:389
 
-  -- internal links  
+  -- internal links
   --*
   -- * GstPadIterIntLinkFunction:
   -- * @pad: The #GstPad to query.
@@ -644,12 +646,12 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
   -- * linked to the given pad on the inside of the parent element.
   -- *
   -- * the caller must call gst_iterator_free() after usage.
-  --  
+  --
 
    type GstPadIterIntLinkFunction is access function  (arg1 : access GstPad; arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstiterator_h.GstIterator;
    pragma Convention (C, GstPadIterIntLinkFunction);  -- gst/gstpad.h:408
 
-  -- generic query function  
+  -- generic query function
   --*
   -- * GstPadQueryFunction:
   -- * @pad: the #GstPad to query.
@@ -661,15 +663,15 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
   -- * The signature of the query function.
   -- *
   -- * Returns: %TRUE if the query could be performed.
-  --  
+  --
 
-   type GstPadQueryFunction is access function 
+   type GstPadQueryFunction is access function
         (arg1 : access GstPad;
          arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject;
          arg3 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h.GstQuery) return GLIB.gboolean;
    pragma Convention (C, GstPadQueryFunction);  -- gst/gstpad.h:423
 
-  -- linking  
+  -- linking
   --*
   -- * GstPadLinkFunction:
   -- * @pad: the #GstPad that is linked.
@@ -681,9 +683,9 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
   -- * Function signature to handle a new link on the pad.
   -- *
   -- * Returns: the result of the link with the specified peer.
-  --  
+  --
 
-   type GstPadLinkFunction is access function 
+   type GstPadLinkFunction is access function
         (arg1 : access GstPad;
          arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject;
          arg3 : access GstPad) return GstPadLinkReturn;
@@ -697,12 +699,12 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
   -- *          during the execution of this function.
   -- *
   -- * Function signature to handle a unlinking the pad prom its peer.
-  --  
+  --
 
    type GstPadUnlinkFunction is access procedure  (arg1 : access GstPad; arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject);
    pragma Convention (C, GstPadUnlinkFunction);  -- gst/gstpad.h:450
 
-  -- misc  
+  -- misc
   --*
   -- * GstPadForwardFunction:
   -- * @pad: the #GstPad that is forwarded.
@@ -712,7 +714,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
   -- * gst_pad_forward().
   -- *
   -- * Returns: %TRUE if the dispatching procedure has to be stopped.
-  --  
+  --
 
    type GstPadForwardFunction is access function  (arg1 : access GstPad; arg2 : System.Address) return GLIB.gboolean;
    pragma Convention (C, GstPadForwardFunction);  -- gst/gstpad.h:464
@@ -748,12 +750,12 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
   -- * The different probing types that can occur. When either one of
   -- * @GST_PAD_PROBE_TYPE_IDLE or @GST_PAD_PROBE_TYPE_BLOCK is used, the probe will be a
   -- * blocking probe.
-  --  
+  --
 
-  -- flags to control blocking  
-  -- flags to select datatypes  
-  -- flags to select scheduling mode  
-  -- flag combinations  
+  -- flags to control blocking
+  -- flags to select datatypes
+  -- flags to select scheduling mode
+  -- flag combinations
    subtype GstPadProbeType is unsigned;
    GST_PAD_PROBE_TYPE_INVALID : constant GstPadProbeType := 0;
    GST_PAD_PROBE_TYPE_IDLE : constant GstPadProbeType := 1;
@@ -803,9 +805,9 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
   -- *        Since: 1.6
   -- *
   -- * Different return values for the #GstPadProbeCallback.
-  --  
+  --
 
-   type GstPadProbeReturn is 
+   type GstPadProbeReturn is
      (GST_PAD_PROBE_DROP,
       GST_PAD_PROBE_OK,
       GST_PAD_PROBE_REMOVE,
@@ -825,7 +827,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
   -- *    #GST_PAD_PROBE_TYPE_PULL
   -- *
   -- * Info passed in the #GstPadProbeCallback.
-  --  
+  --
 
    type GstPadProbeInfo is record
       c_type : aliased GstPadProbeType;  -- gst/gstpad.h:581
@@ -837,7 +839,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
    end record;
    pragma Convention (C_Pass_By_Copy, GstPadProbeInfo);  -- gst/gstpad.h:579
 
-  --< private > 
+  --< private >
    function gst_pad_probe_info_get_event (info : access GstPadProbeInfo) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstevent_h.GstEvent;  -- gst/gstpad.h:609
    pragma Import (C, gst_pad_probe_info_get_event, "gst_pad_probe_info_get_event");
 
@@ -862,9 +864,9 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
   -- * The callback is allowed to modify the data pointer in @info.
   -- *
   -- * Returns: a #GstPadProbeReturn
-  --  
+  --
 
-   type GstPadProbeCallback is access function 
+   type GstPadProbeCallback is access function
         (arg1 : access GstPad;
          arg2 : access GstPadProbeInfo;
          arg3 : System.Address) return GstPadProbeReturn;
@@ -887,9 +889,9 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
   -- * removing or modifying.
   -- *
   -- * Returns: %TRUE if the iteration should continue
-  --  
+  --
 
-   type GstPadStickyEventsForeachFunction is access function 
+   type GstPadStickyEventsForeachFunction is access function
         (arg1 : access GstPad;
          arg2 : System.Address;
          arg3 : System.Address) return GLIB.gboolean;
@@ -930,9 +932,9 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
   -- * @GST_PAD_FLAG_LAST: offset to define more flags
   -- *
   -- * Pad state flags
-  --  
+  --
 
-  -- padding  
+  -- padding
    type GstPadFlags is new unsigned;
    GST_PAD_FLAG_BLOCKED : constant GstPadFlags := 16;
    GST_PAD_FLAG_FLUSHING : constant GstPadFlags := 32;
@@ -957,7 +959,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
   -- *             the pad.
   -- *
   -- * The #GstPad structure. Use the functions to update the variables.
-  --  
+  --
 
    type GstPad is record
       object : aliased GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject;  -- gst/gstpad.h:715
@@ -1008,16 +1010,16 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
    end record;
    pragma Convention (C_Pass_By_Copy, GstPad);  -- gst/gstpad.h:714
 
-  --< public > 
-  --< private > 
-  -- streaming rec_lock  
-  -- block cond, mutex is from the object  
-  -- pad link  
-  -- data transport functions  
-  -- pad offset  
-  -- generic query method  
-  -- internal links  
-  -- counts number of probes attached.  
+  --< public >
+  --< private >
+  -- streaming rec_lock
+  -- block cond, mutex is from the object
+  -- pad link
+  -- data transport functions
+  -- pad offset
+  -- generic query method
+  -- internal links
+  -- counts number of probes attached.
    type GstPadClass is record
       parent_class : aliased GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObjectClass;  -- gst/gstpad.h:793
       linked : access procedure  (arg1 : access GstPad; arg2 : access GstPad);  -- gst/gstpad.h:796
@@ -1026,17 +1028,17 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
    end record;
    pragma Convention (C_Pass_By_Copy, GstPadClass);  -- gst/gstpad.h:792
 
-  -- signal callbacks  
-  --< private > 
-  --**** helper macros **** 
-  -- GstPad  
+  -- signal callbacks
+  --< private >
+  --**** helper macros ****
+  -- GstPad
   --*
   -- * GST_PAD_NAME:
   -- * @pad: a #GstPad
   -- *
   -- * Get name of the given pad.
   -- * No locking is performed in this function, use gst_pad_get_name() instead.
-  --  
+  --
 
   --*
   -- * GST_PAD_PARENT:
@@ -1044,7 +1046,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
   -- *
   -- * Get the @pad parent.
   -- * No locking is performed in this function, use gst_pad_get_parent() instead.
-  --  
+  --
 
   --*
   -- * GST_PAD_ELEMENT_PRIVATE:
@@ -1053,7 +1055,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
   -- * Get the private data of @pad, which is usually some pad- or stream-specific
   -- * structure created by the element and set on the pad when creating it.
   -- * No locking is performed in this function.
-  --  
+  --
 
   --*
   -- * GST_PAD_PAD_TEMPLATE:
@@ -1061,7 +1063,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
   -- *
   -- * Get the @pad #GstPadTemplate. It describes the possible media types
   -- * a @pad or an element factory can handle.
-  --  
+  --
 
   --*
   -- * GST_PAD_DIRECTION:
@@ -1069,7 +1071,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
   -- *
   -- * Get the #GstPadDirection of the given @pad. Accessor macro, use
   -- * gst_pad_get_direction() instead.
-  --  
+  --
 
   --*
   -- * GST_PAD_TASK:
@@ -1078,7 +1080,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
   -- * Get the #GstTask of @pad. Accessor macro used by GStreamer. Use the
   -- * gst_pad_start_task(), gst_pad_stop_task() and gst_pad_pause_task()
   -- * functions instead.
-  --  
+  --
 
   --*
   -- * GST_PAD_MODE:
@@ -1087,42 +1089,42 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
   -- * Get the #GstPadMode of pad, which will be GST_PAD_MODE_NONE if the pad
   -- * has not been activated yet, and otherwise either GST_PAD_MODE_PUSH or
   -- * GST_PAD_MODE_PULL depending on which mode the pad was activated in.
-  --  
+  --
 
   --*
   -- * GST_PAD_ACTIVATEFUNC:
   -- * @pad: a #GstPad
   -- *
   -- * Get the #GstPadActivateFunction from @pad.
-  --  
+  --
 
   --*
   -- * GST_PAD_ACTIVATEMODEFUNC:
   -- * @pad: a #GstPad
   -- *
   -- * Get the #GstPadActivateModeFunction from the given @pad.
-  --  
+  --
 
   --*
   -- * GST_PAD_CHAINFUNC:
   -- * @pad: a #GstPad
   -- *
   -- * Get the #GstPadChainFunction from the given @pad.
-  --  
+  --
 
   --*
   -- * GST_PAD_CHAINLISTFUNC:
   -- * @pad: a #GstPad
   -- *
   -- * Get the #GstPadChainListFunction from the given @pad.
-  --  
+  --
 
   --*
   -- * GST_PAD_GETRANGEFUNC:
   -- * @pad: a #GstPad
   -- *
   -- * Get the #GstPadGetRangeFunction from the given @pad.
-  --  
+  --
 
   --*
   -- * GST_PAD_EVENTFUNC:
@@ -1133,7 +1135,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
   -- * use this to set your own event handling function on a pad
   -- * after you create it.  If your element derives from a base
   -- * class, use the base class's virtual functions instead.
-  --  
+  --
 
   --*
   -- * GST_PAD_EVENTFULLFUNC:
@@ -1146,7 +1148,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
   -- * class, use the base class's virtual functions instead.
   -- *
   -- * Since: 1.8
-  --  
+  --
 
   --*
   -- * GST_PAD_QUERYFUNC:
@@ -1157,14 +1159,14 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
   -- * own query handling function on a pad after you create it. If your
   -- * element derives from a base class, use the base class's virtual
   -- * functions instead.
-  --  
+  --
 
   --*
   -- * GST_PAD_ITERINTLINKFUNC:
   -- * @pad: a #GstPad
   -- *
   -- * Get the #GstPadIterIntLinkFunction from the given @pad.
-  --  
+  --
 
   --*
   -- * GST_PAD_PEER:
@@ -1172,35 +1174,35 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
   -- *
   -- * Return the pad's peer member. This member is a pointer to the linked @pad.
   -- * No locking is performed in this function, use gst_pad_get_peer() instead.
-  --  
+  --
 
   --*
   -- * GST_PAD_LINKFUNC:
   -- * @pad: a #GstPad
   -- *
   -- * Get the #GstPadLinkFunction for the given @pad.
-  --  
+  --
 
   --*
   -- * GST_PAD_UNLINKFUNC:
   -- * @pad: a #GstPad
   -- *
   -- * Get the #GstPadUnlinkFunction from the given @pad.
-  --  
+  --
 
   --*
   -- * GST_PAD_IS_SRC:
   -- * @pad: a #GstPad
   -- *
   -- * Returns: %TRUE if the pad is a source pad (i.e. produces data).
-  --  
+  --
 
   --*
   -- * GST_PAD_IS_SINK:
   -- * @pad: a #GstPad
   -- *
   -- * Returns: %TRUE if the pad is a sink pad (i.e. consumes data).
-  --  
+  --
 
   --*
   -- * GST_PAD_IS_LINKED:
@@ -1208,21 +1210,21 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
   -- *
   -- * Returns: %TRUE if the pad is linked to another pad. Use gst_pad_is_linked()
   -- * instead.
-  --  
+  --
 
   --*
   -- * GST_PAD_IS_ACTIVE:
   -- * @pad: a #GstPad
   -- *
   -- * Returns: %TRUE if the pad has been activated.
-  --  
+  --
 
   --*
   -- * GST_PAD_IS_BLOCKED:
   -- * @pad: a #GstPad
   -- *
   -- * Check if the dataflow on a @pad is blocked. Use gst_pad_is_blocked() instead.
-  --  
+  --
 
   --*
   -- * GST_PAD_IS_BLOCKING:
@@ -1230,14 +1232,14 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
   -- *
   -- * Check if the @pad is currently blocking on a buffer or event. Use
   -- * gst_pad_is_blocking() instead.
-  --  
+  --
 
   --*
   -- * GST_PAD_IS_FLUSHING:
   -- * @pad: a #GstPad
   -- *
   -- * Check if the given @pad is flushing.
-  --  
+  --
 
   --*
   -- * GST_PAD_SET_FLUSHING:
@@ -1249,21 +1251,21 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
   -- * a flushing seek happens. This is used inside GStreamer when flush start/stop
   -- * events pass through pads, or when an element state is changed and pads are
   -- * activated or deactivated.
-  --  
+  --
 
   --*
   -- * GST_PAD_UNSET_FLUSHING:
   -- * @pad: a #GstPad
   -- *
   -- * Unset the flushing flag.
-  --  
+  --
 
   --*
   -- * GST_PAD_IS_EOS:
   -- * @pad: a #GstPad
   -- *
   -- * Check if the @pad is in EOS state.
-  --  
+  --
 
   --*
   -- * GST_PAD_NEEDS_RECONFIGURE:
@@ -1272,7 +1274,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
   -- * Check if the @pad should be reconfigured/renegotiated.
   -- * The flag has to be unset manually after reconfiguration happened.
   -- * Use gst_pad_needs_reconfigure() or gst_pad_check_reconfigure() instead.
-  --  
+  --
 
   --*
   -- * GST_PAD_HAS_PENDING_EVENTS:
@@ -1280,7 +1282,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
   -- *
   -- * Check if the given @pad has pending events. This is used internally by
   -- * GStreamer.
-  --  
+  --
 
   --*
   -- * GST_PAD_IS_FIXED_CAPS:
@@ -1289,7 +1291,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
   -- * Check if the given @pad is using fixed caps, which means that
   -- * once the caps are set on the @pad, the caps query function will
   -- * only return those caps. See gst_pad_use_fixed_caps().
-  --  
+  --
 
   --*
   -- * GST_PAD_NEEDS_PARENT:
@@ -1297,7 +1299,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
   -- *
   -- * Check if there is a parent object before calling into the @pad callbacks.
   -- * This is used internally by GStreamer.
-  --  
+  --
 
   --*
   -- * GST_PAD_IS_PROXY_CAPS:
@@ -1306,7 +1308,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
   -- * Check if the given @pad is set to proxy caps. This means that the default
   -- * event and query handler will forward all events and queries to the
   -- * internally linked @pads instead of discarding them.
-  --  
+  --
 
   --*
   -- * GST_PAD_SET_PROXY_CAPS:
@@ -1317,14 +1319,14 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
   -- * Set this if the element always outputs data in the exact same format as it
   -- * receives as input. This is just for convenience to avoid implementing some
   -- * standard event and query handling code in an element.
-  --  
+  --
 
   --*
   -- * GST_PAD_UNSET_PROXY_CAPS:
   -- * @pad: a #GstPad
   -- *
   -- * Unset proxy caps flag.
-  --  
+  --
 
   --*
   -- * GST_PAD_IS_PROXY_ALLOCATION:
@@ -1333,7 +1335,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
   -- * Check if the given @pad is set as proxy allocation which means
   -- * that the default query handler will forward allocation queries to the
   -- * internally linked @pads instead of discarding them.
-  --  
+  --
 
   --*
   -- * GST_PAD_SET_PROXY_ALLOCATION:
@@ -1345,14 +1347,14 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
   -- * Set this if the element always outputs data in the exact same format as it
   -- * receives as input. This is just for convenience to avoid implementing some
   -- * standard query handling code in an element.
-  --  
+  --
 
   --*
   -- * GST_PAD_UNSET_PROXY_ALLOCATION:
   -- * @pad: a #GstPad
   -- *
   -- * Unset proxy allocation flag.
-  --  
+  --
 
   --*
   -- * GST_PAD_IS_PROXY_SCHEDULING:
@@ -1361,7 +1363,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
   -- * Check if the given @pad is set to proxy scheduling queries, which means that
   -- * the default query handler will forward scheduling queries to the internally
   -- * linked @pads instead of discarding them.
-  --  
+  --
 
   --*
   -- * GST_PAD_SET_PROXY_SCHEDULING:
@@ -1371,14 +1373,14 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
   -- * handler will forward scheduling queries to the internally linked @pads
   -- * instead of discarding them. You will usually want to handle scheduling
   -- * queries explicitly if your element supports multiple scheduling modes.
-  --  
+  --
 
   --*
   -- * GST_PAD_UNSET_PROXY_SCHEDULING:
   -- * @pad: a #GstPad
   -- *
   -- * Unset proxy scheduling flag.
-  --  
+  --
 
   --*
   -- * GST_PAD_IS_ACCEPT_INTERSECT:
@@ -1388,7 +1390,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
   -- * handler will check if the caps intersect the query-caps result instead of
   -- * checking for a subset. This is interesting for parser elements that can
   -- * accept incompletely specified caps.
-  --  
+  --
 
   --*
   -- * GST_PAD_SET_ACCEPT_INTERSECT:
@@ -1397,14 +1399,14 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
   -- * Set @pad to by default accept caps by intersecting the result instead of
   -- * checking for a subset. This is interesting for parser elements that can
   -- * accept incompletely specified caps.
-  --  
+  --
 
   --*
   -- * GST_PAD_UNSET_ACCEPT_INTERSECT:
   -- * @pad: a #GstPad
   -- *
   -- * Unset accept intersect flag.
-  --  
+  --
 
   --*
   -- * GST_PAD_IS_ACCEPT_TEMPLATE:
@@ -1417,7 +1419,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
   -- * recursive accept-caps handling.
   -- *
   -- * Since: 1.6
-  --  
+  --
 
   --*
   -- * GST_PAD_SET_ACCEPT_TEMPLATE:
@@ -1427,7 +1429,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
   -- * the accept caps instead of using a caps query result.
   -- *
   -- * Since: 1.6
-  --  
+  --
 
   --*
   -- * GST_PAD_UNSET_ACCEPT_TEMPLATE:
@@ -1436,7 +1438,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
   -- * Unset accept template flag.
   -- *
   -- * Since: 1.6
-  --  
+  --
 
   --*
   -- * GST_PAD_GET_STREAM_LOCK:
@@ -1446,7 +1448,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
   -- * resources used in the data processing functions of @pad. Accessor
   -- * macro, use GST_PAD_STREAM_LOCK() and GST_PAD_STREAM_UNLOCK() instead
   -- * to take/release the pad's stream lock.
-  --  
+  --
 
   --*
   -- * GST_PAD_STREAM_LOCK:
@@ -1454,7 +1456,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
   -- *
   -- * Take the pad's stream lock. The stream lock is recursive and will be taken
   -- * when buffers or serialized downstream events are pushed on a pad.
-  --  
+  --
 
   --*
   -- * GST_PAD_STREAM_TRYLOCK:
@@ -1462,14 +1464,14 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
   -- *
   -- * Try to take the pad's stream lock, and return %TRUE if the lock could be
   -- * taken, and otherwise %FALSE.
-  --  
+  --
 
   --*
   -- * GST_PAD_STREAM_UNLOCK:
   -- * @pad: a #GstPad
   -- *
   -- * Release the pad's stream lock.
-  --  
+  --
 
   --*
   -- * GST_PAD_LAST_FLOW_RETURN:
@@ -1478,12 +1480,12 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
   -- * Gets the last flow return on this pad
   -- *
   -- * Since: 1.4
-  --  
+  --
 
    function gst_pad_get_type return GLIB.GType;  -- gst/gstpad.h:1263
    pragma Import (C, gst_pad_get_type, "gst_pad_get_type");
 
-  -- creating pads  
+  -- creating pads
    function gst_pad_new (name : access GLIB.gchar; direction : GstPadDirection) return access GstPad;  -- gst/gstpad.h:1266
    pragma Import (C, gst_pad_new, "gst_pad_new");
 
@@ -1500,7 +1502,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
   -- * Get a copy of the name of the pad. g_free() after usage.
   -- *
   -- * MT safe.
-  --  
+  --
 
   --*
   -- * gst_pad_get_parent:
@@ -1513,7 +1515,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
   -- * MT safe.
   -- *
   -- * Returns: (nullable): the parent
-  --  
+  --
 
    function gst_pad_get_direction (pad : access GstPad) return GstPadDirection;  -- gst/gstpad.h:1294
    pragma Import (C, gst_pad_get_direction, "gst_pad_get_direction");
@@ -1580,7 +1582,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
       user_data : System.Address);  -- gst/gstpad.h:1323
    pragma Import (C, gst_pad_sticky_events_foreach, "gst_pad_sticky_events_foreach");
 
-  -- data passing setup functions  
+  -- data passing setup functions
    procedure gst_pad_set_activate_function_full
      (pad : access GstPad;
       activate : GstPadActivateFunction;
@@ -1595,7 +1597,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
       notify : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.GDestroyNotify);  -- gst/gstpad.h:1330
    pragma Import (C, gst_pad_set_activatemode_function_full, "gst_pad_set_activatemode_function_full");
 
-  -- data passing functions  
+  -- data passing functions
    procedure gst_pad_set_chain_function_full
      (pad : access GstPad;
       chain : GstPadChainFunction;
@@ -1631,7 +1633,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
       notify : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.GDestroyNotify);  -- gst/gstpad.h:1351
    pragma Import (C, gst_pad_set_event_full_function_full, "gst_pad_set_event_full_function_full");
 
-  -- pad links  
+  -- pad links
    procedure gst_pad_set_link_function_full
      (pad : access GstPad;
       link : GstPadLinkFunction;
@@ -1670,25 +1672,25 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
    function gst_pad_get_pad_template_caps (pad : access GstPad) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h.GstCaps;  -- gst/gstpad.h:1385
    pragma Import (C, gst_pad_get_pad_template_caps, "gst_pad_get_pad_template_caps");
 
-  -- capsnego function for linked/unlinked pads  
+  -- capsnego function for linked/unlinked pads
    function gst_pad_get_current_caps (pad : access GstPad) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h.GstCaps;  -- gst/gstpad.h:1388
    pragma Import (C, gst_pad_get_current_caps, "gst_pad_get_current_caps");
 
    function gst_pad_has_current_caps (pad : access GstPad) return GLIB.gboolean;  -- gst/gstpad.h:1389
    pragma Import (C, gst_pad_has_current_caps, "gst_pad_has_current_caps");
 
-  -- capsnego for linked pads  
+  -- capsnego for linked pads
    function gst_pad_get_allowed_caps (pad : access GstPad) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h.GstCaps;  -- gst/gstpad.h:1392
    pragma Import (C, gst_pad_get_allowed_caps, "gst_pad_get_allowed_caps");
 
-  -- pad offsets  
+  -- pad offsets
    function gst_pad_get_offset (pad : access GstPad) return GLIB.gint64;  -- gst/gstpad.h:1395
    pragma Import (C, gst_pad_get_offset, "gst_pad_get_offset");
 
    procedure gst_pad_set_offset (pad : access GstPad; offset : GLIB.gint64);  -- gst/gstpad.h:1396
    pragma Import (C, gst_pad_set_offset, "gst_pad_set_offset");
 
-  -- data passing functions to peer  
+  -- data passing functions to peer
    function gst_pad_push (pad : access GstPad; buffer : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBuffer) return GstFlowReturn;  -- gst/gstpad.h:1399
    pragma Import (C, gst_pad_push, "gst_pad_push");
 
@@ -1714,7 +1716,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
    function gst_pad_get_last_flow_return (pad : access GstPad) return GstFlowReturn;  -- gst/gstpad.h:1406
    pragma Import (C, gst_pad_get_last_flow_return, "gst_pad_get_last_flow_return");
 
-  -- data passing functions on pad  
+  -- data passing functions on pad
    function gst_pad_chain (pad : access GstPad; buffer : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBuffer) return GstFlowReturn;  -- gst/gstpad.h:1409
    pragma Import (C, gst_pad_chain, "gst_pad_chain");
 
@@ -1731,7 +1733,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
    function gst_pad_send_event (pad : access GstPad; event : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstevent_h.GstEvent) return GLIB.gboolean;  -- gst/gstpad.h:1413
    pragma Import (C, gst_pad_send_event, "gst_pad_send_event");
 
-  -- pad tasks  
+  -- pad tasks
    function gst_pad_start_task
      (pad : access GstPad;
       func : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsttask_h.GstTaskFunction;
@@ -1748,7 +1750,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
    function gst_pad_get_task_state (pad : access GstPad) return GStreamer.GST_Low_Level.gstreamer_1_0_gst_gsttask_h.GstTaskState;  -- gst/gstpad.h:1420
    pragma Import (C, gst_pad_get_task_state, "gst_pad_get_task_state");
 
-  -- internal links  
+  -- internal links
    procedure gst_pad_set_iterate_internal_links_function_full
      (pad : access GstPad;
       iterintlink : GstPadIterIntLinkFunction;
@@ -1762,7 +1764,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
    function gst_pad_iterate_internal_links_default (pad : access GstPad; parent : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObject) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstiterator_h.GstIterator;  -- gst/gstpad.h:1428
    pragma Import (C, gst_pad_iterate_internal_links_default, "gst_pad_iterate_internal_links_default");
 
-  -- generic query function  
+  -- generic query function
    function gst_pad_query (pad : access GstPad; query : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h.GstQuery) return GLIB.gboolean;  -- gst/gstpad.h:1433
    pragma Import (C, gst_pad_query, "gst_pad_query");
 
@@ -1782,7 +1784,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h is
       query : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h.GstQuery) return GLIB.gboolean;  -- gst/gstpad.h:1438
    pragma Import (C, gst_pad_query_default, "gst_pad_query_default");
 
-  -- misc helper functions  
+  -- misc helper functions
    function gst_pad_forward
      (pad : access GstPad;
       forward : GstPadForwardFunction;

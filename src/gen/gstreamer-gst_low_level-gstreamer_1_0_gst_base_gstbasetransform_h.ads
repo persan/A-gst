@@ -9,7 +9,9 @@ with System;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstsegment_h;
-limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h;
+limited with GStreamer.GST_Low_Level.Gstreamer_1_0_Gst_Gstbuffer_H;
+with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbufferpool_h;
+
 with System;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h;
@@ -63,40 +65,40 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstbasetransform_h is
   -- * License along with this library; if not, write to the
   -- * Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
   -- * Boston, MA 02110-1301, USA.
-  --  
+  --
 
   --*
   -- * GST_BASE_TRANSFORM_SINK_NAME:
   -- *
   -- * The name of the templates for the sink pad.
-  --  
+  --
 
   --*
   -- * GST_BASE_TRANSFORM_SRC_NAME:
   -- *
   -- * The name of the templates for the source pad.
-  --  
+  --
 
   --*
   -- * GST_BASE_TRANSFORM_SRC_PAD:
   -- * @obj: base transform instance
   -- *
   -- * Gives the pointer to the source #GstPad object of the element.
-  --  
+  --
 
   --*
   -- * GST_BASE_TRANSFORM_SINK_PAD:
   -- * @obj: base transform instance
   -- *
   -- * Gives the pointer to the sink #GstPad object of the element.
-  --  
+  --
 
   --*
   -- * GST_BASE_TRANSFORM_FLOW_DROPPED:
   -- *
   -- * A #GstFlowReturn that can be returned from transform and transform_ip to
   -- * indicate that no output buffer was generated.
-  --  
+  --
 
    type GstBaseTransform;
    type u_GstBaseTransform_u_gst_reserved_array is array (0 .. 18) of System.Address;
@@ -114,7 +116,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstbasetransform_h is
   -- * GstBaseTransform:
   -- *
   -- * The opaque #GstBaseTransform data structure.
-  --  
+  --
 
    type GstBaseTransform is record
       element : aliased GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h.GstElement;  -- gst/base/gstbasetransform.h:83
@@ -128,13 +130,13 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstbasetransform_h is
    end record;
    pragma Convention (C_Pass_By_Copy, GstBaseTransform);  -- gst/base/gstbasetransform.h:82
 
-  --< protected > 
-  -- source and sink pads  
-  -- MT-protected (with STREAM_LOCK)  
+  --< protected >
+  -- source and sink pads
+  -- MT-protected (with STREAM_LOCK)
   -- Default submit_input_buffer places the buffer here,
-  --   * for consumption by the generate_output method:  
+  --   * for consumption by the generate_output method:
 
-  --< private > 
+  --< private >
   --*
   -- * GstBaseTransformClass:
   -- * @parent_class:   Element parent class
@@ -248,52 +250,52 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstbasetransform_h is
   -- * needed. At minimum either @transform or @transform_ip need to be overridden.
   -- * If the element can overwrite the input data with the results (data is of the
   -- * same type and quantity) it should provide @transform_ip.
-  --  
+  --
 
    type GstBaseTransformClass is record
       parent_class : aliased GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h.GstElementClass;  -- gst/base/gstbasetransform.h:218
       passthrough_on_same_caps : aliased GLIB.gboolean;  -- gst/base/gstbasetransform.h:221
       transform_ip_on_passthrough : aliased GLIB.gboolean;  -- gst/base/gstbasetransform.h:222
-      transform_caps : access function 
+      transform_caps : access function
            (arg1 : access GstBaseTransform;
             arg2 : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstPadDirection;
             arg3 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h.GstCaps;
             arg4 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h.GstCaps) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h.GstCaps;  -- gst/base/gstbasetransform.h:227
-      fixate_caps : access function 
+      fixate_caps : access function
            (arg1 : access GstBaseTransform;
             arg2 : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstPadDirection;
             arg3 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h.GstCaps;
             arg4 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h.GstCaps) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h.GstCaps;  -- gst/base/gstbasetransform.h:230
-      accept_caps : access function 
+      accept_caps : access function
            (arg1 : access GstBaseTransform;
             arg2 : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstPadDirection;
             arg3 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h.GstCaps) return GLIB.gboolean;  -- gst/base/gstbasetransform.h:232
-      set_caps : access function 
+      set_caps : access function
            (arg1 : access GstBaseTransform;
             arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h.GstCaps;
             arg3 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h.GstCaps) return GLIB.gboolean;  -- gst/base/gstbasetransform.h:234
-      query : access function 
+      query : access function
            (arg1 : access GstBaseTransform;
             arg2 : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstPadDirection;
             arg3 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h.GstQuery) return GLIB.gboolean;  -- gst/base/gstbasetransform.h:236
       decide_allocation : access function  (arg1 : access GstBaseTransform; arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h.GstQuery) return GLIB.gboolean;  -- gst/base/gstbasetransform.h:239
-      filter_meta : access function 
+      filter_meta : access function
            (arg1 : access GstBaseTransform;
             arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h.GstQuery;
             arg3 : GLIB.GType;
             arg4 : access constant GStreamer.GST_Low_Level.gstreamer_1_0_gst_gststructure_h.GstStructure) return GLIB.gboolean;  -- gst/base/gstbasetransform.h:241
-      propose_allocation : access function 
+      propose_allocation : access function
            (arg1 : access GstBaseTransform;
             arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h.GstQuery;
             arg3 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstquery_h.GstQuery) return GLIB.gboolean;  -- gst/base/gstbasetransform.h:245
-      transform_size : access function 
+      transform_size : access function
            (arg1 : access GstBaseTransform;
             arg2 : GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstPadDirection;
             arg3 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h.GstCaps;
             arg4 : GLIB.gsize;
             arg5 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h.GstCaps;
             arg6 : access GLIB.gsize) return GLIB.gboolean;  -- gst/base/gstbasetransform.h:251
-      get_unit_size : access function 
+      get_unit_size : access function
            (arg1 : access GstBaseTransform;
             arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h.GstCaps;
             arg3 : access GLIB.gsize) return GLIB.gboolean;  -- gst/base/gstbasetransform.h:254
@@ -301,26 +303,26 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstbasetransform_h is
       stop : access function  (arg1 : access GstBaseTransform) return GLIB.gboolean;  -- gst/base/gstbasetransform.h:258
       sink_event : access function  (arg1 : access GstBaseTransform; arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstevent_h.GstEvent) return GLIB.gboolean;  -- gst/base/gstbasetransform.h:261
       src_event : access function  (arg1 : access GstBaseTransform; arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstevent_h.GstEvent) return GLIB.gboolean;  -- gst/base/gstbasetransform.h:262
-      prepare_output_buffer : access function 
+      prepare_output_buffer : access function
            (arg1 : access GstBaseTransform;
             arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBuffer;
             arg3 : System.Address) return GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstFlowReturn;  -- gst/base/gstbasetransform.h:265
-      copy_metadata : access function 
+      copy_metadata : access function
            (arg1 : access GstBaseTransform;
             arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBuffer;
             arg3 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBuffer) return GLIB.gboolean;  -- gst/base/gstbasetransform.h:269
-      transform_meta : access function 
+      transform_meta : access function
            (arg1 : access GstBaseTransform;
             arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBuffer;
             arg3 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmeta_h.GstMeta;
             arg4 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBuffer) return GLIB.gboolean;  -- gst/base/gstbasetransform.h:271
       before_transform : access procedure  (arg1 : access GstBaseTransform; arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBuffer);  -- gst/base/gstbasetransform.h:273
-      transform : access function 
+      transform : access function
            (arg1 : access GstBaseTransform;
             arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBuffer;
             arg3 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBuffer) return GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstFlowReturn;  -- gst/base/gstbasetransform.h:277
       transform_ip : access function  (arg1 : access GstBaseTransform; arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBuffer) return GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstFlowReturn;  -- gst/base/gstbasetransform.h:278
-      submit_input_buffer : access function 
+      submit_input_buffer : access function
            (arg1 : access GstBaseTransform;
             arg2 : GLIB.gboolean;
             arg3 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBuffer) return GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstFlowReturn;  -- gst/base/gstbasetransform.h:280
@@ -329,16 +331,16 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstbasetransform_h is
    end record;
    pragma Convention (C_Pass_By_Copy, GstBaseTransformClass);  -- gst/base/gstbasetransform.h:217
 
-  --< public > 
-  -- virtual methods for subclasses  
-  -- decide allocation query for output buffers  
-  -- propose allocation query parameters for input buffers  
-  -- transform size  
-  -- states  
-  -- sink and src pad event handlers  
-  -- metadata  
-  -- transform  
-  --< private > 
+  --< public >
+  -- virtual methods for subclasses
+  -- decide allocation query for output buffers
+  -- propose allocation query parameters for input buffers
+  -- transform size
+  -- states
+  -- sink and src pad event handlers
+  -- metadata
+  -- transform
+  --< private >
    function gst_base_transform_get_type return GLIB.GType;  -- gst/base/gstbasetransform.h:287
    pragma Import (C, gst_base_transform_get_type, "gst_base_transform_get_type");
 
@@ -357,7 +359,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstbasetransform_h is
    procedure gst_base_transform_update_qos
      (trans : access GstBaseTransform;
       proportion : GLIB.gdouble;
-      diff : GLIB.guint64Diff;
+      diff : GLIB.guint64;
       timestamp : GLIB.guint64);  -- gst/base/gstbasetransform.h:297
    pragma Import (C, gst_base_transform_update_qos, "gst_base_transform_update_qos");
 
@@ -373,7 +375,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstbasetransform_h is
    procedure gst_base_transform_set_prefer_passthrough (trans : access GstBaseTransform; prefer_passthrough : GLIB.gboolean);  -- gst/base/gstbasetransform.h:308
    pragma Import (C, gst_base_transform_set_prefer_passthrough, "gst_base_transform_set_prefer_passthrough");
 
-   function gst_base_transform_get_buffer_pool (trans : access GstBaseTransform) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBufferPool;  -- gst/base/gstbasetransform.h:311
+   function gst_base_transform_get_buffer_pool (trans : access GstBaseTransform) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbufferpool_h.GstBufferPool;  -- gst/base/gstbasetransform.h:311
    pragma Import (C, gst_base_transform_get_buffer_pool, "gst_base_transform_get_buffer_pool");
 
    procedure gst_base_transform_get_allocator

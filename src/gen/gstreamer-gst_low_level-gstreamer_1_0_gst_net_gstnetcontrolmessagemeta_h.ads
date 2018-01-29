@@ -4,7 +4,6 @@ pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmeta_h;
-limited with GStreamer.GST_Low_Level.glib_2_0_gio_giotypes_h;
 with glib;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h;
 
@@ -31,7 +30,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_net_gstnetcontrolmessagemeta_h
   -- * License along with this library; if not, write to the
   -- * Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
   -- * Boston, MA 02110-1301, USA.
-  --  
+  --
 
    type GstNetControlMessageMeta;
    --subtype GstNetControlMessageMeta is u_GstNetControlMessageMeta;  -- gst/net/gstnetcontrolmessagemeta.h:28
@@ -43,7 +42,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_net_gstnetcontrolmessagemeta_h
   -- *
   -- * Buffer metadata for GSocket control messages, AKA ancillary data attached to
   -- * data sent across a socket.
-  --  
+  --
 
    type GstNetControlMessageMeta is record
       meta : aliased GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmeta_h.GstMeta;  -- gst/net/gstnetcontrolmessagemeta.h:39
@@ -54,7 +53,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_net_gstnetcontrolmessagemeta_h
    function gst_net_control_message_meta_api_get_type return GLIB.GType;  -- gst/net/gstnetcontrolmessagemeta.h:44
    pragma Import (C, gst_net_control_message_meta_api_get_type, "gst_net_control_message_meta_api_get_type");
 
-  -- implementation  
+  -- implementation
    function gst_net_control_message_meta_get_info return access constant GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmeta_h.GstMetaInfo;  -- gst/net/gstnetcontrolmessagemeta.h:52
    pragma Import (C, gst_net_control_message_meta_get_info, "gst_net_control_message_meta_get_info");
 

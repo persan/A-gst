@@ -6,7 +6,6 @@ with Interfaces.C; use Interfaces.C;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h;
 with glib;
 with GLIB; --  with GStreamer.GST_Low_Level.glibconfig_h;
-limited with GStreamer.GST_Low_Level.glib_2_0_gio_giotypes_h;
 with System;
 with glib;
 with glib.Values;
@@ -33,13 +32,13 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_net_gstnettimepacket_h is
   -- * License along with this library; if not, write to the
   -- * Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
   -- * Boston, MA 02110-1301, USA.
-  --  
+  --
 
   --*
   -- * GST_NET_TIME_PACKET_SIZE:
   -- *
   -- * The size of the packets sent between network clocks.
-  --  
+  --
 
    type GstNetTimePacket;
    --subtype GstNetTimePacket is u_GstNetTimePacket;  -- gst/net/gstnettimepacket.h:36
@@ -50,7 +49,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_net_gstnettimepacket_h is
   -- * @remote_time: the remote time observation
   -- *
   -- * Content of a #GstNetTimePacket.
-  --  
+  --
 
    type GstNetTimePacket is record
       local_time : aliased GLIB.guint64;  -- gst/net/gstnettimepacket.h:46

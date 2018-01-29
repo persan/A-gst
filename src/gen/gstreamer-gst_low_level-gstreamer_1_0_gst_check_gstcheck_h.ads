@@ -10,7 +10,6 @@ with Interfaces.C.Strings;
 with glib;
 with glib.Values;
 with System;
-with GStreamer.GST_Low_Level.glib_2_0_glib_gmessages_h;
 with System;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h;
 limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h;
@@ -121,7 +120,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_check_gstcheck_h is
   -- * License along with this library; if not, write to the
   -- * Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
   -- * Boston, MA 02110-1301, USA.
-  --  
+  --
 
    check_debug : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstinfo_h.GstDebugCategory;  -- gst/check/gstcheck.h:38
    pragma Import (C, check_debug, "check_debug");
@@ -130,9 +129,9 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_check_gstcheck_h is
   -- * a test uses g_message() to log a debug line
   -- * a gst unit test can be run with GST_TEST_DEBUG env var set to see the
   -- * messages
-  --  
+  --
 
-  -- global variables used in test methods  
+  -- global variables used in test methods
    buffers : access GStreamer.GST_Low_Level.glib_2_0_glib_glist_h.GList;  -- gst/check/gstcheck.h:53
    pragma Import (C, buffers, "buffers");
 
@@ -168,9 +167,9 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_check_gstcheck_h is
   -- * Returns: %TRUE if message should be discarded by GstCheck.
   -- *
   -- * Since: 1.12
-  --  
+  --
 
-   type GstCheckLogFilterFunc is access function 
+   type GstCheckLogFilterFunc is access function
         (arg1 : access GLIB.gchar;
          arg2 : GStreamer.GST_Low_Level.glib_2_0_glib_gmessages_h.GLogLevelFlags;
          arg3 : access GLIB.gchar;
@@ -324,15 +323,15 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_check_gstcheck_h is
   -- * @__testname: test function name
   -- *
   -- * wrapper for checks START_TEST
-  --  
+  --
 
   --*
   -- * GST_END_TEST:
   -- *
   -- * wrapper for checks END_TEST
-  --  
+  --
 
-  -- additional fail macros  
+  -- additional fail macros
   --*
   -- * fail_unless_equals_int:
   -- * @a: a #gint value or expression
@@ -341,7 +340,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_check_gstcheck_h is
   -- * This macro checks that @a and @b are equal and aborts if this is not the
   -- * case, printing both expressions and the values they evaluated to. This
   -- * macro is for use in unit tests.
-  --  
+  --
 
   --*
   -- * assert_equals_int:
@@ -351,7 +350,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_check_gstcheck_h is
   -- * This macro checks that @a and @b are equal and aborts if this is not the
   -- * case, printing both expressions and the values they evaluated to. This
   -- * macro is for use in unit tests.
-  --  
+  --
 
   --*
   -- * fail_unless_equals_int_hex:
@@ -363,7 +362,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_check_gstcheck_h is
   -- * hexadecimal format. This macro is for use in unit tests.
   -- *
   -- * Since: 1.2
-  --  
+  --
 
   --*
   -- * assert_equals_int_hex:
@@ -375,7 +374,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_check_gstcheck_h is
   -- * hexadecimal format. This macro is for use in unit tests.
   -- *
   -- * Since: 1.2
-  --  
+  --
 
   --*
   -- * fail_unless_equals_int64:
@@ -385,7 +384,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_check_gstcheck_h is
   -- * This macro checks that @a and @b are equal and aborts if this is not the
   -- * case, printing both expressions and the values they evaluated to. This
   -- * macro is for use in unit tests.
-  --  
+  --
 
   --*
   -- * assert_equals_int64:
@@ -395,7 +394,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_check_gstcheck_h is
   -- * This macro checks that @a and @b are equal and aborts if this is not the
   -- * case, printing both expressions and the values they evaluated to. This
   -- * macro is for use in unit tests.
-  --  
+  --
 
   --*
   -- * fail_unless_equals_int64_hex:
@@ -407,7 +406,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_check_gstcheck_h is
   -- * hexadecimal format. This macro is for use in unit tests.
   -- *
   -- * Since: 1.2
-  --  
+  --
 
   --*
   -- * assert_equals_int64_hex:
@@ -419,7 +418,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_check_gstcheck_h is
   -- * hexadecimal format. This macro is for use in unit tests.
   -- *
   -- * Since: 1.2
-  --  
+  --
 
   --*
   -- * fail_unless_equals_uint64:
@@ -429,7 +428,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_check_gstcheck_h is
   -- * This macro checks that @a and @b are equal and aborts if this is not the
   -- * case, printing both expressions and the values they evaluated to. This
   -- * macro is for use in unit tests.
-  --  
+  --
 
   --*
   -- * assert_equals_uint64:
@@ -439,7 +438,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_check_gstcheck_h is
   -- * This macro checks that @a and @b are equal and aborts if this is not the
   -- * case, printing both expressions and the values they evaluated to. This
   -- * macro is for use in unit tests.
-  --  
+  --
 
   --*
   -- * fail_unless_equals_uint64_hex:
@@ -451,7 +450,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_check_gstcheck_h is
   -- * hexadecimal format. This macro is for use in unit tests.
   -- *
   -- * Since: 1.2
-  --  
+  --
 
   --*
   -- * assert_equals_uint64_hex:
@@ -463,7 +462,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_check_gstcheck_h is
   -- * hexadecimal format. This macro is for use in unit tests.
   -- *
   -- * Since: 1.2
-  --  
+  --
 
   --*
   -- * fail_unless_equals_string:
@@ -473,7 +472,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_check_gstcheck_h is
   -- * This macro checks that @a and @b are equal (as per strcmp) and aborts if
   -- * this is not the case, printing both expressions and the values they
   -- * evaluated to. This macro is for use in unit tests.
-  --  
+  --
 
   --*
   -- * assert_equals_string:
@@ -483,7 +482,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_check_gstcheck_h is
   -- * This macro checks that @a and @b are equal (as per strcmp) and aborts if
   -- * this is not the case, printing both expressions and the values they
   -- * evaluated to. This macro is for use in unit tests.
-  --  
+  --
 
   --*
   -- * fail_unless_equals_float:
@@ -493,7 +492,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_check_gstcheck_h is
   -- * This macro checks that @a and @b are (almost) equal and aborts if this
   -- * is not the case, printing both expressions and the values they evaluated
   -- * to. This macro is for use in unit tests.
-  --  
+  --
 
   --*
   -- * assert_equals_float:
@@ -503,7 +502,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_check_gstcheck_h is
   -- * This macro checks that @a and @b are (almost) equal and aborts if this
   -- * is not the case, printing both expressions and the values they evaluated
   -- * to. This macro is for use in unit tests.
-  --  
+  --
 
   --*
   -- * fail_unless_equals_pointer:
@@ -515,7 +514,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_check_gstcheck_h is
   -- * evaluated to. This macro is for use in unit tests.
   -- *
   -- * Since: 1.2
-  --  
+  --
 
   --*
   -- * assert_equals_pointer:
@@ -527,11 +526,11 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_check_gstcheck_h is
   -- * evaluated to. This macro is for use in unit tests.
   -- *
   -- * Since: 1.2
-  --  
+  --
 
   --**
   -- * thread test macros and variables
-  --  
+  --
 
    thread_list : access GStreamer.GST_Low_Level.glib_2_0_glib_glist_h.GList;  -- gst/check/gstcheck.h:449
    pragma Import (C, thread_list, "thread_list");
@@ -539,24 +538,24 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_check_gstcheck_h is
    mutex : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gthread_h.GMutex;  -- gst/check/gstcheck.h:450
    pragma Import (C, mutex, "mutex");
 
-  -- used to notify main thread of thread startups  
+  -- used to notify main thread of thread startups
    start_cond : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gthread_h.GCond;  -- gst/check/gstcheck.h:451
    pragma Import (C, start_cond, "start_cond");
 
-  -- used to synchronize all threads and main thread  
+  -- used to synchronize all threads and main thread
    sync_cond : aliased GStreamer.GST_Low_Level.glib_2_0_glib_gthread_h.GCond;  -- gst/check/gstcheck.h:452
    pragma Import (C, sync_cond, "sync_cond");
 
-  -- additional assertions  
+  -- additional assertions
   -- Hack to allow run-time selection of unit tests to run via the
   -- * GST_CHECKS environment variable (test function names globs, comma
-  -- * separated), or GST_CHECKS_IGNORE with the same semantics  
+  -- * separated), or GST_CHECKS_IGNORE with the same semantics
 
    --  skipped func _gst_check_run_test_func
 
    --  skipped func __gst_tcase_add_test
 
   -- A special variant to add broken tests. These are normally skipped, but can be
-  -- * forced to run via GST_CHECKS  
+  -- * forced to run via GST_CHECKS
 
 end GStreamer.GST_Low_Level.gstreamer_1_0_gst_check_gstcheck_h;

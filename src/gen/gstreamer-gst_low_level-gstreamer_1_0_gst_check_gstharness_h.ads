@@ -59,7 +59,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_check_gstharness_h is
   -- * License along with this library; if not, write to the
   -- * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
   -- * Boston, MA 02111-1307, USA.
-  --  
+  --
 
   --*
   -- * GstHarnessThread:
@@ -67,13 +67,12 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_check_gstharness_h is
   -- * Opaque handle representing a GstHarness stress testing thread.
   -- *
   -- * Since: 1.6
-  --  
+  --
 
    --  skipped empty struct u_GstHarnessThread
 
    --  skipped empty struct GstHarnessThread
 
-   type GstHarness;
    type GstHarness;
    --subtype GstHarness is u_GstHarness;  -- gst/check/gstharness.h:38
 
@@ -90,7 +89,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_check_gstharness_h is
   -- * @sink_harness: the sink (output) harness (if any)
   -- *
   -- * Since: 1.6
-  --  
+  --
 
    type GstHarness is record
       element : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h.GstElement;  -- gst/check/gstharness.h:52
@@ -102,8 +101,8 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_check_gstharness_h is
    end record;
    pragma Convention (C_Pass_By_Copy, GstHarness);  -- gst/check/gstharness.h:51
 
-  --< private > 
-  -- Harness creation  
+  --< private >
+  -- Harness creation
    function gst_harness_new_empty return access GstHarness;  -- gst/check/gstharness.h:66
    pragma Import (C, gst_harness_new_empty, "gst_harness_new_empty");
 
@@ -160,7 +159,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_check_gstharness_h is
    procedure gst_harness_add_element_sink_pad (h : access GstHarness; sinkpad : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstPad);  -- gst/check/gstharness.h:103
    pragma Import (C, gst_harness_add_element_sink_pad, "gst_harness_add_element_sink_pad");
 
-  -- Caps Functions  
+  -- Caps Functions
    procedure gst_harness_set_src_caps (h : access GstHarness; caps : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstcaps_h.GstCaps);  -- gst/check/gstharness.h:107
    pragma Import (C, gst_harness_set_src_caps, "gst_harness_set_src_caps");
 
@@ -185,7 +184,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_check_gstharness_h is
       c_out : access GLIB.gchar);  -- gst/check/gstharness.h:117
    pragma Import (C, gst_harness_set_caps_str, "gst_harness_set_caps_str");
 
-  -- Clock Functions  
+  -- Clock Functions
    procedure gst_harness_use_systemclock (h : access GstHarness);  -- gst/check/gstharness.h:123
    pragma Import (C, gst_harness_use_systemclock, "gst_harness_use_systemclock");
 
@@ -210,7 +209,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_check_gstharness_h is
    function gst_harness_crank_multiple_clock_waits (h : access GstHarness; waits : GLIB.guint) return GLIB.gboolean;  -- gst/check/gstharness.h:137
    pragma Import (C, gst_harness_crank_multiple_clock_waits, "gst_harness_crank_multiple_clock_waits");
 
-  -- misc  
+  -- misc
    procedure gst_harness_play (h : access GstHarness);  -- gst/check/gstharness.h:141
    pragma Import (C, gst_harness_play, "gst_harness_play");
 
@@ -220,7 +219,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_check_gstharness_h is
    procedure gst_harness_set_forwarding (h : access GstHarness; forwarding : GLIB.gboolean);  -- gst/check/gstharness.h:145
    pragma Import (C, gst_harness_set_forwarding, "gst_harness_set_forwarding");
 
-  -- buffers  
+  -- buffers
    function gst_harness_create_buffer (h : access GstHarness; size : GLIB.gsize) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBuffer;  -- gst/check/gstharness.h:149
    pragma Import (C, gst_harness_create_buffer, "gst_harness_create_buffer");
 
@@ -251,7 +250,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_check_gstharness_h is
    function gst_harness_get_last_pushed_timestamp (h : access GstHarness) return GLIB.guint64;  -- gst/check/gstharness.h:167
    pragma Import (C, gst_harness_get_last_pushed_timestamp, "gst_harness_get_last_pushed_timestamp");
 
-  -- downstream events  
+  -- downstream events
    function gst_harness_push_event (h : access GstHarness; event : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstevent_h.GstEvent) return GLIB.gboolean;  -- gst/check/gstharness.h:171
    pragma Import (C, gst_harness_push_event, "gst_harness_push_event");
 
@@ -267,7 +266,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_check_gstharness_h is
    function gst_harness_events_in_queue (h : access GstHarness) return GLIB.guint;  -- gst/check/gstharness.h:179
    pragma Import (C, gst_harness_events_in_queue, "gst_harness_events_in_queue");
 
-  -- upstream events  
+  -- upstream events
    function gst_harness_push_upstream_event (h : access GstHarness; event : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstevent_h.GstEvent) return GLIB.gboolean;  -- gst/check/gstharness.h:183
    pragma Import (C, gst_harness_push_upstream_event, "gst_harness_push_upstream_event");
 
@@ -283,17 +282,17 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_check_gstharness_h is
    function gst_harness_upstream_events_in_queue (h : access GstHarness) return GLIB.guint;  -- gst/check/gstharness.h:191
    pragma Import (C, gst_harness_upstream_events_in_queue, "gst_harness_upstream_events_in_queue");
 
-  -- latency  
+  -- latency
    function gst_harness_query_latency (h : access GstHarness) return GLIB.guint64;  -- gst/check/gstharness.h:195
    pragma Import (C, gst_harness_query_latency, "gst_harness_query_latency");
 
    procedure gst_harness_set_upstream_latency (h : access GstHarness; latency : GLIB.guint64);  -- gst/check/gstharness.h:197
    pragma Import (C, gst_harness_set_upstream_latency, "gst_harness_set_upstream_latency");
 
-  -- allocator and allocation params  
+  -- allocator and allocation params
    procedure gst_harness_set_propose_allocator
      (h : access GstHarness;
-      allocator : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h.GstAllocator;
+      allocator : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstallocator_h.GstAllocator;
       params : access constant GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstallocator_h.GstAllocationParams);  -- gst/check/gstharness.h:201
    pragma Import (C, gst_harness_set_propose_allocator, "gst_harness_set_propose_allocator");
 
@@ -303,7 +302,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_check_gstharness_h is
       params : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstallocator_h.GstAllocationParams);  -- gst/check/gstharness.h:205
    pragma Import (C, gst_harness_get_allocator, "gst_harness_get_allocator");
 
-  -- src-harness  
+  -- src-harness
    procedure gst_harness_add_src_harness
      (h : access GstHarness;
       src_harness : access GstHarness;
@@ -334,7 +333,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_check_gstharness_h is
    function gst_harness_src_push_event (h : access GstHarness) return GLIB.gboolean;  -- gst/check/gstharness.h:229
    pragma Import (C, gst_harness_src_push_event, "gst_harness_src_push_event");
 
-  -- sink-harness  
+  -- sink-harness
    procedure gst_harness_add_sink_harness (h : access GstHarness; sink_harness : access GstHarness);  -- gst/check/gstharness.h:233
    pragma Import (C, gst_harness_add_sink_harness, "gst_harness_add_sink_harness");
 
@@ -350,7 +349,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_check_gstharness_h is
    function gst_harness_sink_push_many (h : access GstHarness; pushes : GLIB.gint) return GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstFlowReturn;  -- gst/check/gstharness.h:244
    pragma Import (C, gst_harness_sink_push_many, "gst_harness_sink_push_many");
 
-  -- convenience functions  
+  -- convenience functions
    function gst_harness_find_element (h : access GstHarness; element_name : access GLIB.gchar) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstelement_h.GstElement;  -- gst/check/gstharness.h:248
    pragma Import (C, gst_harness_find_element, "gst_harness_find_element");
 
@@ -378,7 +377,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_check_gstharness_h is
       destroy_data : GStreamer.GST_Low_Level.glib_2_0_glib_gtypes_h.GDestroyNotify);  -- gst/check/gstharness.h:259
    pragma Import (C, gst_harness_add_probe, "gst_harness_add_probe");
 
-  -- Stress  
+  -- Stress
    function gst_harness_stress_thread_stop (t : System.Address) return GLIB.guint;  -- gst/check/gstharness.h:269
    pragma Import (C, gst_harness_stress_thread_stop, "gst_harness_stress_thread_stop");
 
@@ -407,7 +406,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_check_gstharness_h is
   -- * @data: user data
   -- *
   -- * Since: 1.6
-  --  
+  --
 
    type GstHarnessPrepareBufferFunc is access function  (arg1 : access GstHarness; arg2 : System.Address) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstbuffer_h.GstBuffer;
    pragma Convention (C, GstHarnessPrepareBufferFunc);  -- gst/check/gstharness.h:299
@@ -434,7 +433,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_check_gstharness_h is
   -- * @data: user data
   -- *
   -- * Since: 1.8
-  --  
+  --
 
    type GstHarnessPrepareEventFunc is access function  (arg1 : access GstHarness; arg2 : System.Address) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstevent_h.GstEvent;
    pragma Convention (C, GstHarnessPrepareEventFunc);  -- gst/check/gstharness.h:326

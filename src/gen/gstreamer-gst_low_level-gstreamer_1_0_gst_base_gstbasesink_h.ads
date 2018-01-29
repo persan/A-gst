@@ -275,10 +275,10 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstbasesink_h is
    pragma Import (C, gst_base_sink_is_async_enabled, "gst_base_sink_is_async_enabled");
 
   -- tuning synchronisation  
-   procedure gst_base_sink_set_ts_offset (sink : access GstBaseSink; offset : GLIB.guint64Diff);  -- gst/base/gstbasesink.h:230
+   procedure gst_base_sink_set_ts_offset (sink : access GstBaseSink; offset : GLIB.guint64);  -- gst/base/gstbasesink.h:230
    pragma Import (C, gst_base_sink_set_ts_offset, "gst_base_sink_set_ts_offset");
 
-   function gst_base_sink_get_ts_offset (sink : access GstBaseSink) return GLIB.guint64Diff;  -- gst/base/gstbasesink.h:231
+   function gst_base_sink_get_ts_offset (sink : access GstBaseSink) return GLIB.guint64;  -- gst/base/gstbasesink.h:231
    pragma Import (C, gst_base_sink_get_ts_offset, "gst_base_sink_get_ts_offset");
 
   -- last sample  
@@ -334,13 +334,13 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_base_gstbasesink_h is
    function gst_base_sink_wait_clock
      (sink : access GstBaseSink;
       time : GLIB.guint64;
-      jitter : access GLIB.guint64Diff) return GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockReturn;  -- gst/base/gstbasesink.h:259
+      jitter : access GLIB.guint64) return GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstclock_h.GstClockReturn;  -- gst/base/gstbasesink.h:259
    pragma Import (C, gst_base_sink_wait_clock, "gst_base_sink_wait_clock");
 
    function gst_base_sink_wait
      (sink : access GstBaseSink;
       time : GLIB.guint64;
-      jitter : access GLIB.guint64Diff) return GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstFlowReturn;  -- gst/base/gstbasesink.h:261
+      jitter : access GLIB.guint64) return GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstpad_h.GstFlowReturn;  -- gst/base/gstbasesink.h:261
    pragma Import (C, gst_base_sink_wait, "gst_base_sink_wait");
 
    procedure glib_autoptr_cleanup_GstBaseSink (u_ptr : System.Address);  -- gst/base/gstbasesink.h:265

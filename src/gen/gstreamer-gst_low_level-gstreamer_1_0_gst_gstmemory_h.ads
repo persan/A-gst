@@ -4,7 +4,7 @@ pragma Warnings (Off);
 
 with Interfaces.C; use Interfaces.C;
 with glib;
-with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstallocator_h;
+limited with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstallocator_h;
 with GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstminiobject_h;
 with GLIB; --  with GStreamer.GST_Low_Level.glibconfig_h;
 with glib;
@@ -64,7 +64,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h is
   -- * License along with this library; if not, write to the
   -- * Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
   -- * Boston, MA 02110-1301, USA.
-  --  
+  --
 
    function gst_memory_get_type return GLIB.GType;  -- gst/gstmemory.h:36
    pragma Import (C, gst_memory_get_type, "gst_memory_get_type");
@@ -72,7 +72,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h is
    type GstMemory;
    --subtype GstMemory is u_GstMemory;  -- gst/gstmemory.h:38
 
-   subtype GstAllocator is GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstallocator_h.u_GstAllocator;  -- gst/gstmemory.h:39
+   --  subtype GstAllocator is GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstallocator_h.u_GstAllocator;  -- gst/gstmemory.h:39
 
   --*
   -- * GstMemoryFlags:
@@ -87,7 +87,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h is
   -- * @GST_MEMORY_FLAG_LAST: first flag that can be used for custom purposes
   -- *
   -- * Flags for wrapped memory.
-  --  
+  --
 
    subtype GstMemoryFlags is unsigned;
    GST_MEMORY_FLAG_READONLY : constant GstMemoryFlags := 2;
@@ -103,7 +103,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h is
   -- * @mem: a #GstMemory.
   -- *
   -- * A flags word containing #GstMemoryFlags flags set on @mem
-  --  
+  --
 
   --*
   -- * GST_MEMORY_FLAG_IS_SET:
@@ -111,7 +111,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h is
   -- * @flag: the #GstMemoryFlags to check.
   -- *
   -- * Gives the status of a specific flag on a @mem.
-  --  
+  --
 
   --*
   -- * GST_MEMORY_FLAG_UNSET:
@@ -119,35 +119,35 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h is
   -- * @flag: the #GstMemoryFlags to clear.
   -- *
   -- * Clear a specific flag on a @mem.
-  --  
+  --
 
   --*
   -- * GST_MEMORY_IS_READONLY:
   -- * @mem: a #GstMemory.
   -- *
   -- * Check if @mem is readonly.
-  --  
+  --
 
   --*
   -- * GST_MEMORY_IS_NO_SHARE:
   -- * @mem: a #GstMemory.
   -- *
   -- * Check if @mem cannot be shared between buffers
-  --  
+  --
 
   --*
   -- * GST_MEMORY_IS_ZERO_PREFIXED:
   -- * @mem: a #GstMemory.
   -- *
   -- * Check if the prefix in @mem is 0 filled.
-  --  
+  --
 
   --*
   -- * GST_MEMORY_IS_ZERO_PADDED:
   -- * @mem: a #GstMemory.
   -- *
   -- * Check if the padding in @mem is 0 filled.
-  --  
+  --
 
   --*
   -- * GST_MEMORY_IS_PHYSICALLY_CONTIGUOUS:
@@ -156,7 +156,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h is
   -- * Check if @mem is physically contiguous.
   -- *
   -- * Since: 1.2
-  --  
+  --
 
   --*
   -- * GST_MEMORY_IS_NOT_MAPPABLE:
@@ -165,7 +165,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h is
   -- * Check if @mem can't be mapped via gst_memory_map() without any preconditions
   -- *
   -- * Since: 1.2
-  --  
+  --
 
   --*
   -- * GstMemory:
@@ -179,11 +179,11 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h is
   -- *
   -- * Base structure for memory implementations. Custom memory will put this structure
   -- * as the first member of their structure.
-  --  
+  --
 
    type GstMemory is record
       mini_object : aliased GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstminiobject_h.GstMiniObject;  -- gst/gstmemory.h:155
-      allocator : access GstAllocator;  -- gst/gstmemory.h:157
+      allocator : access gstreamer_1_0_gst_gstallocator_h.GstAllocator;  -- gst/gstmemory.h:157
       parent : access GstMemory;  -- gst/gstmemory.h:159
       maxsize : aliased GLIB.gsize;  -- gst/gstmemory.h:160
       align : aliased GLIB.gsize;  -- gst/gstmemory.h:161
@@ -199,7 +199,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h is
   -- * @GST_MAP_FLAG_LAST: first flag that can be used for custom purposes
   -- *
   -- * Flags used when mapping memory
-  --  
+  --
 
    subtype GstMapFlags is unsigned;
    GST_MAP_READ : constant GstMapFlags := 1;
@@ -210,7 +210,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h is
   -- * GST_MAP_READWRITE: (value 3) (type GstMapFlags)
   -- *
   -- * GstMapFlags value alias for GST_MAP_READ | GST_MAP_WRITE
-  --  
+  --
 
   --*
   -- * GstMapInfo:
@@ -224,7 +224,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h is
   -- *
   -- * A structure containing the result of a map operation such as
   -- * gst_memory_map(). It contains the data and size.
-  --  
+  --
 
    type GstMapInfo_user_data_array is array (0 .. 3) of System.Address;
    type GstMapInfo_u_gst_reserved_array is array (0 .. 3) of System.Address;
@@ -241,13 +241,13 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h is
 
    --  skipped anonymous struct anon_149
 
-  --< protected > 
-  --< private > 
+  --< protected >
+  --< private >
   --*
   -- * GST_MAP_INFO_INIT:
   -- *
   -- * Initializer for #GstMapInfo
-  --  
+  --
 
   --*
   -- * GstMemoryMapFunction:
@@ -261,9 +261,9 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h is
   -- *
   -- * Returns: a pointer to memory of which at least @maxsize bytes can be
   -- * accessed according to the access pattern in @flags.
-  --  
+  --
 
-   type GstMemoryMapFunction is access function 
+   type GstMemoryMapFunction is access function
         (arg1 : access GstMemory;
          arg2 : GLIB.gsize;
          arg3 : GstMapFlags) return System.Address;
@@ -281,9 +281,9 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h is
   -- *
   -- * Returns: a pointer to memory of which at least @maxsize bytes can be
   -- * accessed according to the access pattern in @info's flags.
-  --  
+  --
 
-   type GstMemoryMapFullFunction is access function 
+   type GstMemoryMapFullFunction is access function
         (arg1 : access GstMemory;
          arg2 : access GstMapInfo;
          arg3 : GLIB.gsize) return System.Address;
@@ -294,7 +294,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h is
   -- * @mem: a #GstMemory
   -- *
   -- * Return the pointer previously retrieved with gst_memory_map().
-  --  
+  --
 
    type GstMemoryUnmapFunction is access procedure  (arg1 : access GstMemory);
    pragma Convention (C, GstMemoryUnmapFunction);  -- gst/gstmemory.h:258
@@ -305,7 +305,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h is
   -- * @info: a #GstMapInfo
   -- *
   -- * Return the pointer previously retrieved with gst_memory_map() with @info.
-  --  
+  --
 
    type GstMemoryUnmapFullFunction is access procedure  (arg1 : access GstMemory; arg2 : access GstMapInfo);
    pragma Convention (C, GstMemoryUnmapFullFunction);  -- gst/gstmemory.h:267
@@ -322,9 +322,9 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h is
   -- *
   -- * Returns: a new #GstMemory object wrapping a copy of the requested region in
   -- * @mem.
-  --  
+  --
 
-   type GstMemoryCopyFunction is access function 
+   type GstMemoryCopyFunction is access function
         (arg1 : access GstMemory;
          arg2 : GStreamer.GST_Low_Level.glibconfig_h.gssize;
          arg3 : GStreamer.GST_Low_Level.glibconfig_h.gssize) return access GstMemory;
@@ -341,9 +341,9 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h is
   -- * shared. This function does not make a copy of the bytes in @mem.
   -- *
   -- * Returns: a new #GstMemory object sharing the requested region in @mem.
-  --  
+  --
 
-   type GstMemoryShareFunction is access function 
+   type GstMemoryShareFunction is access function
         (arg1 : access GstMemory;
          arg2 : GStreamer.GST_Low_Level.glibconfig_h.gssize;
          arg3 : GStreamer.GST_Low_Level.glibconfig_h.gssize) return access GstMemory;
@@ -359,9 +359,9 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h is
   -- * @mem1 in the parent buffer in @offset.
   -- *
   -- * Returns: %TRUE if @mem1 and @mem2 are in contiguous memory.
-  --  
+  --
 
-   type GstMemoryIsSpanFunction is access function 
+   type GstMemoryIsSpanFunction is access function
         (arg1 : access GstMemory;
          arg2 : access GstMemory;
          arg3 : access GLIB.gsize) return GLIB.gboolean;
@@ -370,7 +370,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h is
    procedure gst_memory_init
      (mem : access GstMemory;
       flags : GstMemoryFlags;
-      allocator : access GstAllocator;
+      allocator : access gstreamer_1_0_gst_gstallocator_h.GstAllocator;
       parent : access GstMemory;
       maxsize : GLIB.gsize;
       align : GLIB.gsize;
@@ -381,7 +381,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h is
    function gst_memory_is_type (mem : access GstMemory; mem_type : access GLIB.gchar) return GLIB.gboolean;  -- gst/gstmemory.h:316
    pragma Import (C, gst_memory_is_type, "gst_memory_is_type");
 
-  -- refcounting  
+  -- refcounting
   --*
   -- * gst_memory_ref:
   -- * @memory: The memory to refcount
@@ -389,7 +389,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h is
   -- * Increase the refcount of this memory.
   -- *
   -- * Returns: (transfer full): @memory (for convenience when doing assignments)
-  --  
+  --
 
    function gst_memory_ref (memory : access GstMemory) return access GstMemory;  -- gst/gstmemory.h:328
    pragma Import (C, gst_memory_ref, "gst_memory_ref");
@@ -399,12 +399,12 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h is
   -- * @memory: (transfer full): the memory to refcount
   -- *
   -- * Decrease the refcount of an memory, freeing it if the refcount reaches 0.
-  --  
+  --
 
    procedure gst_memory_unref (memory : access GstMemory);  -- gst/gstmemory.h:340
    pragma Import (C, gst_memory_unref, "gst_memory_unref");
 
-  -- getting/setting memory properties  
+  -- getting/setting memory properties
    function gst_memory_get_sizes
      (mem : access GstMemory;
       offset : access GLIB.gsize;
@@ -417,7 +417,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h is
       size : GLIB.gsize);  -- gst/gstmemory.h:347
    pragma Import (C, gst_memory_resize, "gst_memory_resize");
 
-  -- retrieving data  
+  -- retrieving data
    function gst_memory_make_mapped
      (mem : access GstMemory;
       info : access GstMapInfo;
@@ -433,7 +433,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h is
    procedure gst_memory_unmap (mem : access GstMemory; info : access GstMapInfo);  -- gst/gstmemory.h:357
    pragma Import (C, gst_memory_unmap, "gst_memory_unmap");
 
-  -- copy and subregions  
+  -- copy and subregions
    function gst_memory_copy
      (mem : access GstMemory;
       offset : GStreamer.GST_Low_Level.glibconfig_h.gssize;
@@ -446,7 +446,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h is
       size : GStreamer.GST_Low_Level.glibconfig_h.gssize) return access GstMemory;  -- gst/gstmemory.h:361
    pragma Import (C, gst_memory_share, "gst_memory_share");
 
-  -- span memory  
+  -- span memory
    function gst_memory_is_span
      (mem1 : access GstMemory;
       mem2 : access GstMemory;
@@ -461,6 +461,6 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h is
    procedure glib_autoptr_cleanup_GstAllocator (u_ptr : System.Address);  -- gst/gstmemory.h:371
    pragma Import (C, glib_autoptr_cleanup_GstAllocator, "glib_autoptr_cleanup_GstAllocator");
 
-   type GstAllocator_autoptr is access all GstAllocator;  -- gst/gstmemory.h:371
+   type GstAllocator_autoptr is access all gstreamer_1_0_gst_gstallocator_h.GstAllocator;  -- gst/gstmemory.h:371
 
 end GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h;

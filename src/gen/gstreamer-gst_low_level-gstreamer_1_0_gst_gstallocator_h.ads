@@ -49,7 +49,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstallocator_h is
   -- * License along with this library; if not, write to the
   -- * Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
   -- * Boston, MA 02110-1301, USA.
-  --  
+  --
 
    --  skipped empty struct u_GstAllocatorPrivate
 
@@ -71,7 +71,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstallocator_h is
   -- *
   -- * The default memory alignment in bytes - 1
   -- * an alignment of 7 would be the same as what malloc() guarantees.
-  --  
+  --
 
    gst_memory_alignment : aliased GLIB.gsize;  -- gst/gstallocator.h:53
    pragma Import (C, gst_memory_alignment, "gst_memory_alignment");
@@ -80,7 +80,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstallocator_h is
   -- * GST_ALLOCATOR_SYSMEM:
   -- *
   -- * The allocator name for the default system memory allocator
-  --  
+  --
 
   --*
   -- * GstAllocationParams:
@@ -90,7 +90,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstallocator_h is
   -- * @padding: the desired padding
   -- *
   -- * Parameters to control the allocation of memory
-  --  
+  --
 
    type GstAllocationParams is record
       flags : aliased GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h.GstMemoryFlags;  -- gst/gstallocator.h:72
@@ -101,14 +101,14 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstallocator_h is
    end record;
    pragma Convention (C_Pass_By_Copy, GstAllocationParams);  -- gst/gstallocator.h:71
 
-  --< private > 
+  --< private >
   --*
   -- * GstAllocatorFlags:
   -- * @GST_ALLOCATOR_FLAG_CUSTOM_ALLOC: The allocator has a custom alloc function.
   -- * @GST_ALLOCATOR_FLAG_LAST: first flag that can be used for custom purposes
   -- *
   -- * Flags for allocators.
-  --  
+  --
 
    subtype GstAllocatorFlags is unsigned;
    GST_ALLOCATOR_FLAG_CUSTOM_ALLOC : constant GstAllocatorFlags := 16;
@@ -127,7 +127,7 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstallocator_h is
   -- *      Will be used instead of @mem_unmap if present. (Since 1.6)
   -- *
   -- * The #GstAllocator is used to create new memory.
-  --  
+  --
 
    type u_GstAllocator_u_gst_reserved_array is array (0 .. 1) of System.Address;
    type GstAllocator is record
@@ -145,8 +145,8 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstallocator_h is
    end record;
    pragma Convention (C_Pass_By_Copy, GstAllocator);  -- gst/gstallocator.h:108
 
-  --< public > 
-  --< private > 
+  --< public >
+  --< private >
   --*
   -- * GstAllocatorClass:
   -- * @object_class:  Object parent class
@@ -154,35 +154,35 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstallocator_h is
   -- * @free: implementation that releases memory
   -- *
   -- * The #GstAllocator is used to create new memory.
-  --  
+  --
 
    type GstAllocatorClass is record
       object_class : aliased GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstobject_h.GstObjectClass;  -- gst/gstallocator.h:140
-      alloc : access function 
-           (arg1 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h.GstAllocator;
+      alloc : access function
+           (arg1 : access GstAllocator;
             arg2 : GLIB.gsize;
             arg3 : access GstAllocationParams) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h.GstMemory;  -- gst/gstallocator.h:144
-      free : access procedure  (arg1 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h.GstAllocator; arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h.GstMemory);  -- gst/gstallocator.h:145
+      free : access procedure  (arg1 : access GstAllocator; arg2 : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h.GstMemory);  -- gst/gstallocator.h:145
       u_gst_reserved : u_GstAllocatorClass_u_gst_reserved_array;  -- gst/gstallocator.h:148
    end record;
    pragma Convention (C_Pass_By_Copy, GstAllocatorClass);  -- gst/gstallocator.h:139
 
-  --< public > 
-  --< private > 
+  --< public >
+  --< private >
    function gst_allocator_get_type return GLIB.GType;  -- gst/gstallocator.h:151
    pragma Import (C, gst_allocator_get_type, "gst_allocator_get_type");
 
-  -- allocators  
-   procedure gst_allocator_register (name : access GLIB.gchar; allocator : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h.GstAllocator);  -- gst/gstallocator.h:154
+  -- allocators
+   procedure gst_allocator_register (name : access GLIB.gchar; allocator : access GstAllocator);  -- gst/gstallocator.h:154
    pragma Import (C, gst_allocator_register, "gst_allocator_register");
 
-   function gst_allocator_find (name : access GLIB.gchar) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h.GstAllocator;  -- gst/gstallocator.h:155
+   function gst_allocator_find (name : access GLIB.gchar) return access GstAllocator;  -- gst/gstallocator.h:155
    pragma Import (C, gst_allocator_find, "gst_allocator_find");
 
-   procedure gst_allocator_set_default (allocator : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h.GstAllocator);  -- gst/gstallocator.h:156
+   procedure gst_allocator_set_default (allocator : access GstAllocator);  -- gst/gstallocator.h:156
    pragma Import (C, gst_allocator_set_default, "gst_allocator_set_default");
 
-  -- allocation parameters  
+  -- allocation parameters
    procedure gst_allocation_params_init (params : access GstAllocationParams);  -- gst/gstallocator.h:159
    pragma Import (C, gst_allocation_params_init, "gst_allocation_params_init");
 
@@ -192,14 +192,14 @@ package GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstallocator_h is
    procedure gst_allocation_params_free (params : access GstAllocationParams);  -- gst/gstallocator.h:162
    pragma Import (C, gst_allocation_params_free, "gst_allocation_params_free");
 
-  -- allocating memory blocks  
+  -- allocating memory blocks
    function gst_allocator_alloc
-     (allocator : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h.GstAllocator;
+     (allocator : access GstAllocator;
       size : GLIB.gsize;
       params : access GstAllocationParams) return access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h.GstMemory;  -- gst/gstallocator.h:165
    pragma Import (C, gst_allocator_alloc, "gst_allocator_alloc");
 
-   procedure gst_allocator_free (allocator : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h.GstAllocator; memory : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h.GstMemory);  -- gst/gstallocator.h:167
+   procedure gst_allocator_free (allocator : access GstAllocator; memory : access GStreamer.GST_Low_Level.gstreamer_1_0_gst_gstmemory_h.GstMemory);  -- gst/gstallocator.h:167
    pragma Import (C, gst_allocator_free, "gst_allocator_free");
 
    function gst_memory_new_wrapped
